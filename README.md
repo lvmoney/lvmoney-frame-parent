@@ -45,6 +45,8 @@ zhy-frame-mq
 
 框架构架和开发人员:  
 lvmoney  
-1300515928
+1300515928  
+
+https://gitee.com/lvmoney/zhy-frame-parent
 
 
