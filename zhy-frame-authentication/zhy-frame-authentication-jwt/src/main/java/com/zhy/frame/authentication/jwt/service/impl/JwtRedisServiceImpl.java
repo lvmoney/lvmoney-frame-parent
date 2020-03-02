@@ -1,0 +1,114 @@
+/**
+ * 描述:
+ * 包名:com.zhy.jwt.service.impl
+ * 版本信息: 版本1.0
+ * 日期:2019年1月4日  下午2:55:23
+ * Copyright 四川******科技有限公司
+ */
+
+package com.zhy.frame.authentication.jwt.service.impl;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.core.ro.UserRo;
+import com.zhy.frame.authentication.jwt.service.JwtRedisService;
+import com.zhy.frame.authentication.jwt.util.JwtUtil;
+import com.zhy.frame.cache.common.annation.CacheImpl;
+import com.zhy.frame.cache.common.service.CacheCommonService;
+import com.zhy.frame.core.util.JsonUtil;
+import com.zhy.frame.core.vo.UserVo;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+/**
+ * @describe：
+ * @author: lvmoney /四川******科技有限公司
+ * @version:v1.0 2019年1月4日 下午2:55:23
+ */
+@Service
+public class JwtRedisServiceImpl implements JwtRedisService {
+    @CacheImpl
+    CacheCommonService baseRedisService;
+    @Value("${jwt.server.expire:18000}")
+    String expire;
+
+    @Override
+    public void saveToken2Redis(UserRo userRo) {
+        if (userRo.getExpire() > 0L) {
+            baseRedisService.setString(userRo.getToken(), JsonUtil.t2JsonString(userRo), userRo.getExpire());
+        } else {
+            baseRedisService.setString(userRo.getToken(), JsonUtil.t2JsonString(userRo), Long.parseLong(expire));
+        }
+    }
+
+    @Override
+    public UserVo getUserVo(String token) {
+        Object obj = baseRedisService.getByKey(token);
+        String jwtString = ObjectUtils.isEmpty(obj) ? null : obj.toString();
+        UserVo userVo = new UserVo();
+        if (jwtString != null) {
+            UserRo userRo = JSON.parseObject(jwtString, new TypeReference<UserRo>() {
+            });
+            if (userRo != null) {
+                userVo.setUserId(userRo.getUserId());
+                userVo.setPassword(userRo.getPassword());
+                userVo.setUsername(userRo.getUsername());
+                userVo.setOther(userRo.getOther());
+                userVo.setSysId(userRo.getSysId());
+                return userVo;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean checkToken(String token) {
+        String userId;
+        try {
+            userId = JWT.decode(token).getAudience().get(0);
+        } catch (JWTDecodeException j) {
+            throw new BusinessException(CommonException.Proxy.TOKEN_USER_ID_ERROR);
+        }
+        UserVo userVo = getUserVo(token);
+        if (userVo == null) {
+            throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
+        }
+        if (!userId.startsWith(userVo.getUserId())) {
+            throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
+        }
+        // 验证 token
+        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(userVo.getPassword())).build();
+        try {
+            jwtVerifier.verify(token);
+            return true;
+        } catch (JWTVerificationException e) {
+            return false;
+        }
+
+    }
+
+    @Override
+    public void deleteToken(String token) {
+        baseRedisService.deleteByKey(token);
+    }
+
+    @Override
+    public String updateToken(String token) {
+        if (checkToken(token)) {
+            UserVo userVo = getUserVo(token);
+            return JwtUtil.getToken(userVo);
+        } else {
+            return null;
+        }
+
+    }
+
+}

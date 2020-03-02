@@ -1,0 +1,2 @@
+nacos作为dubbo和cloud的注册中心，同时支持cloud和dubbo的效用方式。  
+在开发的时候需要有个单独的module作为服务提供的接口jar包，该jar包会发布到maven仓库，服务调用方和实现方均需要引入该依赖。可参考zhy-frame-dubbo-api

@@ -1,0 +1,14 @@
+#认证服务器
+auth-server: http://localhost:10380/
+server:
+  port: 8030
+security:
+  oauth2:
+    client:
+      client-id: SampleClientId
+      client-secret: tgb.258
+      scope: user_info
+      access-token-uri: ${auth-server}/oauth/token
+      user-authorization-uri: ${auth-server}/oauth/authorize
+    resource:
+      token-info-uri: ${auth-server}/oauth/check_token

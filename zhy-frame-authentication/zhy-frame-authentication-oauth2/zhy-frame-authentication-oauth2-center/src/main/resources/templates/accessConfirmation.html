@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>authorize to access</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css"
+          th:href="@{/assets/bootstrap/css/bootstrap.min.css}"/>
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <h2>访问授权确认?</h2>
+    <p>
+        “<span th:text="${applicationName}"/>” 试图获取您的以下信息：
+    </p>
+
+    <form id="confirmationForm" name="confirmationForm"
+          action="/oauth/authorize" method="post">
+        <input name="user_oauth_approval" value="true" type="hidden"/>
+        <ul class="list-unstyled">
+            <li th:each="scope,scopeIter:${scopes}">
+                <span class="bg-danger"><span th:text="${scope.value}"></span>!</span>
+                <div class="form-check form-check-inline d-none">
+                    <input class="form-check-input" type="radio" th:name="${scope.key}" value="true"
+                           th:id="${scope.key+'_approve'}" checked="checked"/>
+                    <label class="form-check-label" th:for="${scope.key+'_approve'}">同意</label>
+                </div>
+                <div class="form-check form-check-inline d-none">
+                    <input class="form-check-input" type="radio" th:name="${scope.key}" value="false"
+                           th:id="${scope.key+'_deny'}"/>
+                    <label class="form-check-label" th:for="${scope.key+'_deny'}">拒绝</label>
+                </div>
+            </li>
+        </ul>
+        <button class="btn btn-primary btn-sm" type="submit">同意</button>
+        <a class="btn btn-danger btn-sm" th:href="@{${from}}">拒绝</a>
+    </form>
+
+</div>
+<script src="../static/assets/jquery-3.4.1.min.js"
+        th:src="@{/assets/jquery-3.4.1.min.js}"></script>
+<script src="../static/assets/bootstrap/js/bootstrap.min.js"
+        th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/localforage.min.js}" src="../static/assets/localforage.min.js"></script>
+</body>
+</html>
