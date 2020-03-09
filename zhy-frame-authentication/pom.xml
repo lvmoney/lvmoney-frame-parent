@@ -17,6 +17,9 @@
         <module>zhy-frame-authentication-jwt</module>
         <module>zhy-frame-authentication-oauth2</module>
         <module>zhy-frame-authentication-common</module>
+        <module>zhy-frame-authentication-uri</module>
+        <module>zhy-frame-authentication-util</module>
+        <module>zhy-frame-authentication-api</module>
     </modules>
 
 

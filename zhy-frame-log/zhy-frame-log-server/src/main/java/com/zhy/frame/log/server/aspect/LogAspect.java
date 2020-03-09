@@ -9,8 +9,10 @@ package com.zhy.frame.log.server.aspect;/**
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.zhy.frame.base.core.api.ApiResult;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.base.core.util.SupportUtil;
 import com.zhy.frame.log.server.annotation.ControllerLog;
 import com.zhy.frame.log.server.annotation.NotLog;
 import com.zhy.frame.log.server.constant.LogConstant;
@@ -87,10 +89,10 @@ public class LogAspect {
         proceed = joinPoint.proceed();
         //提取controller中ExecutionResult的属性
         ApiResult result = (ApiResult) proceed;
-        if (LogConstant.FRAME_LOG_SUPPORT_FALSE.equals(logSupport)) {
-            return result;
-        } else if (!LogConstant.FRAME_LOG_SUPPORT_FALSE.equals(logSupport) && !LogConstant.FRAME_LOG_SUPPORT_TRUE.equals(logSupport)) {
+        if (SupportUtil.support(logSupport)) {
             throw new BusinessException(CommonException.Proxy.LOG_SUPPORT_ERROR);
+        } else if (BaseConstant.SUPPORT_FALSE.equals(logSupport)) {
+            return result;
         }
 
         //获取session中的用户
@@ -106,7 +108,7 @@ public class LogAspect {
             }
         }
         // 从 http 请求头中取出
-        String token = request.getHeader("token");
+        String token = request.getHeader(BaseConstant.AUTHORIZATION_TOKEN_KEY);
         String name = "";
         String userId = "";
         if (!StringUtils.isBlank(token)) {

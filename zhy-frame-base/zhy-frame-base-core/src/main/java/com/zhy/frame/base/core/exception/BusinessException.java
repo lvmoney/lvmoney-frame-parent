@@ -18,6 +18,11 @@ public class BusinessException extends RuntimeException {
         this(type.getCode(), type.getDescription(), type);
     }
 
+    public BusinessException(Integer code, String desc) {
+        this.code = code;
+        this.description = desc;
+    }
+
     public BusinessException(ExceptionType type, Throwable cause) {
         this(type.getCode(), type.getDescription(), type, cause);
     }

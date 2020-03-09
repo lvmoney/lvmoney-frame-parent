@@ -14,6 +14,12 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-authentication-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
+            </exclusions>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -23,12 +29,42 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-cache-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-authentication-util</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
+            </exclusions>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-authentication-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
+
 
 </project>

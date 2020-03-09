@@ -8,8 +8,10 @@ package com.zhy.frame.cache.repeatsubmit.aspect;/**
 
 
 import com.zhy.frame.base.core.api.ApiResult;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.base.core.util.SupportUtil;
 import com.zhy.frame.cache.lock.service.DistributedLockerService;
 import com.zhy.frame.cache.repeatsubmit.annotation.NoRepeatSubmit;
 import com.zhy.frame.cache.repeatsubmit.constant.RepeatsubmitConstant;
@@ -80,11 +82,11 @@ public class NoRepeatSubmitAspect {
     public ApiResult recordLog(ProceedingJoinPoint joinPoint) throws Throwable {
         Object proceed;
 
-        if (RepeatsubmitConstant.FRAME_REPEAT_SUPPORT_FALSE.equals(repeatSupport)) {
+        if (!SupportUtil.support(repeatSupport)) {
+            throw new BusinessException(CommonException.Proxy.REPEATSUBMIT_SUPPORT_ERROR);
+        } else if (BaseConstant.SUPPORT_FALSE.equals(repeatSupport)) {
             proceed = joinPoint.proceed();
             return (ApiResult) proceed;
-        } else if (!RepeatsubmitConstant.FRAME_REPEAT_SUPPORT_FALSE.equals(repeatSupport) && !RepeatsubmitConstant.FRAME_REPEAT_SUPPORT_TRUE.equals(repeatSupport)) {
-            throw new BusinessException(CommonException.Proxy.REPEATSUBMIT_SUPPORT_ERROR);
         }
 
         //获取session中的用户
@@ -102,7 +104,7 @@ public class NoRepeatSubmitAspect {
             }
         }
         // 从 http 请求头中取出
-        String token = request.getHeader("token");
+        String token = request.getHeader(BaseConstant.AUTHORIZATION_TOKEN_KEY);
         String name = "";
         if (StringUtils.isBlank(token)) {
             try {

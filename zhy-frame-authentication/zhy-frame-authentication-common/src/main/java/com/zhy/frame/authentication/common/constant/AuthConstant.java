@@ -16,11 +16,11 @@ public class AuthConstant {
     /**
      * 为了区分token类型加前缀 jwt
      */
-    public static final String TOKEM_JWT_PREFIX = "JWT:";
+    public static final String TOKEN_JWT_PREFIX = "JWT:";
     /**
      * 为了区分token类型加前缀 oauth2
      */
-    public static final String TOKEM_OAUTH2_PREFIX = "OAUTH2:";
+    public static final String TOKEN_OAUTH2_PREFIX = "OAUTH2:";
     /**
      * 下划线
      */

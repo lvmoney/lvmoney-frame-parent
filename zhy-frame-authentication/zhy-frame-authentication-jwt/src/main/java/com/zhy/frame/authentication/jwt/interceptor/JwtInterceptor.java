@@ -8,19 +8,19 @@
 
 package com.zhy.frame.authentication.jwt.interceptor;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.zhy.frame.authentication.common.constant.AuthConstant;
 import com.zhy.frame.authentication.jwt.annotation.NotToken;
 import com.zhy.frame.authentication.jwt.constant.JwtConstant;
 import com.zhy.frame.authentication.jwt.properties.JwtConfigProp;
 import com.zhy.frame.authentication.jwt.service.JwtRedisService;
 import com.zhy.frame.authentication.jwt.util.FilterMapUtil;
+import com.zhy.frame.authentication.util.service.UserCommonService;
+import com.zhy.frame.authentication.util.util.JwtUtil;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.base.core.util.SupportUtil;
 import com.zhy.frame.core.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,14 +46,17 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     String frameSupport;
     @Autowired
     JwtConfigProp jwtConfigProp;
+    @Autowired
+    UserCommonService userCommonService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                              Object object) throws Exception {
-        if (JwtConstant.FRAME_JWT_SUPPORT_FALSE.equals(frameSupport)) {
-            return super.preHandle(httpServletRequest, httpServletResponse, object);
-        } else if (!JwtConstant.FRAME_JWT_SUPPORT_FALSE.equals(frameSupport) && !JwtConstant.FRAME_JWT_SUPPORT_TRUE.equals(frameSupport)) {
+        if (!SupportUtil.support(frameSupport)) {
             throw new BusinessException(CommonException.Proxy.TOKEN_SUPPORT_ERROR);
+        } else if (BaseConstant.SUPPORT_FALSE.equals(frameSupport)) {
+            return super.preHandle(httpServletRequest, httpServletResponse, object);
+
         }
         String servletPath = httpServletRequest.getServletPath();
         Map<String, String> filterChainDefinition = jwtConfigProp.getFilterChainDefinitionMap();
@@ -76,11 +79,11 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
 
             // 获取 token 中的 user id
             // 从 http 请求头中取出
-            String token = httpServletRequest.getHeader("token");
+            String token = httpServletRequest.getHeader(BaseConstant.AUTHORIZATION_TOKEN_KEY);
             if (token == null) {
                 throw new BusinessException(CommonException.Proxy.TOKEN_IS_REQUIRED);
             }
-            if (token.startsWith(AuthConstant.TOKEM_OAUTH2_PREFIX)) {
+            if (token.startsWith(AuthConstant.TOKEN_OAUTH2_PREFIX)) {
                 return super.preHandle(httpServletRequest, httpServletResponse, object);
             }
             // 如果不是映射到方法直接通过
@@ -91,24 +94,20 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
 
             String userId;
             try {
-                String verifyToken = token.startsWith(AuthConstant.TOKEM_JWT_PREFIX) ? token.replaceFirst(AuthConstant.TOKEM_JWT_PREFIX, "") : token;
-                userId = JWT.decode(verifyToken).getAudience().get(0);
+                String verifyToken = JwtUtil.getRealToken(token);
+                UserVo userVo = JwtUtil.getUserVo(verifyToken);
+                userId = userVo.getUserId();
             } catch (JWTDecodeException j) {
                 throw new BusinessException(CommonException.Proxy.TOKEN_USER_ID_ERROR);
             }
-            UserVo userVo = jwtRedisService.getUserVo(token);
+            UserVo userVo = userCommonService.getUserVo(token);
             if (userVo == null) {
                 throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
             }
-            if (!userId.startsWith(userVo.getUserId())) {
+            if (!userId.equals(userVo.getUserId())) {
                 throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
             }
-            // 验证 token
-            JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(userVo.getPassword())).build();
-            try {
-                String verifyToken = token.startsWith(AuthConstant.TOKEM_JWT_PREFIX) ? token.replaceFirst(AuthConstant.TOKEM_JWT_PREFIX, "") : token;
-                jwtVerifier.verify(verifyToken);
-            } catch (JWTVerificationException e) {
+            if (!JwtUtil.checkPassword(token, userVo.getPassword(), userId)) {
                 throw new BusinessException(CommonException.Proxy.TOKEN_VERIFY_ERROR);
             }
             return super.preHandle(httpServletRequest, httpServletResponse, object);

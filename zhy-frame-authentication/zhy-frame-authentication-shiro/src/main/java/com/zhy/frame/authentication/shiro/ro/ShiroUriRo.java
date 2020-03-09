@@ -28,4 +28,6 @@ public class ShiroUriRo implements Serializable {
     private String uri;
     private long expire;
     private ShiroUriVo shiroUriVo;
+    private String sysId;
+
 }

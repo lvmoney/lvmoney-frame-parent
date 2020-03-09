@@ -8,9 +8,11 @@ import com.zhy.frame.route.gateway.service.WhiteListService;
 import com.zhy.frame.route.gateway.vo.WhiteListVo;
 import com.zhy.frame.route.gateway.vo.resp.Oauth2TokenCheck;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ServerWebExchange;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,7 +33,7 @@ public class IndexController {
     WhiteListService whiteListService;
 
     @RequestMapping("/hello")
-    public String hello() {
+    public String hello(ServerWebExchange exchange) {
         return "hello world";
     }
 

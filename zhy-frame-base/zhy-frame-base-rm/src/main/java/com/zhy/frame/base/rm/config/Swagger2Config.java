@@ -8,6 +8,7 @@
 
 package com.zhy.frame.base.rm.config;
 
+import com.zhy.frame.base.core.constant.BaseConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -126,7 +127,7 @@ public class Swagger2Config {
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         List<SecurityReference> securityReferences = new ArrayList<>();
-        securityReferences.add(new SecurityReference("token", authorizationScopes));
+        securityReferences.add(new SecurityReference(BaseConstant.AUTHORIZATION_TOKEN_KEY, authorizationScopes));
         return securityReferences;
     }
 }

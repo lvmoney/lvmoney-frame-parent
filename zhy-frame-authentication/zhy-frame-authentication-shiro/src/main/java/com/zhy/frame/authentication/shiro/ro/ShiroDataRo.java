@@ -34,4 +34,5 @@ public class ShiroDataRo implements Serializable {
     private long expire;
     private String username;
     Set<String> roles;
+    private String sysId;
 }

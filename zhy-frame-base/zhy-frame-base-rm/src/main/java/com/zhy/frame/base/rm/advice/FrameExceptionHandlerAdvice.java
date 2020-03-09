@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.util.ContentCachingRequestWrapper;
+import org.springframework.web.util.ContentCachingResponseWrapper;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +68,7 @@ public class FrameExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiResult<?> handler(MethodArgumentNotValidException e) {
+    public ApiResult<?> handler(MethodArgumentNotValidException e, HttpServletResponse res) {
         LOGGER.info(e.getMessage(), e);
         List<BeanValidateExceptionVo> data = new ArrayList<>();
         e.getBindingResult().getFieldErrors().forEach(el -> {
@@ -73,6 +77,7 @@ public class FrameExceptionHandlerAdvice {
             beanValidateExceptionVo.setField(el.getField());
             data.add(beanValidateExceptionVo);
         });
+        res.setStatus(CommonException.Proxy.PARAM_ERROR.getCode());
         return ApiResult.error(CommonException.Proxy.PARAM_ERROR.getCode(), CommonException.Proxy.PARAMETER_ERROR.getDescription(), data);
     }
 
@@ -90,6 +95,7 @@ public class FrameExceptionHandlerAdvice {
     @ExceptionHandler(Exception.class)
     public ApiResult<?> handleException(HttpServletRequest req, HttpServletResponse res, Exception e) {
         LOGGER.error("系统错误", e);
+        res.setStatus(CommonException.Proxy.OTHER_ERROR.getCode());
         return ApiResult.error(CommonException.Proxy.OTHER_ERROR.getCode(), CommonException.Proxy.OTHER_ERROR.getDescription());
     }
 
@@ -107,6 +113,7 @@ public class FrameExceptionHandlerAdvice {
     @ExceptionHandler(BusinessException.class)
     public ApiResult<?> handleBusinessException(HttpServletRequest req, HttpServletResponse res, BusinessException e) {
         LOGGER.error("系统错误", e);
+        res.setStatus(e.getCode());
         return ApiResult.error(e.getCode(), e.getMessage());
     }
 
@@ -133,6 +140,7 @@ public class FrameExceptionHandlerAdvice {
             excepitonVo.setRejectedValue(error.getRejectedValue());
             excepitonVos.add(excepitonVo);
         }
+        res.setStatus(CommonException.Proxy.PARAM_ERROR.getCode());
         return ApiResult.error(CommonException.Proxy.PARAM_ERROR.getCode(), CommonException.Proxy.PARAM_ERROR.getDescription(), excepitonVos);
     }
 

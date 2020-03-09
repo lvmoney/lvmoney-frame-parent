@@ -48,4 +48,16 @@ public class ServerInfo implements Serializable {
      * 服务类型,具体详见枚举InternalService
      */
     private String internalService;
+
+    /**
+     * 不需要token校验的url
+     */
+    private Set<String> notToken;
+
+    /**
+     * 不需要权限校验的url
+     */
+    private Set<String> notAuthority;
+
+
 }

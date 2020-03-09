@@ -29,12 +29,12 @@ public class WhiteListServiceImpl implements WhiteListService {
 
     @Override
     public void saveWhiteList2Redis(WhiteListRo whiteListRo) {
-        baseRedisService.addMap(GatewayConstant.SERVER_WHILTE_LIST, whiteListRo.getData(), whiteListRo.getExpired());
+        baseRedisService.addMap(GatewayConstant.SERVER_WHITE_LIST, whiteListRo.getData(), whiteListRo.getExpired());
     }
 
     @Override
     public WhiteListVo getWhiteList(String serverName) {
-        Object obj = baseRedisService.getByMapKey(GatewayConstant.SERVER_WHILTE_LIST, serverName);
+        Object obj = baseRedisService.getByMapKey(GatewayConstant.SERVER_WHITE_LIST, serverName);
         WhiteListVo whiteListVo = JSON.parseObject(obj.toString(), new TypeReference<WhiteListVo>() {
         });
         return whiteListVo;
@@ -42,6 +42,6 @@ public class WhiteListServiceImpl implements WhiteListService {
 
     @Override
     public boolean isExist(String serverName) {
-        return baseRedisService.isExistMapKey(GatewayConstant.SERVER_WHILTE_LIST, serverName);
+        return baseRedisService.isExistMapKey(GatewayConstant.SERVER_WHITE_LIST, serverName);
     }
 }

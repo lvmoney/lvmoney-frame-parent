@@ -25,6 +25,7 @@
         <module>zhy-frame-route</module>
         <module>zhy-frame-dubbo</module>
         <module>zhy-frame-base</module>
+        <module>zhy-frame-cloud</module>
     </modules>
 
     <distributionManagement>
@@ -170,6 +171,15 @@
         <cloud-hystrix>1.4.6.RELEASE</cloud-hystrix>
         <spring-security-core.version>5.1.1.RELEASE</spring-security-core.version>
         <feign-httpclient.version>8.18.0</feign-httpclient.version>
+
+        <kubernetes-client.version>4.4.0</kubernetes-client.version>
+        <kubernetes-model.version>4.4.0</kubernetes-model.version>
+        <fabric-utils.version>2.0.46</fabric-utils.version>
+        <kubernetes-api.version>3.0.11</kubernetes-api.version>
+        <snakeyaml.version>1.25</snakeyaml.version>
+        <ganymed-ssh2.version>build210</ganymed-ssh2.version>
+        <maven-model.version>3.0</maven-model.version>
+        <micrometer-registry-prometheus.version>1.2.0</micrometer-registry-prometheus.version>
     </properties>
 
     <dependencyManagement>
@@ -851,6 +861,68 @@
                 <groupId>com.netflix.feign</groupId>
                 <artifactId>feign-httpclient</artifactId>
                 <version>${feign-httpclient.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+
+            <!-- https://mvnrepository.com/artifact/io.fabric8/kubernetes-client -->
+            <dependency>
+                <groupId>io.fabric8</groupId>
+                <artifactId>kubernetes-client</artifactId>
+                <version>${kubernetes-client.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.fabric8/kubernetes-model -->
+            <dependency>
+                <groupId>io.fabric8</groupId>
+                <artifactId>kubernetes-model</artifactId>
+                <version>${kubernetes-model.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.fabric8/fabric-utils -->
+            <dependency>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric-utils</artifactId>
+                <version>${fabric-utils.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.fabric8/kubernetes-api -->
+            <dependency>
+                <groupId>io.fabric8</groupId>
+                <artifactId>kubernetes-api</artifactId>
+                <version>${kubernetes-api.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/ch.ethz.ganymed/ganymed-ssh2 -->
+            <dependency>
+                <groupId>ch.ethz.ganymed</groupId>
+                <artifactId>ganymed-ssh2</artifactId>
+                <version>${ganymed-ssh2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-model</artifactId>
+                <version>${maven-model.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${micrometer-registry-prometheus.version}</version>
             </dependency>
 
         </dependencies>

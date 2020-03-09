@@ -388,6 +388,12 @@ public interface CommonException {
          * kafka 队列类型不正确
          */
         KAFKA_SENDER_TYPE_NOT_SUPPORT(ExceptionCodeLevel.MQ.getValue() + 123, "kafka sender type not support"),
+
+        /**
+         * kafka 队列类型不正确
+         */
+        FEIGN_BODY_ERROR(ExceptionCodeLevel.DISPATCH.getValue() + 124, "get feign response body error"),
+
         /**
          * 成功
          */

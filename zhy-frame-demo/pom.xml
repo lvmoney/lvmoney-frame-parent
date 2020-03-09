@@ -12,8 +12,10 @@
     <artifactId>zhy-frame-demo</artifactId>
     <modules>
         <module>zhy-demo-api</module>
-        <module>zhy-demo-user</module>
         <module>zhy-demo-common</module>
+        <module>zhy-demo-shiro</module>
+        <module>zhy-demo-provider</module>
+        <module>zhy-demo-customer</module>
     </modules>
 
 

@@ -7,6 +7,7 @@ package com.zhy.frame.route.gateway.server;/**
  */
 
 
+import com.zhy.frame.base.core.constant.BaseConstant;
 import feign.Feign;
 import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
@@ -29,7 +30,7 @@ public class AuthenticationServerConfig {
                 .encoder(new GsonEncoder())
                 .decoder(new GsonDecoder())
                 .contract(new SpringMvcContract())
-                .requestInterceptor(template -> template.header("token", token))
+                .requestInterceptor(template -> template.header(BaseConstant.AUTHORIZATION_TOKEN_KEY, token))
                 .target(AuthenticationServer.class, authenticationServer);
         return authorityServiceLoginInvoker;
     }

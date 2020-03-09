@@ -15,16 +15,20 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.github.dozermapper.core.Mapper;
+import com.zhy.frame.authentication.util.service.UserCommonService;
+import com.zhy.frame.authentication.util.util.JwtUtil;
+import com.zhy.frame.authentication.util.vo.JwtVo;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.core.ro.UserRo;
 import com.zhy.frame.authentication.jwt.service.JwtRedisService;
-import com.zhy.frame.authentication.jwt.util.JwtUtil;
 import com.zhy.frame.cache.common.annation.CacheImpl;
 import com.zhy.frame.cache.common.service.CacheCommonService;
 import com.zhy.frame.core.util.JsonUtil;
 import com.zhy.frame.core.vo.UserVo;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +44,11 @@ public class JwtRedisServiceImpl implements JwtRedisService {
     @Value("${jwt.server.expire:18000}")
     String expire;
 
+    @Autowired
+    private Mapper mapper;
+    @Autowired
+    UserCommonService userCommonService;
+
     @Override
     public void saveToken2Redis(UserRo userRo) {
         if (userRo.getExpire() > 0L) {
@@ -49,24 +58,18 @@ public class JwtRedisServiceImpl implements JwtRedisService {
         }
     }
 
+
     @Override
-    public UserVo getUserVo(String token) {
+    public UserRo getUserRo(String token) {
         Object obj = baseRedisService.getByKey(token);
         String jwtString = ObjectUtils.isEmpty(obj) ? null : obj.toString();
-        UserVo userVo = new UserVo();
         if (jwtString != null) {
             UserRo userRo = JSON.parseObject(jwtString, new TypeReference<UserRo>() {
             });
-            if (userRo != null) {
-                userVo.setUserId(userRo.getUserId());
-                userVo.setPassword(userRo.getPassword());
-                userVo.setUsername(userRo.getUsername());
-                userVo.setOther(userRo.getOther());
-                userVo.setSysId(userRo.getSysId());
-                return userVo;
-            }
+            return userRo;
+        } else {
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -77,7 +80,7 @@ public class JwtRedisServiceImpl implements JwtRedisService {
         } catch (JWTDecodeException j) {
             throw new BusinessException(CommonException.Proxy.TOKEN_USER_ID_ERROR);
         }
-        UserVo userVo = getUserVo(token);
+        UserVo userVo = userCommonService.getUserVo(token);
         if (userVo == null) {
             throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
         }
@@ -103,8 +106,9 @@ public class JwtRedisServiceImpl implements JwtRedisService {
     @Override
     public String updateToken(String token) {
         if (checkToken(token)) {
-            UserVo userVo = getUserVo(token);
-            return JwtUtil.getToken(userVo);
+            UserRo userRo = getUserRo(token);
+            JwtVo jwtVo = mapper.map(userRo, JwtVo.class);
+            return JwtUtil.getToken(jwtVo);
         } else {
             return null;
         }

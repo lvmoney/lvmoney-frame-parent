@@ -13,15 +13,6 @@ package com.zhy.frame.authentication.jwt.constant;/**
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class JwtConstant {
-    /**
-     * 是否引入shiro的配置文件值
-     */
-    public static final String FRAME_JWT_SUPPORT_FALSE = "false";
-    /**
-     * 是否引入shiro的配置文件值
-     */
-    public static final String FRAME_JWT_SUPPORT_TRUE = "true";
-
 
     /**
      * 配置文件中请求地址忽略标识

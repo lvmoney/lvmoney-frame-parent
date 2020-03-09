@@ -7,6 +7,8 @@ package com.zhy.frame.base.core.constant;/**
  */
 
 
+import java.io.File;
+
 /**
  * @describe：
  * @author: lvmoney/四川******科技有限公司
@@ -40,4 +42,29 @@ public class BaseConstant {
      * saas服务组rediskey
      */
     public static final String REDIS_SERVER_CROUP_KEY = "SAAS_SERVER";
+
+    /**
+     * 文件分隔符
+     */
+    public static final String FILE_SEPARATOR = File.separator;
+    /**
+     * 支持 false
+     */
+    public static final String SUPPORT_TRUE = "true";
+    /**
+     * 支持 false
+     */
+    public static final String SUPPORT_FALSE = "false";
+    /**
+     * 支持 false
+     */
+    public static final boolean SUPPORT_TRUE_BOOL = true;
+    /**
+     * 支持 false
+     */
+    public static final boolean SUPPORT_FALSE_BOOL = false;
+    /**
+     * 权限 header token 的key
+     */
+    public static final String AUTHORIZATION_TOKEN_KEY = "token";
 }

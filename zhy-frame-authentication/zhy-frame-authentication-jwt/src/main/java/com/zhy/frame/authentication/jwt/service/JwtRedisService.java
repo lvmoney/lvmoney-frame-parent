@@ -29,16 +29,17 @@ public interface JwtRedisService {
      */
     void saveToken2Redis(UserRo userRo);
 
+
     /**
-     * 通过token获得用户信息
+     * 通过token获得token信息
      *
      * @param token:
      * @throws
-     * @return: UserVo 用户信息
-     * @author: lvmoney /四川******科技有限公司
-     * @date: 2019/9/9 20:48
+     * @return: com.zhy.frame.core.ro.UserRo
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/3/3 18:19
      */
-    UserVo getUserVo(String token);
+    UserRo getUserRo(String token);
 
     /**
      * 校验token是否存在
@@ -63,10 +64,11 @@ public interface JwtRedisService {
     void deleteToken(String token);
 
     /**
-     *更新token
+     * 更新token
+     *
      * @param token:
-     * @return: java.lang.String
      * @throws
+     * @return: java.lang.String
      * @author: lvmoney /四川******科技有限公司
      * @date: 2019/11/19 17:53
      */

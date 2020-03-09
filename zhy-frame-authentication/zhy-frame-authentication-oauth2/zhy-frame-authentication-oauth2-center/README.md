@@ -78,3 +78,5 @@ localhost:10380/oauth/token?client_id=SampleClientId&client_secret=tgb.258&grant
 
 6、resource,client等client-id不同，只需要在server端redis（mysql）中有对应的值，那么client通过
 server获得access_token就能访问不同的resource
+
+7、注意需要自己把client端，user detail信息放到对应的redis,需要实现接口Db2RedisService

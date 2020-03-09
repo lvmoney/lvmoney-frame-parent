@@ -50,8 +50,31 @@ public interface GatewayException {
         /**
          * 鉴权支持
          */
-        AUTH_SUPPORT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 7, "frame.auth.support value is 'true' or 'false'"),
+        ALLOWABLE_SUPPORT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 7, "frame.allowable.support value is 'true' or 'false'"),
 
+
+        /**
+         * 鉴权支持
+         */
+        JWT_SUPPORT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 8, "frame.jwt.support value is 'true' or 'false'"),
+        /**
+         * 鉴权支持
+         */
+        SHIRO_SUPPORT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 9, "frame.shiro.support value is 'true' or 'false'"),
+
+        /**
+         * 鉴权支持
+         */
+        TOKEN_CHECK_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 10, "check token fail"),
+
+        /**
+         * 鉴权支持
+         */
+        SHIRO_CHECK_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 11, "check authority fail"),
+        /**
+         * 鉴权支持
+         */
+        ALLOWABLE_SYS_ID_NOT_EXIST(ExceptionCodeLevel.ROUTE.getValue() + 8, "sys id not exist"),
         /**
          * 其他
          */

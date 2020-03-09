@@ -24,6 +24,11 @@
                     <groupId>com.zhy.frame</groupId>
                     <artifactId>zhy-frame-base-rm</artifactId>
                 </exclusion>
+
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-web</artifactId>
@@ -35,58 +40,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
             <version>2.1.0.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>netty-transport</artifactId>
-                    <groupId>io.netty</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>netty-codec</artifactId>
-                    <groupId>io.netty</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>reactor-core</artifactId>
-                    <groupId>io.projectreactor</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>netty-common</artifactId>
-                    <groupId>io.netty</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>netty-buffer</artifactId>
-                    <groupId>io.netty</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>netty-handler</artifactId>
-                    <groupId>io.netty</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>rxjava</artifactId>
-                    <groupId>io.reactivex</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jackson-annotations</artifactId>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>archaius-core</artifactId>
-                    <groupId>com.netflix.archaius</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -97,12 +54,6 @@
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-dispatch-feign</artifactId>
             <version>${frame.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>hystrix-core</artifactId>
-                    <groupId>com.netflix.hystrix</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -115,12 +66,45 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
             <version>2.1.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-authentication-util</artifactId>
             <exclusions>
                 <exclusion>
-                    <artifactId>reactive-streams</artifactId>
-                    <groupId>org.reactivestreams</groupId>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
                 </exclusion>
             </exclusions>
+            <version>${frame.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-cloud-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${frame.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-authentication-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${frame.version}</version>
         </dependency>
     </dependencies>
 </project>

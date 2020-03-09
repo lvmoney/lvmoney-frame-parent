@@ -13,12 +13,4 @@ package com.zhy.frame.log.server.constant;/**
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class LogConstant {
-    /**
-     * 是否引入log的配置文件值
-     */
-    public static final String FRAME_LOG_SUPPORT_FALSE = "false";
-    /**
-     * 是否引入log的配置文件值
-     */
-    public static final String FRAME_LOG_SUPPORT_TRUE = "true";
 }

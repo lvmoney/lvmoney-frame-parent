@@ -2,13 +2,14 @@ rpc:
   server:
     authentication: http://localhost:8030
     provider: http://localhost:9901/
+    authority: http://localhost:9010/
 server:
   port: 8888
 spring:
   application:
     name: gateway
   redis:
-    database: 2
+    database: 3
     port: 6379
     host: 10.20.128.234
   cloud:
@@ -29,9 +30,9 @@ spring:
         - id: provider
           uri: ${rpc.server.provider}
           predicates:
-            - Path=/provider/**
+            - Path=/frame/provider/**
           filters:
-            - StripPrefix=1 # 表示在转发时去掉userapi
+            - StripPrefix=0 # 表示在转发时去掉userapi
             # 熔断降级配置
             - name: Hystrix
               args:
@@ -76,10 +77,25 @@ feign:
         loggerLevel: FULL
 frame:
   gateway:
-    support: false
+    support: true
   white:
     support: false
   releaseServer:
-    support: false
-  auth:
-    support: false
+    support: true
+  allowable:
+    support: true
+  jwt:
+    support: true
+  shiro:
+    support: true
+swagger:
+  base:
+    package: com.zhy.frame.route.gateway.controller
+  contact:
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: 网关
+  title: authentication-resource
+  url: ''
+  version: 1.0

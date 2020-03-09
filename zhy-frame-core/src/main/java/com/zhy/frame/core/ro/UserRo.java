@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @describe：
@@ -40,4 +41,31 @@ public class UserRo implements Serializable {
      * new 拓展字段存储为序列化后的json
      */
     private String other;
+
+    /**
+     * iss: jwt签发者
+     */
+    private String iss;
+    /**
+     * sub:jwt所面向的用户
+     */
+    private String sub;
+    /**
+     * aud:接收jwt的一方
+     */
+    private String aud;
+    /**
+     * exp:jwt的过期时间，这个过期时间必须要大于签发时间
+     */
+    private Long exp;
+
+    /**
+     * nbf:定义在什么时间之前，该jwt都是不可用的 .
+     */
+
+    private Date nbf;
+    /**
+     * jti:jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。
+     */
+    private String jti;
 }

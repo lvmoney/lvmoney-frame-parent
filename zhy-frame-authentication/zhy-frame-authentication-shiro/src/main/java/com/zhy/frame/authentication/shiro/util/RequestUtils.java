@@ -1,6 +1,6 @@
 package com.zhy.frame.authentication.shiro.util;
 
-import com.zhy.frame.authentication.shiro.vo.UserVo;
+import com.zhy.frame.core.vo.UserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 

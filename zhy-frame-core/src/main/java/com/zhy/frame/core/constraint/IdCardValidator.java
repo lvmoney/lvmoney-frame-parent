@@ -16,6 +16,8 @@
 
 package com.zhy.frame.core.constraint;
 
+import org.springframework.util.StringUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Pattern;
@@ -35,7 +37,7 @@ public class IdCardValidator implements ConstraintValidator<IdCard, String> {
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
-		if (value ==null){
+        if (StringUtils.isEmpty(value)) {
 			return true;
 		}
 		return PATTERN.matcher(value).matches();

@@ -7,24 +7,31 @@ package com.zhy.frame.route.gateway.filter;/**
  */
 
 
+import com.zhy.frame.authentication.api.ao.ShiroCheckAo;
+import com.zhy.frame.authentication.api.vo.JwtCheckVo;
+import com.zhy.frame.authentication.api.vo.ShiroCheckVo;
+import com.zhy.frame.authentication.util.service.UserCommonService;
+import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.util.SupportUtil;
+import com.zhy.frame.cloud.common.service.AuthorizedService;
+import com.zhy.frame.cloud.common.vo.AuthorizedVo;
 import com.zhy.frame.core.enums.InternalService;
 import com.zhy.frame.core.util.IpUtil;
 import com.zhy.frame.core.vo.ServerInfo;
+import com.zhy.frame.core.vo.UserVo;
 import com.zhy.frame.route.gateway.constant.GatewayConstant;
 import com.zhy.frame.route.gateway.exception.GatewayException;
-import com.zhy.frame.route.gateway.properties.GatewayConfigProp;
-import com.zhy.frame.route.gateway.server.AuthenticationServerConfig;
+import com.zhy.frame.route.gateway.server.IJwtCheckConfig;
+import com.zhy.frame.route.gateway.server.IShiroCheckConfig;
 import com.zhy.frame.route.gateway.service.Gateway2RedisService;
 import com.zhy.frame.route.gateway.service.ServerService;
 import com.zhy.frame.route.gateway.service.WhiteListService;
 import com.zhy.frame.route.gateway.utils.ExceptionUtil;
-import com.zhy.frame.route.gateway.utils.FilterMapUtil;
 import com.zhy.frame.route.gateway.vo.WhiteListVo;
-import com.zhy.frame.route.gateway.vo.resp.Oauth2TokenCheck;
-import com.zhy.frame.route.gateway.vo.resp.ShiroAuthorityCheck;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -33,6 +40,7 @@ import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -54,9 +62,9 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     @Value("${frame.gateway.support:false}")
     String gatewaySupport;
     @Autowired
-    private AuthenticationServerConfig authenticationServerConfig;
+    IShiroCheckConfig IShiroCheckConfig;
     @Autowired
-    GatewayConfigProp gatewayConfigProp;
+    IJwtCheckConfig IJwtCheckConfig;
     @Autowired
     Gateway2RedisService gateway2RedisService;
     @Autowired
@@ -64,8 +72,15 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     @Value("${frame.white.support:false}")
     String whiteSupport;
 
-    @Value("${frame.auth.support:false}")
-    boolean authSupport;
+    @Value("${frame.allowable.support:false}")
+    boolean allowableSupport;
+
+
+    @Value("${frame.jwt.support:false}")
+    boolean jwtSupport;
+
+    @Value("${frame.shiro.support:false}")
+    boolean shiroSupport;
 
 
     @Value("${frame.releaseServer.support:false}")
@@ -84,12 +99,22 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     /**
      * 去掉https请求路径的后缀，主要是istio环境下
      */
-    private static final String HTTPS_SUBFIX_PORT = ":443";
+    private static final String HTTPS_SUFFIX_PORT = ":443";
     @Autowired
     ServerService serverService;
+    @Autowired
+    AuthorizedService authorizedService;
+    @Autowired
+    UserCommonService userCommonService;
 
     /**
-     * @describe:1、是否需要gateway支持====>2、白名单校验=====>3、是否被允许调用======>4、token校验=======>5、权限校验=======>6、服务访问
+     * @describe:1、直接能够访问的接口都是一些常用、不重要、不需要校验的接口 考虑到很多情况都是遭遇到非信任系统的调用攻击，所以需要校验发起调用的服务是否已被授权调用
+     * 2、同一个网络环境的内部服务间调用通过白名单校验，白名单校验通过，就可以直接访问
+     * 外网用户的访问先到这里经过层层考验再转发到对应的服务
+     * 3、基于多种情况的考虑，如果是jwt校验不需要shiro校验，需调用jwt校验服务。
+     * 如果是需要shiro校验，那么必须开启jwt校验，需要调用一个服务即校验jwt也要校验shiro，
+     * <p>
+     * 1、是否需要gateway支持====>2、白名单校验=====>3、sysId是否被授权====>4、是否被允许调用======>5、权限校验=======>6、服务访问
      * @param: [exchange, chain]
      * @return: reactor.core.publisher.Mono<java.lang.Void>
      * @author: lvmoney /XXXXXX科技有限公司
@@ -99,49 +124,75 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
         ServerHttpResponse serverHttpResponse = exchange.getResponse();
-        if (gatewaySupport.equals(GatewayConstant.FRAME_GATEWAY_SUPPORT_FALSE)) {
+        //1、gateway start
+        if (!SupportUtil.support(gatewaySupport)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_SUPPORT_ERROR))));
+        } else if (gatewaySupport.equals(BaseConstant.SUPPORT_FALSE)) {
             // 在这里做判断
             return chain.filter(exchange);
-        } else if (!GatewayConstant.FRAME_GATEWAY_SUPPORT_FALSE.equals(gatewaySupport) && !GatewayConstant.FRAME_GATEWAY_SUPPORT_TRUE.equals(gatewaySupport)) {
-            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_SUPPORT_ERROR))));
         }
-        if (!whiteSupport.equals(GatewayConstant.FRAME_WHITE_SUPPORT_TRUE) && !whiteSupport.equals(GatewayConstant.FRAME_WHITE_SUPPORT_FALSE)) {
-            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_SUPPORT_ERROR))));
-        } else if (!isWhite(exchange)) {
+        //1、gateway end
+
+        Route route = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
+        ServerInfo serverInfo = getServerInfo(route);
+        //2、白名单 start
+        if (!SupportUtil.support(whiteSupport)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.WHITE_SUPPORT_ERROR))));
+        } else if (!isWhite(exchange, serverInfo)) {
             //白名单校验
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_WHITE_CHECK_ERROR))));
         }
+        //2、白名单 end
+
+
+        //3、是否被允许调用 start
         String realPath = realPath(exchange);
-        if (!isRelease(exchange, realPath)) {
+        if (!isRelease(realPath, serverInfo)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_INTERNAL_CHECK_ERROR))));
         }
-        String requestPath = exchange.getRequest().getPath().toString();
-
-
-        if (GatewayConstant.FRAME_AUTH_SUPPORT_TRUE.equals(authSupport) && !GatewayConstant.FRAME_AUTH_SUPPORT_FALSE.equals(authSupport)) {
-            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.AUTH_SUPPORT_ERROR))));
-        } else if (!authSupport) {
-            return chain.filter(exchange);
-        } else {
-            Map<String, String> filterChainDefinition = gatewayConfigProp.getfilterChainDefinitionMap();
-            /**
-             * 判断真实的请求地址是否被允许直接访问，不需要鉴权
-             */
-            if (filterChainDefinition != null && FilterMapUtil.wildcardMatchMapKey(filterChainDefinition, requestPath, GatewayConstant.GATEWAY_REQUEST_IGNORE)) {
-                return chain.filter(exchange);
-            }
-            String token = exchange.getRequest().getHeaders().getFirst("token");
-            ApiResult<Oauth2TokenCheck> oauth2TokenCheck = authenticationServerConfig.authenticationServer(token).oauth2CheckToken();
-            if (!oauth2TokenCheck.isSuccess() || !oauth2TokenCheck.getData().isAdopt()) {
-                return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_TOKEN_CHECK_ERROR))));
-            }
-            ApiResult<ShiroAuthorityCheck> shiroAuthorityCheck = authenticationServerConfig.authenticationServer(token).shiroCheckAuthority(realPath);
-            if (!shiroAuthorityCheck.isSuccess() || !shiroAuthorityCheck.getData().isPass()) {
-                return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_SHIRO_CHECK_ERROR))));
-            }
-
-            return chain.filter(exchange);
+        //3、是否被允许调用 end
+        String token = exchange.getRequest().getHeaders().getFirst(BaseConstant.AUTHORIZATION_TOKEN_KEY);
+        UserVo userVo = userCommonService.getUserVo(token);
+        //4、系统id是否被允许访问 start
+        if (ObjectUtils.isEmpty(userVo)) {
+            token = "";
         }
+        if (!SupportUtil.support(allowableSupport)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.ALLOWABLE_SUPPORT_ERROR))));
+        } else if (BaseConstant.SUPPORT_TRUE_BOOL == allowableSupport) {
+            boolean result = isAllowable(token, serverInfo, realPath);
+            if (!result) {
+                serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+                return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.ALLOWABLE_SYS_ID_NOT_EXIST))));
+            }
+        }
+
+        //4、系统id是否被允许访问 start
+
+        //5、jwt校验 start
+        if (!SupportUtil.support(jwtSupport)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.JWT_SUPPORT_ERROR))));
+        } else if (!isJwt(realPath, token, serverInfo)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.TOKEN_CHECK_ERROR))));
+        }
+        //5、jwt校验 end
+        //6、shiro校验 start
+        if (!SupportUtil.support(shiroSupport)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.SHIRO_SUPPORT_ERROR))));
+        } else if (!isShiro(realPath, token, serverInfo)) {
+            serverHttpResponse.setStatusCode(HttpStatus.BAD_GATEWAY);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.SHIRO_CHECK_ERROR))));
+        }
+        return chain.filter(exchange);
+        //6、shiro校验 end
     }
 
     @Override
@@ -183,14 +234,12 @@ public class GatewayFilter implements GlobalFilter, Ordered {
      * @author: lvmoney /XXXXXX科技有限公司
      * 2019/8/20 10:20
      */
-    private boolean isWhite(ServerWebExchange exchange) {
-        Route route = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
-        ServerInfo serverInfo = getServerInfo(route);
+    private boolean isWhite(ServerWebExchange exchange, ServerInfo serverInfo) {
         String serverName = serverInfo.getServerName();
-        if (whiteSupport.equals(GatewayConstant.FRAME_WHITE_SUPPORT_FALSE)) {
+        if (whiteSupport.equals(BaseConstant.SUPPORT_FALSE)) {
             //不需要白名单支持
             return true;
-        } else if (GatewayConstant.FRAME_WHITE_SUPPORT_TRUE.equals(gatewaySupport)
+        } else if (BaseConstant.SUPPORT_TRUE.equals(gatewaySupport)
                 && !whiteListService.isExist(serverName)) {
             //需要白名单支持，但是服务名称不在redis中，说明该服务不需要白名单校验
             return true;
@@ -245,19 +294,18 @@ public class GatewayFilter implements GlobalFilter, Ordered {
      * 2、根据ServerInfo的internalService去判断是否是内网服务
      * 3、判断是否被允许访问
      *
-     * @param exchange:
+     * @param realPath:
+     * @param serverInfo:
      * @throws
      * @return: boolean
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/17 17:05
      */
-    private boolean isRelease(ServerWebExchange exchange, String realPath) {
+    private boolean isRelease(String realPath, ServerInfo serverInfo) {
         if (!releaseServerSupport) {
             //如果不需要支持直接返回true
             return true;
         } else {
-            Route route = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
-            ServerInfo serverInfo = getServerInfo(route);
             String internalService = serverInfo.getInternalService();
             if (InternalService.external.getValue().equals(internalService)) {
                 //如果是外部c端可访问的全部放开
@@ -287,8 +335,13 @@ public class GatewayFilter implements GlobalFilter, Ordered {
      */
     private ServerInfo getServerInfo(Route route) {
         String routeUrl = route.getUri().toString();
-        if (routeUrl.contains(HTTPS_SUBFIX_PORT)) {
-            routeUrl = routeUrl.replaceAll(HTTPS_SUBFIX_PORT, "");
+
+        if (routeUrl.contains(LOCALHOST_NAME)) {
+            String ip = IpUtil.getLocalhostIp();
+            routeUrl = routeUrl.replace(LOCALHOST_NAME, ip);
+        }
+        if (routeUrl.contains(HTTPS_SUFFIX_PORT)) {
+            routeUrl = routeUrl.replaceAll(HTTPS_SUFFIX_PORT, "");
         }
         ServerInfo serverInfo = new ServerInfo();
         if (routeUrl.startsWith(INTERNAL_SERVICE_PREFIX)) {
@@ -300,6 +353,95 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             serverInfo = serverService.getServerInfo(route.getUri());
         }
         return serverInfo;
+    }
+
+    /**
+     * 1、从redis获得请求的路径是否不需要校验
+     * 2、当前用户token校验,调用远程服务
+     *
+     * @param path:
+     * @param token:
+     * @param serverInfo:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/3/8 16:08
+     */
+    private boolean isJwt(String path, String token, ServerInfo serverInfo) {
+        if (!jwtSupport) {
+            //如果不需要支持直接返回true
+            return true;
+        } else {
+            if (serverInfo.getNotToken().contains(path)) {
+                return true;
+            }
+            if (StringUtils.isEmpty(token)) {
+                return false;
+            }
+            ApiResult<JwtCheckVo> apiResult = IJwtCheckConfig.authorityServer(token).checkToken();
+
+            if (apiResult.getData().isResult()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 1、从redis获得请求的路径是否不需要校验
+     * 2、判断当前用户是否被允许调用请求的url,调用远程服务
+     *
+     * @param path:
+     * @param token:
+     * @param serverInfo:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/3/8 16:09
+     */
+    private boolean isShiro(String path, String token, ServerInfo serverInfo) {
+        if (!shiroSupport) {
+            //如果不需要支持直接返回true
+            return true;
+        } else {
+            if (serverInfo.getNotAuthority().contains(path)) {
+                return true;
+            }
+            if (StringUtils.isEmpty(token)) {
+                return false;
+            }
+            ShiroCheckAo shiroCheckAo = new ShiroCheckAo(path);
+            ApiResult<ShiroCheckVo> apiResult = IShiroCheckConfig.authorityServer(token).checkAuthority(shiroCheckAo);
+            if (apiResult.getData().isResult()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 从redis中校验是否被sysId能访问
+     * 如果是不需要权限校验的url，直接返回校验通过。
+     *
+     * @param token:
+     * @param serverInfo:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/3/8 16:10
+     */
+    private boolean isAllowable(String token, ServerInfo serverInfo, String path) {
+        //如果用户没有登录且在在不需要鉴权的数据中
+        if (serverInfo.getNotAuthority().contains(path) || serverInfo.getNotToken().contains(path)) {
+            return true;
+        }
+        String serverName = serverInfo.getServerName();
+        AuthorizedVo authorizedVo = authorizedService.getSysIdByServer(serverName);
+        if (StringUtils.isEmpty(token)) {
+            return false;
+        }
+        UserVo userVo = JwtUtil.getUserVo(token);
+        return authorizedVo.getSysId().contains(userVo.getSysId());
     }
 
 

@@ -5,6 +5,7 @@ import com.zhy.frame.authentication.shiro.service.ShiroRedisService;
 import com.zhy.frame.authentication.shiro.vo.ShiroDataVo;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.core.vo.UserVo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
@@ -13,8 +14,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.zhy.frame.authentication.shiro.vo.UserVo;
 
 import java.util.*;
 
@@ -40,13 +39,13 @@ public class FrameShiroRealm extends AuthorizingRealm {
             throw new BusinessException(CommonException.Proxy.SHIRO_UNAUTHORIZED_EXCEPTIONT);
         }
         UserVo user = new UserVo();
-        user.setUserName(name);
-        user.setPassWord(password);
+        user.setUsername(name);
+        user.setPassword(password);
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 // 用户
                 user,
                 // 密码
-                user.getPassWord(),
+                user.getPassword(),
                 // realm name
                 getName()
         );
@@ -62,8 +61,8 @@ public class FrameShiroRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         if (principal instanceof UserVo) {
             UserVo userLogin = (UserVo) principal;
-            String userId = userLogin.getUserName();
-            ShiroDataVo shiroDataVo = shiroRedisService.getShiroData(userId);
+            String userName = userLogin.getUsername();
+            ShiroDataVo shiroDataVo = shiroRedisService.getShiroData(userName);
             if (shiroDataVo == null) {
                 throw new BusinessException(CommonException.Proxy.SHIRO_REDIS_NOT_EXSIT);
             }
@@ -76,7 +75,7 @@ public class FrameShiroRealm extends AuthorizingRealm {
                 authorizationInfo.addStringPermissions(permissions);
             }
             ShiroDataRo shiroDataRo = new ShiroDataRo();
-            shiroDataRo.setUsername(userId);
+            shiroDataRo.setUsername(userName);
             shiroDataRo.setRoles(roles);
             shiroDataRo.setPermissions(permissions);
             shiroDataRo.setExpire(shiroDataVo.getExpire());
