@@ -1,0 +1,33 @@
+server:
+  address:
+  port: 8081
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+spring:
+  application:
+    name: shop-service-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+# Dubbo Application  nacos
+## The default value of dubbo.application.name is ${spring.application.name}
+## dubbo.application.name=${spring.application.name}
+nacos:
+  service-address: localhost
+  port: 8848
+dubbo:
+  registry:
+    address: nacos://${nacos.service-address}:${nacos.port}

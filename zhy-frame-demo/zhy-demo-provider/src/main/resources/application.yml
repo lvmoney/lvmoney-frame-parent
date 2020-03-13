@@ -1,0 +1,76 @@
+server:
+  port: 9901
+  #你生成的证书名字
+spring:
+  application:
+    name: provider
+  redis:
+    database: 3
+    port: 6379
+    host: 10.20.128.234
+swagger:
+  base:
+    package: com.zhy.frame.demo.provider.controller
+  contact:
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+istio:
+  namespace: lvmoney
+  docker:
+    image:
+      pull: Always
+    file:
+      temp: /home
+  yaml:
+    cover: true
+    replicas: 1
+    version: v1
+    destination:
+      support: true
+      v1: 90
+      v2: 10
+    mirror:
+      support: true
+      version: v1
+    fault:
+      support: true
+      percent: 90
+      delay: 7
+    policy:
+      maxConnections: 2048
+      connectTimeout: 3s
+      http1MaxPendingRequests: 1024
+      maxRequestsPerConnection: 200
+      http2MaxRequests: 2048
+      consecutiveErrors: 3
+      maxRetries: 3
+      interval: 3s
+      baseEjectionTime: 3m
+      maxEjectionPercent: 100
+  master:
+    ip: 192.168.1.181
+
+operating:
+  environment: local
+  internal: internal
+frame:
+  releaseServer:
+    support: true
+custom:
+  tomcat:
+    https:
+      schema: http
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}

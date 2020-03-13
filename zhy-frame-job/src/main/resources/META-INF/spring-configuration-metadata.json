@@ -1,0 +1,70 @@
+{
+  "groups": [
+    {
+      "name": "xxl-job",
+      "type": "com.zhy.frame.job.properties.XxlJobProperties",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties"
+    },
+    {
+      "name": "xxl-job.admin",
+      "type": "com.zhy.frame.job.properties.XxlJobProperties$AdminProperties",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties",
+      "sourceMethod": "getAdmin()"
+    },
+    {
+      "name": "xxl-job.executor",
+      "type": "com.zhy.frame.job.properties.XxlJobProperties$ExecutorProperties",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties",
+      "sourceMethod": "getExecutor()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "xxl-job.admin.addresses",
+      "type": "java.lang.String",
+      "description": "Xxl-job admin server addresses.",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties$AdminProperties",
+      "defaultValue": "http://127.0.0.1:8080/xxl-job-admin"
+    },
+    {
+      "name": "xxl-job.executor.appname",
+      "type": "java.lang.String",
+      "description": "Xxl-job executor application name.",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties$ExecutorProperties",
+      "defaultValue": "xxl-job-executor"
+    },
+    {
+      "name": "xxl-job.executor.ip",
+      "type": "java.lang.String",
+      "description": "Xxl-job executor registry ip.",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties$ExecutorProperties"
+    },
+    {
+      "name": "xxl-job.executor.port",
+      "type": "java.lang.Integer",
+      "description": "Xxl-job executor registry port.",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties$ExecutorProperties",
+      "defaultValue": "9999"
+    },
+    {
+      "name": "xxl-job.executor.access-token",
+      "type": "java.lang.String",
+      "description": "Xxl-job executor registry access token.",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties$ExecutorProperties"
+    },
+    {
+      "name": "xxl-job.executor.log-path",
+      "type": "java.lang.String",
+      "description": "Xxl-job executor log files path.",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties$ExecutorProperties",
+      "defaultValue": "/data/applogs/xxl-job/jobhandler"
+    },
+    {
+      "name": "xxl-job.executor.log-retention-days",
+      "type": "java.lang.Integer",
+      "description": "Xxl-job executor log files retention days.",
+      "sourceType": "com.zhy.frame.job.properties.XxlJobProperties$ExecutorProperties",
+      "defaultValue": "30"
+    }
+  ]
+}
