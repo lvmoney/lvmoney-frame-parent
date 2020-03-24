@@ -1,6 +1,6 @@
 spring:
   application:
-    name: email-server
+    name: email-feign
   mail:
     host: smtp.qq.com
     port: 465

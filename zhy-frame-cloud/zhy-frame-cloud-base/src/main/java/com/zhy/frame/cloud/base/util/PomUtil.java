@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.util;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.util
+ * 包名:com.zhy.k8s.base.util
  * 版本信息: 版本1.0
  * 日期:2019/9/19
  * Copyright XXXXXX科技有限公司
@@ -44,7 +44,7 @@ public class PomUtil {
      * 为了pom和代码中docker镜像相关的配置统一，通过工具从pom文件获得docker的配置
      *
      * @throws
-     * @return: com.lvmoney.k8s.base.vo.DockerInfo
+     * @return: com.zhy.k8s.base.vo.DockerInfo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/19 14:20
      */

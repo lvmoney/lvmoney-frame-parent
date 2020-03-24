@@ -1,6 +1,6 @@
 /**
  * 描述:
- * 包名:com.zhy.frame.oauth2.server.constant
+ * 包名:com.zhy.frame.oauth2.feign.constant
  * 版本信息: 版本1.0
  * 日期:2019年1月18日  下午1:24:03
  * Copyright xxxx科技有限公司

@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.exception;/**
  * 描述:
- * 包名:com.lvmoney.oauth2.center.server
+ * 包名:com.zhy.oauth2.center.feign
  * 版本信息: 版本1.0
  * 日期:2019/7/28
  * Copyright XXXXXX科技有限公司
@@ -75,6 +75,12 @@ public interface GatewayException {
          * 鉴权支持
          */
         ALLOWABLE_SYS_ID_NOT_EXIST(ExceptionCodeLevel.ROUTE.getValue() + 8, "sys id not exist"),
+
+        /**
+         * 简单路由支持
+         */
+        SIMPLE_ROUTE_SUPPORT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 9, "frame.simpleRoute.support value is 'true' or 'false'"),
+
         /**
          * 其他
          */

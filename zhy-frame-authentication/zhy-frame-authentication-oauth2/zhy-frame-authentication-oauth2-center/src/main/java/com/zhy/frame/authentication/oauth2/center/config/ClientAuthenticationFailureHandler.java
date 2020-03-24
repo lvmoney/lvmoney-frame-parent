@@ -33,16 +33,6 @@ public class ClientAuthenticationFailureHandler extends SimpleUrlAuthenticationF
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response, AuthenticationException exception)
             throws IOException {
-//        String username = request.getParameter("username");
-//        LoginHistoryVo loginHistoryVo = new LoginHistoryVo();
-//        loginHistoryVo.setUsername(username);
-//        loginHistoryVo.setIp(IpUtil.getIpAddress(request));
-//        loginHistoryVo.setDevice(request.getHeader("User-Agent"));
-//        loginHistoryVo.setRecordStatus(0);
-//        loginHistoryVo.setRemarks(exception.getMessage());
-//        loginHistoryService.asyncCreate(loginHistoryVo);
-
-
         boolean isAjax = "XMLHttpRequest".equals(request
                 .getHeader("X-Requested-With")) || "apiLogin".equals(request
                 .getHeader("api-login"));

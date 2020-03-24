@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.annotations;/**
  * 描述:
- * 包名:com.lvmoney.jwt.annotation
+ * 包名:com.zhy.jwt.annotation
  * 版本信息: 版本1.0
  * 日期:2019/1/31
  * Copyright xxxx科技有限公司

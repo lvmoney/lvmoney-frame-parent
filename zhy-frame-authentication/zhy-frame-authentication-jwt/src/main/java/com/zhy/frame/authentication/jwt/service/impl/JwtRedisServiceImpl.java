@@ -21,11 +21,11 @@ import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.authentication.util.vo.JwtVo;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.core.ro.UserRo;
 import com.zhy.frame.authentication.jwt.service.JwtRedisService;
 import com.zhy.frame.cache.common.annation.CacheImpl;
 import com.zhy.frame.cache.common.service.CacheCommonService;
-import com.zhy.frame.core.util.JsonUtil;
 import com.zhy.frame.core.vo.UserVo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ import org.springframework.stereotype.Service;
 public class JwtRedisServiceImpl implements JwtRedisService {
     @CacheImpl
     CacheCommonService baseRedisService;
-    @Value("${jwt.server.expire:18000}")
+    @Value("${jwt.feign.expire:18000}")
     String expire;
 
     @Autowired

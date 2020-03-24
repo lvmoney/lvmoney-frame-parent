@@ -92,7 +92,7 @@ public class WebRequestLogAspect {
         // 处理完请求，返回内容
         if (log.isInfoEnabled()) {
             try {
-                log.info("Response from server : \n" + JacksonUtil.object2JsonString(ret));
+                log.info("Response from feign : \n" + JacksonUtil.object2JsonString(ret));
             } catch (Exception e) {
                 log.info("log http response Exception:\n ", e);
             }

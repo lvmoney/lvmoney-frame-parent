@@ -16,6 +16,7 @@
         <module>zhy-demo-shiro</module>
         <module>zhy-demo-provider</module>
         <module>zhy-demo-customer</module>
+        <module>zhy-demo-seata</module>
     </modules>
 
 

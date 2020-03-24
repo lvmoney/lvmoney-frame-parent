@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.vo;/**
  * 描述:
- * 包名:com.lvmoney.k8s.gateway.ro
+ * 包名:com.zhy.k8s.gateway.ro
  * 版本信息: 版本1.0
  * 日期:2019/8/20
  * Copyright XXXXXX科技有限公司

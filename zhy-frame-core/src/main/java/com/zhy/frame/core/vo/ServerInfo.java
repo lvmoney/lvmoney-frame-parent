@@ -1,6 +1,6 @@
 package com.zhy.frame.core.vo;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.info
+ * 包名:com.zhy.k8s.base.info
  * 版本信息: 版本1.0
  * 日期:2019/8/16
  * Copyright XXXXXX科技有限公司
@@ -58,6 +58,11 @@ public class ServerInfo implements Serializable {
      * 不需要权限校验的url
      */
     private Set<String> notAuthority;
+
+    /**
+     * 是否是简单的路由
+     */
+    private boolean simpleRoute;
 
 
 }

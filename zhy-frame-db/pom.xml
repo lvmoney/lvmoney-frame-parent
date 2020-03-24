@@ -12,8 +12,9 @@
     <artifactId>zhy-frame-db</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>zhy-frame-db-mysql-common</module>
-        <module>zhy-frame-db-mysql-rw</module>
+        <module>zhy-frame-db-sharding</module>
+        <module>zhy-frame-db-seata</module>
+        <module>zhy-frame-db-mysql</module>
     </modules>
 
 </project>

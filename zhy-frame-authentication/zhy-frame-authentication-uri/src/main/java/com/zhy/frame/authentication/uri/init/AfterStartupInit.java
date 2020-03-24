@@ -7,7 +7,7 @@ package com.zhy.frame.authentication.uri.init;/**
  */
 
 
-import com.zhy.frame.authentication.uri.annotation.SysResouce;
+import com.zhy.frame.authentication.uri.annotation.SysServer;
 import com.zhy.frame.authentication.uri.ro.SysUriRo;
 import com.zhy.frame.authentication.uri.service.UriService;
 import com.zhy.frame.authentication.uri.vo.SysUriVo;
@@ -34,38 +34,50 @@ import java.util.Map;
  */
 @Service
 public class AfterStartupInit implements InitializingBean {
+    private static final String DEFAULT_REQUEST_TYPE = "GET";
     @Autowired
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
     @Autowired
     UriService uriService;
     @Value("${spring.application.name:lvmoney}")
     private String serverName;
+
     @Override
     public void afterPropertiesSet() throws Exception {
-        List<SysUriVo> sysUriVoList = new ArrayList<SysUriVo>();
+        List<SysUriVo> sysUriVoList = new ArrayList();
         Map<RequestMappingInfo, HandlerMethod> map = requestMappingHandlerMapping.getHandlerMethods();
         for (Map.Entry<RequestMappingInfo, HandlerMethod> m : map.entrySet()) {
             SysUriVo sysServiceDataVo = new SysUriVo();
             RequestMappingInfo info = m.getKey();
+            String type = getRequestType(info);
+            sysServiceDataVo.setRequestType(type);
             HandlerMethod handlerMethod = m.getValue();
             PatternsRequestCondition p = info.getPatternsCondition();
             for (String url : p.getPatterns()) {
                 sysServiceDataVo.setUri(url);
             }
             Method method = handlerMethod.getMethod();
-            if (method.isAnnotationPresent(SysResouce.class)) {
-                SysResouce sysResouce = method.getAnnotation(SysResouce.class);
-                sysServiceDataVo.setDescrption(sysResouce.describe());
+            if (method.isAnnotationPresent(SysServer.class)) {
+                SysServer sysServer = method.getAnnotation(SysServer.class);
+                sysServiceDataVo.setDescribe(sysServer.describe());
             }
             sysUriVoList.add(sysServiceDataVo);
         }
-        SysUriRo shiroServerRo = new SysUriRo();
+        SysUriRo sysUriRo = new SysUriRo();
         Map<String, List<SysUriVo>> data = new HashMap(BaseConstant.MAP_DEFAULT_SIZE) {{
             put(serverName, sysUriVoList);
         }};
-        shiroServerRo.setData(data);
+        sysUriRo.setData(data);
         uriService.deleteSysUriByServerName(serverName);
-        uriService.saveSysUri(shiroServerRo);
+        uriService.saveSysUri(sysUriRo);
+    }
+
+    private String getRequestType(RequestMappingInfo requestMappingInfo) {
+        try {
+            return requestMappingInfo.getMethodsCondition().getMethods().toArray()[0].toString().toUpperCase();
+        } catch (Exception e) {
+            return DEFAULT_REQUEST_TYPE;
+        }
     }
 
 

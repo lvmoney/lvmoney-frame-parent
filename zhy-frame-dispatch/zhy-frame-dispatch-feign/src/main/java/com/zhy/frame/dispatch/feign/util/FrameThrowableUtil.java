@@ -17,7 +17,7 @@ import com.zhy.frame.base.core.exception.CommonException;
  */
 public class FrameThrowableUtil {
 
-    public static BusinessException Throwable2BusinessException(Throwable cause) {
+    public static BusinessException throwable2BusinessException(Throwable cause) {
         if (cause instanceof BusinessException) {
             return (BusinessException) cause;
         } else {

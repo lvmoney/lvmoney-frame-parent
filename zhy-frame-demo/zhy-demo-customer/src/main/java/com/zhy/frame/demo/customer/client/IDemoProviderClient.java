@@ -18,6 +18,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author: lvmoney/XXXXXX科技有限公司
  * @version:v1.0 2020/3/5 15:37
  */
-@FeignClient(name = "provider", url = "${rpc.server.gateway}", configuration = {FeignConfig.class}, fallbackFactory = IDemoProviderClientFallback.class)
+@FeignClient(name = "${rpc.server.gateway}", configuration = {FeignConfig.class}, fallbackFactory = IDemoProviderClientFallback.class)
 public interface IDemoProviderClient extends IDemoProvider {
 }

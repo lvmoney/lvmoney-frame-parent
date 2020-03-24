@@ -11,13 +11,8 @@ import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.demo.api.surface.IDemoProvider;
 import com.zhy.frame.base.core.api.ApiResult;
-import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.cloud.base.annotations.ReleaseServer;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @describe：

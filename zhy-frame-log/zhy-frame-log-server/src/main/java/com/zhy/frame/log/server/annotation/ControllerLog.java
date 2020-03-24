@@ -1,6 +1,6 @@
 package com.zhy.frame.log.server.annotation;/**
  * 描述:
- * 包名:com.zhy.frame.log.server.annotation
+ * 包名:com.zhy.frame.log.feign.annotation
  * 版本信息: 版本1.0
  * 日期:2019/1/31
  * Copyright 四川******科技有限公司

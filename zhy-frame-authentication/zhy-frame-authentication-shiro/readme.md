@@ -23,7 +23,7 @@ spring.redis.pool.min-idle=20
 spring.redis.timeout=60000
 3、该模块采用token的方式进行身份验证，没有用session的方式。每个需要鉴权的访问都需要在head配置token值
 4、已做了过滤器，当调用权限校验标签的时候，会自动对token进行登录校验，不需要在代码中显示的调用shiro的登录校验方式。
-5、对于需要权限校验的访问，加入配置：
+5、对于需要权限校验的访问，加入配置：不建议使用
 @RequiresPermissions({"/auth/index"}):这里是权限的资源路径和系统的真实路径无关，只是一个权限映射关系
 @RequiresRoles("USER")：这里是一个角色配置，和资源路径做对应即可
 6、不需要权限校验的需要在application.properties同目录新建shiroConfig.properites,并进行配置，详见样例。
@@ -274,3 +274,5 @@ DELIMITER ;
 
 
 11、为了方便开发和测试frame.shiro.support:false 默认是不支持的，需要改为true，系统就支持token了。
+12、frame.requestType.support: true用来表示是否支持多个请求地址一样请求类型（post，get）不同的url来配置权限
+若如此构造的ShiroUriRo中url需以_POST(请求类型)结尾

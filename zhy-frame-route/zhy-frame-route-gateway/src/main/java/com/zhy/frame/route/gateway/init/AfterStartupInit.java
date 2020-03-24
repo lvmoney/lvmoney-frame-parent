@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.init;/**
  * 描述:
- * 包名:com.lvmoney.jwt.annotation
+ * 包名:com.zhy.jwt.annotation
  * 版本信息: 版本1.0
  * 日期:2019/2/22
  * Copyright xxxx科技有限公司

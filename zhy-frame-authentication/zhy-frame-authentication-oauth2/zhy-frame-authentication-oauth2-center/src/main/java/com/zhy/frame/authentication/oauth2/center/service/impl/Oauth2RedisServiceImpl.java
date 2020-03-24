@@ -11,9 +11,6 @@ import com.zhy.frame.authentication.oauth2.center.service.Oauth2RedisService;
 import com.zhy.frame.authentication.oauth2.center.vo.AuthorizationVo;
 import com.zhy.frame.authentication.oauth2.center.vo.resp.AuthorizationRespVo;
 import com.zhy.frame.cache.redis.service.BaseRedisService;
-import com.zhy.platform.authentication.oauth2.common.constant.Oauth2CommonConstant;
-import com.zhy.platform.authentication.oauth2.common.ro.Oauth2UserRo;
-import com.zhy.platform.authentication.oauth2.common.vo.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +38,8 @@ public class Oauth2RedisServiceImpl implements Oauth2RedisService {
 
     @Override
     public BaseClientDetails getClientDetailsByClientId(String clientId) {
-        Object obj = baseRedisService.getByMapKey(Oauth2ServerConstant.REDIS_FRAME_CLIENT_DETAILS_NAME, clientId);
         try {
+            Object obj = baseRedisService.getByMapKey(Oauth2ServerConstant.REDIS_FRAME_CLIENT_DETAILS_NAME, clientId);
             BaseClientDetails baseClientDetails = JSON.parseObject(obj.toString(), new TypeReference<BaseClientDetails>() {
             });
             return baseClientDetails;
@@ -70,8 +67,8 @@ public class Oauth2RedisServiceImpl implements Oauth2RedisService {
 
     @Override
     public AuthorizationVo getAuthorizationCodeByCode(String code) {
-        Object obj = baseRedisService.getByMapKey(Oauth2ServerConstant.REDIS_FRAME_AUTHENTICATION_CODE_NAME, code);
         try {
+            Object obj = baseRedisService.getByMapKey(Oauth2ServerConstant.REDIS_FRAME_AUTHENTICATION_CODE_NAME, code);
             AuthorizationRespVo authorizationRespVo = JSON.parseObject(obj.toString(), new TypeReference<AuthorizationRespVo>() {
             });
             AuthorizationVo authorizationVo = authorizationRespVo2AuthorizationVo(authorizationRespVo);

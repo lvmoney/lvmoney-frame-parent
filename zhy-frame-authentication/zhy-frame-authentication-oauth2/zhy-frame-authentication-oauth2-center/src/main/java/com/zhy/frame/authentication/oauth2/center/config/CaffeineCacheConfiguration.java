@@ -27,10 +27,6 @@ public class CaffeineCacheConfiguration {
     public CacheManager cacheManager() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         ArrayList<CaffeineCache> caches = new ArrayList<CaffeineCache>();
-//        for (CachesEnum c : CachesEnum.values()) {
-//            caches.add(new CaffeineCache(c.name(), Caffeine.newBuilder().expireAfterWrite(c.getTtl(), TimeUnit.SECONDS)
-//                    .maximumSize(c.getMaxSize()).build()));
-//        }
         cacheManager.setCaches(caches);
         return cacheManager;
     }

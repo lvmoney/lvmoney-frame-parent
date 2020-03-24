@@ -26,4 +26,8 @@ public class ShiroCheckAo implements Serializable {
      * 请求地址
      */
     private String path;
+    /**
+     * token
+     */
+    private String token;
 }

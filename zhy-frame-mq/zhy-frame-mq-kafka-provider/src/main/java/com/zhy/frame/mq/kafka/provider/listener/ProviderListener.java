@@ -7,7 +7,7 @@ package com.zhy.frame.mq.kafka.provider.listener;/**
  */
 
 
-import com.zhy.frame.core.util.JsonUtil;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.mq.common.ro.ErrorRecordRo;
 import com.zhy.frame.mq.kafka.provider.service.BaseKafkaErrorService;
 import org.apache.kafka.clients.producer.ProducerRecord;

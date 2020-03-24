@@ -304,11 +304,11 @@ public interface CommonException {
         /**
          * 服务崩了
          */
-        SERVER_IS_DOWNGRADE(ExceptionCodeLevel.ROUTE.getValue() + 105, "rpc server is downgrade"),
+        SERVER_IS_DOWNGRADE(ExceptionCodeLevel.ROUTE.getValue() + 105, "rpc feign is downgrade"),
         /**
          * canal服务参数不能为空
          */
-        CANAL_PROP_IS_NULL(ExceptionCodeLevel.CORE.getValue() + 106, "canal server properties not Required null"),
+        CANAL_PROP_IS_NULL(ExceptionCodeLevel.CORE.getValue() + 106, "canal feign properties not Required null"),
         /**
          * canal zk 地址报错
          */
@@ -396,7 +396,7 @@ public interface CommonException {
         /**
          * feign 远程连接拒绝
          */
-        FEIGN_CONNECTION_REFUSED(ExceptionCodeLevel.DISPATCH.getValue() + 125, "feign rpc server connection refused"),
+        FEIGN_CONNECTION_REFUSED(ExceptionCodeLevel.DISPATCH.getValue() + 125, "feign rpc feign connection refused"),
 
         /**
          * 成功

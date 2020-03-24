@@ -85,7 +85,7 @@ public class ServerConfig extends AuthorizationServerConfigurerAdapter implement
 
     @Bean
     public KeyPair keyPair() {
-        Resource resource = new ClassPathResource("jwt.jks");
+        Resource resource = new ClassPathResource("classpath:jwt.jks");
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(resource,
                 keypass.toCharArray());
         return keyStoreKeyFactory.getKeyPair(keypair);
@@ -95,9 +95,6 @@ public class ServerConfig extends AuthorizationServerConfigurerAdapter implement
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
         accessTokenConverter.setKeyPair(keyPair());
-
-        // 测试用,资源服务使用相同的字符达到一个对称加密的效果,生产时候使用RSA非对称加密方式
-        // accessTokenConverter.setSigningKey("123");
         return accessTokenConverter;
     }
 
@@ -110,33 +107,14 @@ public class ServerConfig extends AuthorizationServerConfigurerAdapter implement
         return tokenEnhancerChain;
     }
 
-//    @Bean
-//    public TokenStore tokenStore() {
-//        return new JwtTokenStore(accessTokenConverter());
-//    }
-
 
     @Bean
     public TokenStore tokenStore() {
         return frameRedisTokenStore;
     }
-//    @Bean
-//    public TokenStore tokenStore() {
-//        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
-//        return redisTokenStore;
-//    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//      import!,client和user的加密方式须一致
-//        clients.inMemory()
-//                .withClient("SampleClientId")
-//                .authorizedGrantTypes("implicit", "authorization_code", "refresh_token", "password", "client_credentials")
-//                .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-//                .scopes("read", "write", "trust")
-//                .secret("secret")
-//                .accessTokenValiditySeconds(3600)AuthorizationServerSecurityConfigurer
-//                .refreshTokenValiditySeconds(2592000);
         clients.withClientDetails(clientDetailsService);
     }
 
@@ -180,16 +158,12 @@ public class ServerConfig extends AuthorizationServerConfigurerAdapter implement
         endpoints.reuseRefreshTokens(true);
         endpoints.tokenGranter(tokenGranter());
         endpoints.authorizationCodeServices(redisAuthorizationCodeServices);
-//      endpoints.tokenEnhancer(tokenEnhancerChain);  // 设了 tokenGranter 后该配制失效,需要在 tokenServices() 中设置
         endpoints.userApprovalHandler(userApprovalHandler());
         endpoints.exceptionTranslator(customWebResponseExceptionTranslator);
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-//        oauthServer.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')")
-//                .checkTokenAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')")
-//                .allowFormAuthenticationForClients();
         oauthServer
                 .tokenKeyAccess("permitAll()")
                 //allow check token
@@ -197,10 +171,6 @@ public class ServerConfig extends AuthorizationServerConfigurerAdapter implement
                 .allowFormAuthenticationForClients();
     }
 
-//    @Bean
-//    public AuthorizationCodeServices authorizationCodeServices() {
-//        return new InMemoryAuthorizationCodeServices(); // 使用默认
-//    }
 
     @Bean
     public DefaultTokenServices authorizationServerTokenServices() {

@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Scope;
  * @author: lvmoney/XXXXXX科技有限公司
  * @version:v1.0 2020/3/13 11:16
  */
-//@Configuration
 public class DisableHystrix {
 
     @Bean

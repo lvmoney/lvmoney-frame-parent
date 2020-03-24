@@ -4,8 +4,7 @@
 4、gateway 在控制器里面用httpservletrequest都不得行，
 这个时候如果feign 需要设置 header时需要特定的方式(普通方式用RequestInterceptor即可，
 可参考frame-authentication-support下FeignInterceptor)，
-可参考com.lvmoney.k8s.gateway.server.AuthenticationServerConfig  
-5、gateway过滤请求可在gatewayConfig.properties配置，这里需要配置通过gateway 的请求路径  
+可参考com.zhy.k8s.gateway.server.AuthenticationServerConfig  
 6、请求路径的权限校验，是通过真实的路径（调用不同服务的真正路径）来校验的，在AuthenticationFilter实现了
 获得当前请求路径的真实请求路径的方法，frame.releaseServer.support结合鉴权服务来完成。
 7、路由规则做了redis改造。RedisRouteDefinitionRepository，Gateway2RedisServiceImpl，在AfterStartupInit

@@ -7,7 +7,7 @@ package com.zhy.frame.mq.kafka.provider.sender;/**
  */
 
 
-import com.zhy.frame.core.util.JsonUtil;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.mq.common.annation.MqService;
 import com.zhy.frame.mq.common.constant.MqConstant;
 import com.zhy.frame.mq.common.service.MqSendService;

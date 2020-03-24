@@ -41,11 +41,9 @@ public class CustomTokenEnhancer implements TokenEnhancer {
             String username = (String) authentication.getUserAuthentication().getName();
             UserInfo user = oauth2CommonService.getOauth2UserVo(username);
             additionalInformation.put("grantType", authentication.getOAuth2Request().getGrantType());
-//            additionalInformation.put("userId", user.getUserId());
             additionalInformation.put("username", user.getUsername());
             additionalInformation.put("nikename", user.getNickname());
             additionalInformation.put("gender", user.getGender());
-//            additionalInformation.put("status", 1);
         }
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
         return accessToken;

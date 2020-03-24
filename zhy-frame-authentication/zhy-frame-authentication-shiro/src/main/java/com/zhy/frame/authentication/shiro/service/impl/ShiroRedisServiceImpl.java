@@ -13,24 +13,21 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.zhy.frame.authentication.common.constant.AuthConstant;
 import com.zhy.frame.base.core.constant.BaseConstant;
-import com.zhy.frame.core.ro.UserRo;
 import com.zhy.frame.authentication.shiro.constant.ShiroConstant;
 import com.zhy.frame.authentication.shiro.ro.ShiroDataRo;
 import com.zhy.frame.authentication.shiro.ro.ShiroUriRo;
 import com.zhy.frame.authentication.shiro.service.ShiroRedisService;
 import com.zhy.frame.authentication.shiro.vo.ShiroDataVo;
 import com.zhy.frame.authentication.shiro.vo.ShiroUriVo;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.cache.common.annation.CacheImpl;
 import com.zhy.frame.cache.common.constant.CacheConstant;
 import com.zhy.frame.cache.common.service.CacheCommonService;
-import com.zhy.frame.core.util.JsonUtil;
-import com.zhy.frame.core.vo.UserVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

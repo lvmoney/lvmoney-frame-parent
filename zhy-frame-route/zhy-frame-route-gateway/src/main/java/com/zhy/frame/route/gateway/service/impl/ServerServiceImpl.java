@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.service.impl;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.service.impl
+ * 包名:com.zhy.k8s.base.service.impl
  * 版本信息: 版本1.0
  * 日期:2019/8/20
  * Copyright XXXXXX科技有限公司
@@ -33,8 +33,8 @@ public class ServerServiceImpl implements ServerService {
 
     @Override
     public ServerInfo getServerInfo(URI uri) {
-        Object obj = baseRedisService.getByMapKey(BaseConstant.REDIS_SERVER_CROUP_KEY, uri.getHost().toString());
         try {
+            Object obj = baseRedisService.getByMapKey(BaseConstant.REDIS_SERVER_CROUP_KEY, uri.getHost().toString());
             ServerInfo ServerInfo = JSON.parseObject(obj.toString(), new TypeReference<ServerInfo>() {
             });
             return ServerInfo;

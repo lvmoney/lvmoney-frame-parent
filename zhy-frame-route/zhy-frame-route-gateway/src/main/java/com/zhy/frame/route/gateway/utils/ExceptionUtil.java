@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.utils;/**
  * 描述:
- * 包名:com.lvmoney.k8s.gateway.util
+ * 包名:com.zhy.k8s.gateway.util
  * 版本信息: 版本1.0
  * 日期:2019/8/14
  * Copyright XXXXXX科技有限公司
@@ -9,7 +9,7 @@ package com.zhy.frame.route.gateway.utils;/**
 
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.core.util.JsonUtil;
+import com.zhy.frame.base.core.util.JsonUtil;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 

@@ -1,6 +1,6 @@
 package com.zhy.frame.authentication.oauth2.center.service;/**
  * 描述:
- * 包名:com.lvmoney.oauth2.center.server.service
+ * 包名:com.zhy.oauth2.center.feign.service
  * 版本信息: 版本1.0
  * 日期:2019/8/6
  * Copyright XXXXXX科技有限公司

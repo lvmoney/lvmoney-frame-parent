@@ -1,6 +1,6 @@
 package com.zhy.frame.core.enums;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.enums
+ * 包名:com.zhy.k8s.base.enums
  * 版本信息: 版本1.0
  * 日期:2019/8/19
  * Copyright XXXXXX科技有限公司

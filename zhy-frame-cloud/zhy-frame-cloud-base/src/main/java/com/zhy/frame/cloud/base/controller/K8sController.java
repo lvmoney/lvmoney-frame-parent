@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.controller;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.controller
+ * 包名:com.zhy.k8s.base.controller
  * 版本信息: 版本1.0
  * 日期:2019/8/17
  * Copyright XXXXXX科技有限公司
@@ -32,11 +32,12 @@ public class K8sController {
 //    }
 
     /**
-     * @describe: k8s namespace list
-     * @param: []
+     * k8s namespace list
+     *
+     * @throws
      * @return: io.fabric8.kubernetes.api.model.NamespaceList
      * @author: lvmoney /XXXXXX科技有限公司
-     * 2019/9/9 10:15
+     * @date: 2020/3/17 18:40
      */
     @RequestMapping(value = "/listnamespace", method = RequestMethod.GET)
     public NamespaceList listk8snamespace() {

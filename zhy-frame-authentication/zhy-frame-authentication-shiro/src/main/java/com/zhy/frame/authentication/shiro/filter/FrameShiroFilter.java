@@ -11,8 +11,8 @@ import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.base.core.exception.ExceptionType;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.base.core.util.SupportUtil;
-import com.zhy.frame.core.util.JsonUtil;
 import com.zhy.frame.core.vo.UserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -48,6 +48,9 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
     @Autowired
     UserCommonService userCommonService;
 
+    @Value("${frame.requestType.support:false}")
+    boolean requestTypeSupport;
+
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         return false;
@@ -61,7 +64,9 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
         } else if (BaseConstant.SUPPORT_FALSE.equals(frameSupport)) {
             return true;
         }
+
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+
         String servletPath = httpServletRequest.getServletPath();
         // 先判断是否是系统配置的不需要校验的访问，例如登录请求，或者其他静态资源
         Map<String, String> filterChainDefinition = shiroConfigProp.getFilterChainDefinitionMap();
@@ -92,8 +97,13 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
             if (servletPath.endsWith(ShiroConstant.SERVLET_END_WITH)) {
                 servletPath = servletPath.substring(0, servletPath.lastIndexOf(ShiroConstant.SERVLET_END_WITH));
             }
+            String requestUrl = sysId + AuthConstant.UNDERLINE + servletPath;
+            if (requestTypeSupport) {
+                String requestType = httpServletRequest.getMethod().toUpperCase();
+                requestUrl = requestUrl + AuthConstant.UNDERLINE + requestType;
+            }
             //考虑到到多系统需要用sysId做如下处理
-            ShiroUriVo shiroUriVo = shiroRedisService.getShiroUriData(sysId + AuthConstant.UNDERLINE + servletPath);
+            ShiroUriVo shiroUriVo = shiroRedisService.getShiroUriData(requestUrl);
             if (shiroUriVo != null) {
                 List<String> roleList = new ArrayList<>(shiroUriVo.getRole());
                 boolean[] roles = subject.hasRoles(roleList);

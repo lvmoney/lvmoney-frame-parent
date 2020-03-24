@@ -24,7 +24,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ShiroUriRo implements Serializable {
     private static final long serialVersionUID = 66817079523606816L;
-    private String username;
     private String uri;
     private long expire;
     private ShiroUriVo shiroUriVo;

@@ -42,8 +42,8 @@ public class AuthorizedServiceImpl implements AuthorizedService {
 
     @Override
     public AuthorizedVo getSysIdByServer(String serverName) {
-        Object obj = baseRedisService.getByMapKey(CloudCommonConstant.REDIS_AUTHORIZED_SYS, serverName);
         try {
+            Object obj = baseRedisService.getByMapKey(CloudCommonConstant.REDIS_AUTHORIZED_SYS, serverName);
             Set<String> sydIds = JSON.parseObject(obj.toString(), new TypeReference<Set>() {
             });
             return new AuthorizedVo(sydIds);

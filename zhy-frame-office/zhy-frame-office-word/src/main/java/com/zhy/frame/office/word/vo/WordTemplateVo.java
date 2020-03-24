@@ -11,7 +11,7 @@ import com.deepoove.poi.data.PictureRenderData;
 import com.deepoove.poi.data.RenderData;
 import com.deepoove.poi.data.TextRenderData;
 import com.deepoove.poi.util.BytePictureUtils;
-import com.zhy.frame.core.util.JsonUtil;
+import com.zhy.frame.base.core.util.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -19,7 +19,7 @@ public class IDemoProviderClientFallback implements FallbackFactory<IDemoProvide
         return new IDemoProviderClient() {
             @Override
             public ApiResult<String> fallback(String name) {
-                BusinessException businessException = FrameThrowableUtil.Throwable2BusinessException(cause);
+                BusinessException businessException = FrameThrowableUtil.throwable2BusinessException(cause);
                 return ApiResult.error(businessException.getCode(), businessException.getMessage());
             }
 

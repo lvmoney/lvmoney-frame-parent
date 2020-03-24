@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.service;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.service
+ * 包名:com.zhy.k8s.base.service
  * 版本信息: 版本1.0
  * 日期:2019/8/19
  * Copyright XXXXXX科技有限公司
@@ -19,7 +19,7 @@ public interface YamlService {
      * 构造service
      *
      * @throws
-     * @return: com.lvmoney.k8s.base.vo.jyaml.Service
+     * @return: com.zhy.k8s.base.vo.jyaml.Service
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/10 9:02
      */
@@ -29,7 +29,7 @@ public interface YamlService {
      * 构造Deployment
      *
      * @throws
-     * @return: com.lvmoney.k8s.base.vo.jyaml.Deployment
+     * @return: com.zhy.k8s.base.vo.jyaml.Deployment
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/10 9:02
      */
@@ -39,7 +39,7 @@ public interface YamlService {
      * 构造gateway
      *
      * @throws
-     * @return: com.lvmoney.k8s.base.vo.jyaml.Gateway
+     * @return: com.zhy.k8s.base.vo.jyaml.Gateway
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/10 9:03
      */
@@ -49,7 +49,7 @@ public interface YamlService {
      * 构造VirtualService
      *
      * @throws
-     * @return: com.lvmoney.k8s.base.vo.jyaml.VirtualService
+     * @return: com.zhy.k8s.base.vo.jyaml.VirtualService
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/10 9:03
      */
@@ -59,7 +59,7 @@ public interface YamlService {
      * 构造Prometheus
      *
      * @throws
-     * @return: com.lvmoney.k8s.base.vo.jyaml.VirtualService
+     * @return: com.zhy.k8s.base.vo.jyaml.VirtualService
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/10 9:03
      */
@@ -69,7 +69,7 @@ public interface YamlService {
      * 构造DestinationRule
      *
      * @throws
-     * @return: com.lvmoney.k8s.base.vo.jyaml.DestinationRule
+     * @return: com.zhy.k8s.base.vo.jyaml.DestinationRule
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/10 9:03
      */

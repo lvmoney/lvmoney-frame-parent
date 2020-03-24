@@ -1,17 +1,16 @@
 package com.zhy.frame.cloud.base.listener;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.listener
+ * 包名:com.zhy.k8s.base.listener
  * 版本信息: 版本1.0
  * 日期:2019/8/16
  * Copyright XXXXXX科技有限公司
  */
 
 import com.zhy.frame.base.core.constant.BaseConstant;
+import com.zhy.frame.base.core.enums.OperatingEnvironmentType;
 import com.zhy.frame.cloud.base.annotations.NotAuthority;
 import com.zhy.frame.cloud.base.annotations.NotToken;
 import com.zhy.frame.cloud.base.annotations.ReleaseServer;
-import com.zhy.frame.cloud.base.constant.CloudBaseConstant;
-import com.zhy.frame.cloud.base.enums.OperatingEnvironmentType;
 import com.zhy.frame.cloud.base.service.CloudBaseService;
 import com.zhy.frame.core.ro.ServerBaseInfoRo;
 import com.zhy.frame.core.vo.ServerInfo;
@@ -54,6 +53,8 @@ public class ServerInfoListener implements ApplicationListener<WebServerInitiali
     String operatingEnvironment;
     @Value("${operating.internal:internal}")
     String operatingInternal;
+    @Value("${operating.simpleRoute:false}")
+    boolean simpleRoute;
 
     @Autowired
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -62,7 +63,7 @@ public class ServerInfoListener implements ApplicationListener<WebServerInitiali
      * 为当前服务构造基础数据，主要用在gateway中白名单，是否公布出去被访问等等
      *
      * @throws
-     * @return: com.lvmoney.common.vo.ServerInfo
+     * @return: com.zhy.common.vo.ServerInfo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/17 16:59
      */
@@ -76,17 +77,20 @@ public class ServerInfoListener implements ApplicationListener<WebServerInitiali
         ServerInfo serverInfo = new ServerInfo();
         serverInfo.setIp(address.getHostAddress());
         serverInfo.setPort(this.serverPort);
+        serverInfo.setServerName(BaseConstant.WEBSITE_PREFIX + this.serverName + BaseConstant.WEBSITE_SUFFIX);
         if (operatingEnvironment.equals(OperatingEnvironmentType.local.getValue())) {
             serverInfo.setUri(schema + "://" + address.getHostAddress() + ":" + this.serverPort + "/");
         } else if (operatingEnvironment.equals(OperatingEnvironmentType.istio.getValue())) {
-            serverInfo.setUri(schema + "://" + CloudBaseConstant.WEBSITE_PREFIX + this.serverName + CloudBaseConstant.WEBSITE_SUFFIX + "/");
+            serverInfo.setUri(schema + "://" + BaseConstant.WEBSITE_PREFIX + this.serverName + BaseConstant.WEBSITE_SUFFIX + "/");
+        } else if (operatingEnvironment.equals(OperatingEnvironmentType.nacos.getValue())) {
+            serverInfo.setUri(BaseConstant.NACOS_PREFIX + this.serverName);
         }
-        serverInfo.setServerName(CloudBaseConstant.WEBSITE_PREFIX + this.serverName + CloudBaseConstant.WEBSITE_SUFFIX);
         serverInfo.setHttpScheme(this.schema);
         serverInfo.setReleaseServer(this.getReleaseServer());
         serverInfo.setNotAuthority(this.getNotAuthority());
         serverInfo.setNotToken(this.getNotToken());
         serverInfo.setInternalService(operatingInternal);
+        serverInfo.setSimpleRoute(simpleRoute);
         ServerBaseInfoRo serverBaseInfoRo = new ServerBaseInfoRo();
         Map<String, ServerInfo> stringServerInfoMap = new HashMap(BaseConstant.MAP_DEFAULT_SIZE) {{
             put(serverInfo.getServerName(), serverInfo);

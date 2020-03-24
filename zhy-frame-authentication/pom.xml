@@ -20,6 +20,7 @@
         <module>zhy-frame-authentication-uri</module>
         <module>zhy-frame-authentication-util</module>
         <module>zhy-frame-authentication-api</module>
+        <module>zhy-frame-authentication-cloud</module>
     </modules>
 
 

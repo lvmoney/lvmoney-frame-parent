@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.constant;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.constant
+ * 包名:com.zhy.k8s.base.constant
  * 版本信息: 版本1.0
  * 日期:2019/8/16
  * Copyright XXXXXX科技有限公司
@@ -23,15 +23,7 @@ public class CloudBaseConstant {
 
     public static final String YAML_FILE_PATH = System.getProperty("user.dir") + FILE_SEPARATOR + "data" + FILE_SEPARATOR + "yaml";
 
-    /**
-     * 虚拟路径后缀
-     */
-    public static final String WEBSITE_SUFFIX = ".com";
 
-    /**
-     * 虚拟路径前缀
-     */
-    public static final String WEBSITE_PREFIX = "www.";
 
     /**
      * ingress 默认端口

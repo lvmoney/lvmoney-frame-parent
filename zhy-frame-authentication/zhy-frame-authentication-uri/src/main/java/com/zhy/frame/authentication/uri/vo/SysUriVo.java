@@ -23,6 +23,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SysUriVo implements Serializable {
     private String uri;
-    private String descrption;
+    private String describe;
+    private String requestType;
 
 }

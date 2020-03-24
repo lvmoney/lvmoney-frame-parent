@@ -1,12 +1,13 @@
 package com.zhy.frame.cloud.base.service.impl;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.service.impl
+ * 包名:com.zhy.k8s.base.service.impl
  * 版本信息: 版本1.0
  * 日期:2019/8/19
  * Copyright XXXXXX科技有限公司
  */
 
 
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.cloud.base.constant.CloudBaseConstant;
 import com.zhy.frame.cloud.base.enums.*;
 import com.zhy.frame.cloud.base.properties.RpcServerConfigProp;
@@ -55,7 +56,7 @@ public class YamlServiceImpl implements YamlService {
     /**
      * 服务端口
      */
-    @Value("${server.port:8080}")
+    @Value("${feign.port:8080}")
     int serverPort;
     /**
      * 发布多少个pod
@@ -300,7 +301,7 @@ public class YamlServiceImpl implements YamlService {
         }
         gatewatSpec.setServers(serverList);
         servers.setHosts(new ArrayList() {{
-            add("*." + applicationName + CloudBaseConstant.WEBSITE_SUFFIX);
+            add("*." + applicationName + BaseConstant.WEBSITE_SUFFIX);
         }});
         gateway.setMetadata(gMetadata);
         gateway.setSpec(gatewatSpec);
@@ -318,7 +319,7 @@ public class YamlServiceImpl implements YamlService {
         virtualService.setMetadata(vsMetadata);
         VirtualServiceSpec virtualServiceSpec = new VirtualServiceSpec();
         virtualServiceSpec.setHosts(new ArrayList() {{
-            add(CloudBaseConstant.WEBSITE_PREFIX + applicationName + CloudBaseConstant.WEBSITE_SUFFIX);
+            add(BaseConstant.WEBSITE_PREFIX + applicationName + BaseConstant.WEBSITE_SUFFIX);
         }});
         virtualServiceSpec.setGateways(new ArrayList() {{
             add(applicationName);

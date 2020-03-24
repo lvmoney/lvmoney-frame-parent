@@ -1,0 +1,71 @@
+server:
+  port: 8090
+spring:
+  shardingsphere:
+    datasource:
+      names: ds0,ds1
+      ds0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/subdb?useSSL=FALSE&serverTimezone=GMT%2B8
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+      ds1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/subdb2?useSSL=FALSE&serverTimezone=GMT%2B8
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+    sharding:
+      #      defaultDatabaseStrategy:
+      #        hint:
+      #          algorithmClassName: com.lvmoney.mysql.subdb.algorithm.HashPreciseShardingStrategy
+      #      defaultTableStrategy:
+      #        hint:
+      #          algorithmClassName: com.lvmoney.mysql.subdb.algorithm.HashPreciseShardingStrategy
+      tables:
+        user:
+          actual-data-nodes: ds$->{0..1}.user_$->{0..1}
+          table-strategy:
+            hint: # Hint分片策略
+              shardingColumns: id
+              algorithm-class-name: com.zhy.frame.db.sharding.base.algorithm.HashPreciseShardingStrategy # Hint分片
+          key-generator-column-name: id
+swagger:
+  base:
+    package: com.zhy.frame.db.sharding.base.controller
+  contact:
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: frame demo 服务调用方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+

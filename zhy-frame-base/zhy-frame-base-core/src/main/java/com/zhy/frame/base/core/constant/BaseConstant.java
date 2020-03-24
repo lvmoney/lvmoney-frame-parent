@@ -67,4 +67,19 @@ public class BaseConstant {
      * 权限 header token 的key
      */
     public static final String AUTHORIZATION_TOKEN_KEY = "token";
+    /**
+     * 虚拟路径后缀
+     */
+    public static final String WEBSITE_SUFFIX = ".com";
+
+    /**
+     * 虚拟路径前缀
+     */
+    public static final String WEBSITE_PREFIX = "www.";
+
+
+    /**
+     * nacos 环境以lb开头
+     */
+    public static final String NACOS_PREFIX = "lb://";
 }

@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.filter;/**
  * 描述:
- * 包名:com.lvmoney.k8s.gateway.filter
+ * 包名:com.zhy.k8s.gateway.filter
  * 版本信息: 版本1.0
  * 日期:2019/8/8
  * Copyright XXXXXX科技有限公司
@@ -24,8 +24,7 @@ import com.zhy.frame.core.vo.ServerInfo;
 import com.zhy.frame.core.vo.UserVo;
 import com.zhy.frame.route.gateway.constant.GatewayConstant;
 import com.zhy.frame.route.gateway.exception.GatewayException;
-import com.zhy.frame.route.gateway.server.IJwtCheckConfig;
-import com.zhy.frame.route.gateway.server.IShiroCheckConfig;
+import com.zhy.frame.route.gateway.feign.IAuthorityCheckClient;
 import com.zhy.frame.route.gateway.service.Gateway2RedisService;
 import com.zhy.frame.route.gateway.service.ServerService;
 import com.zhy.frame.route.gateway.service.WhiteListService;
@@ -62,10 +61,6 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     @Value("${frame.gateway.support:false}")
     String gatewaySupport;
     @Autowired
-    IShiroCheckConfig IShiroCheckConfig;
-    @Autowired
-    IJwtCheckConfig IJwtCheckConfig;
-    @Autowired
     Gateway2RedisService gateway2RedisService;
     @Autowired
     WhiteListService whiteListService;
@@ -75,7 +70,11 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     @Value("${frame.allowable.support:false}")
     boolean allowableSupport;
 
-
+    /**
+     * 简单路由
+     */
+    @Value("${frame.simpleRoute.support:false}")
+    boolean simpleRouteSupport;
     @Value("${frame.jwt.support:false}")
     boolean jwtSupport;
 
@@ -90,12 +89,16 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     /**
      * 开发local本地环境以http或者https开头，http包含了https
      */
-    private static final String INTERNAL_SERVICE_PREFIX = "http";
+    private static final String INTERNAL_SERVICE_PREFIX = "http://";
 
     /**
      * istio环境以www开头
      */
-    private static final String EXTERNAL_SERVICE_PREFIX = "www";
+    private static final String EXTERNAL_SERVICE_PREFIX = "www.";
+    /**
+     * nacos 环境以lb开头
+     */
+    private static final String NACOS_SERVICE_PREFIX = "lb://";
     /**
      * 去掉https请求路径的后缀，主要是istio环境下
      */
@@ -106,6 +109,8 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     AuthorizedService authorizedService;
     @Autowired
     UserCommonService userCommonService;
+    @Autowired
+    IAuthorityCheckClient iAuthorityCheckClient;
 
     /**
      * @describe:1、直接能够访问的接口都是一些常用、不重要、不需要校验的接口 考虑到很多情况都是遭遇到非信任系统的调用攻击，所以需要校验发起调用的服务是否已被授权调用
@@ -122,7 +127,6 @@ public class GatewayFilter implements GlobalFilter, Ordered {
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
         ServerHttpResponse serverHttpResponse = exchange.getResponse();
         //1、gateway start
         if (!SupportUtil.support(gatewaySupport)) {
@@ -133,10 +137,18 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
         //1、gateway end
-
+        //2、是否是简单的路由 start
         Route route = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
         ServerInfo serverInfo = getServerInfo(route);
-        //2、白名单 start
+        if (!SupportUtil.support(simpleRouteSupport)) {
+            serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.SIMPLE_ROUTE_SUPPORT_ERROR))));
+        } else if (isSimpleRoute(simpleRouteSupport, serverInfo)) {
+            // 在这里做判断
+            return chain.filter(exchange);
+        }
+        //2、是否是简单的路由 end
+        //3、白名单 start
         if (!SupportUtil.support(whiteSupport)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.WHITE_SUPPORT_ERROR))));
@@ -145,16 +157,14 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_WHITE_CHECK_ERROR))));
         }
-        //2、白名单 end
-
-
-        //3、是否被允许调用 start
+        //3、白名单 end
+        //4、是否被允许调用 start
         String realPath = realPath(exchange);
         if (!isRelease(realPath, serverInfo)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_INTERNAL_CHECK_ERROR))));
         }
-        //3、是否被允许调用 end
+        //4、是否被允许调用 end
         String token = exchange.getRequest().getHeaders().getFirst(BaseConstant.AUTHORIZATION_TOKEN_KEY);
         UserVo userVo = null;
         try {
@@ -164,7 +174,7 @@ public class GatewayFilter implements GlobalFilter, Ordered {
         } catch (Exception e) {
             userVo = null;
         }
-        //4、系统id是否被允许访问 start
+        //5、系统id是否被允许访问 start
         if (ObjectUtils.isEmpty(userVo)) {
             token = "";
         }
@@ -178,10 +188,8 @@ public class GatewayFilter implements GlobalFilter, Ordered {
                 return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.ALLOWABLE_SYS_ID_NOT_EXIST))));
             }
         }
-
-        //4、系统id是否被允许访问 start
-
-        //5、jwt校验 start
+        //5、系统id是否被允许访问 start
+        //6、jwt校验 start
         if (!SupportUtil.support(jwtSupport)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.JWT_SUPPORT_ERROR))));
@@ -189,8 +197,8 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.TOKEN_CHECK_ERROR))));
         }
-        //5、jwt校验 end
-        //6、shiro校验 start
+        //6、jwt校验 end
+        //7、shiro校验 start
         if (!SupportUtil.support(shiroSupport)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.SHIRO_SUPPORT_ERROR))));
@@ -199,7 +207,7 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.SHIRO_CHECK_ERROR))));
         }
         return chain.filter(exchange);
-        //6、shiro校验 end
+        //7、shiro校验 end
     }
 
     @Override
@@ -336,7 +344,7 @@ public class GatewayFilter implements GlobalFilter, Ordered {
      *
      * @param route:
      * @throws
-     * @return: com.lvmoney.common.vo.ServerInfo
+     * @return: com.zhy.common.vo.ServerInfo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/18 14:56
      */
@@ -358,7 +366,12 @@ public class GatewayFilter implements GlobalFilter, Ordered {
         } else if (routeUrl.startsWith(EXTERNAL_SERVICE_PREFIX)) {
             //istio 环境
             serverInfo = serverService.getServerInfo(route.getUri());
+        } else if (routeUrl.startsWith(NACOS_SERVICE_PREFIX)) {
+            //nacos 环境
+            serverInfo = serverService.getServerInfo(routeUrl);
+
         }
+
         return serverInfo;
     }
 
@@ -385,7 +398,7 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             if (StringUtils.isEmpty(token)) {
                 return false;
             }
-            ApiResult<JwtCheckVo> apiResult = IJwtCheckConfig.authorityServer(token).checkToken();
+            ApiResult<JwtCheckVo> apiResult = iAuthorityCheckClient.checkToken(token);
 
             if (apiResult.getData().isResult()) {
                 return true;
@@ -417,8 +430,8 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             if (StringUtils.isEmpty(token)) {
                 return false;
             }
-            ShiroCheckAo shiroCheckAo = new ShiroCheckAo(path);
-            ApiResult<ShiroCheckVo> apiResult = IShiroCheckConfig.authorityServer(token).checkAuthority(shiroCheckAo);
+            ShiroCheckAo shiroCheckAo = new ShiroCheckAo(path, token);
+            ApiResult<ShiroCheckVo> apiResult = iAuthorityCheckClient.checkAuthority(shiroCheckAo);
             if (apiResult.getData().isResult()) {
                 return true;
             }
@@ -449,6 +462,35 @@ public class GatewayFilter implements GlobalFilter, Ordered {
         }
         UserVo userVo = JwtUtil.getUserVo(token);
         return authorizedVo.getSysId().contains(userVo.getSysId());
+    }
+
+    /**
+     * 判断某个路由是否是简单的route，没有Serverinfo 的route被认为是简单的route
+     * 如果serverinfo 的simpleRoute=false也被认为是简单的route
+     * 如果是直接路由，如果不是就行后续的各种校验
+     *
+     * @param simpleRouteSupport:
+     * @param serverInfo:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/3/14 21:24
+     */
+    private boolean isSimpleRoute(boolean simpleRouteSupport, ServerInfo serverInfo) {
+        if (simpleRouteSupport) {
+            if (ObjectUtils.isEmpty(serverInfo)) {
+                return true;
+            } else if (serverInfo.isSimpleRoute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (ObjectUtils.isEmpty(serverInfo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

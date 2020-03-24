@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.vo.jyaml;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.vo.jyaml
+ * 包名:com.zhy.k8s.base.vo.jyaml
  * 版本信息: 版本1.0
  * 日期:2019/8/27
  * Copyright XXXXXX科技有限公司

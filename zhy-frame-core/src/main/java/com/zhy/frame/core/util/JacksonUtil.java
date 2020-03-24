@@ -25,7 +25,6 @@ public class JacksonUtil {
 
     static {
         // 美化输出
-        //mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

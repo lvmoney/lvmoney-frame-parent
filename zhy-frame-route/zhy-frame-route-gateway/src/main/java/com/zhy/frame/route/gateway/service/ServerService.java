@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.service;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.service
+ * 包名:com.zhy.k8s.base.service
  * 版本信息: 版本1.0
  * 日期:2019/8/20
  * Copyright XXXXXX科技有限公司
@@ -34,7 +34,7 @@ public interface ServerService {
      *
      * @param uri: 例如：http://10.20.10.69:9901/
      * @throws
-     * @return: com.lvmoney.common.vo.ServerInfo
+     * @return: com.zhy.common.vo.ServerInfo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2019/9/18 8:57
      */

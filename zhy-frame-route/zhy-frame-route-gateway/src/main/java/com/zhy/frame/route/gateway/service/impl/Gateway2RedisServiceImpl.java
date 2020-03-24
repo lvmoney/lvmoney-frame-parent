@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.service.impl;/**
  * 描述:
- * 包名:com.lvmoney.k8s.gateway.service
+ * 包名:com.zhy.k8s.gateway.service
  * 版本信息: 版本1.0
  * 日期:2019/8/15
  * Copyright XXXXXX科技有限公司
@@ -35,9 +35,8 @@ public class Gateway2RedisServiceImpl implements Gateway2RedisService {
 
     @Override
     public List<RouteDefinition> getRouteDefinition() {
-        Object obj = baseRedisService.getMapByKey(GatewayConstant.REDIS_GATEWAY_ROUTE_KEY);
-
         try {
+            Object obj = baseRedisService.getMapByKey(GatewayConstant.REDIS_GATEWAY_ROUTE_KEY);
             List<RouteDefinition> result =
                     JSON.parseObject(obj.toString(), new TypeReference<List<RouteDefinition>>() {
                     });
@@ -65,8 +64,8 @@ public class Gateway2RedisServiceImpl implements Gateway2RedisService {
 
     @Override
     public RouteDefinition getRouteDefinition(String routeId) {
-        Object obj = baseRedisService.getByMapKey(GatewayConstant.REDIS_GATEWAY_ROUTE_KEY, routeId);
         try {
+            Object obj = baseRedisService.getByMapKey(GatewayConstant.REDIS_GATEWAY_ROUTE_KEY, routeId);
             RouteDefinition result = JSON.parseObject(obj.toString(), new TypeReference<RouteDefinition>() {
             });
             return result;

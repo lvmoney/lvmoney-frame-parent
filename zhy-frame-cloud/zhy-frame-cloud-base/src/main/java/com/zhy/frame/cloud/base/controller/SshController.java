@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.controller;/**
  * 描述:
- * 包名:com.lvmoney.k8s.base.controller
+ * 包名:com.zhy.k8s.base.controller
  * 版本信息: 版本1.0
  * 日期:2019/8/21
  * Copyright XXXXXX科技有限公司
@@ -31,7 +31,7 @@ public class SshController {
     /**
      * @describe:文件上传到linux指定目录
      * @param: [sshUploadFileReqVo]
-     * @return: com.lvmoney.common.util.vo.ResultData<java.lang.Boolean>
+     * @return: com.zhy.common.util.vo.ResultData<java.lang.Boolean>
      * @author: lvmoney /XXXXXX科技有限公司
      * 2019/8/21 16:29
      */
@@ -48,7 +48,7 @@ public class SshController {
     /**
      * @describe:在linux执行特定的命令行
      * @param: [sshExecReqVo]
-     * @return: com.lvmoney.common.util.vo.ResultData<java.lang.Boolean>
+     * @return: com.zhy.common.util.vo.ResultData<java.lang.Boolean>
      * @author: lvmoney /XXXXXX科技有限公司
      * 2019/8/21 16:30
      */

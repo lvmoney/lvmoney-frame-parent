@@ -1,9 +1,22 @@
 server:
   port: 9902
   httpPort: 8081
+nacos:
+  service:
+    address: localhost
+    port: 8848
+
 spring:
   application:
     name: customer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+    service-registry:
+      auto-registration:
+      enabled: true
   redis:
     database: 3
     port: 6379
@@ -26,9 +39,9 @@ istio:
     ip: 192.168.1.181
 rpc:
   server:
-    gateway: http://localhost:8888
+    gateway: gateway
 operating:
-  environment: local
+  environment: nacos
   internal: internal
 swagger:
   base:
