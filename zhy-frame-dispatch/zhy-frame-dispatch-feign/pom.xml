@@ -67,6 +67,17 @@
         </dependency>
 
         <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-gson</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>com.google.code.gson</artifactId>
+                    <groupId>gson</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
