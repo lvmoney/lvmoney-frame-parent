@@ -8,6 +8,7 @@ package com.zhy.platform.authentication.oauth2.common.service.impl;/**
 
 
 import com.zhy.frame.authentication.common.constant.AuthConstant;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.cache.redis.service.BaseRedisService;
 import com.zhy.platform.authentication.oauth2.common.constant.Oauth2CommonConstant;
 import com.zhy.platform.authentication.oauth2.common.ro.ProtectResrouceRo;
@@ -32,7 +33,7 @@ public class Oauth2ResourceServiceImpl implements Oauth2ResourceService {
     @Value("${spring.application.name:resource}")
     String projectName;
 
-    String protectResourceKey = Oauth2CommonConstant.REDIS_FRAME_OAUTH2_PROTECT_RESOURCE + AuthConstant.UNDERLINE + projectName;
+    String protectResourceKey = Oauth2CommonConstant.REDIS_FRAME_OAUTH2_PROTECT_RESOURCE + BaseConstant.CONNECTOR_UNDERLINE + projectName;
 
     @Override
     public void saveProtectResource2Redis(ProtectResrouceRo protectResrouceRo) {

@@ -7,7 +7,9 @@ package com.zhy.frame.cache.common.service;/**
  */
 
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @describe：
@@ -18,7 +20,7 @@ public interface CacheCommonService<T> {
     /**
      * 存储数据 string并设置过期时间
      *
-     * @param key:     key
+     * @param key:    key
      * @param object: 数据对象
      * @param time:   失效时间
      * @return: void
@@ -122,12 +124,23 @@ public interface CacheCommonService<T> {
     /**
      * 通过map的key获得数据
      *
-     * @param key:     key
+     * @param key:    key
      * @param mapKey: map key
      * @return: java.lang.Object
      * @author: lvmoney /四川******科技有限公司
      * @date: 2019/9/9 19:46
      */
     Object getByMapKey(String key, String mapKey);
+
+    /**
+     * 通过通配符获得key
+     *
+     * @param wildcard:
+     * @throws
+     * @return: java.util.Set<java.lang.String>
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/4/21 19:06
+     */
+    Set<String> getKeysByWildcard(String wildcard);
 
 }

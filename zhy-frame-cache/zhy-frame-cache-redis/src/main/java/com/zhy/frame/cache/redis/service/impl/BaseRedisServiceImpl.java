@@ -9,10 +9,10 @@
 package com.zhy.frame.cache.redis.service.impl;
 
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.cache.common.annation.CacheService;
 import com.zhy.frame.cache.common.constant.CacheConstant;
+import com.zhy.frame.cache.common.exception.CacheException;
 import com.zhy.frame.core.vo.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -55,14 +55,10 @@ public class BaseRedisServiceImpl extends BaseRedisService {
 
     @Override
     public void setString(String key, Object object, Long time) {
-        // 让该方法能够支持多种数据类型存放
-        if (object instanceof String) {
-            setString(key, object);
-        }
+        setString(key, object);
         // 设置有效期
-
         if (time != null && time > 0L) {
-            stringRedisTemplate.expire(key, time, TimeUnit.SECONDS);
+            this.setExpire(key, time);
         }
     }
 
@@ -98,7 +94,7 @@ public class BaseRedisServiceImpl extends BaseRedisService {
             return stringRedisTemplate.opsForValue().get(key);
         } catch (Exception e) {
             LOGGER.error("从redis中获取数据报错:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.REDIS_NOT_EXSIT);
+            throw new BusinessException(CacheException.Proxy.REDIS_NOT_EXIST);
         }
     }
 
@@ -123,7 +119,7 @@ public class BaseRedisServiceImpl extends BaseRedisService {
             return page;
         }
         if (StringUtils.isBlank(key)) {
-            throw new BusinessException(CommonException.Proxy.REDIS_KEY_IS_REQUIRED);
+            throw new BusinessException(CacheException.Proxy.REDIS_KEY_IS_REQUIRED);
         }
         int pageNo = page.getPageNo();
         int pageSize = page.getPageSize();
@@ -179,6 +175,12 @@ public class BaseRedisServiceImpl extends BaseRedisService {
     @Override
     public Object getByMapKey(String key, String mapKey) {
         return redisTemplate.opsForHash().get(key, mapKey);
+    }
+
+    @Override
+    public Set<String> getKeysByWildcard(String wildcard) {
+        Set keys = stringRedisTemplate.keys(wildcard);
+        return keys;
     }
 
 

@@ -45,10 +45,10 @@ spring:
     sharding:
       #      defaultDatabaseStrategy:
       #        hint:
-      #          algorithmClassName: com.lvmoney.mysql.subdb.algorithm.HashPreciseShardingStrategy
+      #          algorithmClassName: com.zhy.mysql.subdb.algorithm.HashPreciseShardingStrategy
       #      defaultTableStrategy:
       #        hint:
-      #          algorithmClassName: com.lvmoney.mysql.subdb.algorithm.HashPreciseShardingStrategy
+      #          algorithmClassName: com.zhy.mysql.subdb.algorithm.HashPreciseShardingStrategy
       tables:
         user:
           actual-data-nodes: ds$->{0..1}.user_$->{0..1}

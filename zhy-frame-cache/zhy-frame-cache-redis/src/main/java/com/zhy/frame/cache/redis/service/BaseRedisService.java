@@ -14,6 +14,7 @@ import com.zhy.frame.core.vo.Page;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @describe：
@@ -121,7 +122,6 @@ public abstract class BaseRedisService implements CacheCommonService {
     public abstract Long getMapSize(String key);
 
 
-
     /**
      * 通过redis key获得map的数据
      *
@@ -166,7 +166,6 @@ public abstract class BaseRedisService implements CacheCommonService {
     public abstract List getListAll(String key);
 
 
-
     /**
      * 返回给定 key的剩余生存时间(TTL, time to live)
      *
@@ -177,6 +176,17 @@ public abstract class BaseRedisService implements CacheCommonService {
      * @date: 2019/11/4 16:00
      */
     public abstract long ttl(String key);
+
+    /**
+     * 通配符获得key
+     * @param wildcard:
+     * @throws
+     * @return: java.util.List<java.lang.String>
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/4/21 19:03
+     */
+    @Override
+    public abstract Set<String> getKeysByWildcard(String wildcard);
 
 
 }

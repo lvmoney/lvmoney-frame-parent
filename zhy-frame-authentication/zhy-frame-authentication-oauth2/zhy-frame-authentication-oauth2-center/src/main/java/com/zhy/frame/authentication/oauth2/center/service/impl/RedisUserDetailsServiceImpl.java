@@ -1,7 +1,7 @@
 package com.zhy.frame.authentication.oauth2.center.service.impl;
 
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
 import com.zhy.frame.authentication.oauth2.center.service.Db2RedisService;
 import com.zhy.frame.authentication.oauth2.center.service.Oauth2RedisService;
 import com.zhy.platform.authentication.oauth2.common.service.Oauth2CommonService;
@@ -39,7 +39,7 @@ public class RedisUserDetailsServiceImpl implements UserDetailsService {
             db2RedisService.loadUserByUsername(username);
             userInfo = oauth2CommonService.getOauth2UserVo(username);
             if (userInfo == null) {
-                throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_CLIENT_DETAIL_NO_EXIST.getDescription());
+                throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_CLIENT_DETAIL_NO_EXIST.getDescription());
             }
             return userInfo;
         }

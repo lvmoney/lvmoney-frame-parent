@@ -27,6 +27,15 @@
         <module>zhy-frame-base</module>
         <module>zhy-frame-cloud</module>
         <module>zhy-frame-test</module>
+        <module>zhy-frame-pool</module>
+        <module>zhy-frame-retrieval</module>
+        <module>zhy-frame-newsql</module>
+        <module>zhy-frame-sync</module>
+        <module>zhy-frame-html</module>
+        <module>zhy-frame-stream</module>
+        <module>zhy-frame-ipfs</module>
+        <module>zhy-frame-workflow</module>
+        <module>zhy-frame-strategy</module>
     </modules>
 
     <distributionManagement>
@@ -42,8 +51,6 @@
         </snapshotRepository>
     </distributionManagement>
     <properties>
-
-
         <spring.version>5.1.2.RELEASE</spring.version>
         <springboot.version>2.1.0.RELEASE</springboot.version>
         <mariadb.java.client>2.2.1</mariadb.java.client>
@@ -60,7 +67,6 @@
         <java.version>1.8</java.version>
         <maven.compiler.vesion>3.6.0</maven.compiler.vesion>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
-
         <ampq.verion>2.1.0.RELEASE</ampq.verion>
         <boot.security.version>2.1.0.RELEASE</boot.security.version>
         <httpclient.version>4.5.6</httpclient.version>
@@ -82,7 +88,6 @@
         <freemarker.version>2.3.28</freemarker.version>
         <jolokia.version>1.6.0</jolokia.version>
         <aspectjweaver.version>1.9.2</aspectjweaver.version>
-        <jasypt.version>1.18</jasypt.version>
         <jaxb.api.version>2.3.0</jaxb.api.version>
         <oauth2.autoconfigure.version>2.1.0.RELEASE</oauth2.autoconfigure.version>
         <oauth.cloud.version>2.1.0.RELEASE</oauth.cloud.version>
@@ -104,7 +109,6 @@
         <google.gson.version>2.8.3</google.gson.version>
         <github.feign.version>10.1.0</github.feign.version>
         <sharding.jdbc.version>3.1.0</sharding.jdbc.version>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project-parent.version>${parent.version}</project-parent.version>
@@ -139,40 +143,23 @@
         <redisson.version>3.6.5</redisson.version>
         <maven.model.version>3.0</maven.model.version>
         <fegin.form.verion>3.7.0</fegin.form.verion>
-
         <config.monitor.version>2.1.0.RELEASE</config.monitor.version>
-
         <cloud.bus.amqp.version>2.1.0.RELEASE</cloud.bus.amqp.version>
-
         <config.server.version>2.1.0.RELEASE</config.server.version>
         <config.client.version>2.1.0.RELEASE</config.client.version>
-
         <poi.tl.version>1.3.1</poi.tl.version>
-
         <boot.mail.version>2.1.0.RELEASE</boot.mail.version>
-
-        <boot.mongo.version>2.1.0.RELEASE</boot.mongo.version>
-
         <logback.more.appenders.version>1.7.0</logback.more.appenders.version>
-
         <fluent.logger.version>0.3.4</fluent.logger.version>
-
         <ribbon.version>1.4.6.RELEASE</ribbon.version>
-
         <nacos.client.version>1.1.1</nacos.client.version>
-
         <apache.dubbo.version>2.7.3</apache.dubbo.version>
-
-
         <spring-security-jwt.version>1.0.10.RELEASE</spring-security-jwt.version>
-
         <nimbus-jose-jwt.version>7.2.1</nimbus-jose-jwt.version>
-
         <netflix.feign.version>8.18.0</netflix.feign.version>
         <cloud-hystrix>1.4.6.RELEASE</cloud-hystrix>
         <spring-security-core.version>5.1.1.RELEASE</spring-security-core.version>
         <feign-httpclient.version>8.18.0</feign-httpclient.version>
-
         <kubernetes-client.version>4.4.0</kubernetes-client.version>
         <kubernetes-model.version>4.4.0</kubernetes-model.version>
         <fabric-utils.version>2.0.46</fabric-utils.version>
@@ -184,16 +171,48 @@
         <zipkin.version>2.12.1</zipkin.version>
         <archaius-core.version>0.7.6</archaius-core.version>
         <reactor-test.version>3.3.0.RELEASE</reactor-test.version>
-
         <sharding-jdbc.version>4.0.1</sharding-jdbc.version>
         <uid-generator.version>0.0.4-RELEASE</uid-generator.version>
         <testng.version>7.1.0</testng.version>
-
+        <elasticsearch.version>2.1.0.RELEASE</elasticsearch.version>
+        <elasticsearch.client.version>6.2.3</elasticsearch.client.version>
+        <elasticsearch.high.client.version>7.5.1</elasticsearch.high.client.version>
+        <nacos.config.version>0.9.0.RELEASE</nacos.config.version>
+        <boot.mongo.version>2.1.0.RELEASE</boot.mongo.version>
+        <canal.version>1.1.3</canal.version>
+        <cassandra.spring.data.version>2.1.0.RELEASE</cassandra.spring.data.version>
+        <jasypt.version>3.0.0</jasypt.version>
+        <activiti.version>6.0.0</activiti.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-cassandra</artifactId>
+                <version>${cassandra.spring.data.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.high.client.version}</version>
+            </dependency>
+
+            <!-- canal -->
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.client</artifactId>
+                <version>${canal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.protocol</artifactId>
+                <version>${canal.version}</version>
+            </dependency>
+            <!-- canal -->
 
             <!-- apache commons start -->
             <dependency>
@@ -233,6 +252,18 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jetty</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-undertow</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${javax.validation.version}</version>
@@ -251,7 +282,17 @@
                 <version>${hibernateValidator.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId>
+                <version>${elasticsearch.client.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
@@ -896,6 +937,12 @@
                 <version>${springboot.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
 
             <!-- https://mvnrepository.com/artifact/io.fabric8/kubernetes-client -->
             <dependency>
@@ -1009,7 +1056,56 @@
                 <version>${testng.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                <version>${boot.mongo.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.config.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-core</artifactId>
+                <version>${drools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-compiler</artifactId>
+                <version>${drools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-decisiontables</artifactId>
+                <version>${drools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-templates</artifactId>
+                <version>${drools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.kie</groupId>
+                <artifactId>kie-api</artifactId>
+                <version>${drools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-spring-boot-starter-basic</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

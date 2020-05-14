@@ -1,9 +1,9 @@
 package com.zhy.frame.authentication.oauth2.center.config;
 
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.constant.Oauth2ServerConstant;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
-import com.zhy.frame.captcha.service.CaptchaService;
+import com.zhy.frame.captcha.common.service.CaptchaService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +73,7 @@ public class ClientAuthenticationProvider extends AbstractUserDetailsAuthenticat
             ClientWebAuthenticationDetails clientWebAuthenticationDetails = (ClientWebAuthenticationDetails) details;
             String captcha = captchaService.getValidate(clientWebAuthenticationDetails.getGraphId()).getValue();
             if (!StringUtils.equalsIgnoreCase(clientWebAuthenticationDetails.getInputVerificationCode(), captcha)) {
-                throw new CustomOauthException(Oauth2Exception.Proxy.VERIFICATION_ERROR.getDescription());
+                throw new CustomOauthException(AuthorityException.Proxy.VERIFICATION_ERROR.getDescription());
             }
             captchaService.deleteValidate(clientWebAuthenticationDetails.getGraphId());
         } else if (details instanceof LinkedHashMap<?, ?>) {
@@ -88,11 +88,11 @@ public class ClientAuthenticationProvider extends AbstractUserDetailsAuthenticat
                         String captcha = captchaService.getValidate(graphId).getValue();
 
                         if (!StringUtils.equalsIgnoreCase(map.get(Oauth2ServerConstant.VERIFICATION_CODE), captcha)) {
-                            throw new CustomOauthException(Oauth2Exception.Proxy.VERIFICATION_ERROR.getDescription());
+                            throw new CustomOauthException(AuthorityException.Proxy.VERIFICATION_ERROR.getDescription());
                         }
                         captchaService.deleteValidate(graphId);
                     } else {
-                        throw new CustomOauthException(Oauth2Exception.Proxy.VERIFICATION_ERROR.getDescription());
+                        throw new CustomOauthException(AuthorityException.Proxy.VERIFICATION_ERROR.getDescription());
                     }
                 }
             }

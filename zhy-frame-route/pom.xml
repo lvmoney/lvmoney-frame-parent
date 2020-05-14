@@ -13,5 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>zhy-frame-route-gateway</module>
+        <module>zhy-frame-route-common</module>
     </modules>
 </project>

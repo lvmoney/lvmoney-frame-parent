@@ -77,6 +77,21 @@ public enum ExceptionCodeLevel {
      */
     ROUTE(15000),
 
+    /**
+     * 检索
+     */
+    RETRIEVAL(16000),
+
+    /**
+     * 线程
+     */
+    POOL(17000),
+
+    /**
+     * ipfs
+     */
+    IPFS(18000),
+
     ;
 
     private Integer value;

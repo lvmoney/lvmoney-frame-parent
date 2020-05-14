@@ -25,8 +25,13 @@ public class LockConstant {
      * 分布式锁的key
      */
     public static final String PROD_SECTION_UPDATE_LOCK_KEY = "prodSectionUpdateLock";
-
+    /**
+     * 商品锁
+     */
     public static final String PROD_LOCK_KEY = "prodLock";
-
+    /**
+     * 锁的时间
+     */
     public static final int LOCK_TIME = 60;
+
 }

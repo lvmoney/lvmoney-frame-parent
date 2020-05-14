@@ -16,11 +16,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.github.dozermapper.core.Mapper;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.util.service.UserCommonService;
 import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.authentication.util.vo.JwtVo;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.core.ro.UserRo;
 import com.zhy.frame.authentication.jwt.service.JwtRedisService;
@@ -78,14 +78,14 @@ public class JwtRedisServiceImpl implements JwtRedisService {
         try {
             userId = JWT.decode(token).getAudience().get(0);
         } catch (JWTDecodeException j) {
-            throw new BusinessException(CommonException.Proxy.TOKEN_USER_ID_ERROR);
+            throw new BusinessException(AuthorityException.Proxy.TOKEN_USER_ID_ERROR);
         }
         UserVo userVo = userCommonService.getUserVo(token);
         if (userVo == null) {
-            throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
+            throw new BusinessException(AuthorityException.Proxy.TOKEN_USER_NOT_EXIST);
         }
         if (!userId.startsWith(userVo.getUserId())) {
-            throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
+            throw new BusinessException(AuthorityException.Proxy.TOKEN_USER_NOT_EXIST);
         }
         // 验证 token
         JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(userVo.getPassword())).build();

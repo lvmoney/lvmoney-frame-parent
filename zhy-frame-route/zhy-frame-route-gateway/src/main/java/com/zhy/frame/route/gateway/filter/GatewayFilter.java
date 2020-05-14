@@ -133,10 +133,8 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_SUPPORT_ERROR))));
         } else if (gatewaySupport.equals(BaseConstant.SUPPORT_FALSE)) {
-            // 在这里做判断
             return chain.filter(exchange);
         }
-        //1、gateway end
         //2、是否是简单的路由 start
         Route route = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
         ServerInfo serverInfo = getServerInfo(route);
@@ -147,29 +145,24 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             // 在这里做判断
             return chain.filter(exchange);
         }
-        //2、是否是简单的路由 end
         //3、白名单 start
         if (!SupportUtil.support(whiteSupport)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.WHITE_SUPPORT_ERROR))));
         } else if (!isWhite(exchange, serverInfo)) {
-            //白名单校验
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_WHITE_CHECK_ERROR))));
         }
-        //3、白名单 end
         //4、是否被允许调用 start
         String realPath = realPath(exchange);
         if (!isRelease(realPath, serverInfo)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.GATEWAY_INTERNAL_CHECK_ERROR))));
         }
-        //4、是否被允许调用 end
         String token = exchange.getRequest().getHeaders().getFirst(BaseConstant.AUTHORIZATION_TOKEN_KEY);
         UserVo userVo = null;
         try {
-            //由于gateway和普通的servlet请求不同，通过throw的方式抛错不得行，
-            // 所以需做如下处理
+            //由于gateway和普通的servlet请求不同，通过throw的方式抛错不得行，所以需做如下处理
             userVo = userCommonService.getUserVo(token);
         } catch (Exception e) {
             userVo = null;
@@ -188,7 +181,6 @@ public class GatewayFilter implements GlobalFilter, Ordered {
                 return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.ALLOWABLE_SYS_ID_NOT_EXIST))));
             }
         }
-        //5、系统id是否被允许访问 start
         //6、jwt校验 start
         if (!SupportUtil.support(jwtSupport)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
@@ -197,7 +189,6 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.TOKEN_CHECK_ERROR))));
         }
-        //6、jwt校验 end
         //7、shiro校验 start
         if (!SupportUtil.support(shiroSupport)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
@@ -207,7 +198,6 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.SHIRO_CHECK_ERROR))));
         }
         return chain.filter(exchange);
-        //7、shiro校验 end
     }
 
     @Override

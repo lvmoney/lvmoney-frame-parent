@@ -7,6 +7,8 @@ package com.zhy.frame.cache.repeatsubmit.annotation;/**
  */
 
 
+import com.zhy.frame.cache.repeatsubmit.enums.NoRepeatSubmitEnum;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,5 +25,10 @@ public @interface NoRepeatSubmit {
     /**
      * 被允许重复提交
      */
-    boolean required() default false;
+    NoRepeatSubmitEnum required();
+
+    /**
+     * 时间
+     */
+    int time() default 10;
 }

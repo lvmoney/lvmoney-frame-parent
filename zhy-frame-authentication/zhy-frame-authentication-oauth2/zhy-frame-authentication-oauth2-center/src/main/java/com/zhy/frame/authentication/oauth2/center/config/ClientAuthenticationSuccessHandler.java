@@ -3,8 +3,8 @@ package com.zhy.frame.authentication.oauth2.center.config;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
 import com.zhy.frame.authentication.oauth2.center.vo.RoleEnum;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.exception.CommonException;
@@ -66,7 +66,7 @@ public class ClientAuthenticationSuccessHandler extends SavedRequestAwareAuthent
                 objectMapper.writeValue(jsonGenerator, resultData);
             } catch (Exception ex) {
                 LOGGER.error("不能够写入json信息:{}", ex.getMessage());
-                throw new CustomOauthException(Oauth2Exception.Proxy.DENIED_JSON_NOT_WRITE.getDescription());
+                throw new CustomOauthException(AuthorityException.Proxy.DENIED_JSON_NOT_WRITE.getDescription());
             }
         } else {
             //Call the parent method to manage the successful authentication

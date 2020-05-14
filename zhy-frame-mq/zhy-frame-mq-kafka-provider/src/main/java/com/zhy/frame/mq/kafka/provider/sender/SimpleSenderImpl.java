@@ -24,7 +24,7 @@ import org.springframework.kafka.core.KafkaTemplate;
  * @author: lvmoney /四川******科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
-@MqService(MqConstant.KAFAK_TYPE_SIMPLE)
+@MqService(MqConstant.KAFKA_TYPE_SIMPLE)
 public class SimpleSenderImpl implements MqSendService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleSenderImpl.class);
 

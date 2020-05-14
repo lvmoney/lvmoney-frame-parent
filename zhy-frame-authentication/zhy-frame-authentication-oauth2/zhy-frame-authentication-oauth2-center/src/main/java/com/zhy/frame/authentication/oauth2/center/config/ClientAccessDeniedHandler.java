@@ -1,7 +1,7 @@
 package com.zhy.frame.authentication.oauth2.center.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.base.core.api.ApiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +33,10 @@ public class ClientAccessDeniedHandler implements AccessDeniedHandler {
         LOGGER.error("客户端授权失败报错:{}", e.getMessage());
         response.setContentType("application/json;charset=UTF-8");
         ApiResult resultData = new ApiResult();
-        resultData.setCode(Oauth2Exception.Proxy.OAUTH2_ACCESS_DENIED_ERROR.getCode());
+        resultData.setCode(AuthorityException.Proxy.OAUTH2_ACCESS_DENIED_ERROR.getCode());
         resultData.setDate(new Date());
         resultData.setSuccess(false);
-        resultData.setMsg(Oauth2Exception.Proxy.OAUTH2_ACCESS_DENIED_ERROR.getDescription());
+        resultData.setMsg(AuthorityException.Proxy.OAUTH2_ACCESS_DENIED_ERROR.getDescription());
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().write(objectMapper.writeValueAsString(resultData));

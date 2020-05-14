@@ -18,7 +18,7 @@ public class BaseConstant {
     /**
      * 返回值时间格式
      */
-    public static final String API_RESULT_DATA_DATE_FORMART = "yyyy-MM-dd HH:mm:ss";
+    public static final String API_RESULT_DATA_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss:SSS";
     /**
      * 默认成功的编码
      */
@@ -82,4 +82,156 @@ public class BaseConstant {
      * nacos 环境以lb开头
      */
     public static final String NACOS_PREFIX = "lb://";
+
+    /**
+     * 字符编码小写:utf-8
+     */
+    public static final String CHARACTER_ENCODE_UTF8_LOWER = "utf-8";
+    /**
+     * 字符编码大写:utf-8
+     */
+    public static final String CHARACTER_ENCODE_UTF8_UPPER = "UTF-8";
+    /**
+     * ISO-8859-1
+     */
+    public static final String CHARACTER_ENCODE_ISO88591 = "ISO-8859-1";
+    /**
+     * GBK
+     */
+    public static final String CHARACTER_ENCODE_GBK = "GBK";
+
+
+    /**
+     * 逗号
+     */
+    public static final String CHARACTER_COMMA = ",";
+
+
+    /**
+     * 连接符下划线
+     */
+    public static final String CONNECTOR_UNDERLINE = "_";
+    /**
+     * 反斜杠
+     */
+    public static final String BACKSLASH = "/";
+    /**
+     * 小数点
+     */
+    public static final String DECIMAL_POINT = ".";
+
+    /**
+     * 大括号左
+     */
+    public static final String BRACE_LEFT = "{";
+    /**
+     * 大括号右
+     */
+    public static final String BRACE_RIGHT = "}";
+
+
+    /**
+     * 请求头User-Agent
+     */
+    public static final String USER_AGENT = "User-Agent";
+    /**
+     * MSIE
+     */
+    public static final String MSIE = "MSIE";
+    /**
+     * TRIDENT
+     */
+    public static final String TRIDENT = "TRIDENT";
+    /**
+     * EDGE
+     */
+    public static final String EDGE = "EDGE";
+
+    /**
+     * 字符U
+     */
+    public static final String CHAR_U_UPPER = "U";
+
+
+    /**
+     * 字符,
+     */
+    public static final String CHAR_COMMA = ",";
+    /**
+     * 字符%
+     */
+    public static final String CHAR_PERCENT = "%";
+    /**
+     * 字符∞
+     */
+    public static final String CHAR_INFINITE = "∞";
+
+    /**
+     * 字符%
+     */
+    public static final String COLON = ":";
+
+    /**
+     * 字符b
+     */
+    public static final String CHAR_B_LOWER = "b";
+
+    /**
+     * 字符A
+     */
+    public static final char CHAR_A_UPPER = 'A';
+    /**
+     * 字符a
+     */
+    public static final char CHAR_A_LOWER = 'a';
+
+    /**
+     * 字符Z
+     */
+    public static final char CHAR_Z_UPPER = 'Z';
+    /**
+     * 字符z
+     */
+    public static final char CHAR_Z_LOWER = 'z';
+
+    /**
+     * ECC factory类型
+     */
+    public final static String EEC_FACTORY_TYPE = "EC";
+
+    /**
+     * ECC signature类型
+     */
+    public final static String EEC_SIGNATURE_TYPE = "SHA256withECDSA";
+    /**
+     * md5
+     */
+    public final static String MD5_SIGNATURE_TYPE = "md5";
+
+    /**
+     * SHA-256
+     */
+    public final static String SHA_256_SIGNATURE_TYPE = "SHA-256";
+
+    /**
+     * SHA-1
+     */
+    public final static String SHA_1_SIGNATURE_TYPE = "SHA-1";
+
+
+    /**
+     * HMAC_SHA1
+     */
+    public final static String HMAC_SHA1_SIGNATURE_TYPE = "HmacSHA1";
+
+
+    /**
+     * api请求签名字段是否转为大写
+     */
+    public static final boolean API_TO_UPPER = true;
+    /**
+     * api请求签名字段是否转为ENCODE
+     */
+    public static final boolean API_URL_ENCODE = true;
+
 }

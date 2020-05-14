@@ -10,6 +10,7 @@ package com.zhy.frame.authentication.oauth2.center.exception;/**
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class CustomOauthExceptionSerializer extends StdSerializer<OAuth2Exceptio
     @Override
     public void serialize(OAuth2Exception value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
-        gen.writeNumberField("code", Oauth2Exception.Proxy.OAUTH2_CUSTOM_OAUTH_ERROR.getCode());
+        gen.writeNumberField("code", AuthorityException.Proxy.OAUTH2_CUSTOM_OAUTH_ERROR.getCode());
         gen.writeStringField("msg", buildErrorMsg(value.getMessage()));
         gen.writeBooleanField("success", false);
         gen.writeObjectField("date", System.currentTimeMillis());

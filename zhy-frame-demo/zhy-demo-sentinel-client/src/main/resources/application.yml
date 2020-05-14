@@ -1,0 +1,49 @@
+nacos:
+  service:
+    address: localhost
+    port: 8848
+spring:
+  application:
+    name: sentinel-demo-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+      service-registry:
+        auto-registration:
+        enabled: true
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+#      datasource:
+#        ds:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}-sentinel
+#            groupId: DEFAULT_GROUP
+#            rule-type: flow
+swagger:
+  base:
+    package: com.zhy.demo.sentinel.client.controller
+  contact:
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+server:
+  port: 9906
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+rpc:
+  server:
+    gateway: http://localhost:9901

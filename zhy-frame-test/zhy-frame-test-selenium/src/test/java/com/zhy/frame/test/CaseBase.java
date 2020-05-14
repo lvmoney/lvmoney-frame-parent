@@ -7,12 +7,18 @@ package com.zhy.frame.test;/**
  */
 
 
-import com.zhy.frame.test.selenium.vo.TestingReporterListener;
+import com.zhy.frame.test.selenium.listener.TestingReporterListener;
 import lombok.extern.slf4j.Slf4j;
+import org.mockito.Mockito;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import java.util.Iterator;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * @describe：
@@ -31,6 +37,20 @@ public class CaseBase extends AbstractTestNGSpringContextTests {
         //couponMapper.queryByLoanBillId(1l);
         System.out.println("test....");
         logger.info("test from logger...");
+    }
+
+    @Test
+    public void test2() {
+
+        //mock一个Iterator类
+        Iterator iterator = mock(Iterator.class);
+        //预设当iterator调用next()时第一次返回hello，第n次都返回world
+        Mockito.when(iterator.next()).thenReturn("hello").thenReturn("world");
+        //使用mock的对象
+        String result = iterator.next() + " " + iterator.next() + " " + iterator.next();
+        System.out.println(result);
+        //验证结果
+        Assert.assertEquals("hello world world", result);
     }
 
 

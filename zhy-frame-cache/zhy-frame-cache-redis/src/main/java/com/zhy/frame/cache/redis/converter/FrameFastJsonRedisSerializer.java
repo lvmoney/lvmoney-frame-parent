@@ -14,6 +14,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import lombok.NoArgsConstructor;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
@@ -33,7 +34,7 @@ public class FrameFastJsonRedisSerializer<T> implements RedisSerializer<T> {
     private static final String IGNORE_CHAR = "type";
 
     private ObjectMapper objectMapper = new ObjectMapper();
-    public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+    public static final Charset DEFAULT_CHARSET = Charset.forName(BaseConstant.CHARACTER_ENCODE_UTF8_UPPER);
 
     private Class<T> clazz;
 

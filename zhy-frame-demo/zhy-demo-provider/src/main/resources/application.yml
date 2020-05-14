@@ -1,12 +1,15 @@
 server:
   port: 9901
-  #你生成的证书名字
 
 nacos:
   service:
     address: localhost
     port: 8848
 spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
   application:
     name: provider
   cloud:
@@ -83,7 +86,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
   metrics:
     tags:
       application: ${spring.application.name}

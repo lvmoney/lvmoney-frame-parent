@@ -33,6 +33,7 @@ public class ConsistentHashVirtualNodeUtil {
             for (int i = 0; i < total; i++) {
                 String virtualNodeName = str + "&&VN" + String.valueOf(i);
                 int hash = getHash(virtualNodeName);
+//                System.out.println("虚拟节点[" + virtualNodeName + "]被添加, hash值为" + hash);
                 virtualNodes.put(hash, virtualNodeName);
             }
         }

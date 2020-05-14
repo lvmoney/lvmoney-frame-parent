@@ -1,6 +1,6 @@
 package com.zhy.frame.db.sharding.base.service.impl;/**
  * 描述:
- * 包名:com.lvmoney.mysql.subdb.service.impl
+ * 包名:com.zhy.mysql.subdb.service.impl
  * 版本信息: 版本1.0
  * 日期:2020/1/8
  * Copyright XXXXXX科技有限公司

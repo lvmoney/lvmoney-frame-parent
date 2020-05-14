@@ -13,13 +13,22 @@ package com.zhy.frame.mq.kafka.common.constant;/**
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class KafkaConstant {
+    /**
+     * 简单
+     */
     public static final String SIMPLE_QUEUE_NAME = "simple";
-
+    /**
+     * 异步
+     */
     public static final String SYN_QUEUE_NAME = "synchronous";
+    /**
+     * 简单 group
+     */
     public static final String SIMPLE_QUEUE_GROUP_ID = "simple_group";
-
+    /**
+     * 异步 group
+     */
     public static final String SYN_QUEUE_GROUP_ID = "synchronous_group";
 
-    public static final String REDIS_KAFKA_ERROR_RECORD_NAME = "kafka_error_record";
 
 }

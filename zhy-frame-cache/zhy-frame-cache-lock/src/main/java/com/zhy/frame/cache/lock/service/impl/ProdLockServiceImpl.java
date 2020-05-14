@@ -9,7 +9,7 @@ package com.zhy.frame.cache.lock.service.impl;/**
 
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.cache.common.exception.CacheException;
 import com.zhy.frame.cache.lock.constant.LockConstant;
 import com.zhy.frame.cache.lock.service.DistributedLockerService;
 import com.zhy.frame.cache.lock.service.ProdLockService;
@@ -47,7 +47,7 @@ public class ProdLockServiceImpl implements ProdLockService {
         try {
             stock = (Integer) baseRedisService.getByMapKey(LockConstant.PROD_LOCK_KEY, prodId);
         } catch (Exception e) {
-            throw new BusinessException(CommonException.Proxy.LOCK_SOURCE_ERROR);
+            throw new BusinessException(CacheException.Proxy.LOCK_SOURCE_ERROR);
         }
         if (stock < 0 || stock == null || stock < num) {
             prodLockStockRespVo.setResult(false);
@@ -72,7 +72,7 @@ public class ProdLockServiceImpl implements ProdLockService {
             baseRedisService.addMap(LockConstant.PROD_LOCK_KEY, prodLockInitReqVo.getStock(), prodLockInitReqVo.getExpire());
             return true;
         } catch (Exception e) {
-            throw new BusinessException(CommonException.Proxy.LOCK_SOURCE_INIT_ERROR);
+            throw new BusinessException(CacheException.Proxy.LOCK_SOURCE_INIT_ERROR);
         }
     }
 
@@ -81,7 +81,7 @@ public class ProdLockServiceImpl implements ProdLockService {
         String prodId = prodLockUpdateReqVo.getProdId();
         boolean bool = baseRedisService.isExistMapKey(LockConstant.PROD_LOCK_KEY, prodId);
         if (!bool) {
-            throw new BusinessException(CommonException.Proxy.LOCK_SOURCE_NOT_EXIST);
+            throw new BusinessException(CacheException.Proxy.LOCK_SOURCE_NOT_EXIST);
         }
         distributedLockerService.lock(LockConstant.PROD_SECTION_UPDATE_LOCK_KEY, TimeUnit.SECONDS, LockConstant.LOCK_TIME);
         Map<String, Integer> prod = new HashMap<>(2);

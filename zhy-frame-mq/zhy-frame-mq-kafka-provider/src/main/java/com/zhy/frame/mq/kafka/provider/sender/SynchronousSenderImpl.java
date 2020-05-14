@@ -19,10 +19,10 @@ package com.zhy.frame.mq.kafka.provider.sender;/**
  */
 
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.mq.common.annation.MqService;
 import com.zhy.frame.mq.common.constant.MqConstant;
+import com.zhy.frame.mq.common.exception.MqException;
 import com.zhy.frame.mq.common.service.MqSendService;
 import com.zhy.frame.mq.common.vo.MessageVo;
 import com.zhy.frame.mq.kafka.common.constant.KafkaConstant;
@@ -56,15 +56,15 @@ public class SynchronousSenderImpl implements MqSendService {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             LOGGER.error("kafka发送同步消息报错:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.KAFKA_SEND_SYN_INTERRUPTED_ERROR);
+            throw new BusinessException(MqException.Proxy.KAFKA_SEND_SYN_INTERRUPTED_ERROR);
 
         } catch (ExecutionException e) {
             LOGGER.error("kafka发送同步消息执行错误:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.KAFKA_SEND_SYN_EXE_ERROR);
+            throw new BusinessException(MqException.Proxy.KAFKA_SEND_SYN_EXE_ERROR);
 
         } catch (TimeoutException e) {
             LOGGER.error("kafka发送同步消息超时:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.KAFKA_SEND_SYN_TIME_ERROR);
+            throw new BusinessException(MqException.Proxy.KAFKA_SEND_SYN_TIME_ERROR);
         }
     }
 }

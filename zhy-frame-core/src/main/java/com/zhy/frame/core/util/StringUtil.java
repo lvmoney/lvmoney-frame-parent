@@ -3,7 +3,7 @@
  * 包名:com.zhy.hotel.util
  * 版本信息: 版本1.0
  * 日期:2018年12月4日  下午1:57:49
- * Copyright 四川******科技有限公司
+ * Copyright xxxx科技有限公司
  */
 
 package com.zhy.frame.core.util;
@@ -19,12 +19,23 @@ import java.util.regex.Pattern;
 
 /**
  * @describe：
- * @author: lvmoney /四川******科技有限公司
+ * @author: lvmoney /xxxx科技有限公司
  * @version:v1.0 2018年12月4日 下午1:57:49
  */
 
 public class StringUtil extends StringUtils {
+    /**
+     * 中文
+     */
     private static final Pattern PATTERN = Pattern.compile("[\u4e00-\u9fa5]");
+    /**
+     * 空格 split
+     */
+    private static final String SPLIT_BLANK_SPACE = "\\s+";
+    /**
+     * 空格占位符
+     */
+    private static final String PLACEHOLDER_BLANK_SPACE = "\u0009";
     /**
      * 16进制长度
      */
@@ -37,6 +48,15 @@ public class StringUtil extends StringUtils {
      */
     public static final String EMPTY = "";
 
+    /**
+     * 是否包含汉字
+     *
+     * @param str:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:51
+     */
     public static boolean isContainChinese(String str) {
         Matcher m = PATTERN.matcher(str);
         if (m.find()) {
@@ -46,11 +66,14 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 不足左侧补零, 超过返回原值
-     * @param: [str, strLength]
+     * 足左侧补零, 超过返回原值
+     *
+     * @param str:
+     * @param strLength:
+     * @throws
      * @return: java.lang.String
-     * @author： lvmoney /四川******科技有限公司
-     * 2019/3/9
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:51
      */
     public static String addZeroForNum(String str, int strLength) {
         int strLen = str.length();
@@ -59,7 +82,6 @@ public class StringUtil extends StringUtils {
                 StringBuffer sb = new StringBuffer();
                 // 左补0
                 sb.append("0").append(str);
-                // sb.append(str).append("0");//右补0
                 str = sb.toString();
                 strLen = str.length();
             }
@@ -67,12 +89,14 @@ public class StringUtil extends StringUtils {
         return str;
     }
 
-
     /**
      * 16进制转 byte[]
      *
-     * @param hexString
-     * @return
+     * @param hexString:
+     * @throws
+     * @return: byte[]
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:52
      */
     public static byte[] hexToByte(String hexString) {
         if (StringUtils.isEmpty(hexString)) {
@@ -94,55 +118,65 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 将Unicode字符串转换成01字符串
-     * @param: [str]
+     * 将Unicode字符串转换成01字符串
+     *
+     * @param str:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:50
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:52
      */
-    public static String strToBinStr(String str) {
-        return boolArrToBinStr(strToBool(str));
+    public static String unicodeStrToBinStr(String str) {
+        return boolArrToBinStr(unicodeStrToBool(str));
     }
 
     /**
-     * @describe: 将01字符串转换成Unicode字符串
-     * @param: [arrStr]
+     * 将01字符串转换成Unicode字符串
+     *
+     * @param arrStr:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:50
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:53
      */
-    public static String binStrToStr(String arrStr) {
-        return boolToStr(binStrToBoolArr(arrStr));
+    public static String binStrToUnicodeStr(String arrStr) {
+        return boolToUnicodeStr(binStrToBoolArr(arrStr));
     }
 
     /**
-     * @describe: 将Unicode字符串转换成01字符串
-     * @param: [str]
+     * 将Unicode字符串转换成01字符串
+     *
+     * @param str:
+     * @throws
      * @return: int[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:50
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:54
      */
-    public static int[] strToBinArr(String str) {
-        return boolArrToBinArr(strToBool(str));
+    public static int[] unicodeStrToBinArr(String str) {
+        return boolArrToBinArr(unicodeStrToBool(str));
     }
 
     /**
-     * @describe: 将01数组转换成Unicode字符串
-     * @param: [intArr]
+     * 将01数组转换成Unicode字符串
+     *
+     * @param intArr:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:51
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:54
      */
-    public static String binArrToStr(int[] intArr) {
-        return boolToStr(binArrToBoolArr(intArr));
+    public static String binArrToUnicodeStr(int[] intArr) {
+        return boolToUnicodeStr(binArrToBoolArr(intArr));
     }
 
     /**
-     * @describe: 将bool型数组转换成01数组
-     * @param: [boolArr]
+     * 将bool型数组转换成01数组
+     *
+     * @param boolArr:
+     * @throws
      * @return: int[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:51
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:54
      */
     public static int[] boolArrToBinArr(boolean[] boolArr) {
         int[] intArr = new int[boolArr.length];
@@ -153,11 +187,13 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 将01数组转换成bool型数组
-     * @param: [intArr]
+     * 将01数组转换成bool型数组
+     *
+     * @param intArr:
+     * @throws
      * @return: boolean[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:51
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:55
      */
     public static boolean[] binArrToBoolArr(int[] intArr) {
         boolean[] boolArr = new boolean[intArr.length];
@@ -168,11 +204,13 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 将bool型数组转换成二进制字符串
-     * @param: [boolArr]
+     * 将bool型数组转换成二进制字符串
+     *
+     * @param boolArr:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:51
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:55
      */
     public static String boolArrToBinStr(boolean[] boolArr) {
         StringBuffer stringBuffer = new StringBuffer();
@@ -187,11 +225,13 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 将二进制字符串转换成bool型数组
-     * @param: [str]
+     * 将二进制字符串转换成bool型数组
+     *
+     * @param str:
+     * @throws
      * @return: boolean[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:51
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:56
      */
     public static boolean[] binStrToBoolArr(String str) {
         char[] chs = str.toCharArray();
@@ -207,98 +247,116 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 将Unicode字符串转换成bool型数组
+     * @describe:
      * @param: [input]
      * @return: boolean[]
-     * @author: lvmoney /四川******科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      * 2019/9/9 10:51
      */
-    public static boolean[] strToBool(String input) {
-        boolean[] output = binstr16ToBool(binstrToBinstr16(strToBinstr(input)));
+    /**
+     * 将Unicode字符串转换成bool型数组
+     *
+     * @param input:
+     * @throws
+     * @return: boolean[]
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:56
+     */
+    public static boolean[] unicodeStrToBool(String input) {
+        boolean[] output = binStr16ToBoolArr(binStrToBinStr16(strToBinStr(input)));
         return output;
     }
 
     /**
-     * @describe: 将bool型数组转换成Unicode字符串
-     * @param: [input]
+     * 将bool型数组转换成Unicode字符串
+     *
+     * @param input:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:52
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:56
      */
-    public static String boolToStr(boolean[] input) {
-        String output = binstrToStr(binstr16ToBinstr(boolToBinstr16(input)));
+    public static String boolToUnicodeStr(boolean[] input) {
+        String output = binStrToStr(binStr16ToBinStr(boolArrToBinStr16(input)));
         return output;
     }
 
     /**
-     * @describe: 将字符串转换成二进制字符串，以空格相隔
-     * @param: [str]
+     * 将字符串转换成二进制字符串，以空格相隔
+     *
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:52
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 14:57
      */
-    private static String strToBinstr(String str) {
+    private static String strToBinStr(String str) {
         char[] strChar = str.toCharArray();
         String result = "";
         for (int i = 0; i < strChar.length; i++) {
-            result += Integer.toBinaryString(strChar[i]) + " ";
+            result += Integer.toBinaryString(strChar[i]) + PLACEHOLDER_BLANK_SPACE;
         }
         return result;
     }
 
     /**
-     * @describe: 将二进制字符串转换成Unicode字符串
-     * @param: [binStr]
+     * 将二进制字符串转换成Unicode字符串
+     *
+     * @param binStr:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:52
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:11
      */
-    private static String binstrToStr(String binStr) {
+    private static String binStrToStr(String binStr) {
         String[] tempStr = strToStrArray(binStr);
         char[] tempChar = new char[tempStr.length];
         for (int i = 0; i < tempStr.length; i++) {
-            tempChar[i] = binstrToChar(tempStr[i]);
+            tempChar[i] = binStrToChar(tempStr[i]);
         }
         return String.valueOf(tempChar);
     }
 
     /**
-     * @describe: 将二进制字符串格式化成全16位带空格的Binstr
-     * @param: [input]
+     * 将二进制字符串格式化成全16位带空格的Binstr
+     *
+     * @param input:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:52
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:12
      */
-    private static String binstrToBinstr16(String input) {
+    private static String binStrToBinStr16(String input) {
         StringBuffer output = new StringBuffer();
         String[] tempStr = strToStrArray(input);
         for (int i = 0; i < tempStr.length; i++) {
             for (int j = BIN_STR_LENGTH - tempStr[i].length(); j > 0; j--) {
                 output.append('0');
             }
-            output.append(tempStr[i] + " ");
+            output.append(tempStr[i] + PLACEHOLDER_BLANK_SPACE);
         }
         return output.toString();
     }
 
     /**
-     * @describe: 将全16位带空格的Binstr转化成去0前缀的带空格Binstr
-     * @param: [input]
+     * 将全16位带空格的Binstr转化成去0前缀的带空格Binstr
+     *
+     * @param input:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:52
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:12
      */
-    private static String binstr16ToBinstr(String input) {
+    private static String binStr16ToBinStr(String input) {
         StringBuffer output = new StringBuffer();
         String[] tempStr = strToStrArray(input);
         for (int i = 0; i < tempStr.length; i++) {
             for (int j = 0; j < BIN_STR_LENGTH; j++) {
                 if (tempStr[i].charAt(j) == '1') {
-                    output.append(tempStr[i].substring(j) + " ");
+                    output.append(tempStr[i].substring(j) + PLACEHOLDER_BLANK_SPACE);
                     break;
                 }
                 if (j == 15 && tempStr[i].charAt(j) == '0') {
-                    output.append("0" + " ");
+                    output.append("0" + PLACEHOLDER_BLANK_SPACE);
                 }
             }
         }
@@ -306,13 +364,15 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 二进制字串转化为boolean型数组 输入16位有空格的Binstr
-     * @param: [input]
+     * 二进制字串转化为boolean型数组 输入16位有空格的Binstr
+     *
+     * @param input:
+     * @throws
      * @return: boolean[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:52
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:13
      */
-    private static boolean[] binstr16ToBool(String input) {
+    private static boolean[] binStr16ToBoolArr(String input) {
         String[] tempStr = strToStrArray(input);
         boolean[] output = new boolean[tempStr.length * 16];
         for (int i = 0, j = 0; i < input.length(); i++, j++) {
@@ -328,13 +388,15 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: boolean型数组转化为二进制字串 返回带0前缀16位有空格的Binstr
-     * @param: [input]
+     * boolean型数组转化为二进制字串 返回带0前缀16位有空格的Binstr
+     *
+     * @param input:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:52
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:13
      */
-    private static String boolToBinstr16(boolean[] input) {
+    private static String boolArrToBinStr16(boolean[] input) {
         StringBuffer output = new StringBuffer();
         for (int i = 0; i < input.length; i++) {
             if (input[i]) {
@@ -351,14 +413,17 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 将二进制字符串转换为char
-     * @param: [binStr]
+     * 将二进制字符串转换为char
+     *
+     * @param binStr:
+     * @throws
      * @return: char
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:53
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:14
      */
-    private static char binstrToChar(String binStr) {
-        int[] temp = binstrToIntArray(binStr);
+
+    private static char binStrToChar(String binStr) {
+        int[] temp = binStrToIntArr(binStr);
         int sum = 0;
         for (int i = 0; i < temp.length; i++) {
             sum += temp[temp.length - 1 - i] << i;
@@ -367,24 +432,28 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 将初始二进制字符串转换成字符串数组，以空格相隔
-     * @param: [str]
+     * 将初始二进制字符串转换成字符串数组，以空格相隔
+     *
+     * @param str:
+     * @throws
      * @return: java.lang.String[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:56
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:14
      */
     private static String[] strToStrArray(String str) {
-        return str.split(" ");
+        return str.split(SPLIT_BLANK_SPACE);
     }
 
     /**
-     * @describe: 将二进制字符串转换成int数组
-     * @param: [binStr]
+     * 将二进制字符串转换成int数组
+     *
+     * @param binStr:
+     * @throws
      * @return: int[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:56
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:14
      */
-    private static int[] binstrToIntArray(String binStr) {
+    private static int[] binStrToIntArr(String binStr) {
         char[] temp = binStr.toCharArray();
         int[] result = new int[temp.length];
         for (int i = 0; i < temp.length; i++) {
@@ -392,7 +461,6 @@ public class StringUtil extends StringUtils {
         }
         return result;
     }
-
 
     /**
      * <p>如果傳入的參數為 <code>null</code>, 返回一個空字符串("").</p>
@@ -405,7 +473,10 @@ public class StringUtil extends StringUtils {
      *
      * @param str 传入的参数，可以为null
      * @return 转换后的字符串，如果传入为 <code>null</code>，则为空字符串
-     * @see String#valueOf(Object)
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:14
      */
     public static String defaultString(String str) {
         return str == null ? EMPTY : str;
@@ -422,9 +493,13 @@ public class StringUtil extends StringUtils {
      * StringUtils.isBlank("  bob  ") = false
      * </pre>
      *
-     * @param str 需要进行检查的字符串
+     * @param str  需要进行检查的字符串
+     * @param str:
      * @return 如果传入的str为null、空、空格，则返回<code>true</code> ,
-     * @since 2.0
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:15
      */
     public static boolean isBlank(String str) {
         int strLen;
@@ -442,10 +517,16 @@ public class StringUtil extends StringUtils {
     /**
      * 将concatText拼接到oldText，以separator为分隔符(首位不添加该分隔符)
      *
-     * @param oldText    原有字符串
-     * @param concatText 待拼接字符串
-     * @param separator  分隔符
-     * @return 拼接后的字符串
+     * @param oldText     原有字符串
+     * @param concatText  待拼接字符串
+     * @param separator   分隔符
+     * @param oldText:
+     * @param concatText:
+     * @param separator:
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:15
      */
     public static String join(String oldText, String concatText, String separator) {
         return StringUtil.isBlank(oldText) ? concatText : (oldText + separator + concatText);
@@ -457,7 +538,10 @@ public class StringUtil extends StringUtils {
      * @param oldText   原有字符串
      * @param concatObj 待拼接对象(直接调用.toString()转换为字符串)
      * @param separator 分隔符
-     * @return 拼接后的字符串
+     * @throws
+     * @return: java.lang.String 拼接后的字符串
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:16
      */
     public static String join(String oldText, Object concatObj, String separator) {
         return StringUtil.isBlank(oldText) ? concatObj.toString() : (oldText + separator + concatObj.toString());
@@ -468,7 +552,10 @@ public class StringUtil extends StringUtils {
      *
      * @param strList   待拼接字符串列表
      * @param separator 分隔符
-     * @return
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:16
      */
     public static String join(Collection<String> strList, String separator) {
         String text = StringUtil.EMPTY;
@@ -483,7 +570,10 @@ public class StringUtil extends StringUtils {
      * 首字母大写
      *
      * @param text 将首字母转为大写
-     * @return 首字母大写字符串
+     * @throws
+     * @return: java.lang.String 首字母大写字符串
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:16
      */
     public static String capitalize(String text) {
         String result = text;
@@ -494,7 +584,7 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * <p>Removes core occurrences of a substring from within the source string.</p>
+     * <p>Removes all occurrences of a substring from within the source string.</p>
      * <p>
      * <p>A <code>null</code> source string will return <code>null</code>.
      * An empty ("") source string will return the empty string.
@@ -510,11 +600,16 @@ public class StringUtil extends StringUtils {
      * StringUtils.remove("queued", "zz") = "queued"
      * </pre>
      *
-     * @param str    the source String to search, may be null
-     * @param remove the String to search for and remove, may be null
+     * @param str     the source String to search, may be null
+     * @param remove  the String to search for and remove, may be null
+     * @param str:
+     * @param remove:
      * @return the substring with the string removed if found,
      * <code>null</code> if null String input
-     * @since 2.1
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:16
      */
     public static String remove(String str, String remove) {
         if (isBlank(str) || isBlank(remove)) {
@@ -522,7 +617,6 @@ public class StringUtil extends StringUtils {
         }
         return replace(str, remove, EMPTY, -1);
     }
-
 
     /**
      * <p>Replaces a String with another String inside a larger String,
@@ -549,10 +643,10 @@ public class StringUtil extends StringUtils {
      * @param searchString the String to search for, may be null
      * @param replacement  the String to replace it with, may be null
      * @param max          maximum number of values to replace, or <code>-1</code> if no maximum
-     * @return the text with any replacements processed,
-     * <code>null</code> if null String input
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:57
+     * @throws
+     * @return: java.lang.String the text with any replacements processed,
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:17
      */
     public static String replace(String text, String searchString, String replacement, int max) {
         if (isBlank(text) || isBlank(searchString) || replacement == null || max == 0) {
@@ -581,11 +675,13 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 去除数组中重复和为空的字符串
-     * @param: [array]
+     * 去除数组中重复和为空的字符串
+     *
+     * @param array:
+     * @throws
      * @return: java.lang.String[]
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:57
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:17
      */
     public static String[] distinctArray(String[] array) {
         if (array == null || array.length < 1) {
@@ -603,28 +699,47 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @describe: 字符串左补齐
-     * @param: [oldText, length, parse]
+     * 字符串左补齐
+     *
+     * @param oldText:
+     * @param length:
+     * @param parse:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:57
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:18
      */
-    public static String lpad(String oldText, int length, char parse) {
+    public static String leftPad(String oldText, int length, char parse) {
         return StringUtil.leftPad(oldText, length, parse);
     }
 
     /**
-     * @describe: 字符串右补齐
-     * @param: [oldText, length, parse]
+     * 字符串右补齐
+     *
+     * @param oldText:
+     * @param length:
+     * @param parse:
+     * @throws
      * @return: java.lang.String
-     * @author: lvmoney /四川******科技有限公司
-     * 2019/9/9 10:56
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/9 15:18
      */
-    public static String rpad(String oldText, int length, char parse) {
+    public static String rightPad(String oldText, int length, char parse) {
         return StringUtil.rightPad(oldText, length, parse);
     }
 
     public static void main(String[] args) {
         System.out.println(StringUtil.addZeroForNum("123", 6));
+
+
+        String text = "x 2 3 3";
+        System.out.println(strToStrArray(text)[3]);
+
+        System.out.println(strToBinStr(new String("111")));
+
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("adfad").append(PLACEHOLDER_BLANK_SPACE).append("dafadsf");
+        System.out.println(stringBuffer);
+
     }
 }

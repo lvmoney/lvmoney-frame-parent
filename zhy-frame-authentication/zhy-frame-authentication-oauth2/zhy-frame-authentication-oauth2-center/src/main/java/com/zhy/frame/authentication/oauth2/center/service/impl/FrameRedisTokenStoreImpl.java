@@ -7,8 +7,8 @@ package com.zhy.frame.authentication.oauth2.center.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
 import com.zhy.frame.authentication.oauth2.center.vo.FrameOauth2AccessToken;
 import com.zhy.frame.authentication.oauth2.center.vo.FrameOauth2RefreshToken;
 import com.zhy.frame.authentication.oauth2.center.vo.resp.Oauth2AuthenticationRespVo;
@@ -111,7 +111,7 @@ public class FrameRedisTokenStoreImpl implements TokenStore {
             OAuth2Authentication auth = authorizationRespVo2AuthorizationVo(authorizationRespVo);
             return auth;
         } catch (Exception e) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_TOKEN_AUTHENTICATION_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_TOKEN_AUTHENTICATION_ERROR.getDescription());
         }
     }
 
@@ -212,7 +212,7 @@ public class FrameRedisTokenStoreImpl implements TokenStore {
             }
         } catch (Exception e) {
 
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_STORE_ACCESS_TOKEN_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_STORE_ACCESS_TOKEN_ERROR.getDescription());
 
         }
     }
@@ -237,7 +237,7 @@ public class FrameRedisTokenStoreImpl implements TokenStore {
         String rKey = ACCESS + tokenValue;
         Object obj = baseRedisService.getByKey(rKey);
         if (obj == null) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_ACCESS_TOKEN_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_ACCESS_TOKEN_ERROR.getDescription());
         }
         FrameOauth2AccessToken frameOauth2AccessToken = JSON.parseObject(obj.toString(), new TypeReference<FrameOauth2AccessToken>() {
         });
@@ -270,7 +270,7 @@ public class FrameRedisTokenStoreImpl implements TokenStore {
                 baseRedisService.deleteByKey(ACCESS + key);
             }
         } catch (Exception e) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_RM_ACCESS_TOKEN_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_RM_ACCESS_TOKEN_ERROR.getDescription());
         }
     }
 

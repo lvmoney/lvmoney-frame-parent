@@ -11,11 +11,10 @@ import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.base.core.util.SupportUtil;
+import com.zhy.frame.log.common.exception.LogException;
 import com.zhy.frame.log.server.annotation.ControllerLog;
 import com.zhy.frame.log.server.annotation.NotLog;
-import com.zhy.frame.log.server.constant.LogConstant;
 import com.zhy.frame.log.server.service.LogService;
 import com.zhy.frame.log.server.vo.ControllerVo;
 import com.zhy.frame.log.server.vo.LogVo;
@@ -90,7 +89,7 @@ public class LogAspect {
         //提取controller中ExecutionResult的属性
         ApiResult result = (ApiResult) proceed;
         if (SupportUtil.support(logSupport)) {
-            throw new BusinessException(CommonException.Proxy.LOG_SUPPORT_ERROR);
+            throw new BusinessException(LogException.Proxy.LOG_SUPPORT_ERROR);
         } else if (BaseConstant.SUPPORT_FALSE.equals(logSupport)) {
             return result;
         }

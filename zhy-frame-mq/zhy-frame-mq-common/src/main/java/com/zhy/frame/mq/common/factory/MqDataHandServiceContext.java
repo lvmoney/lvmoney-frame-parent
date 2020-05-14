@@ -9,8 +9,8 @@
 package com.zhy.frame.mq.common.factory;
 
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.mq.common.annation.CustomerService;
+import com.zhy.frame.mq.common.exception.MqException;
 import com.zhy.frame.mq.common.service.MqDataHandService;
 import com.zhy.frame.mq.common.vo.MessageVo;
 import org.apache.commons.lang3.StringUtils;
@@ -52,7 +52,7 @@ public class MqDataHandServiceContext {
     public void getData(String implName, MessageVo messageVo) {
         String beanName = getMqDataHandServiceBeanName(implName);
         if (StringUtils.isBlank(beanName)) {
-            throw new BusinessException(CommonException.Proxy.RABBITMQ_DYNAMIC_NOT_EXSIT);
+            throw new BusinessException(MqException.Proxy.RABBITMQ_DYNAMIC_NOT_EXIST);
         }
         strategyMap.get(beanName).handData(messageVo);
     }

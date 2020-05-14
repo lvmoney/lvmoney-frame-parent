@@ -1,6 +1,6 @@
 package com.zhy.frame.db.sharding.base.constant;/**
  * 描述:
- * 包名:com.lvmoney.mysql.subdb.constant
+ * 包名:com.zhy.mysql.subdb.constant
  * 版本信息: 版本1.0
  * 日期:2020/1/8
  * Copyright XXXXXX科技有限公司

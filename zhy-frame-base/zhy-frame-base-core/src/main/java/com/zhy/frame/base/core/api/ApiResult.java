@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.zhy.frame.base.core.constant.BaseConstant.API_RESULT_DATA_DATE_FORMART;
+import static com.zhy.frame.base.core.constant.BaseConstant.API_RESULT_DATA_DATE_FORMAT;
 import static com.zhy.frame.base.core.constant.BaseConstant.SUCCESS_DEFAULT_CODE;
 
 /**
@@ -29,8 +29,8 @@ public class ApiResult<T> implements Serializable {
     private String msg;
 
     private T data;
-    @JSONField(format = API_RESULT_DATA_DATE_FORMART)
-    @JsonFormat(pattern = API_RESULT_DATA_DATE_FORMART)
+    @JSONField(format = API_RESULT_DATA_DATE_FORMAT)
+    @JsonFormat(pattern = API_RESULT_DATA_DATE_FORMAT)
     private Date date;
 
     public Date getDate() {

@@ -1,7 +1,7 @@
 package com.zhy.frame.authentication.oauth2.center.config;
 
 import com.zhy.frame.authentication.oauth2.center.service.impl.*;
-import com.zhy.frame.captcha.service.CaptchaService;
+import com.zhy.frame.captcha.common.service.CaptchaService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -85,7 +85,7 @@ public class ServerConfig extends AuthorizationServerConfigurerAdapter implement
 
     @Bean
     public KeyPair keyPair() {
-        Resource resource = new ClassPathResource("classpath:jwt.jks");
+        Resource resource = new ClassPathResource("jwt.jks");
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(resource,
                 keypass.toCharArray());
         return keyStoreKeyFactory.getKeyPair(keypair);

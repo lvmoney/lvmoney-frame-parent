@@ -1,6 +1,6 @@
 package com.zhy.frame.db.sharding.base.algorithm;/**
  * 描述:
- * 包名:com.lvmoney.mysql.subdb.algorithm
+ * 包名:com.zhy.mysql.subdb.algorithm
  * 版本信息: 版本1.0
  * 日期:2019/11/15
  * Copyright XXXXXX科技有限公司
@@ -26,7 +26,9 @@ import java.util.TreeSet;
 @NoArgsConstructor
 @Service
 public class HashPreciseShardingStrategy implements HintShardingAlgorithm<String> {
-    //支持多分片键
+    /**
+     * 支持多分片键
+     */
     @Getter
     Collection<String> shardingColumns;
 

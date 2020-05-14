@@ -12,6 +12,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.zhy.frame.authentication.jwt.interceptor.JwtInterceptor;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -44,7 +45,7 @@ public class JwtInterceptorConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/statics/**").addResourceLocations("classpath:/statics/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
@@ -53,7 +54,7 @@ public class JwtInterceptorConfig extends WebMvcConfigurationSupport {
 
     public HttpMessageConverter<String> stringConverter() {
         StringHttpMessageConverter converter = new StringHttpMessageConverter(
-                Charset.forName("UTF-8"));
+                Charset.forName(BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
         return converter;
     }
 
@@ -70,7 +71,7 @@ public class JwtInterceptorConfig extends WebMvcConfigurationSupport {
                 //空字段保留
                 SerializerFeature.WriteNullListAsEmpty,
                 SerializerFeature.WriteMapNullValue);
-        fastJsonConfig.setCharset(Charset.forName("UTF-8"));
+        fastJsonConfig.setCharset(Charset.forName(BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
         //2-1 处理中文乱码问题
         List<MediaType> fastMediaTypes = new ArrayList();
         fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);

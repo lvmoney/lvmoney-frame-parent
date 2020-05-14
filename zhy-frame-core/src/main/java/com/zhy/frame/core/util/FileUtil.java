@@ -31,25 +31,32 @@ public class FileUtil {
     private static final int FILE_BYRE_LENGTH = 8 * 1024;
 
     /**
-     * @describe: multipart 转flle ,待验证
+     * @describe: multipart 转flle
      * @param: [file]
      * @return: void
      * @author： lvmoney /四川******科技有限公司
      * 2019/3/5
      */
-    public static void multipartFileToFile(MultipartFile file) throws Exception {
-
+    public static File multipartFile2File(MultipartFile file) {
         File toFile = null;
-        if ("".equals(file) || file.getSize() <= 0) {
+        if (("").equals(file) || file.getSize() <= 0) {
             file = null;
         } else {
             InputStream ins = null;
-            ins = file.getInputStream();
+            try {
+                ins = file.getInputStream();
+            } catch (IOException e) {
+                LOGGER.error("获取文件的inputStream报错:{}", e.getMessage());
+            }
             toFile = new File(file.getOriginalFilename());
             inputStreamToFile(ins, toFile);
-            ins.close();
+            try {
+                ins.close();
+            } catch (IOException e) {
+                LOGGER.error("关闭文件的inputStream报错:{}", e.getMessage());
+            }
         }
-
+        return toFile;
     }
 
     /**

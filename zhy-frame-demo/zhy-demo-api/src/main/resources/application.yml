@@ -103,14 +103,14 @@ spring:
 #mybatis-plus:
 #  mapper-locations: classpath*:mappers/*
 #  #MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名，注册后在 Mapper 对应的 XML 文件中可以直接使用类名，而不用使用全限定的类名
-#  type-aliases-package: com.scltzhy.dictionaries.po
+#  type-aliases-package: com.scltzhy.dictionaries.entity
 #  # 数据库表与实体类的驼峰命名自动转换
 #  configuration:
 #    map-underscore-to-camel-case: true
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: top.shen33.yang.model.po
+  typeAliasesPackage: top.shen33.yang.model.entity
   #typeEnumsPackage: com.baomidou.springboot.entity.enums
   global-config:
     #刷新mapper 调试神器

@@ -8,11 +8,10 @@ package com.zhy.frame.authentication.oauth2.center.config;/**
 
 
 import com.zhy.frame.authentication.common.constant.AuthConstant;
-import com.zhy.frame.authentication.oauth2.center.constant.Oauth2ServerConstant;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.platform.authentication.oauth2.common.constant.Oauth2CommonConstant;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -51,15 +50,15 @@ public class ShortMsgTokenGranter extends AbstractTokenGranter {
         String username = parameters.get("telephone");
         // 客户端提交的验证码
         String password = parameters.get("password");
-        username = Oauth2CommonConstant.TOKEN_GRANTER_SHORT_MSG + AuthConstant.UNDERLINE + username;
+        username = Oauth2CommonConstant.TOKEN_GRANTER_SHORT_MSG + BaseConstant.CONNECTOR_UNDERLINE + username;
         // 从库里查用户
         UserDetails user = userDetailsService.loadUserByUsername(username);
         if (user == null) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_USER_NOT_EXIST.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_USER_NOT_EXIST.getDescription());
         }
         String rPass = user.getPassword();
         if (!new BCryptPasswordEncoder().matches(password, rPass)) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_PASSWORD_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_PASSWORD_ERROR.getDescription());
         }
 
         Authentication userAuth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

@@ -1,6 +1,6 @@
 package com.zhy.frame.db.sharding.base.algorithm;/**
  * 描述:
- * 包名:com.lvmoney.mysql.subdb.algorithm
+ * 包名:com.zhy.mysql.subdb.algorithm
  * 版本信息: 版本1.0
  * 日期:2019/11/21
  * Copyright XXXXXX科技有限公司

@@ -1,6 +1,6 @@
 package com.zhy.frame.db.sharding.base.enums;/**
  * 描述:
- * 包名:com.lvmoney.mysql.separate.enums
+ * 包名:com.zhy.mysql.separate.enums
  * 版本信息: 版本1.0
  * 日期:2019/9/6
  * Copyright XXXXXX科技有限公司

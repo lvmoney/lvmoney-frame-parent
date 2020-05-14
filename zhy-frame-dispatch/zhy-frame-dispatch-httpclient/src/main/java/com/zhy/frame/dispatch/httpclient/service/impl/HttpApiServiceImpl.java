@@ -8,8 +8,9 @@
 
 package com.zhy.frame.dispatch.httpclient.service.impl;
 
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.dispatch.common.exception.DispatchException;
 import com.zhy.frame.dispatch.httpclient.service.HttpApiService;
 import com.zhy.frame.dispatch.httpclient.vo.HttpFileResult;
 import com.zhy.frame.dispatch.httpclient.vo.HttpResult;
@@ -84,7 +85,7 @@ public class HttpApiServiceImpl implements HttpApiService {
             // 判断状态码是否为200
             if (response.getStatusLine().getStatusCode() == HTTP_SUCCESS_CODE) {
                 // 返回响应体的内容
-                return EntityUtils.toString(response.getEntity(), "UTF-8");
+                return EntityUtils.toString(response.getEntity(), BaseConstant.CHARACTER_ENCODE_UTF8_UPPER);
             } else {
                 httpGet.abort();
             }
@@ -140,7 +141,7 @@ public class HttpApiServiceImpl implements HttpApiService {
                 list.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
             }
             // 构造from表单对象
-            UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(list, "UTF-8");
+            UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(list, BaseConstant.CHARACTER_ENCODE_UTF8_UPPER);
 
             // 把表单放到post里
             httpPost.setEntity(urlEncodedFormEntity);
@@ -149,7 +150,7 @@ public class HttpApiServiceImpl implements HttpApiService {
         // 发起请求
         CloseableHttpResponse response = this.httpClient.execute(httpPost);
         return new HttpResult(response.getStatusLine().getStatusCode(),
-                EntityUtils.toString(response.getEntity(), "UTF-8"));
+                EntityUtils.toString(response.getEntity(), BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
     }
 
     /**
@@ -170,17 +171,17 @@ public class HttpApiServiceImpl implements HttpApiService {
             //第二步：创建httpPost对象
             HttpPost httpPost = new HttpPost(url);
             //第三步：给httpPost设置JSON格式的参数
-            StringEntity requestEntity = new StringEntity(json, "utf-8");
-            requestEntity.setContentEncoding("UTF-8");
+            StringEntity requestEntity = new StringEntity(json, BaseConstant.CHARACTER_ENCODE_UTF8_LOWER);
+            requestEntity.setContentEncoding(BaseConstant.CHARACTER_ENCODE_UTF8_UPPER);
             httpPost.setHeader("Content-type", "application/json");
             httpPost.setEntity(requestEntity);
             CloseableHttpResponse response = this.httpClient.execute(httpPost);
             return new HttpResult(response.getStatusLine().getStatusCode(),
-                    EntityUtils.toString(response.getEntity(), "UTF-8"));
+                    EntityUtils.toString(response.getEntity(), BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
 
         } catch (Exception e) {
             LOGGER.error("通过httpclient 发送json请求数据报错:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.HTTPCLIENT_JSON_ERROR);
+            throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_JSON_ERROR);
         }
     }
 
@@ -206,10 +207,10 @@ public class HttpApiServiceImpl implements HttpApiService {
             httpPost.setEntity(entity);
             CloseableHttpResponse response = this.httpClient.execute(httpPost);
             return new HttpResult(response.getStatusLine().getStatusCode(),
-                    EntityUtils.toString(response.getEntity(), "UTF-8"));
+                    EntityUtils.toString(response.getEntity(), BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
         } catch (Exception e) {
             LOGGER.error("通过httpclient 发送file请求数据报错:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.HTTPCLIENT_FILE_ERROR);
+            throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_FILE_ERROR);
         }
     }
 
@@ -219,8 +220,8 @@ public class HttpApiServiceImpl implements HttpApiService {
             //第二步：创建httpPost对象
             HttpPost httpPost = new HttpPost(url);
             //第三步：给httpPost设置JSON格式的参数
-            StringEntity requestEntity = new StringEntity(json, "utf-8");
-            requestEntity.setContentEncoding("UTF-8");
+            StringEntity requestEntity = new StringEntity(json, BaseConstant.CHARACTER_ENCODE_UTF8_LOWER);
+            requestEntity.setContentEncoding(BaseConstant.CHARACTER_ENCODE_UTF8_UPPER);
             httpPost.setHeader("Content-type", "application/json");
             httpPost.setEntity(requestEntity);
             CloseableHttpResponse response = this.httpClient.execute(httpPost);
@@ -229,7 +230,7 @@ public class HttpApiServiceImpl implements HttpApiService {
 
         } catch (Exception e) {
             LOGGER.error("通过httpclient 发送file请求数据返回文件流报错:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.HTTPCLIENT_FILE2_ERROR);
+            throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_FILE2_ERROR);
         }
     }
 
@@ -253,7 +254,7 @@ public class HttpApiServiceImpl implements HttpApiService {
             Map<String, List<String>> map = connection.getHeaderFields();
         } catch (Exception e) {
             LOGGER.error("获得hpptclient请求链接信息报错:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.HTTPCLIENT_CONNECTION_ERROR);
+            throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_CONNECTION_ERROR);
         }
         // 使用finally块来关闭输入流
         finally {
@@ -263,7 +264,7 @@ public class HttpApiServiceImpl implements HttpApiService {
                 }
             } catch (Exception e2) {
                 LOGGER.error("获得hpptclient请求链接信息报错:{}", e2.getMessage());
-                throw new BusinessException(CommonException.Proxy.HTTPCLIENT_CONNECTION_ERROR);
+                throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_CONNECTION_ERROR);
             }
         }
         return connection;

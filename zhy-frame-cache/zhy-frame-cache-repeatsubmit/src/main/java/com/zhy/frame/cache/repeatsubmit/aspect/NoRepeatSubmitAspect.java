@@ -7,14 +7,19 @@ package com.zhy.frame.cache.repeatsubmit.aspect;/**
  */
 
 
-import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.base.core.util.SupportUtil;
+import com.zhy.frame.cache.common.exception.CacheException;
 import com.zhy.frame.cache.lock.service.DistributedLockerService;
 import com.zhy.frame.cache.repeatsubmit.annotation.NoRepeatSubmit;
-import com.zhy.frame.cache.repeatsubmit.constant.RepeatsubmitConstant;
+import com.zhy.frame.cache.repeatsubmit.constant.RepeatSubmitConstant;
+import com.zhy.frame.cache.repeatsubmit.enums.NoRepeatSubmitEnum;
+import com.zhy.frame.cache.repeatsubmit.properties.RepeatSubmitConfigProp;
+import com.zhy.frame.cache.repeatsubmit.util.FilterMapUtil;
+import com.zhy.frame.core.util.SignUtil;
+import com.zhy.frame.core.vo.SignVo;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -30,6 +35,7 @@ import org.springframework.web.servlet.handler.AbstractHandlerMethodMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -57,6 +63,17 @@ public class NoRepeatSubmitAspect {
     @Autowired
     DistributedLockerService distributedLockerService;
 
+    @Autowired
+    RepeatSubmitConfigProp repeatSubmitConfigProp;
+
+    /**
+     * json控制
+     */
+    private static final String JSON_EMPTY_VALUE = "{}";
+
+    @Value("${spring.application.name:lvmoney}")
+    private String serverName;
+
     /***
      * 定义controller切入点拦截规则，拦截所有的controller方法
      */
@@ -79,30 +96,30 @@ public class NoRepeatSubmitAspect {
      * @throws Throwable
      */
     @Around("controllerAspect()")
-    public ApiResult recordLog(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object recordLog(ProceedingJoinPoint joinPoint) throws Throwable {
         Object proceed;
 
         if (!SupportUtil.support(repeatSupport)) {
-            throw new BusinessException(CommonException.Proxy.REPEATSUBMIT_SUPPORT_ERROR);
+            throw new BusinessException(CacheException.Proxy.REPEATSUBMIT_SUPPORT_ERROR);
         } else if (BaseConstant.SUPPORT_FALSE.equals(repeatSupport)) {
             proceed = joinPoint.proceed();
-            return (ApiResult) proceed;
+            return proceed;
         }
+
 
         //获取session中的用户
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String servletPath = request.getServletPath();
+        Map<String, String> filterChainDefinition = repeatSubmitConfigProp.getFilterChainDefinitionMap();
+        if (filterChainDefinition != null && FilterMapUtil.wildcardMatchMapKey(filterChainDefinition, servletPath, RepeatSubmitConstant.REPEAT_SUBMIT_REQUEST_IGNORE)) {
+            proceed = joinPoint.proceed();
+            return proceed;
+        }
+
+
         Object object = abstractHandlerMethodMapping.getHandler(request).getHandler();
         HandlerMethod handlerMethod = (HandlerMethod) object;
         Method method = handlerMethod.getMethod();
-        // 检查是否有NotToken注释，有则跳过认证
-        if (method.isAnnotationPresent(NoRepeatSubmit.class)) {
-            NoRepeatSubmit noRepeatSubmit = method.getAnnotation(NoRepeatSubmit.class);
-            if (!noRepeatSubmit.required()) {
-                proceed = joinPoint.proceed();
-                //提取controller中ExecutionResult的属性
-                return (ApiResult) proceed;
-            }
-        }
         // 从 http 请求头中取出
         String token = request.getHeader(BaseConstant.AUTHORIZATION_TOKEN_KEY);
         String name = "";
@@ -124,13 +141,40 @@ public class NoRepeatSubmitAspect {
             name = token;
         }
         String ip = request.getRemoteAddr();
-        String lockKey = name + RepeatsubmitConstant.CONNECTOR_UNDERLINE + request.getServletPath() + RepeatsubmitConstant.CONNECTOR_UNDERLINE + ip;
+        String lockKey = name + BaseConstant.CONNECTOR_UNDERLINE + request.getServletPath() + BaseConstant.CONNECTOR_UNDERLINE + ip;
+
+        // 检查是否有NoRepeatSubmit注释
+        if (method.isAnnotationPresent(NoRepeatSubmit.class)) {
+            NoRepeatSubmit noRepeatSubmit = method.getAnnotation(NoRepeatSubmit.class);
+            if (NoRepeatSubmitEnum.ALLOW.getRequired().equals(noRepeatSubmit.required().getRequired())) {
+                proceed = joinPoint.proceed();
+                //提取controller中ExecutionResult的属性
+                return proceed;
+            } else if (NoRepeatSubmitEnum.PARTLY.getRequired().equals(noRepeatSubmit.required().getRequired())) {
+                /**
+                 * 只要是同一个请求地址，就做了重复提交限制，体验不是很好
+                 */
+                repeactsubmitTime = noRepeatSubmit.time();
+
+            } else {
+                /**
+                 * 这里对非file请求，进行签名，生成唯一的hash值，用来作为lockKey，以达到我们请求参数不同被认为是不同的请求
+                 */
+                String data = JsonUtil.t2JsonString(request.getParameterMap());
+                data = JSON_EMPTY_VALUE.equals(data) ? serverName : data;
+                SignVo signVo = new SignVo();
+                signVo.setData(data);
+                lockKey = lockKey + BaseConstant.CONNECTOR_UNDERLINE + SignUtil.signature(name, signVo);
+                repeactsubmitTime = noRepeatSubmit.time();
+            }
+        }
+
         boolean lock = distributedLockerService.tryLock(lockKey, TimeUnit.SECONDS, 1, repeactsubmitTime);
         if (lock) {
             proceed = joinPoint.proceed();
-            return (ApiResult) proceed;
+            return proceed;
         } else {
-            throw new BusinessException(CommonException.Proxy.REPEATSUBMIT_REQUEST_ERROR);
+            throw new BusinessException(CacheException.Proxy.REPEATSUBMIT_REQUEST_ERROR);
         }
 
     }

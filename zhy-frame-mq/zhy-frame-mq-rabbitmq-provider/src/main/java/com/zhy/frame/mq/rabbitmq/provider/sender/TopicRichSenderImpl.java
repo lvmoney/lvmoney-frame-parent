@@ -34,7 +34,7 @@ import java.util.List;
  * @author: lvmoney/四川******科技有限公司
  * @version:v1.0 2019/11/12 18:44
  */
-@MqService(MqConstant.RABBIT_TYPE_TOPICRICE)
+@MqService(MqConstant.RABBIT_TYPE_TOPIC_RICE)
 public class TopicRichSenderImpl implements MqSendService {
     @Autowired
     BaseRabbitmqErrorService baseRabbitmqErrorService;

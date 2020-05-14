@@ -8,9 +8,7 @@ package com.zhy.frame.demo.customer.client;/**
 
 
 import com.zhy.frame.demo.api.surface.IDemoProvider;
-import com.zhy.frame.dispatch.feign.config.DisableHystrix;
 import com.zhy.frame.dispatch.feign.config.FeignConfig;
-import com.zhy.frame.dispatch.feign.interceptor.FeignInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**

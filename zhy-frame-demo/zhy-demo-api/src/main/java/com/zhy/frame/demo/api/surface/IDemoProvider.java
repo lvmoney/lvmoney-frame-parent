@@ -21,4 +21,8 @@ public interface IDemoProvider {
 
     @GetMapping(value = "frame/provider/hystrix")
     ApiResult<String> hystrix(@RequestParam("name") String name);
+
+
+    @GetMapping(value = "frame/provider/test/{name}")
+    ApiResult<String> test(@PathVariable("name") String name);
 }

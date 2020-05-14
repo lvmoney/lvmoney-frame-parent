@@ -9,6 +9,7 @@ package com.zhy.frame.cloud.base.util;/**
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static com.zhy.frame.cache.redis.converter.FrameFastJsonRedisSerializer.DEFAULT_CHARSET;
+
 /**
  * @describe：
  * @author: lvmoney/XXXXXX科技有限公司
@@ -24,10 +27,6 @@ import java.io.InputStreamReader;
  */
 public class Ssh2Util {
     private static final Logger LOGGER = LoggerFactory.getLogger(Ssh2Util.class);
-
-
-    private static String DEFAULT_CHARSET = "UTF-8";
-
 
     /**
      * @param host     主机地址

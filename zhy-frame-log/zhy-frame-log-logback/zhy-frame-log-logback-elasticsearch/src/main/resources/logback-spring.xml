@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <!-- 文件输出格式 -->
+    <property name="PATTERN" value="%-1(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n"/>
+
+    <appender name="mongodb" class="com.zhy.k8s.logback.elasticsearch.service.impl.LogbackAppender"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <springProfile name="test,dev">
+        <logger name="org.springframework.web" level="INFO">
+            <appender-ref ref="mongodb"/>
+        </logger>
+        <logger name="com.zhy" level="INFO">
+            <appender-ref ref="mongodb"/>
+        </logger>
+    </springProfile>
+
+
+</configuration>

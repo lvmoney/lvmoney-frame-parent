@@ -10,7 +10,7 @@ package com.zhy.frame.dispatch.feign.config;/**
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.dispatch.common.exception.DispatchException;
 import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
@@ -35,7 +35,7 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
         try {
             body = Util.toString(response.body().asReader());
         } catch (IOException e) {
-            throw new BusinessException(CommonException.Proxy.FEIGN_BODY_ERROR);
+            throw new BusinessException(DispatchException.Proxy.FEIGN_BODY_ERROR);
         }
         JSONObject obj = (JSONObject) JSON.parse(body);
         Integer code = (Integer) obj.get(RESULT_CODE);

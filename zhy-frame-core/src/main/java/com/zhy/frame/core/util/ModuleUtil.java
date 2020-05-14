@@ -23,8 +23,17 @@ import java.io.FileNotFoundException;
  */
 public class ModuleUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(ModuleUtil.class);
-    private static final String RELACE_TARGET = "target";
-    private static final String RELACE_CLASSES = "classes";
+    /**
+     * replace target
+     */
+    private static final String REPLACE_TARGET = "target";
+    /**
+     * replace classes
+     */
+    private static final String REPLACE_CLASSES = "classes";
+    /**
+     * classpath:
+     */
     private static final String CLASSPATH = "classpath:";
 
     /**
@@ -39,7 +48,7 @@ public class ModuleUtil {
         File path = null;
         try {
             path = new File(ResourceUtils.getURL(CLASSPATH).getPath());
-            String rootPath = path.getPath().replaceAll(RELACE_TARGET, "").replaceAll(RELACE_CLASSES, "");
+            String rootPath = path.getPath().replaceAll(REPLACE_TARGET, "").replaceAll(REPLACE_CLASSES, "");
             return rootPath;
         } catch (FileNotFoundException e) {
             LOGGER.error("获取当前module的根目录报错:{}", e.getMessage());

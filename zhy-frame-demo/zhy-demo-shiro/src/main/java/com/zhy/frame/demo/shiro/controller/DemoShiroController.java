@@ -10,6 +10,7 @@ package com.zhy.frame.demo.shiro.controller;/**
 import com.github.dozermapper.core.Mapper;
 import com.zhy.frame.authentication.jwt.annotation.NotToken;
 import com.zhy.frame.authentication.jwt.service.JwtRedisService;
+import com.zhy.frame.authentication.uri.annotation.SysServer;
 import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.authentication.util.vo.JwtVo;
 import com.zhy.frame.base.core.api.ApiResult;
@@ -43,6 +44,7 @@ public class DemoShiroController {
 
     @PostMapping("shiro/token/get")
     @NotToken
+    @SysServer(describe = "test")
     public ApiResult<String> getToken(JwtVo jwtVo) {
         String token = JwtUtil.getToken(jwtVo);
         boolean succ = JwtUtil.checkPassword(token, jwtVo.getPassword(), jwtVo.getUserId());

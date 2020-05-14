@@ -1,6 +1,6 @@
 package com.zhy.frame.db.sharding.base.controller;/**
  * 描述:
- * 包名:com.lvmoney.mysql.subdb.controller
+ * 包名:com.zhy.mysql.subdb.controller
  * 版本信息: 版本1.0
  * 日期:2019/9/10
  * Copyright XXXXXX科技有限公司

@@ -30,13 +30,13 @@ public class BaseKafkaErrorServiceImpl extends BaseKafkaErrorService {
 
     @Override
     public void errorRecord2Redis(ErrorRecordRo errorRecordRo) {
-        baseRedisService.addList(MqConstant.MQ_ERRROR_RECORD_REDIS_KEY, errorRecordRo.getData(), errorRecordRo.getExpire());
+        baseRedisService.addList(MqConstant.MQ_ERROR_RECORD_REDIS_KEY, errorRecordRo.getData(), errorRecordRo.getExpire());
 
     }
 
     @Override
     public List getAllErrorRecord() {
-        return baseRedisService.getListAll(MqConstant.MQ_ERRROR_RECORD_REDIS_KEY);
+        return baseRedisService.getListAll(MqConstant.MQ_ERROR_RECORD_REDIS_KEY);
 
     }
 }

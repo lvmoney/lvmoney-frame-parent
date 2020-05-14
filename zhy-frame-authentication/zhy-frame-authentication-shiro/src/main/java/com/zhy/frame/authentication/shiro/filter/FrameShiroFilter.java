@@ -1,6 +1,7 @@
 package com.zhy.frame.authentication.shiro.filter;
 
 import com.zhy.frame.authentication.common.constant.AuthConstant;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.shiro.constant.ShiroConstant;
 import com.zhy.frame.authentication.shiro.properties.ShiroConfigProp;
 import com.zhy.frame.authentication.shiro.service.ShiroRedisService;
@@ -9,7 +10,6 @@ import com.zhy.frame.authentication.shiro.vo.ShiroUriVo;
 import com.zhy.frame.authentication.util.service.UserCommonService;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.base.core.exception.ExceptionType;
 import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.base.core.util.SupportUtil;
@@ -59,7 +59,7 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) {
         if (!SupportUtil.support(frameSupport)) {
-            responsePrint(response, CommonException.Proxy.SHIRO_SUPPORT_ERROR);
+            responsePrint(response, AuthorityException.Proxy.SHIRO_SUPPORT_ERROR);
             return false;
         } else if (BaseConstant.SUPPORT_FALSE.equals(frameSupport)) {
             return true;
@@ -77,19 +77,19 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
         // 从 http 请求头中取出
         String token = httpServletRequest.getHeader(BaseConstant.AUTHORIZATION_TOKEN_KEY);
         if (token == null) {
-            responsePrint(response, CommonException.Proxy.TOKEN_IS_REQUIRED);
+            responsePrint(response, AuthorityException.Proxy.TOKEN_IS_REQUIRED);
             return false;
         }
         UserVo userVo = userCommonService.getUserVo(token);
         if (userVo == null) {
-            responsePrint(response, CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
+            responsePrint(response, AuthorityException.Proxy.TOKEN_USER_NOT_EXIST);
             return false;
         }
         String userId = userVo.getUserId();
         String password = userVo.getPassword();
         String sysId = userVo.getSysId();
         //考虑到多个系统的权限角色，需要区分不同的用户和系统，做如下处理
-        String username = sysId + AuthConstant.UNDERLINE + userId;
+        String username = sysId + BaseConstant.CONNECTOR_UNDERLINE + userId;
         try {
             UsernamePasswordToken shiroToken = new UsernamePasswordToken(username, password);
             Subject subject = SecurityUtils.getSubject();
@@ -97,10 +97,10 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
             if (servletPath.endsWith(ShiroConstant.SERVLET_END_WITH)) {
                 servletPath = servletPath.substring(0, servletPath.lastIndexOf(ShiroConstant.SERVLET_END_WITH));
             }
-            String requestUrl = sysId + AuthConstant.UNDERLINE + servletPath;
+            String requestUrl = sysId + BaseConstant.CONNECTOR_UNDERLINE + servletPath;
             if (requestTypeSupport) {
                 String requestType = httpServletRequest.getMethod().toUpperCase();
-                requestUrl = requestUrl + AuthConstant.UNDERLINE + requestType;
+                requestUrl = requestUrl + BaseConstant.CONNECTOR_UNDERLINE + requestType;
             }
             //考虑到到多系统需要用sysId做如下处理
             ShiroUriVo shiroUriVo = shiroRedisService.getShiroUriData(requestUrl);
@@ -123,15 +123,15 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
                         return true;
                     }
 
-                    responsePrint(response, CommonException.Proxy.SHIRO_AUTHORIZATION_EXCEPTIONT);
+                    responsePrint(response, AuthorityException.Proxy.SHIRO_AUTHORIZATION_EXCEPTIONT);
                     return false;
                 }
             } else {
-                responsePrint(response, CommonException.Proxy.SHIRO_URI_EXCEPTIONT);
+                responsePrint(response, AuthorityException.Proxy.SHIRO_URI_EXCEPTIONT);
                 return false;
             }
         } catch (Exception e) {
-            responsePrint(response, CommonException.Proxy.SHIRO_AUTHORIZATION_EXCEPTIONT);
+            responsePrint(response, AuthorityException.Proxy.SHIRO_AUTHORIZATION_EXCEPTIONT);
             return false;
         }
     }

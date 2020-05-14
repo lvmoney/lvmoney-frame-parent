@@ -14,8 +14,8 @@ import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.GridFSFindIterable;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.oss.common.annation.OssService;
+import com.zhy.frame.oss.common.exception.OssException;
 import com.zhy.frame.oss.common.vo.FileBaseOutVo;
 import com.zhy.frame.oss.common.vo.FileBaseVo;
 import com.zhy.frame.oss.common.vo.FileByteOutVo;
@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.zhy.frame.oss.common.constant.OssType.OSS_GRIDFS;
+import static com.zhy.frame.oss.gridfs.constant.GridfsConstant.MONGO_KEY_ID;
 
 /**
  * @describe：
@@ -53,10 +54,6 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
     GridFsTemplate gridFsTemplate;
     @Autowired
     GridFSBucket gridFsBucket;
-    /**
-     * mongo 默认主键id名称
-     */
-    private static final String MONGO_KEY_ID = "_id";
 
     @Override
     public FileBaseOutVo save(FileBaseVo fileBaseVo) {
@@ -64,7 +61,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
         MultipartFile file = fileBaseVo.getFile();
         long fileSize = file.getSize();
         if (maxSize < file.getSize()) {
-            throw new BusinessException(CommonException.Proxy.GRIDFS_FILE_SIZE);
+            throw new BusinessException(OssException.Proxy.GRIDFS_FILE_SIZE);
         }
         String baseFileName = fileBaseVo.getFileName();
         String fileName = StringUtils.isBlank(baseFileName) ? file.getOriginalFilename() : baseFileName;
@@ -86,7 +83,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
             return result;
         } catch (IOException e) {
             LOGGER.error("文件名为:{},文件类型为:{},保存文件报错:{}", fileName, contentType, e.getMessage());
-            throw new BusinessException(CommonException.Proxy.GRIDFS_SAVE_ERROR);
+            throw new BusinessException(OssException.Proxy.GRIDFS_SAVE_ERROR);
         }
 
     }
@@ -108,7 +105,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
         Query query = Query.query(Criteria.where(MONGO_KEY_ID).is(fileId));
         GridFSFile gridFsFile = gridFsTemplate.findOne(query);
         if (gridFsFile == null) {
-            throw new BusinessException(CommonException.Proxy.GRIDFS_QUERY_FILE_NOT_EXSIT);
+            throw new BusinessException(OssException.Proxy.GRIDFS_QUERY_FILE_NOT_EXIST);
         }
         String fileName = gridFsFile.getFilename();
         // 打开下载流对象
@@ -122,7 +119,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
             return result;
         } catch (IllegalStateException | IOException e) {
             LOGGER.error("通过_id{}获得文件报错：{}", fileId, e.getMessage());
-            throw new BusinessException(CommonException.Proxy.GRIDFS_QUERY_FILE_ERROR);
+            throw new BusinessException(OssException.Proxy.GRIDFS_QUERY_FILE_ERROR);
         }
     }
 
@@ -153,7 +150,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
                 result.add(baseGridFsByteOutVo);
             } catch (IllegalStateException | IOException e) {
                 LOGGER.error("通过_id{}获得文件报错：{}", fileId, e.getMessage());
-                throw new BusinessException(CommonException.Proxy.GRIDFS_QUERY_FILE_ERROR);
+                throw new BusinessException(OssException.Proxy.GRIDFS_QUERY_FILE_ERROR);
             }
         });
         return result;

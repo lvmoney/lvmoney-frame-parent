@@ -34,11 +34,11 @@ public interface Oauth2Exception {
         /**
          * 没有找到对应的客户端详细信息
          */
-        CLIENT_DETAIL_NOT_EXSIT(ExceptionCodeLevel.AUTHENTICATION.getValue() + 4, "没有找到对应的客户端详细信息"),
+        CLIENT_DETAIL_NOT_EXIST(ExceptionCodeLevel.AUTHENTICATION.getValue() + 4, "没有找到对应的客户端详细信息"),
         /**
          * 用户已经存在
          */
-        USER_EXSIT(ExceptionCodeLevel.AUTHENTICATION.getValue() + 5, "用户已经存在"),
+        USER_EXIST(ExceptionCodeLevel.AUTHENTICATION.getValue() + 5, "用户已经存在"),
         /**
          * 不支持的编码错误
          */
@@ -46,7 +46,7 @@ public interface Oauth2Exception {
         AUTHENTICATION_EXCEPTION(ExceptionCodeLevel.AUTHENTICATION.getValue() + 7, "权限错误"),
         OAUTH2_CLIENT_DENIED_EXCEPTION(ExceptionCodeLevel.AUTHENTICATION.getValue() + 8, "客户端没有权限"),
         OAUTH2_OAUTH_CLIENT_IS_NULL(ExceptionCodeLevel.AUTHENTICATION.getValue() + 9, "token 失效"),
-        CLIENT_NOT_EXSIT(ExceptionCodeLevel.AUTHENTICATION.getValue() + 4, "没有找到对应的客户端信息"),
+        CLIENT_NOT_EXIST(ExceptionCodeLevel.AUTHENTICATION.getValue() + 4, "没有找到对应的客户端信息"),
         OAUTH2_ACCESS_TOKEM_REQUIRED(ExceptionCodeLevel.AUTHENTICATION.getValue() + 10, "没有检测到access_token"),
         OAUTH2_TOKEM_EXPIRED(ExceptionCodeLevel.AUTHENTICATION.getValue() + 11, "token 失效"),
         OAUTH2_SCOPE_DEFINITION_ERROR(ExceptionCodeLevel.AUTHENTICATION.getValue() + 12, "通过scope获得数据报错"),

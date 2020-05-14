@@ -1,0 +1,18 @@
+logging:
+  config: classpath:log-spring.xml
+spring:
+  profiles:
+    active: dev
+server:
+  port: 8838
+swagger:
+  base:
+    package: com.zhy.frame.log.efk.controller
+  contact:
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0

@@ -1,22 +1,17 @@
 package com.zhy.frame.authentication.oauth2.center.service.impl;
 
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
-import com.zhy.frame.authentication.oauth2.center.ro.Oauth2ClientDetailRo;
 import com.zhy.frame.authentication.oauth2.center.service.Oauth2RedisService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 
 /**
@@ -40,7 +35,7 @@ public class RedisClientDetailsServiceImpl implements ClientDetailsService {
             baseClientDetails = oauth2RedisService.getClientDetailsByClientId(clientId);
             if (baseClientDetails == null) {
                 LOGGER.error("客户端clientid:{}详细信息未找到", clientId);
-                throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_CLIENT_DETAIL_NO_EXIST.getDescription());
+                throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_CLIENT_DETAIL_NO_EXIST.getDescription());
             }
             return baseClientDetails;
         }

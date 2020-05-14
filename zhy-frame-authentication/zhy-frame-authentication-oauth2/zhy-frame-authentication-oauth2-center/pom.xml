@@ -38,11 +38,21 @@
                     <artifactId>slf4j-api</artifactId>
                     <groupId>org.slf4j</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>thymeleaf</artifactId>
+                    <groupId>org.thymeleaf</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-web</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
@@ -126,7 +136,7 @@
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
-            <artifactId>zhy-frame-captcha</artifactId>
+            <artifactId>zhy-frame-captcha-server</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

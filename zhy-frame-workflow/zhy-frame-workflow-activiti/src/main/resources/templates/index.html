@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>工作流</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+<div>
+    <button onclick="writeForm()">填写请假单</button>
+    <button class="log" onclick="logout()">退出</button>
+</div>
+<table th:if="${forms.size()}>0">
+    <thead>
+    <tr>
+        <td>请假标题</td>
+        <td>请假内容</td>
+        <td>请假人</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tr th:each="form:${forms}">
+        <td th:text="${form.title}"></td>
+        <td th:text="${form.content}"></td>
+        <td th:text="${form.applicant}"></td>
+        <td th:text="${form.state}"></td>
+        <td>
+            <button th:if="${form.state} == '填写请假单'"
+                    th:onclick="'javascript:apply(\''+${form.id}+'\')'">申请请假
+            </button>
+            <button th:if="${form.state} == '填写请假单'"
+                    th:onclick="'javascript:giveup(\''+${form.id}+'\')'">放弃请假
+            </button>
+            <button th:onclick="'javascript:checkState(\''+${form.id}+'\')'" data-toggle="modal" data-target="#myModal">
+                查看流程
+            </button>
+        </td>
+    </tr>
+</table>
+<div th:if="${forms.size()}==0">
+    <br/>暂无请假数据
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">流程</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<style>
+    body {
+        margin: 10px 10px 100px 10px;
+    }
+
+    * {
+        font-family: "微软雅黑";
+        font-size: 15px;
+    }
+
+    td {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        padding: 5px;
+        margin: 5px 0;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+    }
+
+    .log {
+        float: right;
+        padding: 5px 8px;
+        background: #ec5757;
+        color: #fff;
+    }
+</style>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+    function writeForm() {
+        location.href = "/form";
+    }
+
+    function logout() {
+        $.ajax({
+            url: "/logout",
+            success: function (data) {
+                if (data.code == 200) {
+                    location.href = "/";
+                }
+            }
+        });
+    }
+
+    function apply(formId) {
+        var operator = getUser();
+        if (operator == "") {
+            location.href = "/";
+        }
+        $.ajax({
+            url: "/apply",
+            data: {
+                "formId": formId,
+                "operator": operator
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    location.href = "/home";
+                }
+            }
+        });
+    }
+
+    function giveup(formId) {
+        var operator = getUser();
+        if (operator == "") {
+            location.href = "/";
+        }
+        $.ajax({
+            url: "/giveup",
+            data: {
+                "formId": formId,
+                "operator": operator
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    location.href = "/home";
+                }
+            }
+        });
+    }
+
+    function checkState(formId) {
+        $.ajax({
+            url: "/historyState",
+            data: {
+                "formId": formId
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    var processList = data.info;
+                    var html = "";
+                    $.each(processList, function (i, item) {
+                        html += "<span>" + item.name + "(操作人：" + item.operator + ")" + "</span><br/><br/>";
+                    });
+                    $(".modal-body").html(html);
+                }
+            }
+        });
+    }
+
+    function getUser() {
+        var name = "userInfo=";
+        var user = "";
+        var ca = document.cookie.split(';');
+        $.each(ca, function (i, item) {
+            if (item.indexOf(name) != -1) {
+                user = item.substring(name.length, item.length);
+            }
+        });
+        return user;
+    }
+</script>

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -38,9 +39,12 @@ public class CacheCommonServiceFactoryImpl implements CacheCommonService {
     }
 
     /**
-     * @describe:策略注入
-     * @author: lvmoney /四川******科技有限公司
-     * 2018年11月8日下午3:08:36
+     * 策略注入
+     * @param strategyMap:
+     * @return: null
+     * @throws
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/5/11 20:20
      */
     @Autowired
     public <T> CacheCommonServiceFactoryImpl(Map<String, CacheCommonService> strategyMap) {
@@ -107,6 +111,11 @@ public class CacheCommonServiceFactoryImpl implements CacheCommonService {
 
     @Override
     public Object getByMapKey(String key, String mapKey) {
+        return null;
+    }
+
+    @Override
+    public Set<String> getKeysByWildcard(String wildcard) {
         return null;
     }
 

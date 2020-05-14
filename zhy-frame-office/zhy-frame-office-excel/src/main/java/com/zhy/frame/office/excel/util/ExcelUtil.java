@@ -12,8 +12,9 @@ import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.office.common.exception.OfficeException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
@@ -63,13 +64,13 @@ public class ExcelUtil {
 
     private static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
         try {
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(BaseConstant.CHARACTER_ENCODE_UTF8_UPPER);
             response.setHeader("content-Type", "application/vnd.ms-excel");
-            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
             workbook.write(response.getOutputStream());
         } catch (IOException e) {
             logger.error("excel文档导出下载报错:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.EXCEL_DOWNLOAD_ERROR);
+            throw new BusinessException(OfficeException.Proxy.EXCEL_DOWNLOAD_ERROR);
         }
     }
 
@@ -92,10 +93,10 @@ public class ExcelUtil {
             list = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
         } catch (NoSuchElementException e) {
             logger.error("excel模板文件导入为空:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.EXCEL_TEMPLATE_ERROR);
+            throw new BusinessException(OfficeException.Proxy.EXCEL_TEMPLATE_ERROR);
         } catch (Exception e) {
             logger.error("excel模板文件导入为空:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.EXCEL_TEMPLATE_ERROR);
+            throw new BusinessException(OfficeException.Proxy.EXCEL_TEMPLATE_ERROR);
         }
         return list;
     }
@@ -113,10 +114,10 @@ public class ExcelUtil {
             list = ExcelImportUtil.importExcel(file.getInputStream(), pojoClass, params);
         } catch (NoSuchElementException e) {
             logger.error("excel文件导入为空:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.EXCEL_IMPORT_ERROR);
+            throw new BusinessException(OfficeException.Proxy.EXCEL_IMPORT_ERROR);
         } catch (Exception e) {
             logger.error("excel导入为空:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.EXCEL_IMPORT_ERROR);
+            throw new BusinessException(OfficeException.Proxy.EXCEL_IMPORT_ERROR);
         }
         return list;
     }

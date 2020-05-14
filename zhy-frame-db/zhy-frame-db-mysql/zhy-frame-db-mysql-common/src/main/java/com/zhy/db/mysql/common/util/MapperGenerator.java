@@ -64,7 +64,7 @@ public class MapperGenerator {
 //        PackageConfig pc = new PackageConfig();
 //        pc.setParent("com.zhy.op.api");
 //        pc.setMapper("dao");
-//        pc.setEntity("po");
+//        pc.setEntity("entity");
 //        pc.setXml("mapper.xml");
 //        pc.setService("service");
 //        pc.setController("controller");

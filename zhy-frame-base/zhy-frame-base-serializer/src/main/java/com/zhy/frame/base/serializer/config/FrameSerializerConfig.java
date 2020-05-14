@@ -35,9 +35,11 @@ import java.util.List;
  */
 @Configuration
 public class FrameSerializerConfig extends WebMvcConfigurationSupport {
+    private static final String CHARACTER_ENCODE_UTF8_UPPER = "UTF-8";
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/statics/**").addResourceLocations("classpath:/statics/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
@@ -46,7 +48,7 @@ public class FrameSerializerConfig extends WebMvcConfigurationSupport {
 
     public HttpMessageConverter<String> stringConverter() {
         StringHttpMessageConverter converter = new StringHttpMessageConverter(
-                Charset.forName("UTF-8"));
+                Charset.forName(CHARACTER_ENCODE_UTF8_UPPER));
         return converter;
     }
 
@@ -63,7 +65,7 @@ public class FrameSerializerConfig extends WebMvcConfigurationSupport {
                 //空字段保留
                 SerializerFeature.WriteNullListAsEmpty,
                 SerializerFeature.WriteMapNullValue);
-        fastJsonConfig.setCharset(Charset.forName("UTF-8"));
+        fastJsonConfig.setCharset(Charset.forName(CHARACTER_ENCODE_UTF8_UPPER));
         //2-1 处理中文乱码问题
         List<MediaType> fastMediaTypes = new ArrayList();
         fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);

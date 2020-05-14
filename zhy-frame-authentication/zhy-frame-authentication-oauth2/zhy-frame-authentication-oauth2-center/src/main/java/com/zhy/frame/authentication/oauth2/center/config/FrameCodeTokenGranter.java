@@ -1,8 +1,8 @@
 package com.zhy.frame.authentication.oauth2.center.config;
 
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
-import com.zhy.frame.captcha.service.CaptchaService;
+import com.zhy.frame.captcha.common.service.CaptchaService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,16 +54,16 @@ public class FrameCodeTokenGranter extends AbstractTokenGranter {
         // 验证验证码
         String codeCached = captchaService.getValidate(captchaNum).getValue();
         if (!StringUtils.equalsIgnoreCase(codeCached, captcha)) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.VERIFICATION_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.VERIFICATION_ERROR.getDescription());
         }
         // 从库里查用户
         UserDetails user = userDetailsService.loadUserByUsername(username);
         if (user == null) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_USER_NOT_EXIST.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_USER_NOT_EXIST.getDescription());
         }
         String rPass = user.getPassword();
         if (!new BCryptPasswordEncoder().matches(password, rPass)) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_PASSWORD_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_PASSWORD_ERROR.getDescription());
         }
 
         Authentication userAuth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

@@ -178,7 +178,7 @@ public class DbServiceImpl implements DbService {
     public String showTableSql(TableReqVo tableReqVo) {
         CommonReqVo commonReqVo = dozerMapper.map(tableReqVo, CommonReqVo.class);
         Connection conn = getConnection(commonReqVo);
-        String sql = DbUtilConstant.TABLE_CREATE_SHOW + tableReqVo.getDbName() + "." + tableReqVo.getTableName();
+        String sql = DbUtilConstant.TABLE_CREATE_SHOW + tableReqVo.getDbName() + BaseConstant.DECIMAL_POINT + tableReqVo.getTableName();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement(sql);

@@ -17,6 +17,14 @@
         <module>zhy-demo-provider</module>
         <module>zhy-demo-customer</module>
         <module>zhy-demo-seata</module>
+        <module>zhy-demo-syn</module>
+        <module>zhy-demo-sentinel-client</module>
+        <module>zhy-demo-sentinel-provider</module>
+        <module>zhy-demo-mongodb</module>
+        <module>zhy-demo-profile</module>
+        <module>zhy-demo-seckill</module>
+        <module>zhy-demo-db</module>
+        <module>zhy-demo-resubmit</module>
     </modules>
 
 

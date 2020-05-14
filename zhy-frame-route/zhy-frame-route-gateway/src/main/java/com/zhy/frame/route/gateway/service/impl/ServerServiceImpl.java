@@ -35,9 +35,9 @@ public class ServerServiceImpl implements ServerService {
     public ServerInfo getServerInfo(URI uri) {
         try {
             Object obj = baseRedisService.getByMapKey(BaseConstant.REDIS_SERVER_CROUP_KEY, uri.getHost().toString());
-            ServerInfo ServerInfo = JSON.parseObject(obj.toString(), new TypeReference<ServerInfo>() {
+            ServerInfo serverInfo = JSON.parseObject(obj.toString(), new TypeReference<ServerInfo>() {
             });
-            return ServerInfo;
+            return serverInfo;
         } catch (Exception e) {
             return null;
         }

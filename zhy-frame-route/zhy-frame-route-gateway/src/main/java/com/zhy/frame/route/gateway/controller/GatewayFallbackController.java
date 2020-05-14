@@ -2,8 +2,7 @@ package com.zhy.frame.route.gateway.controller;
 
 
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
-import com.zhy.frame.route.gateway.exception.GatewayException;
+import com.zhy.frame.route.common.exception.RouteException;
 import com.zhy.frame.route.gateway.utils.ExceptionUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -22,6 +21,6 @@ public class GatewayFallbackController {
     @RequestMapping("/gateway/fallback/default")
     public Mono<Void> defaultFallback(ServerHttpResponse serverHttpResponse) {
         serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
-        return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(CommonException.Proxy.SERVER_IS_DOWNGRADE))));
+        return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(RouteException.Proxy.SERVER_IS_DOWNGRADE))));
     }
 }

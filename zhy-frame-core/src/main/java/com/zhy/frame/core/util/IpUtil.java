@@ -117,7 +117,7 @@ public class IpUtil {
                 ip = request.getRemoteAddr();
             }
         } else if (ip.length() > IP_LENGTH_MAX) {
-            String[] ips = ip.split(",");
+            String[] ips = ip.split(BaseConstant.CHARACTER_COMMA);
             for (int index = 0; index < ips.length; index++) {
                 String strIp = (String) ips[index];
                 if (!("unknown".equalsIgnoreCase(strIp))) {

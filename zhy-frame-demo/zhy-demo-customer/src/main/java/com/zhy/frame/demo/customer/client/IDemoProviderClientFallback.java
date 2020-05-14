@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 public class IDemoProviderClientFallback implements FallbackFactory<IDemoProviderClient> {
     @Override
     public IDemoProviderClient create(Throwable cause) {
-
         return new IDemoProviderClient() {
             @Override
             public ApiResult<String> fallback(String name) {
@@ -25,6 +24,11 @@ public class IDemoProviderClientFallback implements FallbackFactory<IDemoProvide
 
             @Override
             public ApiResult<String> hystrix(String name) {
+                return null;
+            }
+
+            @Override
+            public ApiResult<String> test(String name) {
                 return null;
             }
         };

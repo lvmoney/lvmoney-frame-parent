@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.zhy.frame</groupId>
-            <artifactId>zhy-frame-core</artifactId>
+            <artifactId>zhy-frame-route-common</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.zhy.frame</groupId>

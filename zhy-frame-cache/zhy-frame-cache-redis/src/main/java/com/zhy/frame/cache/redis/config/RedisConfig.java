@@ -24,7 +24,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * @describe: 缓存管理器 spring boot 2.0后 配置缓存管理器 和2.0以前 不一样 根据自己的版本 配置
      * @param: [redisTemplate]
      * @return: org.springframework.data.redis.cache.RedisCacheManager
-     * @author: lvmoney /四川******科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      * 2019/9/9 10:29
      */
     @Bean
@@ -36,7 +36,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * @describe: 以下两种redisTemplate自由根据场景选择
      * @param: [connectionFactory]
      * @return: org.springframework.data.redis.core.RedisTemplate<java.lang.Object, java.lang.Object>
-     * @author: lvmoney /四川******科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      * 2019/9/9 10:29
      */
     @Bean

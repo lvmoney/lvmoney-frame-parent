@@ -2,9 +2,9 @@ package com.zhy.frame.authentication.oauth2.center.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.constant.Oauth2ServerConstant;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
-import com.zhy.frame.authentication.oauth2.center.exception.Oauth2Exception;
 import com.zhy.frame.authentication.oauth2.center.ro.AuthorizationCodeRo;
 import com.zhy.frame.authentication.oauth2.center.ro.Oauth2ClientDetailRo;
 import com.zhy.frame.authentication.oauth2.center.service.Oauth2RedisService;
@@ -74,7 +74,7 @@ public class Oauth2RedisServiceImpl implements Oauth2RedisService {
             AuthorizationVo authorizationVo = authorizationRespVo2AuthorizationVo(authorizationRespVo);
             return authorizationVo;
         } catch (Exception e) {
-            throw new CustomOauthException(Oauth2Exception.Proxy.OAUTH2_CUSTOM_OAUTH_ERROR.getDescription());
+            throw new CustomOauthException(AuthorityException.Proxy.OAUTH2_CUSTOM_OAUTH_ERROR.getDescription());
         }
 
     }

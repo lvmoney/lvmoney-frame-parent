@@ -9,7 +9,7 @@ package com.zhy.frame.mq.rabbitmq.customer.receiver;/**
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.mq.common.exception.MqException;
 import com.zhy.frame.mq.common.vo.MessageVo;
 import com.zhy.frame.mq.rabbitmq.common.constant.RabbitmqConstant;
 import com.zhy.frame.mq.common.factory.MqDataHandServiceContext;
@@ -45,7 +45,7 @@ public class SimpleReceiver {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (IOException e) {
             LOGGER.error("消费消息失败:{}", e.getMessage());
-            throw new BusinessException(CommonException.Proxy.RABBIT_MESSAGE_RECEIVER_SIMPLE_ERROR);
+            throw new BusinessException(MqException.Proxy.RABBIT_MESSAGE_RECEIVER_SIMPLE_ERROR);
             //丢弃这条消息
             //channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);
         }

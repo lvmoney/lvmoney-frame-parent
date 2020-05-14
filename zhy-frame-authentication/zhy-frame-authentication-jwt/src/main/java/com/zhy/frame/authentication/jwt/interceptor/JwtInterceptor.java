@@ -10,6 +10,7 @@ package com.zhy.frame.authentication.jwt.interceptor;
 
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.zhy.frame.authentication.common.constant.AuthConstant;
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.jwt.annotation.NotToken;
 import com.zhy.frame.authentication.jwt.constant.JwtConstant;
 import com.zhy.frame.authentication.jwt.properties.JwtConfigProp;
@@ -19,7 +20,6 @@ import com.zhy.frame.authentication.util.service.UserCommonService;
 import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.base.core.util.SupportUtil;
 import com.zhy.frame.core.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                              Object object) throws Exception {
         if (!SupportUtil.support(frameSupport)) {
-            throw new BusinessException(CommonException.Proxy.TOKEN_SUPPORT_ERROR);
+            throw new BusinessException(AuthorityException.Proxy.TOKEN_SUPPORT_ERROR);
         } else if (BaseConstant.SUPPORT_FALSE.equals(frameSupport)) {
             return super.preHandle(httpServletRequest, httpServletResponse, object);
 
@@ -81,7 +81,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
             // 从 http 请求头中取出
             String token = httpServletRequest.getHeader(BaseConstant.AUTHORIZATION_TOKEN_KEY);
             if (token == null) {
-                throw new BusinessException(CommonException.Proxy.TOKEN_IS_REQUIRED);
+                throw new BusinessException(AuthorityException.Proxy.TOKEN_IS_REQUIRED);
             }
             if (token.startsWith(AuthConstant.TOKEN_OAUTH2_PREFIX)) {
                 return super.preHandle(httpServletRequest, httpServletResponse, object);
@@ -98,17 +98,17 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
                 UserVo userVo = JwtUtil.getUserVo(verifyToken);
                 userId = userVo.getUserId();
             } catch (JWTDecodeException j) {
-                throw new BusinessException(CommonException.Proxy.TOKEN_USER_ID_ERROR);
+                throw new BusinessException(AuthorityException.Proxy.TOKEN_USER_ID_ERROR);
             }
             UserVo userVo = userCommonService.getUserVo(token);
             if (userVo == null) {
-                throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
+                throw new BusinessException(AuthorityException.Proxy.TOKEN_USER_NOT_EXIST);
             }
             if (!userId.equals(userVo.getUserId())) {
-                throw new BusinessException(CommonException.Proxy.TOKEN_USER_NOT_EXSIT);
+                throw new BusinessException(AuthorityException.Proxy.TOKEN_USER_NOT_EXIST);
             }
             if (!JwtUtil.checkPassword(token, userVo.getPassword(), userId)) {
-                throw new BusinessException(CommonException.Proxy.TOKEN_VERIFY_ERROR);
+                throw new BusinessException(AuthorityException.Proxy.TOKEN_VERIFY_ERROR);
             }
             return super.preHandle(httpServletRequest, httpServletResponse, object);
         }

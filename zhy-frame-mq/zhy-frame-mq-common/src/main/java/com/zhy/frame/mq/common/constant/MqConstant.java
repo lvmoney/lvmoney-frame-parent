@@ -16,7 +16,7 @@ public class MqConstant {
     /**
      * kafka simple
      */
-    public static final String KAFAK_TYPE_SIMPLE = "simple";
+    public static final String KAFKA_TYPE_SIMPLE = "simple";
     /**
      * kafka synchronous
      */
@@ -37,13 +37,13 @@ public class MqConstant {
     /**
      * rabbitmq topic 通配符
      */
-    public static final String RABBIT_TYPE_TOPICRICE = "topicRich";
+    public static final String RABBIT_TYPE_TOPIC_RICE = "topicRich";
 
 
     /**
      * 错误key
      */
-    public static final String MQ_ERRROR_RECORD_REDIS_KEY = "mq_error_record";
+    public static final String MQ_ERROR_RECORD_REDIS_KEY = "mq_error_record";
 
 
     /**

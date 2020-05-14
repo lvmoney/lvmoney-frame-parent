@@ -1,10 +1,10 @@
 package com.zhy.frame.authentication.shiro.realm;
 
+import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.shiro.ro.ShiroDataRo;
 import com.zhy.frame.authentication.shiro.service.ShiroRedisService;
 import com.zhy.frame.authentication.shiro.vo.ShiroDataVo;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.core.vo.UserVo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +36,7 @@ public class FrameShiroRealm extends AuthorizingRealm {
         String name = token.getUsername();
         String password = String.valueOf(token.getPassword());
         if (StringUtils.isBlank(name) || StringUtils.isBlank(password)) {
-            throw new BusinessException(CommonException.Proxy.SHIRO_UNAUTHORIZED_EXCEPTIONT);
+            throw new BusinessException(AuthorityException.Proxy.SHIRO_UNAUTHORIZED_EXCEPTIONT);
         }
         UserVo user = new UserVo();
         user.setUsername(name);
@@ -64,7 +64,7 @@ public class FrameShiroRealm extends AuthorizingRealm {
             String userName = userLogin.getUsername();
             ShiroDataVo shiroDataVo = shiroRedisService.getShiroData(userName);
             if (shiroDataVo == null) {
-                throw new BusinessException(CommonException.Proxy.SHIRO_REDIS_NOT_EXSIT);
+                throw new BusinessException(AuthorityException.Proxy.SHIRO_REDIS_NOT_EXIST);
             }
             Set<String> roles = shiroDataVo.getRoles();
             if (ObjectUtils.allNotNull(roles)) {

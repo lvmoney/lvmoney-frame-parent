@@ -24,11 +24,17 @@ public class DemoProviderController implements IDemoProvider {
     @ReleaseServer(release = true)
     @Override
     public ApiResult<String> fallback(String name) {
-        throw new BusinessException(CommonException.Proxy.RABBITMQ_PROVIDER_DYNAMIC_NOT_EXIST);
+        throw new BusinessException(CommonException.Proxy.PARAM_ERROR);
     }
 
     @Override
     public ApiResult<String> hystrix(String name) {
         return ApiResult.success("hystrix" + name);
+    }
+
+    @Override
+    public ApiResult<String> test(String name) {
+        return ApiResult.success("test" + name);
+
     }
 }

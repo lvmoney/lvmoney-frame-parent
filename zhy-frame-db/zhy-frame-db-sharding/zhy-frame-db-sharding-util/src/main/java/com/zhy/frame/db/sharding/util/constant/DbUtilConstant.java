@@ -57,9 +57,4 @@ public class DbUtilConstant {
      */
     public static final String MYSQL_URL_SUBFFIX = "?useSSL=FALSE&serverTimezone=GMT%2B8";
 
-
-    public static final String UNDERLINE = "_";
-    public static final String CENTER_LINE = "-";
-    public static final String SEMICOLON = ";";
-    public static final String LINE_FEED = "\r\n";
 }
