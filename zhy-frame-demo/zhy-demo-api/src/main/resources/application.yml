@@ -5,7 +5,7 @@ swagger:
   title: demo
   version: v2.0
   base:
-    package: com.zhy.demo.api.controller
+    package: com.zhy.demo.api.function
   description: 框架demo系统后台接口
   url: www.baidu.com
   contact:

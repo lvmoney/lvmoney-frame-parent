@@ -26,6 +26,8 @@
         <module>zhy-demo-db</module>
         <module>zhy-demo-resubmit</module>
         <module>zhy-demo-skywalking</module>
+        <module>zhy-demo-cache</module>
+        <module>zhy-demo-caffeine</module>
     </modules>
 
 

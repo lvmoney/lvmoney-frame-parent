@@ -14,15 +14,21 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-cache-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <dependency><!--设置reids配置需要的依赖包-->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-cache-caffeine</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

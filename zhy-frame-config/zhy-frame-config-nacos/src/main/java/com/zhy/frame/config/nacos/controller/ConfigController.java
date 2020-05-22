@@ -1,6 +1,6 @@
 package com.zhy.frame.config.nacos.controller;/**
  * 描述:
- * 包名:com.zhy.k8s.nacos.controller
+ * 包名:com.zhy.k8s.nacos.function
  * 版本信息: 版本1.0
  * 日期:2019/11/14
  * Copyright XXXXXX科技有限公司

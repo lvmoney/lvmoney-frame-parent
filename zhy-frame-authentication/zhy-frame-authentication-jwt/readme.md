@@ -38,4 +38,6 @@ key值为：token值
 
 9、为了区分token的类型，jwt或者oauth2，在jwt token前面加了前缀：JWT:，参考JwtUtil
 
-10、注意jwt的拦截器和base中用来做后台返回值处理（null处理等）的拦截器有冲突，引入jwt的时候需要在core中exclusion zhy-frame-base-serializer module  
+10、jwt的实现用到了拦截器在使用时需要我们动手去extends SerializerConfig把拦截器配置到我们系统并用spring托管，可参考JwtInterceptorConfig   
+
+11、注意由于一个系统可能有多个拦截器，基于如上考虑。用的时候需要extends SerializerConfig，把拦截器加入到配置器里面，注意拦截器执行顺序，jwt应该放到最前面  

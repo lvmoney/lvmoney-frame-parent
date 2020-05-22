@@ -5,7 +5,7 @@ spring:
     name: provider
 swagger:
   base:
-    package: com.zhy.frame.pool.disruptor.controller
+    package: com.zhy.frame.pool.disruptor.function
   contact:
     email: author@zhy.com
     name: author

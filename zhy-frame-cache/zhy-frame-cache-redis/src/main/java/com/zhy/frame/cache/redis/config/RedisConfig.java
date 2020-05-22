@@ -1,6 +1,13 @@
 package com.zhy.frame.cache.redis.config;
 
+import com.zhy.frame.base.core.constant.BaseConstant;
+import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.util.SupportUtil;
+import com.zhy.frame.cache.common.exception.CacheException;
 import com.zhy.frame.cache.redis.converter.FrameFastJsonRedisSerializer;
+import com.zhy.frame.cache.redis.enums.RedisMessageEnum;
+import com.zhy.frame.cache.redis.listener.RedisListener;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +17,8 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -20,6 +29,17 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
+    /**
+     * 是否支持Listener
+     */
+    @Value("${frame.redis.listener.support:false}")
+    private boolean supportListener;
+    /**
+     * 监听类型默认为过期
+     */
+    @Value("${frame.redis.listener.type:expired}")
+    private String listenerType;
+
     /**
      * @describe: 缓存管理器 spring boot 2.0后 配置缓存管理器 和2.0以前 不一样 根据自己的版本 配置
      * @param: [redisTemplate]
@@ -76,5 +96,16 @@ public class RedisConfig extends CachingConfigurerSupport {
         return stringRedisTemplate;
     }
 
-
+    @Bean
+    RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        String pattern = RedisMessageEnum.valueOf(listenerType.toUpperCase()).getType();
+        if (!SupportUtil.support(supportListener)) {
+            throw new BusinessException(CacheException.Proxy.REDIS_LISTENER_SUPPORT_ERROR);
+        } else if (BaseConstant.SUPPORT_TRUE_BOOL == supportListener) {
+            container.addMessageListener(new RedisListener(), new PatternTopic(pattern));
+        }
+        return container;
+    }
 }

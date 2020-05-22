@@ -36,6 +36,7 @@
         <module>zhy-frame-ipfs</module>
         <module>zhy-frame-workflow</module>
         <module>zhy-frame-strategy</module>
+        <module>zhy-frame-serverless</module>
     </modules>
 
     <distributionManagement>
@@ -51,6 +52,7 @@
         </snapshotRepository>
     </distributionManagement>
     <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <spring.version>5.1.2.RELEASE</spring.version>
         <springboot.version>2.1.0.RELEASE</springboot.version>
         <mariadb.java.client>2.2.1</mariadb.java.client>
@@ -110,7 +112,6 @@
         <github.feign.version>10.1.0</github.feign.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project-parent.version>${project.parent.version}</project-parent.version>
         <fastjson.version>1.2.59</fastjson.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <velocity.version>1.7</velocity.version>
@@ -126,7 +127,6 @@
         <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <hutool.version>4.5.10</hutool.version>
         <guava.version>28.0-jre</guava.version>
         <commons.text.version>1.6</commons.text.version>
@@ -182,6 +182,8 @@
         <cassandra.spring.data.version>2.1.0.RELEASE</cassandra.spring.data.version>
         <jasypt.version>3.0.0</jasypt.version>
         <activiti.version>6.0.0</activiti.version>
+        <maven-surefire-plugin.version>2.12.4</maven-surefire-plugin.version>
+        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -1079,11 +1081,17 @@
                 <artifactId>activiti-spring-boot-starter-basic</artifactId>
                 <version>${activiti.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>
         <plugins>
-            <!-- mvn compile 编译时jdk版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -1092,6 +1100,14 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>

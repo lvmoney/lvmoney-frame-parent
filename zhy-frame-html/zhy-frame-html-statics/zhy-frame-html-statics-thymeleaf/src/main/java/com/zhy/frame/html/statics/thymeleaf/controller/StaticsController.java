@@ -1,6 +1,6 @@
 package com.zhy.frame.html.statics.thymeleaf.controller;/**
  * 描述:
- * 包名:com.zhy.frame.html.statics.controller
+ * 包名:com.zhy.frame.html.statics.function
  * 版本信息: 版本1.0
  * 日期:2020/4/21
  * Copyright XXXXXX科技有限公司

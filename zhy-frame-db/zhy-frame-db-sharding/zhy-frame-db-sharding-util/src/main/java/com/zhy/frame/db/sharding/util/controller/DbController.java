@@ -1,6 +1,6 @@
 package com.zhy.frame.db.sharding.util.controller;/**
  * 描述:
- * 包名:com.zhy.mysql.subdb.controller
+ * 包名:com.zhy.mysql.subdb.function
  * 版本信息: 版本1.0
  * 日期:2019/11/15
  * Copyright XXXXXX科技有限公司

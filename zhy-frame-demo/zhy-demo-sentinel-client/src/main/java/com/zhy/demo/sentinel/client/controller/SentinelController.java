@@ -1,6 +1,6 @@
 package com.zhy.demo.sentinel.client.controller;/**
  * 描述:
- * 包名:com.zhy.frame.ops.sentinel.controller
+ * 包名:com.zhy.frame.ops.sentinel.function
  * 版本信息: 版本1.0
  * 日期:2020/4/8
  * Copyright XXXXXX科技有限公司

@@ -11,3 +11,15 @@ value 通过JsonUtil序列化（jsonString）后存到redis，取出值以后再
 1）如果只去更新某个key，同时业务中清晰的知道过期时间开始时间什么的（有专门的存储），那么直接获得对应的值即可  
 2）如果是批量去更新，通过redis自身的方式去更新，建议在save的时候在key值上记录创建时间和失效时间：key_创建时间_失效时间，这样方便
 直接通过key就可以获得然后去更新
+7、使用frame.redis.listener.support 配置来支持redis的监听策略,代码层面目前支持增，删，expired,rename的拓展。注意配置redis.conf notify-keyspace-events Exg$  
+K：keyspace事件，事件以__keyspace@<db>__为前缀进行发布；         
+E：keyevent事件，事件以__keyevent@<db>__为前缀进行发布；         
+g：一般性的，非特定类型的命令，比如del，expire，rename等；        
+$：字符串特定命令；         
+l：列表特定命令；         
+s：集合特定命令；         
+h：哈希特定命令；         
+z：有序集合特定命令；         
+x：过期事件，当某个键过期并删除时会产生该事件；         
+e：驱逐事件，当某个键因maxmemore策略而被删除时，产生该事件；         
+A：g$lshzxe的别名，因此”AKE”意味着所有事件。 

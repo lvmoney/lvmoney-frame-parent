@@ -26,7 +26,7 @@ spring:
     host: 10.20.128.234
 swagger:
   base:
-    package: com.zhy.frame.demo.provider.controller
+    package: com.zhy.frame.demo.provider.function
   contact:
     email: author@zhy.com
     name: author

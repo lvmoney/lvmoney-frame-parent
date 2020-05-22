@@ -14,25 +14,25 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-demo-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-dispatch-feign</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-registry-nacos</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-ops-fuse-netflix-feign</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

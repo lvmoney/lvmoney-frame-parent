@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-authentication-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

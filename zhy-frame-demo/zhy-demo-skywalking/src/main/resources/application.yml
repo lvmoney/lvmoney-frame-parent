@@ -7,7 +7,7 @@ spring:
     name: skywalking
 swagger:
   base:
-    package: com.zhy.demo.skywalking.controller
+    package: com.zhy.demo.skywalking.function
   contact:
     email: author@zhy.com
     name: author

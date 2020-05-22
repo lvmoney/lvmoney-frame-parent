@@ -7,7 +7,7 @@ server:
   port: 8838
 swagger:
   base:
-    package: com.zhy.frame.log.efk.controller
+    package: com.zhy.frame.log.efk.function
   contact:
     email: author@zhy.com
     name: author

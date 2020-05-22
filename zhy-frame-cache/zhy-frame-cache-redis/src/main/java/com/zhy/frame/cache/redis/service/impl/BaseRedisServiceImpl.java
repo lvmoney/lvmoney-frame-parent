@@ -20,17 +20,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import com.zhy.frame.cache.redis.service.BaseRedisService;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * @describe：
@@ -179,8 +180,25 @@ public class BaseRedisServiceImpl extends BaseRedisService {
 
     @Override
     public Set<String> getKeysByWildcard(String wildcard) {
-        Set keys = stringRedisTemplate.keys(wildcard);
+        Set<String> keys = new HashSet<>();
+        this.scan(wildcard, item -> {
+            //符合条件的key
+            String key = new String(item, StandardCharsets.UTF_8);
+            keys.add(key);
+        });
         return keys;
+    }
+
+    private void scan(String pattern, Consumer<byte[]> consumer) {
+        this.stringRedisTemplate.execute((RedisConnection connection) -> {
+            try (Cursor<byte[]> cursor = connection.scan(ScanOptions.scanOptions().count(Long.MAX_VALUE).match(pattern).build())) {
+                cursor.forEachRemaining(consumer);
+                return null;
+            } catch (IOException e) {
+                LOGGER.error("通过scan命令获得keys报错:{}", e.getMessage());
+                throw new BusinessException(CacheException.Proxy.SCAN_COMMAND_ERROR);
+            }
+        });
     }
 
 

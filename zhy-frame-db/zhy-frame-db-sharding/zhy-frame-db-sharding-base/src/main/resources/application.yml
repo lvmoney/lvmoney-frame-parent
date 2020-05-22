@@ -59,7 +59,7 @@ spring:
           key-generator-column-name: id
 swagger:
   base:
-    package: com.zhy.frame.db.sharding.base.controller
+    package: com.zhy.frame.db.sharding.base.function
   contact:
     email: author@zhy.com
     name: author

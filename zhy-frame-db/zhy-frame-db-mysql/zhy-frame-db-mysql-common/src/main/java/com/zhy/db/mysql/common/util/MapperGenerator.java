@@ -67,7 +67,7 @@ public class MapperGenerator {
 //        pc.setEntity("entity");
 //        pc.setXml("mapper.xml");
 //        pc.setService("service");
-//        pc.setController("controller");
+//        pc.setController("function");
 //        generator.setPackageInfo(pc);
 //
 //        generator.execute();

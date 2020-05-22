@@ -15,19 +15,19 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-dubbo-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-dubbo-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-dispatch-feign</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>

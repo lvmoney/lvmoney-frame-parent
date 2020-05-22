@@ -24,7 +24,6 @@ public class CloudBaseConstant {
     public static final String YAML_FILE_PATH = System.getProperty("user.dir") + FILE_SEPARATOR + "data" + FILE_SEPARATOR + "yaml";
 
 
-
     /**
      * ingress 默认端口
      */
@@ -66,4 +65,13 @@ public class CloudBaseConstant {
      * 时间单位:毫秒
      */
     public static final String TIME_UNIT_MS = "ms";
+
+    /**
+     * 默认 jvm配置
+     */
+    public static final String DEFAULT_JAVA_OPTS = "-XX:MetaspaceSize=128m\n" +
+            " -XX:MaxMetaspaceSize=128m\n" +
+            " -Xms1024m -Xmx1024m -Xmn256m -Xss256k\n" +
+            " -XX:SurvivorRatio=8\n" +
+            "-XX:+UseConcMarkSweepGC\n";
 }

@@ -1,6 +1,6 @@
 package com.zhy.frame.dubbo.client.controller;/**
  * 描述:
- * 包名:com.zhy.frame.dubbo.client.controller
+ * 包名:com.zhy.frame.dubbo.client.function
  * 版本信息: 版本1.0
  * 日期:2019/12/27
  * Copyright XXXXXX科技有限公司

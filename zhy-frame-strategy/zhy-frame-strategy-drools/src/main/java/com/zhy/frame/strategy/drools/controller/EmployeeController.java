@@ -1,6 +1,6 @@
 /**
  * 描述:
- * 包名:com.zhy.hotel.controller
+ * 包名:com.zhy.hotel.function
  * 版本信息: 版本1.0
  * 日期:2018年11月7日  上午10:40:05
  * Copyright xxxx科技有限公司

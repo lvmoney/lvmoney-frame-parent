@@ -13,11 +13,11 @@
 
 #### 使用方式
 
-通过maven依赖的方式引用到项目模块即可。把frame作为所有项目的parent，子项目一般都要引入common，其他模块根据系统需要引入，详见各个module的readme.md。
+通过maven依赖的方式引用到项目模块即可。把zhy-frame-parent作为所有项目的parent，子项目一般都要引入zhy-frame-core，其他模块根据系统需要引入，详见各个module的readme.md。demo 可见 zhy-frame-demo
 
 #### 服务支持
 
-访问安全认证(auth2,jwt)  
+访问安全认证(oauth2,jwt)  
 zhy-frame-authentication  
    
 架构基础   
@@ -115,6 +115,9 @@ zhy-frame-workflow
 
 springboot  
 springcloud  
+nacos  
+sentinel  
+ipfs  
 docker  
 k8s1.16.0  
 istio1.3.0  

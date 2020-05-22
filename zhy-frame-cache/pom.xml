@@ -17,6 +17,8 @@
         <module>zhy-frame-cache-common</module>
         <module>zhy-frame-cache-lock</module>
         <module>zhy-frame-cache-repeatsubmit</module>
+        <module>zhy-frame-cache-caffeine</module>
+        <module>zhy-frame-cache-queue</module>
     </modules>
 
 

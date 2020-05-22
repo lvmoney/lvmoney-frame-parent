@@ -22,12 +22,12 @@ public interface CacheException {
         /**
          * 重复提交支持与否
          */
-        REPEATSUBMIT_SUPPORT_ERROR(ExceptionCodeLevel.CORE.getValue() + 1, "frame.repeactsubmit.support value is 'true' or 'false'"),
+        REPEATSUBMIT_SUPPORT_ERROR(ExceptionCodeLevel.CACHE.getValue() + 1, "frame.repeactsubmit.support value is 'true' or 'false'"),
 
         /**
          * 重复提交支持与否
          */
-        REPEATSUBMIT_REQUEST_ERROR(ExceptionCodeLevel.CORE.getValue() + 2, "short time resubmission error"),
+        REPEATSUBMIT_REQUEST_ERROR(ExceptionCodeLevel.CACHE.getValue() + 2, "short time resubmission error"),
 
         /**
          * 获得分布式锁数据报错
@@ -52,7 +52,31 @@ public interface CacheException {
         /**
          * 秒杀商品不存在
          */
-        SECKILL_PRODUCT_NOT_EXIST(ExceptionCodeLevel.CACHE.getValue() + 8, "seckill product not exist");;
+        SECKILL_PRODUCT_NOT_EXIST(ExceptionCodeLevel.CACHE.getValue() + 8, "seckill product not exist"),
+
+
+        /**
+         * redis 监听支持与否
+         */
+        REDIS_LISTENER_SUPPORT_ERROR(ExceptionCodeLevel.CACHE.getValue() + 9, "frame.redis.listener.support value is 'true' or 'false'"),
+        /**
+         * scan error
+         */
+        SCAN_COMMAND_ERROR(ExceptionCodeLevel.CACHE.getValue() + 10, "redis scan key error"),
+        /**
+         * redis 监听支持与否
+         */
+        REDIS_HOT_REQUEST_SUPPORT_ERROR(ExceptionCodeLevel.CACHE.getValue() + 11, "frame.redis.hotRequest.support value is 'true' or 'false'"),
+        /**
+         * redis 监听支持与否
+         */
+        REDIS_DELAY_QUEUE_DYNAMIC_ERROR(ExceptionCodeLevel.CACHE.getValue() + 12, "rabbitmq @QueueListener bean not exist"),
+
+        /**
+         * redis 监听支持与否
+         */
+        REDIS_DELAYED_QUEUE_SUPPORT_ERROR(ExceptionCodeLevel.CACHE.getValue() + 13, "frame.redis.delayedQueue.support value is 'true' or 'false'"),
+        ;
         private int code;
         private String description;
 

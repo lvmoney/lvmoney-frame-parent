@@ -1,12 +1,13 @@
 package com.zhy.frame.cloud.base.controller;/**
  * 描述:
- * 包名:com.zhy.k8s.base.controller
+ * 包名:com.zhy.k8s.base.function
  * 版本信息: 版本1.0
  * 日期:2019/8/21
  * Copyright XXXXXX科技有限公司
  */
 
 
+import com.zhy.frame.cloud.base.constant.CloudBaseConstant;
 import com.zhy.frame.cloud.base.util.PomUtil;
 import com.zhy.frame.cloud.base.vo.req.DockerFileReqVo;
 import com.zhy.frame.core.util.ModuleUtil;
@@ -33,7 +34,13 @@ import java.nio.file.Paths;
 @RequestMapping(value = "/docker")
 public class DockerFileController {
     @Value("${istio.docker.file.temp:/home}")
-    String temp;
+    private String temp;
+    @Value("${istio.docker.java.javaOpts:" + CloudBaseConstant.DEFAULT_JAVA_OPTS + "}")
+    private String javaOpts;
+    /**
+     * dockerfile 默认路径
+     */
+    private static final String DOCKERFILE_PATH = "\\src\\main\\resources\\Dockerfile";
 
     @GetMapping(value = "/dockerFile")
     public String build(DockerFileReqVo dockerFileReqVo) {
@@ -41,7 +48,7 @@ public class DockerFileController {
             String rootPath = ModuleUtil.getModuleRootPath();
             Path rootLocation = Paths.get(rootPath);
             //data.js是文件
-            String dockerFilePath = rootPath + "\\src\\main\\resources\\Dockerfile";
+            String dockerFilePath = rootPath + DOCKERFILE_PATH;
             File file = new File(dockerFilePath);
             if (file.exists()) {
                 file.delete();
@@ -72,7 +79,7 @@ public class DockerFileController {
         String volume = "VOLUME " + temp + tempPath;
         String add = "ADD " + dokcerFile + ".jar " + appJar;
         String run = "RUN sh -c 'touch /" + appJar + "'";
-        String env = "ENV JAVA_OPTS=\"\"";
+        String env = "ENV JAVA_OPTS=" + javaOpts;
         String entrypoint = "ENTRYPOINT [ \"sh\", \"-c\", \"java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /" + appJar + "\" ]";
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(from).append("\n").append(volume).append("\n").append(add).append("\n").append(run).append("\n").append(env).append("\n").append(entrypoint);

@@ -5,7 +5,7 @@ swagger:
   title: db-demo
   version: v2.0
   base:
-    package: com.zhy.demo.db.controller
+    package: com.zhy.demo.db.function
   description: 会员中台服务
   url: www.baidu.com
   contact:

@@ -19,12 +19,12 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-base-profile</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-db-mysql-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

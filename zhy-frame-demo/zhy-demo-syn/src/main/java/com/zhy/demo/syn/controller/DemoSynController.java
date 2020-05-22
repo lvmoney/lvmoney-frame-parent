@@ -1,6 +1,6 @@
 package com.zhy.demo.syn.controller;/**
  * 描述:
- * 包名:com.zhy.demo.syn.controller
+ * 包名:com.zhy.demo.syn.function
  * 版本信息: 版本1.0
  * 日期:2020/3/27
  * Copyright XXXXXX科技有限公司

@@ -1,6 +1,6 @@
 package com.zhy.frame.log.efk.controller;/**
  * 描述:
- * 包名:com.zhy.frame.log.efk.controller
+ * 包名:com.zhy.frame.log.efk.function
  * 版本信息: 版本1.0
  * 日期:2020/5/6
  * Copyright XXXXXX科技有限公司

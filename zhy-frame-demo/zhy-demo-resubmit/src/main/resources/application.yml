@@ -16,7 +16,7 @@ server:
     uri-encoding: UTF-8
 swagger:
   base:
-    package: com.zhy.demo.resubmit.controller
+    package: com.zhy.demo.resubmit.function
   contact:
     email: author@zhy.com
     name: author

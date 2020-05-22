@@ -32,7 +32,7 @@ public class RedisConstant {
     public static final String SECKILL_SCRIPT_LUA_ADD = "local buyNum = ARGV[1]\n" +
             "local prodCode = KEYS[1]  \n" +
             "local prodCount = redis.call('get',prodCode) \n" +
-            "if prodCount >= buyNum \n" +
+            "if buyNum >= 0 \n" +
             "then redis.call('incrby',prodCode,buyNum) \n" +
             "return redis.call('get',prodCode) \n" +
             "else \n" +
@@ -42,4 +42,20 @@ public class RedisConstant {
      * 商品秒杀前缀
      */
     public static final String SECKILL_PRODUCT_PREFIX = "seckillProduct";
+
+    /**
+     * 搞频访问前缀
+     */
+    public static final String HOT_REQUEST_PREFIX = "hotRequestStatistics";
+
+
+    /**
+     * 高频访问锁
+     */
+    public static final String HOT_REQUEST_UPDATE_LOCK_PREFIX = "hotRequestLock";
+
+    /**
+     * 搞频访问锁
+     */
+    public static final String HOT_REQUEST_INTERCEPTOR_LOCK_PREFIX = "hotRequestLock";
 }

@@ -1,6 +1,6 @@
 package com.zhy.frame.pool.disruptor.controller;/**
  * 描述:
- * 包名:com.zhy.frame.pool.disruptor.controller
+ * 包名:com.zhy.frame.pool.disruptor.function
  * 版本信息: 版本1.0
  * 日期:2020/4/28
  * Copyright XXXXXX科技有限公司

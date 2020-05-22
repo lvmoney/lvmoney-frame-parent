@@ -2,7 +2,7 @@ server:
   port: 8828
 swagger:
   base:
-    package: com.zhy.frame.ipfs.node.controller
+    package: com.zhy.frame.ipfs.node.function
   contact:
     email: author@zhy.com
     name: author

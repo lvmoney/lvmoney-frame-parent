@@ -1,6 +1,6 @@
 package com.zhy.frame.sync.canal.common.controller;/**
  * 描述:
- * 包名:com.zhy.bigdata.canal.redis.controller
+ * 包名:com.zhy.bigdata.canal.redis.function
  * 版本信息: 版本1.0
  * 日期:2019/7/21
  * Copyright XXXXXX科技有限公司

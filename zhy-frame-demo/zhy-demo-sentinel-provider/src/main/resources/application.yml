@@ -29,7 +29,7 @@ spring:
     host: 10.20.128.234
 swagger:
   base:
-    package: com.zhy.demo.sentinel.provider.controller
+    package: com.zhy.demo.sentinel.provider.function
   contact:
     email: author@zhy.com
     name: author

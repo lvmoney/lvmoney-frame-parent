@@ -1,6 +1,6 @@
 package com.zhy.frame.ops.docker.controller;/**
  * 描述:
- * 包名:com.zhy.k8s.base.controller
+ * 包名:com.zhy.k8s.base.function
  * 版本信息: 版本1.0
  * 日期:2019/8/21
  * Copyright 四川******科技有限公司

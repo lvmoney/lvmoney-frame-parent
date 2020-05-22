@@ -17,7 +17,7 @@ import com.zhy.frame.cache.repeatsubmit.annotation.NoRepeatSubmit;
 import com.zhy.frame.cache.repeatsubmit.constant.RepeatSubmitConstant;
 import com.zhy.frame.cache.repeatsubmit.enums.NoRepeatSubmitEnum;
 import com.zhy.frame.cache.repeatsubmit.properties.RepeatSubmitConfigProp;
-import com.zhy.frame.cache.repeatsubmit.util.FilterMapUtil;
+import com.zhy.frame.core.util.FilterMapUtil;
 import com.zhy.frame.core.util.SignUtil;
 import com.zhy.frame.core.vo.SignVo;
 import org.apache.commons.lang3.StringUtils;

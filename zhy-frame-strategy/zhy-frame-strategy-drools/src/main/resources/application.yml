@@ -16,7 +16,7 @@ product:
     charge: 0.05d
 swagger:
   base:
-    package: com.zhy.frame.strategy.drools.controller
+    package: com.zhy.frame.strategy.drools.function
   contact:
     email: author@zhy.com
     name: author

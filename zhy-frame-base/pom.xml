@@ -16,6 +16,7 @@
         <module>zhy-frame-base-core</module>
         <module>zhy-frame-base-serializer</module>
         <module>zhy-frame-base-profile</module>
+        <module>zhy-frame-base-interceptor</module>
     </modules>
 
 

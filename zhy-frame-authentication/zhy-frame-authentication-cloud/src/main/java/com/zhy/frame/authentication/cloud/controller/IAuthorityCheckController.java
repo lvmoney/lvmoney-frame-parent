@@ -1,6 +1,6 @@
 package com.zhy.frame.authentication.cloud.controller;/**
  * 描述:
- * 包名:com.zhy.frame.authentication.cloud.controller
+ * 包名:com.zhy.frame.authentication.cloud.function
  * 版本信息: 版本1.0
  * 日期:2020/3/15
  * Copyright XXXXXX科技有限公司

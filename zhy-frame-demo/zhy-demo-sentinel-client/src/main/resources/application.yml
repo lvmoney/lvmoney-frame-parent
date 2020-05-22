@@ -25,7 +25,7 @@ spring:
 #            rule-type: flow
 swagger:
   base:
-    package: com.zhy.demo.sentinel.client.controller
+    package: com.zhy.demo.sentinel.client.function
   contact:
     email: author@zhy.com
     name: author

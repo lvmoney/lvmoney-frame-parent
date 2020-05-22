@@ -86,7 +86,7 @@ frame:
     support: false
 swagger:
   base:
-    package: com.zhy.frame.route.gateway.controller
+    package: com.zhy.frame.route.gateway.function
   contact:
     email: author@zhy.com
     name: author
