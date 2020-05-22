@@ -37,6 +37,7 @@
         <module>zhy-frame-workflow</module>
         <module>zhy-frame-strategy</module>
         <module>zhy-frame-serverless</module>
+        <module>zhy-frame-sidecar</module>
     </modules>
 
     <distributionManagement>
