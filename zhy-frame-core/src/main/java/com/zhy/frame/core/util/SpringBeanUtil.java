@@ -7,11 +7,16 @@ package com.zhy.frame.core.util;
  * Copyright 四川******科技有限公司
  */
 
+import com.zhy.frame.base.core.constant.BaseConstant;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,5 +119,43 @@ public class SpringBeanUtil implements ApplicationContextAware {
             map = null;
         }
         return map;
+    }
+
+    /**
+     * 获取当前用户的token
+     *
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/2 16:50
+     */
+    public static String getToken() {
+        HttpServletRequest request = getHttpServletRequest();
+        String token = request.getHeader(BaseConstant.AUTHORIZATION_TOKEN_KEY);
+        return token;
+    }
+
+    /**
+     * 获得当前的HttpServletRequest
+     *
+     * @throws
+     * @return: javax.servlet.http.HttpServletRequest
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/2 17:21
+     */
+    public static HttpServletRequest getHttpServletRequest() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
+
+    /**
+     * 获得当前的HttpServletResponse
+     *
+     * @throws
+     * @return: javax.servlet.http.HttpServletResponse
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/2 17:27
+     */
+    public static HttpServletResponse getHttpServletResponse() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 }

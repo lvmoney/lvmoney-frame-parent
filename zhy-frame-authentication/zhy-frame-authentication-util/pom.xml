@@ -14,12 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>com.zhy.frame</groupId>
-            <artifactId>zhy-frame-cache-redis</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-authentication-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

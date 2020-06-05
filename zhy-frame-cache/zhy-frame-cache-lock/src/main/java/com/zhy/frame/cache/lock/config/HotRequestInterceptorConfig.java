@@ -1,6 +1,6 @@
 package com.zhy.frame.cache.lock.config;/**
  * 描述:
- * 包名:com.zhy.frame.cache.lock.config
+ * 包名:com.zhy.frame.cache.lock.handler
  * 版本信息: 版本1.0
  * 日期:2020/5/19
  * Copyright XXXXXX科技有限公司

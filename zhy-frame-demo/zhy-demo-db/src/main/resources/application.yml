@@ -2,16 +2,16 @@
 #  profiles:
 #    active: dev
 swagger:
-  title: db-demo
-  version: v2.0
   base:
-    package: com.zhy.demo.db.function
-  description: 会员中台服务
-  url: www.baidu.com
+    package: com.zhy.demo.db.controller
   contact:
-    name: lvmoney
-    url: www.baidu.com
-    email: 1300515928@qq.com
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: resubmit demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
 #在这里我没有写driver-class-name: com.mysql.jdbc.Driver这个驱动被弃用了  使用新版com.mysql.cj.jdbc.Driver
 #控制台提示说自动帮我们找相应的驱动，一般无需手动加载，所以我注释掉了
 spring:
@@ -127,4 +127,10 @@ mybatis-plus:
 
 server:
   port: 8027
-
+frame:
+  saas:
+    support: true
+#    filterTable: dictionaries_info
+logging:
+  level:
+    com.zhy.demo.db: debug

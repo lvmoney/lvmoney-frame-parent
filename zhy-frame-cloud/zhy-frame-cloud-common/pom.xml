@@ -10,14 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zhy-frame-cloud-common</artifactId>
-    <properties>
-        <frame.version>1.0-SNAPSHOT</frame.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-cache-redis</artifactId>
-            <version>${frame.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

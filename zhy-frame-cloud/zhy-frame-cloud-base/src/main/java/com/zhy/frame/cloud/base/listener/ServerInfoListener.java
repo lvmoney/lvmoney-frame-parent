@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.listener;/**
  * 描述:
- * 包名:com.zhy.k8s.base.listener
+ * 包名:com.zhy.k8s.base.handler
  * 版本信息: 版本1.0
  * 日期:2019/8/16
  * Copyright XXXXXX科技有限公司

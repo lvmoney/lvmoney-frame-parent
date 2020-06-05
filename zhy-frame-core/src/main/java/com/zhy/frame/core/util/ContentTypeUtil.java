@@ -22,7 +22,7 @@ import java.util.Properties;
 @Slf4j
 public final class ContentTypeUtil {
 
-    private static String MIME_TYPE_CONFIG_FILE = "config/mime-type.properties";
+    private static String MIME_TYPE_CONFIG_FILE = "handler/mime-type.properties";
 
     private static String DEFAULT_MIME_TYPE = "application/octet-stream";
 

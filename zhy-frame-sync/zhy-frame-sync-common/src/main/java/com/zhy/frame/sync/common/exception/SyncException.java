@@ -30,7 +30,7 @@ public interface SyncException {
         /**
          * canal 配置分析报错
          */
-        CANAL_CONFIG_ANALYZE_ERROR(ExceptionCodeLevel.CORE.getValue() + 3, "canal config analyze error"),
+        CANAL_CONFIG_ANALYZE_ERROR(ExceptionCodeLevel.CORE.getValue() + 3, "canal handler analyze error"),
         /**
          * canal 连接为空
          */
@@ -38,11 +38,11 @@ public interface SyncException {
         /**
          * canal 配置不支持空
          */
-        CANAL_CONFIG_IS_NULL(ExceptionCodeLevel.CORE.getValue() + 5, "canal config not Required null"),
+        CANAL_CONFIG_IS_NULL(ExceptionCodeLevel.CORE.getValue() + 5, "canal handler not Required null"),
         /**
          * canal 执行监听方法报错
          */
-        CANAL_LISTENER_METHOD_INVOKE_ERROR(ExceptionCodeLevel.CORE.getValue() + 111, "canal invoke listener method error"),
+        CANAL_LISTENER_METHOD_INVOKE_ERROR(ExceptionCodeLevel.CORE.getValue() + 111, "canal invoke handler method error"),
         ;
         private int code;
         private String description;

@@ -6,10 +6,8 @@ package com.zhy.frame.cache.lock.aspect;/**
  * Copyright 四川******科技有限公司
  */
 
-import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.base.core.util.SupportUtil;
 import com.zhy.frame.cache.caffeine.service.CaffeineService;
 import com.zhy.frame.cache.common.exception.CacheException;
@@ -19,9 +17,8 @@ import com.zhy.frame.cache.lock.ro.HotRequestRo;
 import com.zhy.frame.cache.lock.service.DistributedLockerService;
 import com.zhy.frame.cache.lock.service.HotRequestService;
 import com.zhy.frame.cache.lock.utils.ParamUtil;
-import com.zhy.frame.cache.redis.constant.RedisConstant;
+import com.zhy.frame.core.util.SpringBeanUtil;
 import org.apache.commons.lang3.ObjectUtils;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -29,18 +26,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @describe：
@@ -82,7 +72,7 @@ public class HotRequestAspect {
      */
     @Around("controllerAspect()")
     public Object recordHotRequest(ProceedingJoinPoint joinPoint) throws Throwable {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = SpringBeanUtil.getHttpServletRequest();
         Object object = abstractHandlerMethodMapping.getHandler(request).getHandler();
         HandlerMethod handlerMethod = (HandlerMethod) object;
         Method method = handlerMethod.getMethod();

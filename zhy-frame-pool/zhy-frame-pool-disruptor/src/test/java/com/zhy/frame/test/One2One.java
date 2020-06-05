@@ -8,6 +8,7 @@ package com.zhy.frame.test;/**
 
 
 import com.zhy.frame.pool.disruptor.service.impl.BaseMsgService;
+import com.zhy.frame.pool.disruptor.service.impl.MsgServiceImpl;
 import com.zhy.frame.pool.disruptor.vo.MsgEvent;
 
 import java.util.Date;
@@ -21,10 +22,10 @@ import java.util.concurrent.Executors;
  */
 public class One2One {
     public static void main(String[] args) {
-//        BaseMsgService baseMsgService = new BaseMsgService();
-//        ExecutorService executor = Executors.newCachedThreadPool();
-//        MsgEvent msgEvent2 = new MsgEvent("test2", "testAA", new Date().getTime());
-//        MsgEvent msgEvent = new MsgEvent("test", "testAA", new Date().getTime());
-//        baseMsgService.one2One(executor, msgEvent, msgEvent2);
+        BaseMsgService baseMsgService = new MsgServiceImpl();
+        ExecutorService executor = Executors.newCachedThreadPool();
+        MsgEvent msgEvent2 = new MsgEvent("test2", "testAA", new Date().getTime());
+        MsgEvent msgEvent = new MsgEvent("test", "testAA", new Date().getTime());
+        baseMsgService.one2One(executor, msgEvent, msgEvent2);
     }
 }

@@ -92,6 +92,11 @@ public enum ExceptionCodeLevel {
      */
     IPFS(18000),
 
+    /**
+     * db
+     */
+    DB(19000),
+
     ;
 
     private Integer value;

@@ -31,6 +31,12 @@
             <artifactId>zhy-frame-authentication-util</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-authentication-service</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

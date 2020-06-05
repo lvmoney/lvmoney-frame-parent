@@ -1,6 +1,6 @@
 package com.zhy.frame.authentication.oauth2.center.service.impl;/**
  * 描述:
- * 包名:com.zhy.frame.authentication.oauth2.center.config
+ * 包名:com.zhy.frame.authentication.oauth2.center.handler
  * 版本信息: 版本1.0
  * 日期:2019/7/29
  * Copyright XXXXXX科技有限公司

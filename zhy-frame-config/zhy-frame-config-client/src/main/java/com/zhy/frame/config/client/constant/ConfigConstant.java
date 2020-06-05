@@ -1,6 +1,6 @@
 package com.zhy.frame.config.client.constant;/**
  * 描述:
- * 包名:com.zhy.frame.config.client.constant
+ * 包名:com.zhy.frame.handler.client.constant
  * 版本信息: 版本1.0
  * 日期:2019/11/25
  * Copyright 四川******科技有限公司

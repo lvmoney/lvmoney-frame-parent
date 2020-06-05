@@ -58,7 +58,7 @@ public interface CacheException {
         /**
          * redis 监听支持与否
          */
-        REDIS_LISTENER_SUPPORT_ERROR(ExceptionCodeLevel.CACHE.getValue() + 9, "frame.redis.listener.support value is 'true' or 'false'"),
+        REDIS_LISTENER_SUPPORT_ERROR(ExceptionCodeLevel.CACHE.getValue() + 9, "frame.redis.handler.support value is 'true' or 'false'"),
         /**
          * scan error
          */

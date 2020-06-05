@@ -56,7 +56,7 @@ public class JasyptUtil {
      *
      * @param password:
      * @throws
-     * @return: org.jasypt.encryption.pbe.config.SimpleStringPBEConfig
+     * @return: org.jasypt.encryption.pbe.handler.SimpleStringPBEConfig
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2020/5/2 17:55
      */

@@ -1,7 +1,7 @@
 package com.zhy.frame.sync.canal.common.vo;
 /**
  * 描述:
- * 包名:com.zhy.common.config
+ * 包名:com.zhy.common.handler
  * 版本信息: 版本1.0
  * 日期:2019/2/28
  * Copyright xxxx科技有限公司

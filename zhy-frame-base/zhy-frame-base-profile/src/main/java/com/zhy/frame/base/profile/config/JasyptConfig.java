@@ -1,6 +1,6 @@
 package com.zhy.frame.base.profile.config;/**
  * 描述:
- * 包名:com.zhy.frame.base.profile.config
+ * 包名:com.zhy.frame.base.profile.handler
  * 版本信息: 版本1.0
  * 日期:2020/5/2
  * Copyright XXXXXX科技有限公司

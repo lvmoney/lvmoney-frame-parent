@@ -9,7 +9,6 @@ package com.zhy.frame.captcha.server.service.impl;/**
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.revengemission.commons.captcha.core.VerificationCodeUtil;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.util.JsonUtil;
@@ -25,7 +24,6 @@ import com.zhy.frame.core.util.SnowflakeIdFactoryUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -53,9 +51,9 @@ public class CaptchaServiceImpl implements CaptchaService {
     String expire;
     @CacheImpl(CACHE_REDIS)
     CacheCommonService baseRedisService;
-
+/*
     @Autowired
-    DefaultKaptcha defaultKaptcha;
+    DefaultKaptcha defaultKaptcha;*/
 
     /**
      * @describe: 渲染随机背景颜色
@@ -182,34 +180,6 @@ public class CaptchaServiceImpl implements CaptchaService {
         validateResultVo.setCode(FileUtil.file2Base64(b));
         validateResultVo.setValue(validateCodeVo.getValue());
         return validateResultVo;
-    }
-
-
-    @Override
-    public ValidateResultVo encodeBase64ImgCode() {
-        String createText = defaultKaptcha.createText();
-        // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
-        BufferedImage challenge = defaultKaptcha.createImage(createText);
-        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(challenge, "jpg", jpegOutputStream);
-            byte[] b = jpegOutputStream.toByteArray();
-            ValidateResultVo validateResultVo = new ValidateResultVo();
-            validateResultVo.setCode(FileUtil.file2Base64(b));
-            validateResultVo.setValue(createText);
-            SnowflakeIdFactoryUtil idWorker = new SnowflakeIdFactoryUtil(1, 2);
-            ValidateCodeRo validateCodeRo = new ValidateCodeRo();
-            String serialNumber = String.valueOf(idWorker.nextId());
-            validateResultVo.setSerialNumber(serialNumber);
-            validateCodeRo.setValue(createText);
-            validateCodeRo.setSerialNumber(serialNumber);
-            validateCodeRo.setExpire(Long.parseLong(expire));
-            this.saveValidaCode2Cache(validateCodeRo);
-            return validateResultVo;
-        } catch (IOException e) {
-            LOGGER.error("生成验证码报错:{}", e.getMessage());
-            throw new BusinessException(CaptchaException.Proxy.VALID_CODE_ERROR);
-        }
     }
 
 

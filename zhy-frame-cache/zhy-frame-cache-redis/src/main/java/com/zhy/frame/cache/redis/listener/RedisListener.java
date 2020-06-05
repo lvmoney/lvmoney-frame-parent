@@ -1,6 +1,6 @@
 package com.zhy.frame.cache.redis.listener;/**
  * 描述:
- * 包名:com.zhy.frame.cache.redis.listener
+ * 包名:com.zhy.frame.cache.redis.handler
  * 版本信息: 版本1.0
  * 日期:2020/5/17
  * Copyright XXXXXX科技有限公司
@@ -9,13 +9,8 @@ package com.zhy.frame.cache.redis.listener;/**
 
 import com.zhy.frame.cache.redis.service.RedisListenerService;
 import com.zhy.frame.core.util.SpringBeanUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
-import org.springframework.stereotype.Component;
 
 
 /**

@@ -19,4 +19,9 @@ public interface DictionariesInfoService extends IService<DictionariesInfo> {
 
     void errorTest(String code, DictionariesInfo dictionariesInfo);
 
+    DictionariesInfo getDataByName(String name);
+
+
+
+
 }

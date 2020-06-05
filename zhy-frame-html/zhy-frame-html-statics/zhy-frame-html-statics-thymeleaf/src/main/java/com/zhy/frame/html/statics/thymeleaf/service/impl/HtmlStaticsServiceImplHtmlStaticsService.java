@@ -7,13 +7,12 @@ package com.zhy.frame.html.statics.thymeleaf.service.impl;/**
  */
 
 
+import com.zhy.frame.core.util.SpringBeanUtil;
 import com.zhy.frame.html.statics.common.service.impl.BaseHtmlStaticsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -43,8 +42,8 @@ public class HtmlStaticsServiceImplHtmlStaticsService extends BaseHtmlStaticsSer
         if (modelAndView == null || modelAndView.getModel().isEmpty()) {
             return;
         }
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        HttpServletRequest request = SpringBeanUtil.getHttpServletRequest();
+        HttpServletResponse response = SpringBeanUtil.getHttpServletResponse();
         FileWriter fileWriter = null;
         try {
             String fileName = super.getFileName(request);

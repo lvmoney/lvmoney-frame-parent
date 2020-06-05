@@ -1,6 +1,6 @@
 package com.zhy.frame.db.mysql.rw.config;/**
  * 描述:
- * 包名:com.zhy.mysql.separate.config
+ * 包名:com.zhy.mysql.separate.handler
  * 版本信息: 版本1.0
  * 日期:2019/9/6
  * Copyright 四川******科技有限公司

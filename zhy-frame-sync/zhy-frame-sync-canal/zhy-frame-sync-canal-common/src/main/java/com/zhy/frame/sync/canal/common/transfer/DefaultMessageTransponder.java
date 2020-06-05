@@ -178,8 +178,8 @@ public class DefaultMessageTransponder extends AbstractMessageTransponder {
 //									String tableName,
 //									CanalEntry.RowChange rowChange) {
 //		if (listeners != null) {
-//			for (CanalEventListener listener : listeners) {
-//				listener.onEvent(destination, schemaName, tableName, rowChange);
+//			for (CanalEventListener handler : listeners) {
+//				handler.onEvent(destination, schemaName, tableName, rowChange);
 //			}
 //		}
 //	}

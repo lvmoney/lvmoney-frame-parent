@@ -1,6 +1,6 @@
 package com.zhy.frame.dispatch.feign.config;/**
  * 描述:
- * 包名:com.zhy.frame.dispatch.feign.config
+ * 包名:com.zhy.frame.dispatch.feign.handler
  * 版本信息: 版本1.0
  * 日期:2020/3/6
  * Copyright XXXXXX科技有限公司

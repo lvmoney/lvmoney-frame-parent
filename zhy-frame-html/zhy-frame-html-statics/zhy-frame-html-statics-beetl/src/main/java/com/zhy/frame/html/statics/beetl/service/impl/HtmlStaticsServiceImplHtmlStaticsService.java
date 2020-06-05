@@ -7,6 +7,7 @@ package com.zhy.frame.html.statics.beetl.service.impl;/**
  */
 
 
+import com.zhy.frame.core.util.SpringBeanUtil;
 import com.zhy.frame.html.statics.common.constant.StaticsConstant;
 import com.zhy.frame.html.statics.common.service.impl.BaseHtmlStaticsService;
 import org.beetl.core.Configuration;
@@ -17,8 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +40,7 @@ public class HtmlStaticsServiceImplHtmlStaticsService extends BaseHtmlStaticsSer
         if (modelAndView == null || modelAndView.getModel().isEmpty()) {
             return;
         }
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = SpringBeanUtil.getHttpServletRequest();
         FileWriter fileWriter = null;
         try {
             String fileName = super.getFileName(request);

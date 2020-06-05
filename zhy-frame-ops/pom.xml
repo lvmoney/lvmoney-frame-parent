@@ -12,7 +12,6 @@
     <artifactId>zhy-frame-ops</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>zhy-frame-ops-docker</module>
         <module>zhy-frame-ops-admin</module>
         <module>zhy-frame-ops-fuse</module>
         <module>zhy-frame-ops-monitor</module>

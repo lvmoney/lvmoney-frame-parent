@@ -1,6 +1,6 @@
 /**
  * 描述:
- * 包名:com.zhy.jwt.config
+ * 包名:com.zhy.jwt.handler
  * 版本信息: 版本1.0
  * 日期:2019年1月4日  下午2:41:22
  * Copyright 四川******科技有限公司

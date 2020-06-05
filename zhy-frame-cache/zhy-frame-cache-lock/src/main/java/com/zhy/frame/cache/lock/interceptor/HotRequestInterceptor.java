@@ -19,12 +19,11 @@ import com.zhy.frame.cache.lock.service.DistributedLockerService;
 import com.zhy.frame.cache.lock.service.HotRequestService;
 import com.zhy.frame.cache.lock.utils.ParamUtil;
 import com.zhy.frame.cache.redis.constant.RedisConstant;
+import com.zhy.frame.core.util.SpringBeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -98,11 +97,11 @@ public class HotRequestInterceptor extends HandlerInterceptorAdapter {
                 if (!hotRequest.required()) {
                     return super.preHandle(httpServletRequest, httpServletResponse, object);
                 }
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                HttpServletRequest request = SpringBeanUtil.getHttpServletRequest();
                 String servletPath = request.getServletPath();
                 Object obj = caffeineService.get(LockConstant.HOT_REQUEST_CAFFEINE_CACHE_NAME, RedisConstant.HOT_REQUEST_PREFIX + BaseConstant.CONNECTOR_UNDERLINE + serverName + BaseConstant.CONNECTOR_UNDERLINE + servletPath + BaseConstant.CONNECTOR_UNDERLINE + ParamUtil.buildParam(getReqVo(request)));
                 if (obj != null) {
-                    HttpServletResponse httpResponse = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+                    HttpServletResponse httpResponse = SpringBeanUtil.getHttpServletResponse();
                     httpResponse.setContentType("application/json;charset=utf-8");
                     httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
                     String json = JsonUtil.t2JsonString(obj);

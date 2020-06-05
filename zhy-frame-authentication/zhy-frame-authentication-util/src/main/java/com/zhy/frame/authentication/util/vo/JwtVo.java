@@ -61,5 +61,9 @@ public class JwtVo implements Serializable {
      * 系统编号
      */
     private String sysId;
+    /**
+     * 租户id
+     */
+    private String tenantId;
 
 }

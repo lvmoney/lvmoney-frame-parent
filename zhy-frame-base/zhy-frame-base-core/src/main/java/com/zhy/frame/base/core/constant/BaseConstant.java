@@ -234,4 +234,13 @@ public class BaseConstant {
      */
     public static final boolean API_URL_ENCODE = true;
 
+    /**
+     * 空格占位符
+     */
+    public static final String PLACEHOLDER_BLANK_SPACE = "\u0009";
+    /**
+     * 换行符
+     */
+    public static final String PLACEHOLDER_WARP_SPACE = "\n";
+
 }

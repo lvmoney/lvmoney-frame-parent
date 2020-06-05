@@ -29,6 +29,11 @@ public class DictionariesInfo extends Model<DictionariesInfo> {
     private String name;
 
     /**
+     * 名字
+     */
+    private String tenant_id;
+
+    /**
      * 组code
      */
 

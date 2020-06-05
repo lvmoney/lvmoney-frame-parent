@@ -10,7 +10,7 @@ package com.zhy.frame.route.gateway.filter;/**
 import com.zhy.frame.authentication.api.ao.ShiroCheckAo;
 import com.zhy.frame.authentication.api.vo.JwtCheckVo;
 import com.zhy.frame.authentication.api.vo.ShiroCheckVo;
-import com.zhy.frame.authentication.util.service.UserCommonService;
+import com.zhy.frame.authentication.service.service.UserCommonService;
 import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;

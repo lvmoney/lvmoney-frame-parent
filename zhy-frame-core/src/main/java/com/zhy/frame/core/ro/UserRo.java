@@ -38,6 +38,10 @@ public class UserRo implements Serializable {
      */
     private String sysId;
     /**
+     * 租户id
+     */
+    private String tenantId;
+    /**
      * new 拓展字段存储为序列化后的json
      */
     private String other;

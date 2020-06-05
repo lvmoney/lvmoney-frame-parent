@@ -69,7 +69,7 @@ public class SimpleCanalClient extends AbstractCanalClient {
 
     @Override
     protected void process(CanalConnector connector, Map.Entry<String, CanalProp.Instance> config) {
-//		executor.submit(factory.newTransponder(connector, config, listeners, annoListeners));
+//		executor.submit(factory.newTransponder(connector, handler, listeners, annoListeners));
         executorService.submit(factory.newTransponder(connector, config, listeners, annoListeners));
     }
 

@@ -1,6 +1,6 @@
 package com.zhy.frame.cloud.base.config;/**
  * 描述:
- * 包名:com.zhy.k8s.base.config
+ * 包名:com.zhy.k8s.base.handler
  * 版本信息: 版本1.0
  * 日期:2019/10/16
  * Copyright XXXXXX科技有限公司

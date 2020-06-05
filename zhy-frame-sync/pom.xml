@@ -14,6 +14,7 @@
     <modules>
         <module>zhy-frame-sync-common</module>
         <module>zhy-frame-sync-canal</module>
+        <module>zhy-frame-sync-netty</module>
     </modules>
 
 

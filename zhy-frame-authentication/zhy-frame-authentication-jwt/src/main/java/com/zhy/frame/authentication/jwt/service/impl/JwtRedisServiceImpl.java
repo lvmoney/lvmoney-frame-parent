@@ -17,7 +17,7 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.github.dozermapper.core.Mapper;
 import com.zhy.frame.authentication.common.exception.AuthorityException;
-import com.zhy.frame.authentication.util.service.UserCommonService;
+import com.zhy.frame.authentication.service.service.UserCommonService;
 import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.authentication.util.vo.JwtVo;
 import com.zhy.frame.base.core.exception.BusinessException;

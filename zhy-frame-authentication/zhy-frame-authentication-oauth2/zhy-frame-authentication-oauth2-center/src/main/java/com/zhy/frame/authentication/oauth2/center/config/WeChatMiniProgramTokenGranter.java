@@ -1,4 +1,4 @@
-package com.zhy.frame.authentication.oauth2.center.config;//package com.zhy.frame.authentication.oauth2.center.config;
+package com.zhy.frame.authentication.oauth2.center.config;//package com.zhy.frame.authentication.oauth2.center.handler;
 //
 //import com.fasterxml.jackson.core.type.TypeReference;
 //import com.zhy.frame.authentication.oauth2.center.db.dao.ThirdPartyAccountDao;

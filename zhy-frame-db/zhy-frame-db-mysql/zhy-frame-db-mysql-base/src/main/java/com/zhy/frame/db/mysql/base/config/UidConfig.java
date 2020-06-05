@@ -1,6 +1,6 @@
 package com.zhy.frame.db.mysql.base.config;/**
  * 描述:
- * 包名:com.zhy.platform.member.info.config
+ * 包名:com.zhy.platform.member.info.handler
  * 版本信息: 版本1.0
  * 日期:2020/1/20
  * Copyright XXXXXX科技有限公司

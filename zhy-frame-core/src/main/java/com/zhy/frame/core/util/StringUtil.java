@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.zhy.frame.base.core.constant.BaseConstant.PLACEHOLDER_BLANK_SPACE;
+
 /**
  * @describe：
  * @author: lvmoney /xxxx科技有限公司
@@ -32,10 +34,6 @@ public class StringUtil extends StringUtils {
      * 空格 split
      */
     private static final String SPLIT_BLANK_SPACE = "\\s+";
-    /**
-     * 空格占位符
-     */
-    private static final String PLACEHOLDER_BLANK_SPACE = "\u0009";
     /**
      * 16进制长度
      */

@@ -32,12 +32,12 @@ public class RedisConfig extends CachingConfigurerSupport {
     /**
      * 是否支持Listener
      */
-    @Value("${frame.redis.listener.support:false}")
+    @Value("${frame.redis.handler.support:false}")
     private boolean supportListener;
     /**
      * 监听类型默认为过期
      */
-    @Value("${frame.redis.listener.type:expired}")
+    @Value("${frame.redis.handler.type:expired}")
     private String listenerType;
 
     /**

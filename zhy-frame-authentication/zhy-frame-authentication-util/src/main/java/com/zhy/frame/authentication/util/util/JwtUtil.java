@@ -30,10 +30,6 @@ import java.util.Map;
 
 public class JwtUtil {
     /**
-     * 默认时间戳长度
-     */
-    private static final int DEFAULT_TIMESTAMP_LENGTH = 13;
-    /**
      * 算法
      */
     private static final String JWT_ALG = "HS256";
@@ -49,6 +45,11 @@ public class JwtUtil {
      * key sysId
      */
     private static final String KEY_SYS_ID = "sysId";
+
+    /**
+     * key 租户
+     */
+    private static final String KEY_TENANT_ID = "tenantId";
     /**
      * key iss
      */
@@ -98,22 +99,20 @@ public class JwtUtil {
     public static String getToken(JwtVo jwtVo) {
         String password = jwtVo.getPassword();
         String sysId = jwtVo.getSysId();
+        String tenantId = jwtVo.getTenantId();
         Map<String, Object> map = new HashMap(BaseConstant.MAP_DEFAULT_SIZE);
         map.put(KEY_ALG, JWT_ALG);
         map.put(KEY_TYP, JWT_TYPE);
         Date iatDate = new Date();
-        Long millisecond = iatDate.getTime();
         String userId = jwtVo.getUserId();
-        Long expire = millisecond + jwtVo.getExp();
         String token = JWT.create().withHeader(map)
                 .withClaim(KEY_SYS_ID, sysId)
                 .withClaim(KEY_USER_ID, userId)
+                .withClaim(KEY_TENANT_ID, tenantId)
                 .withClaim(KEY_ISS, jwtVo.getIss())
                 .withClaim(KEY_AUD, jwtVo.getAud())
                 .withClaim(KEY_JTI, jwtVo.getJti())
                 .withIssuedAt(iatDate)
-                //使用redis的失效机制，不在内存中
-                //.withExpiresAt(new Date(expire))
                 .withIssuer(userId)
                 .sign(Algorithm.HMAC256(password));
         return token;
@@ -160,9 +159,11 @@ public class JwtUtil {
         String verifyToken = getRealToken(token);
         String userId = JWT.decode(verifyToken).getClaim(KEY_USER_ID).asString();
         String sysId = JWT.decode(verifyToken).getClaim(KEY_SYS_ID).asString();
+        String tenantId = JWT.decode(verifyToken).getClaim(KEY_TENANT_ID).asString();
         UserVo userVo = new UserVo();
         userVo.setSysId(sysId);
         userVo.setUserId(userId);
+        userVo.setTenantId(tenantId);
         return userVo;
     }
 
@@ -171,6 +172,7 @@ public class JwtUtil {
         jwtVo.setPassword("1212");
         jwtVo.setUserId("1212");
         jwtVo.setSysId("AAA");
+        jwtVo.setTenantId("123");
         jwtVo.setExp(18000L);
         String token2 = getToken(jwtVo);
         System.out.println(token2);

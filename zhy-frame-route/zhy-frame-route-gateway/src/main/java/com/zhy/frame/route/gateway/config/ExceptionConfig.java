@@ -1,6 +1,6 @@
 package com.zhy.frame.route.gateway.config;/**
  * 描述:
- * 包名:com.zhy.frame.route.gateway.config
+ * 包名:com.zhy.frame.route.gateway.handler
  * 版本信息: 版本1.0
  * 日期:2020/3/14
  * Copyright XXXXXX科技有限公司

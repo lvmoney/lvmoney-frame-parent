@@ -1,11 +1,11 @@
 package com.zhy.frame.authentication.shiro.filter;
 
 import com.zhy.frame.authentication.common.exception.AuthorityException;
+import com.zhy.frame.authentication.service.service.UserCommonService;
 import com.zhy.frame.authentication.shiro.constant.ShiroConstant;
 import com.zhy.frame.authentication.shiro.properties.ShiroConfigProp;
 import com.zhy.frame.authentication.shiro.service.ShiroRedisService;
 import com.zhy.frame.authentication.shiro.vo.ShiroUriVo;
-import com.zhy.frame.authentication.util.service.UserCommonService;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.ExceptionType;

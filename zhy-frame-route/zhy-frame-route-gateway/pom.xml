@@ -11,9 +11,6 @@
 
     <artifactId>zhy-frame-route-gateway</artifactId>
 
-    <properties>
-        <frame.version>1.0-SNAPSHOT</frame.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -34,7 +31,7 @@
                     <artifactId>spring-boot-starter-web</artifactId>
                 </exclusion>
             </exclusions>
-            <version>${frame.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -47,13 +44,13 @@
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-dispatch-feign</artifactId>
-            <version>${frame.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-cache-redis</artifactId>
-            <version>${frame.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
 
@@ -71,7 +68,19 @@
                     <artifactId>zhy-frame-base-serializer</artifactId>
                 </exclusion>
             </exclusions>
-            <version>${frame.version}</version>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-authentication-service</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zhy.frame</groupId>
+                    <artifactId>zhy-frame-base-serializer</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.zhy.frame</groupId>
@@ -82,7 +91,7 @@
                     <artifactId>zhy-frame-base-serializer</artifactId>
                 </exclusion>
             </exclusions>
-            <version>${frame.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
@@ -94,7 +103,7 @@
                     <artifactId>zhy-frame-base-serializer</artifactId>
                 </exclusion>
             </exclusions>
-            <version>${frame.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>

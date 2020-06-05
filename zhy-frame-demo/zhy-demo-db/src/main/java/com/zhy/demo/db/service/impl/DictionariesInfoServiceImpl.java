@@ -20,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class DictionariesInfoServiceImpl extends ServiceImpl<DictionariesInfoDao, DictionariesInfo> implements DictionariesInfoService {
+    @Autowired
+    DictionariesInfoDao dictionariesInfoDao;
+
     @Override
     public void delete(String code) {
         this.removeById(code);
@@ -37,5 +40,11 @@ public class DictionariesInfoServiceImpl extends ServiceImpl<DictionariesInfoDao
     public void errorTest(String code, DictionariesInfo dictionariesInfo) {
         this.delete(code);
         this.add(dictionariesInfo);
+    }
+
+    @Override
+
+    public DictionariesInfo getDataByName(String name) {
+        return dictionariesInfoDao.getDataByName(name);
     }
 }

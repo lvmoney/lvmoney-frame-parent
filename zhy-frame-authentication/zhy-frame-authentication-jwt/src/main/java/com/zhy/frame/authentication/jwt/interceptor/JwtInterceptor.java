@@ -15,7 +15,7 @@ import com.zhy.frame.authentication.jwt.annotation.NotToken;
 import com.zhy.frame.authentication.jwt.constant.JwtConstant;
 import com.zhy.frame.authentication.jwt.properties.JwtConfigProp;
 import com.zhy.frame.authentication.jwt.service.JwtRedisService;
-import com.zhy.frame.authentication.util.service.UserCommonService;
+import com.zhy.frame.authentication.service.service.UserCommonService;
 import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;

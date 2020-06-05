@@ -34,12 +34,12 @@
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-authentication-uri</artifactId>
             <version>${project.parent.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.zhy.frame</groupId>
-                    <artifactId>zhy-frame-base-serializer</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhy.frame</groupId>
+            <artifactId>zhy-frame-authentication-service</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

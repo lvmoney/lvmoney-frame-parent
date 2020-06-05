@@ -48,14 +48,6 @@ public interface CaptchaService {
      */
     ValidateResultVo encodeBase64ImgCode(boolean is2Cache, boolean isDrawLine, int validCodeSize, int fc, int bc, String fontType);
 
-    /**
-     * 获得默认base64后的验证码
-     *
-     * @return: com.zhy.captcha.vo.ValidateResultVo
-     * @author: lvmoney /四川******科技有限公司
-     * @date: 2019/9/9 19:56
-     */
-    ValidateResultVo encodeBase64ImgCode();
 
     /**
      * 获得验证码

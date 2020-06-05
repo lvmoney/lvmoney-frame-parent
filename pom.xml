@@ -692,12 +692,6 @@
                 <version>${revengemission.captcha.verion}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.github.penggle</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${penggle.kaptcha.version}</version>
-            </dependency>
-
 
             <dependency>
                 <groupId>org.redisson</groupId>

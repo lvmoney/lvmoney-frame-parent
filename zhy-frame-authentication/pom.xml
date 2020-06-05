@@ -21,6 +21,7 @@
         <module>zhy-frame-authentication-util</module>
         <module>zhy-frame-authentication-api</module>
         <module>zhy-frame-authentication-cloud</module>
+        <module>zhy-frame-authentication-service</module>
     </modules>
 
 

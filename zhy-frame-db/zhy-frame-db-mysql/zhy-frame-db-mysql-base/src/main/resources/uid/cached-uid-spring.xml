@@ -33,7 +33,7 @@
 
     </bean>
 
-    <!-- Import mybatis config -->
+    <!-- Import mybatis handler -->
     <!--<import resource="classpath:/uid/mybatis-spring.xml" />-->
 
 </beans>

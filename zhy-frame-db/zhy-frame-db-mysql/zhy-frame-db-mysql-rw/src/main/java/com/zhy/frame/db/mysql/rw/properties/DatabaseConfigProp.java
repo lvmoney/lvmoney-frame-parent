@@ -22,7 +22,7 @@ import java.util.List;
  * @version:v1.0 2019/9/6 16:17
  */
 @Data
-@ConfigurationProperties(prefix = "frame.config")
+@ConfigurationProperties(prefix = "frame.handler")
 @Component
 public class DatabaseConfigProp {
     private List<DatabaseConfig> database;

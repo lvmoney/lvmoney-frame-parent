@@ -51,7 +51,10 @@ public class DictionariesInfoController {
         d.setSysStatus(1);
         d.setUpdateUid("1");
         d.setCreateUid("1");
-        dictionariesInfoService.saveOrUpdate(d);
+//        dictionariesInfoService.saveOrUpdate(d);
+
+//        dictionariesInfoService.getById("test");
+        dictionariesInfoService.getDataByName("test");
         return "succ";
     }
 

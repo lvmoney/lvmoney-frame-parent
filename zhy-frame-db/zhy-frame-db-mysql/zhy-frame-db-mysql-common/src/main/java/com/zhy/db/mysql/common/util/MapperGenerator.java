@@ -2,11 +2,11 @@ package com.zhy.db.mysql.common.util;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 //import com.baomidou.mybatisplus.generator.AutoGenerator;
-//import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-//import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-//import com.baomidou.mybatisplus.generator.config.PackageConfig;
-//import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-//import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+//import com.baomidou.mybatisplus.generator.handler.DataSourceConfig;
+//import com.baomidou.mybatisplus.generator.handler.GlobalConfig;
+//import com.baomidou.mybatisplus.generator.handler.PackageConfig;
+//import com.baomidou.mybatisplus.generator.handler.StrategyConfig;
+//import com.baomidou.mybatisplus.generator.handler.rules.NamingStrategy;
 //import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 /**

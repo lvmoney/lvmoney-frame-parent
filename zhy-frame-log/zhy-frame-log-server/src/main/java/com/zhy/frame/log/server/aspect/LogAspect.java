@@ -12,6 +12,7 @@ import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.util.SupportUtil;
+import com.zhy.frame.core.util.SpringBeanUtil;
 import com.zhy.frame.log.common.exception.LogException;
 import com.zhy.frame.log.server.annotation.ControllerLog;
 import com.zhy.frame.log.server.annotation.NotLog;
@@ -32,8 +33,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodMapping;
 
@@ -95,7 +94,7 @@ public class LogAspect {
         }
 
         //获取session中的用户
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = SpringBeanUtil.getHttpServletRequest();
         Object object = abstractHandlerMethodMapping.getHandler(request).getHandler();
         HandlerMethod handlerMethod = (HandlerMethod) object;
         Method method = handlerMethod.getMethod();

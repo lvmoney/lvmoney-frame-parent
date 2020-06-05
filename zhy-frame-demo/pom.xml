@@ -28,11 +28,12 @@
         <module>zhy-demo-skywalking</module>
         <module>zhy-demo-cache</module>
         <module>zhy-demo-caffeine</module>
+        <module>zhy-demo-rabbitmq</module>
+        <module>zhy-demo-video</module>
     </modules>
 
 
     <properties>
-        <frame.version>1.0-SNAPSHOT</frame.version>
         <java.version>1.8</java.version>
         <maven.compiler.vesion>3.6.0</maven.compiler.vesion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,32 +44,32 @@
             <dependency>
                 <groupId>com.zhy.frame</groupId>
                 <artifactId>zhy-frame-core</artifactId>
-                <version>${frame.version}</version>
+                <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zhy.frame</groupId>
                 <artifactId>zhy-frame-authentication-jwt</artifactId>
-                <version>${frame.version}</version>
+                <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zhy.frame</groupId>
                 <artifactId>zhy-frame-authentication-shiro</artifactId>
-                <version>${frame.version}</version>
+                <version>${project.parent.version}</version>
             </dependency>
 
 
             <dependency>
                 <groupId>com.zhy.frame</groupId>
                 <artifactId>zhy-frame-db-mysql-common</artifactId>
-                <version>${frame.version}</version>
+                <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zhy.frame</groupId>
                 <artifactId>zhy-frame-config-client</artifactId>
-                <version>${frame.version}</version>
+                <version>${project.parent.version}</version>
             </dependency>
 
         </dependencies>

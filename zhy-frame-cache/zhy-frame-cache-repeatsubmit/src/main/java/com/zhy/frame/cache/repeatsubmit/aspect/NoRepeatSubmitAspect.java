@@ -19,6 +19,7 @@ import com.zhy.frame.cache.repeatsubmit.enums.NoRepeatSubmitEnum;
 import com.zhy.frame.cache.repeatsubmit.properties.RepeatSubmitConfigProp;
 import com.zhy.frame.core.util.FilterMapUtil;
 import com.zhy.frame.core.util.SignUtil;
+import com.zhy.frame.core.util.SpringBeanUtil;
 import com.zhy.frame.core.vo.SignVo;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -28,8 +29,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodMapping;
 
@@ -108,7 +107,7 @@ public class NoRepeatSubmitAspect {
 
 
         //获取session中的用户
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = SpringBeanUtil.getHttpServletRequest();
         String servletPath = request.getServletPath();
         Map<String, String> filterChainDefinition = repeatSubmitConfigProp.getFilterChainDefinitionMap();
         if (filterChainDefinition != null && FilterMapUtil.wildcardMatchMapKey(filterChainDefinition, servletPath, RepeatSubmitConstant.REPEAT_SUBMIT_REQUEST_IGNORE)) {

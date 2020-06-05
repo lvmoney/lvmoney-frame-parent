@@ -1,6 +1,6 @@
 package com.zhy.frame.ops.fuse.sentinel.client.config;/**
  * 描述:
- * 包名:com.zhy.frame.ops.fuse.sentinel.client.config
+ * 包名:com.zhy.frame.ops.fuse.sentinel.client.handler
  * 版本信息: 版本1.0
  * 日期:2020/4/11
  * Copyright XXXXXX科技有限公司
