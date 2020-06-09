@@ -7,6 +7,7 @@ package com.zhy.frame.serverless.faas.application;/**
  */
 
 
+import com.zhy.frame.core.util.SpringBeanUtil;
 import com.zhy.frame.serverless.faas.vo.Foo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
