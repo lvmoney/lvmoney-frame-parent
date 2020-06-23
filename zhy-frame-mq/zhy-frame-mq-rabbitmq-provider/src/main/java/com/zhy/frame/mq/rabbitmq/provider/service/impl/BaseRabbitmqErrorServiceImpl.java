@@ -8,7 +8,7 @@ package com.zhy.frame.mq.rabbitmq.provider.service.impl;/**
 
 
 import com.zhy.frame.cache.redis.service.BaseRedisService;
-import com.zhy.frame.mq.common.annation.MqService;
+import com.zhy.frame.mq.common.annotations.MqService;
 import com.zhy.frame.mq.common.constant.MqConstant;
 import com.zhy.frame.mq.common.ro.ErrorRecordRo;
 import com.zhy.frame.mq.rabbitmq.provider.service.BaseRabbitmqErrorService;

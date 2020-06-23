@@ -151,7 +151,7 @@ public class PinyinUtil {
                 try {
                     pybf.append(PinyinHelper.toHanyuPinyinStringArray(arr[i], defaultFormat)[0]);
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    LOGGER.error("汉语拼音全拼报错:{}", e.getMessage());
+                    LOGGER.error("汉语拼音全拼报错:{}", e);
                 }
             } else {
                 pybf.append(arr[i]);
@@ -187,7 +187,7 @@ public class PinyinUtil {
                         pybf.append(temp[0].charAt(0));
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    LOGGER.error("获取汉字拼音首字母报错:{}", e.getMessage());
+                    LOGGER.error("获取汉字拼音首字母报错:{}", e);
                 }
             } else {
                 pybf.append(arr[i]);
@@ -380,7 +380,7 @@ public class PinyinUtil {
                         pybf.append(t[0].charAt(0));
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    LOGGER.error("获取汉字串拼音首字母，英文字符不变报错:{}", e.getMessage());
+                    LOGGER.error("获取汉字串拼音首字母，英文字符不变报错:{}", e);
                 }
             } else {
                 pybf.append(arr[i]);
@@ -409,7 +409,7 @@ public class PinyinUtil {
                 try {
                     pybf.append(PinyinHelper.toHanyuPinyinStringArray(arr[i], defaultFormat)[0]);
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    LOGGER.error("获取汉字串拼音，英文字符不变报错:{}", e.getMessage());
+                    LOGGER.error("获取汉字串拼音，英文字符不变报错:{}", e);
                 }
             } else {
                 pybf.append(arr[i]);
@@ -448,7 +448,7 @@ public class PinyinUtil {
                         }
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    LOGGER.error("汉字转换位汉语拼音首字母报错:{}", e.getMessage());
+                    LOGGER.error("汉字转换位汉语拼音首字母报错:{}", e);
                 }
             } else {
                 pinyinName.append(nameChar[i]);
@@ -487,7 +487,7 @@ public class PinyinUtil {
                         }
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    LOGGER.error("汉字转换位汉语全拼:{}", e.getMessage());
+                    LOGGER.error("汉字转换位汉语全拼:{}", e);
 
                 }
             } else {

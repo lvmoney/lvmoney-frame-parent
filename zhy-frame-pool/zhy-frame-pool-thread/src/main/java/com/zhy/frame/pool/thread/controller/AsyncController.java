@@ -177,7 +177,7 @@ public class AsyncController {
 
         }, Executors.newFixedThreadPool(5)).whenCompleteAsync((result, throwable) -> {
             if (throwable != null) {
-                deferredResult.setErrorResult(throwable.getMessage());
+                deferredResult.setErrorResult(throwable);
             } else {
                 deferredResult.setResult(result);
             }

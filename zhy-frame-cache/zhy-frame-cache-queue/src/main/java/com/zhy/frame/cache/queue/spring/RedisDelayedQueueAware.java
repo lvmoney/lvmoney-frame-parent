@@ -86,16 +86,13 @@ public class RedisDelayedQueueAware implements ApplicationContextAware {
         RedisDelayedQueuePool exec = new RedisDelayedQueuePool();
         exec.init(corePoolSize, maxPoolSize, keepAliveTime, capacity);
         ExecutorService pool = exec.getRedisDelayedQueuePool();
-        pool.execute(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        T t = blockingFairQueue.take();
-                        redisDelayedQueueListener.receive((MessageVo) t);
-                    } catch (Exception e) {
-                        LOGGER.info("监听队列线程错误{}", e.getMessage());
-                    }
+        pool.execute(() -> {
+            while (true) {
+                try {
+                    T t = blockingFairQueue.take();
+                    redisDelayedQueueListener.receive((MessageVo) t);
+                } catch (Exception e) {
+                    LOGGER.info("监听队列线程错误{}", e);
                 }
             }
         });

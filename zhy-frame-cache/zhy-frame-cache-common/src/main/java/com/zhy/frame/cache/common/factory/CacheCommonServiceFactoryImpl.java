@@ -7,7 +7,7 @@ package com.zhy.frame.cache.common.factory;/**
  */
 
 
-import com.zhy.frame.cache.common.annation.CacheService;
+import com.zhy.frame.cache.common.annotations.CacheService;
 import com.zhy.frame.cache.common.service.CacheCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

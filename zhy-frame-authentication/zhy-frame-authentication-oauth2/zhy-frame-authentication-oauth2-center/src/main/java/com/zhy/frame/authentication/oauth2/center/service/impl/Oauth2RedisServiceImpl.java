@@ -44,7 +44,7 @@ public class Oauth2RedisServiceImpl implements Oauth2RedisService {
             });
             return baseClientDetails;
         } catch (Exception e) {
-            LOGGER.error("通过clientId获得oauth2客户端详情信息报错:{}", e.getMessage());
+            LOGGER.error("通过clientId获得oauth2客户端详情信息报错:{}", e);
             return null;
         }
     }

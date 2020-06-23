@@ -13,8 +13,9 @@ import com.zhy.frame.cloud.base.enums.*;
 import com.zhy.frame.cloud.base.properties.RpcServerConfigProp;
 import com.zhy.frame.cloud.base.service.YamlService;
 import com.zhy.frame.cloud.base.util.PomUtil;
-import com.zhy.frame.cloud.base.util.YamlUtil;
+import com.zhy.frame.core.util.YamlUtil;
 import com.zhy.frame.cloud.base.vo.jyaml.*;
+import com.zhy.frame.core.vo.YamlBuildVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.zhy.frame.base.core.constant.BaseConstant.DASH_LINE;
 
 /**
  * @describe：
@@ -178,7 +181,7 @@ public class YamlServiceImpl implements YamlService {
         deployment.setApiVersion(ApiVersion.appsv1.getValue());
         deployment.setKind(YamlKind.Deployment.getValue());
         Metadata dMetadata = new Metadata();
-        dMetadata.setName(applicationName + "-" + version);
+        dMetadata.setName(applicationName + DASH_LINE + version);
         dMetadata.setNamespace(istioNamespace);
         Labels meLabels = new Labels();
         meLabels.setVersion(version);
@@ -389,7 +392,7 @@ public class YamlServiceImpl implements YamlService {
     public Prometheus buildPrometheus() {
         Prometheus prometheus = new Prometheus();
         PrometheusJob prometheusJob = new PrometheusJob();
-        prometheusJob.setJob_name(applicationName + "-" + PROMETHEUS_SUFFIX);
+        prometheusJob.setJob_name(applicationName + DASH_LINE + PROMETHEUS_SUFFIX);
         prometheus.setScrape_configs(new ArrayList() {{
             add(prometheusJob);
         }});
@@ -469,12 +472,12 @@ public class YamlServiceImpl implements YamlService {
             iDeploy.add(this.buildService());
             iDeploy.add(this.buildDeployment());
         }
-        YamlBuild yamlBuild = new YamlBuild();
-        yamlBuild.setCover(yamlCover);
-        yamlBuild.setData(iDeploy);
-        yamlBuild.setPath(CloudBaseConstant.YAML_FILE_PATH);
-        yamlBuild.setName(version + "-" + YamlType.IDeploy.getValue() + "-" + applicationName + CloudBaseConstant.YAML_SUFFIX);
-        YamlUtil.buildYaml(yamlBuild);
+        YamlBuildVo yamlBuildVo = new YamlBuildVo();
+        yamlBuildVo.setCover(yamlCover);
+        yamlBuildVo.setData(iDeploy);
+        yamlBuildVo.setPath(CloudBaseConstant.YAML_FILE_PATH);
+        yamlBuildVo.setName(version + DASH_LINE + YamlType.IDeploy.getValue() + DASH_LINE + applicationName + CloudBaseConstant.YAML_SUFFIX);
+        YamlUtil.buildYaml(yamlBuildVo);
     }
 
     @Override
@@ -486,24 +489,24 @@ public class YamlServiceImpl implements YamlService {
         iDeploy.add(this.buildGateway());
         iDeploy.add(this.buildVirtualService());
         iDeploy.add(this.buildDestinationRule());
-        YamlBuild yamlBuild = new YamlBuild();
-        yamlBuild.setCover(yamlCover);
-        yamlBuild.setData(iDeploy);
-        yamlBuild.setPath(CloudBaseConstant.YAML_FILE_PATH);
-        yamlBuild.setName(ALL_PREFIX + "-" + YamlType.IGateway.getValue() + "-" + applicationName + CloudBaseConstant.YAML_SUFFIX);
-        YamlUtil.buildYaml(yamlBuild);
+        YamlBuildVo yamlBuildVo = new YamlBuildVo();
+        yamlBuildVo.setCover(yamlCover);
+        yamlBuildVo.setData(iDeploy);
+        yamlBuildVo.setPath(CloudBaseConstant.YAML_FILE_PATH);
+        yamlBuildVo.setName(ALL_PREFIX + DASH_LINE + YamlType.IGateway.getValue() + DASH_LINE + applicationName + CloudBaseConstant.YAML_SUFFIX);
+        YamlUtil.buildYaml(yamlBuildVo);
     }
 
     @Override
     public void createPrometheus() {
         List<Object> iPrometheus = new ArrayList<>();
         iPrometheus.add(this.buildPrometheus());
-        YamlBuild yamlBuild = new YamlBuild();
-        yamlBuild.setCover(yamlCover);
-        yamlBuild.setData(iPrometheus);
-        yamlBuild.setPath(CloudBaseConstant.YAML_FILE_PATH);
-        yamlBuild.setName(PART_PREFIX + "-" + YamlType.IPrometheus.getValue() + "-" + applicationName + CloudBaseConstant.YAML_SUFFIX);
-        YamlUtil.buildYaml(yamlBuild);
+        YamlBuildVo yamlBuildVo = new YamlBuildVo();
+        yamlBuildVo.setCover(yamlCover);
+        yamlBuildVo.setData(iPrometheus);
+        yamlBuildVo.setPath(CloudBaseConstant.YAML_FILE_PATH);
+        yamlBuildVo.setName(PART_PREFIX + DASH_LINE + YamlType.IPrometheus.getValue() + DASH_LINE + applicationName + CloudBaseConstant.YAML_SUFFIX);
+        YamlUtil.buildYaml(yamlBuildVo);
     }
 
 

@@ -9,7 +9,7 @@
 package com.zhy.frame.mq.common.factory;
 
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.mq.common.annation.CustomerService;
+import com.zhy.frame.mq.common.annotations.CustomerService;
 import com.zhy.frame.mq.common.exception.MqException;
 import com.zhy.frame.mq.common.service.MqDataHandService;
 import com.zhy.frame.mq.common.vo.MessageVo;

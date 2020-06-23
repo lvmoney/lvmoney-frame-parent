@@ -12,7 +12,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.revengemission.commons.captcha.core.VerificationCodeUtil;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.util.JsonUtil;
-import com.zhy.frame.cache.common.annation.CacheImpl;
+import com.zhy.frame.cache.common.annotations.CacheImpl;
 import com.zhy.frame.cache.common.service.CacheCommonService;
 import com.zhy.frame.captcha.common.exception.CaptchaException;
 import com.zhy.frame.captcha.common.ro.ValidateCodeRo;
@@ -162,7 +162,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         try {
             boolean flag = ImageIO.write(codeImg, "JPEG", out);
         } catch (IOException e) {
-            LOGGER.error("生成验证码报错:{}", e.getMessage());
+            LOGGER.error("生成验证码报错:{}", e);
             throw new BusinessException(CaptchaException.Proxy.VALID_CODE_ERROR);
         }
         ValidateResultVo validateResultVo = new ValidateResultVo();
@@ -192,7 +192,7 @@ public class CaptchaServiceImpl implements CaptchaService {
             String base64EncodedGraph = VerificationCodeUtil.outputImage(width, height, captcha);
             validateResultVo.setCode(base64EncodedGraph);
         } catch (IOException e) {
-            LOGGER.error("获得验证码报错:{}", e.getMessage());
+            LOGGER.error("获得验证码报错:{}", e);
         }
         SnowflakeIdFactoryUtil idWorker = new SnowflakeIdFactoryUtil(1, 2);
         String serialNumber = String.valueOf(idWorker.nextId());

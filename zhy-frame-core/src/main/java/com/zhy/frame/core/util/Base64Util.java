@@ -83,7 +83,7 @@ public class Base64Util {
         try {
             return b != null ? (new String(b, BaseConstant.CHARACTER_ENCODE_UTF8_UPPER)) : null;
         } catch (UnsupportedEncodingException e) {
-            LOGGER.error("base解密报错{}", e.getMessage());
+            LOGGER.error("base解密报错{}", e);
             throw new BusinessException(CommonException.Proxy.BASE64_ENCODING_ERROR);
         }
     }

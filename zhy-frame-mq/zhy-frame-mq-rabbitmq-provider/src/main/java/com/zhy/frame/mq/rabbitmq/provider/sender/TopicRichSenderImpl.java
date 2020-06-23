@@ -8,7 +8,7 @@ package com.zhy.frame.mq.rabbitmq.provider.sender;/**
 
 
 import com.zhy.frame.base.core.util.JsonUtil;
-import com.zhy.frame.mq.common.annation.MqService;
+import com.zhy.frame.mq.common.annotations.MqService;
 import com.zhy.frame.mq.common.constant.MqConstant;
 import com.zhy.frame.mq.common.ro.ErrorRecordRo;
 import com.zhy.frame.mq.common.service.MqSendService;

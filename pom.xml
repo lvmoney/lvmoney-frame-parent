@@ -38,6 +38,8 @@
         <module>zhy-frame-strategy</module>
         <module>zhy-frame-serverless</module>
         <module>zhy-frame-sidecar</module>
+        <module>zhy-frame-autocode</module>
+        <module>zhy-frame-archetype</module>
     </modules>
 
     <distributionManagement>
@@ -185,6 +187,7 @@
         <activiti.version>6.0.0</activiti.version>
         <maven-surefire-plugin.version>2.12.4</maven-surefire-plugin.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+        <yaml.jackson.version>2.11.0</yaml.jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -1081,6 +1084,18 @@
                 <groupId>com.github.ben-manes.caffeine</groupId>
                 <artifactId>caffeine</artifactId>
                 <version>${caffeine.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${yaml.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-properties</artifactId>
+                <version>${yaml.jackson.version}</version>
             </dependency>
 
         </dependencies>

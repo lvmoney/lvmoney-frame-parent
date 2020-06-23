@@ -8,7 +8,7 @@ package com.zhy.frame.cache.queue.service.impl;/**
 
 
 import com.zhy.frame.base.core.util.JsonUtil;
-import com.zhy.frame.cache.queue.annation.QueueImpl;
+import com.zhy.frame.cache.queue.annotations.QueueImpl;
 import com.zhy.frame.cache.queue.service.RedisDelayedQueueService;
 import com.zhy.frame.cache.queue.vo.MessageVo;
 

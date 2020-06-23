@@ -54,14 +54,14 @@ public class FileUtil {
             try {
                 ins = file.getInputStream();
             } catch (IOException e) {
-                LOGGER.error("获取文件的inputStream报错:{}", e.getMessage());
+                LOGGER.error("获取文件的inputStream报错:{}", e);
             }
             toFile = new File(file.getOriginalFilename());
             inputStreamToFile(ins, toFile);
             try {
                 ins.close();
             } catch (IOException e) {
-                LOGGER.error("关闭文件的inputStream报错:{}", e.getMessage());
+                LOGGER.error("关闭文件的inputStream报错:{}", e);
             }
         }
         return toFile;
@@ -100,7 +100,7 @@ public class FileUtil {
             os.close();
             ins.close();
         } catch (Exception e) {
-            LOGGER.error("inputstream 转 file报错:{}", e.getMessage());
+            LOGGER.error("inputstream 转 file报错:{}", e);
             throw new BusinessException(CommonException.Proxy.FILE_INPUTSTREAM2FILE_ERROR);
         }
     }
@@ -152,20 +152,20 @@ public class FileUtil {
             bos = new BufferedOutputStream(fos);
             bos.write(buf);
         } catch (Exception e) {
-            LOGGER.error("流转换成文件报错:{}", e.getMessage());
+            LOGGER.error("流转换成文件报错:{}", e);
         } finally {
             if (bos != null) {
                 try {
                     bos.close();
                 } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e.getMessage());
+                    LOGGER.error("流转换成文件报错:{}", e);
                 }
             }
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e.getMessage());
+                    LOGGER.error("流转换成文件报错:{}", e);
                 }
             }
         }
@@ -187,9 +187,9 @@ public class FileUtil {
             bos.close();
             buffer = bos.toByteArray();
         } catch (FileNotFoundException e) {
-            LOGGER.error("文件转成成流报错:{}", e.getMessage());
+            LOGGER.error("文件转成成流报错:{}", e);
         } catch (IOException e) {
-            LOGGER.error("文件转成成流报错:{}", e.getMessage());
+            LOGGER.error("文件转成成流报错:{}", e);
         }
         return buffer;
     }
@@ -208,20 +208,20 @@ public class FileUtil {
             bos = new BufferedOutputStream(fos);
             bos.write(buf);
         } catch (Exception e) {
-            LOGGER.error("流转换成文件报错:{}", e.getMessage());
+            LOGGER.error("流转换成文件报错:{}", e);
         } finally {
             if (bos != null) {
                 try {
                     bos.close();
                 } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e.getMessage());
+                    LOGGER.error("流转换成文件报错:{}", e);
                 }
             }
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e.getMessage());
+                    LOGGER.error("流转换成文件报错:{}", e);
                 }
             }
         }
@@ -231,8 +231,9 @@ public class FileUtil {
     /**
      * 大量写入数据.经过测试在resource大小为60M的时候，完成文件的读写在700ms内
      *
-     * @param filename 文件路径/文件名称
-     * @param resource 写入的内容
+     * @param filename   文件路径/文件名称
+     * @param resource   写入的内容
+     * @param appendable 是否写入
      * @return
      * @throws IOException
      */
@@ -240,11 +241,7 @@ public class FileUtil {
 
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 5000000; i++) {
-            sb.append(resource);
-            sb.append("\r\n");
-        }
-
+        sb.append(resource);
         try {
             RandomAccessFile randomAccessFile = new RandomAccessFile(filename, "rw");
             byte[] bytes = sb.toString().getBytes();
@@ -254,7 +251,7 @@ public class FileUtil {
             }
             randomAccessFile.close();
         } catch (Exception e) {
-            LOGGER.error("写文件报错:{}", e.getMessage());
+            LOGGER.error("写文件报错:{}", e);
             return false;
         }
         return true;
@@ -290,7 +287,7 @@ public class FileUtil {
             outFileChannel.close();
             outMappedByteBuffer.flip();
         } catch (Exception e) {
-            LOGGER.error("文件复制失败:{}", e.getMessage());
+            LOGGER.error("文件复制失败:{}", e);
             return false;
         }
         return true;
@@ -334,7 +331,7 @@ public class FileUtil {
             }
 
         } catch (IOException e) {
-            LOGGER.error("读取文件报错:{}", e.getMessage());
+            LOGGER.error("读取文件报错:{}", e);
             return 0L;
         }
         return result;
@@ -510,10 +507,77 @@ public class FileUtil {
             }
             reader.close();
         } catch (Exception ex) {
-            LOGGER.error("从InputStream获得数据报错:{}", ex.getMessage());
+            LOGGER.error("从InputStream获得数据报错:{}", ex);
         }
         return buffer.toString();
     }
 
+
+    /**
+     * 创建文件，可选择是否覆盖
+     *
+     * @param path:
+     * @param cover:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/17 16:36
+     */
+    public static boolean createFile(String path, boolean cover) {
+        File file = new File(path);
+        if (!file.exists()) {
+            return file.mkdirs();
+        } else if (cover) {
+            file.delete();
+            return file.mkdirs();
+        }
+        return true;
+    }
+
+    /**
+     * 删除文件夹及其目录下文件
+     *
+     * @param file:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/18 10:39
+     */
+    public static boolean delFile(File file) {
+        if (!file.exists()) {
+            return false;
+        }
+
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                delFile(f);
+            }
+        }
+        return file.delete();
+    }
+
+    /**
+     * 清空文件夹
+     *
+     * @param file:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/18 10:39
+     */
+    public static boolean clearFile(File file) {
+        if (!file.exists()) {
+            return false;
+        }
+
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                delFile(f);
+            }
+        }
+        return true;
+    }
 
 }

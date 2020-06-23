@@ -14,7 +14,7 @@ import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.GridFSFindIterable;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.zhy.frame.base.core.exception.BusinessException;
-import com.zhy.frame.oss.common.annation.OssService;
+import com.zhy.frame.oss.common.annotations.OssService;
 import com.zhy.frame.oss.common.exception.OssException;
 import com.zhy.frame.oss.common.vo.FileBaseOutVo;
 import com.zhy.frame.oss.common.vo.FileBaseVo;
@@ -82,7 +82,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
             result.setSize(fileSize);
             return result;
         } catch (IOException e) {
-            LOGGER.error("文件名为:{},文件类型为:{},保存文件报错:{}", fileName, contentType, e.getMessage());
+            LOGGER.error("文件名为:{},文件类型为:{},保存文件报错:{}", fileName, contentType, e);
             throw new BusinessException(OssException.Proxy.GRIDFS_SAVE_ERROR);
         }
 
@@ -118,7 +118,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
             result.setFileName(fileName);
             return result;
         } catch (IllegalStateException | IOException e) {
-            LOGGER.error("通过_id{}获得文件报错：{}", fileId, e.getMessage());
+            LOGGER.error("通过_id{}获得文件报错：{}", fileId, e);
             throw new BusinessException(OssException.Proxy.GRIDFS_QUERY_FILE_ERROR);
         }
     }
@@ -149,7 +149,7 @@ public class BaseGridFsServiceImpl extends BaseGridFsService {
                 baseGridFsByteOutVo.setFileName(fileName);
                 result.add(baseGridFsByteOutVo);
             } catch (IllegalStateException | IOException e) {
-                LOGGER.error("通过_id{}获得文件报错：{}", fileId, e.getMessage());
+                LOGGER.error("通过_id{}获得文件报错：{}", fileId, e);
                 throw new BusinessException(OssException.Proxy.GRIDFS_QUERY_FILE_ERROR);
             }
         });

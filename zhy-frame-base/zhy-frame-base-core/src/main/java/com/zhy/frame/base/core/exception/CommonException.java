@@ -4,6 +4,7 @@ package com.zhy.frame.base.core.exception;
 import com.zhy.frame.base.core.enums.ExceptionCodeLevel;
 
 import static com.zhy.frame.base.core.constant.BaseConstant.SUCCESS_DEFAULT_CODE;
+import static com.zhy.frame.base.core.constant.BaseConstant.SUCCESS_DEFAULT_MSG;
 
 /**
  * @describe：路由错误码定义接口
@@ -71,7 +72,7 @@ public interface CommonException {
         /**
          * 成功
          */
-        SUCCESS(SUCCESS_DEFAULT_CODE, "success");
+        SUCCESS(SUCCESS_DEFAULT_CODE, SUCCESS_DEFAULT_MSG);
 
         private int code;
         private String description;
@@ -90,9 +91,5 @@ public interface CommonException {
         public String getDescription() {
             return description;
         }
-
-//                public int getCode(String description){
-//                        Proxy.
-//                }
     }
 }

@@ -24,6 +24,10 @@ public class BaseConstant {
      */
     public static final Integer SUCCESS_DEFAULT_CODE = 20000;
     /**
+     * 默认成功的msg
+     */
+    public static final String SUCCESS_DEFAULT_MSG = "success";
+    /**
      * map默认长度
      */
     public static final Integer MAP_DEFAULT_SIZE = 14;
@@ -116,9 +120,18 @@ public class BaseConstant {
      */
     public static final String BACKSLASH = "/";
     /**
+     * 斜杠
+     */
+    public static final String SLASH = "\\";
+    /**
      * 小数点
      */
     public static final String DECIMAL_POINT = ".";
+
+    /**
+     * replace 小数点
+     */
+    public static final String REPLACE_DECIMAL_POINT = "\\.";
 
     /**
      * 大括号左
@@ -237,10 +250,18 @@ public class BaseConstant {
     /**
      * 空格占位符
      */
-    public static final String PLACEHOLDER_BLANK_SPACE = "\u0009";
+    public static final String PLACEHOLDER_BLANK_SPACE = "\u0020";
     /**
      * 换行符
      */
     public static final String PLACEHOLDER_WARP_SPACE = "\n";
+    /**
+     * 短横线
+     */
+    public static final String DASH_LINE = "-";
+    /**
+     * 分号
+     */
+    public static final String SEMICOLON = ";";
 
 }

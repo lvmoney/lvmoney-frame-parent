@@ -76,7 +76,7 @@ public class IpUtil {
             String localip = ia.getHostAddress();
             return localip;
         } catch (Exception e) {
-            LOGGER.error("获取本机ip地址报错:{}", e.getMessage());
+            LOGGER.error("获取本机ip地址报错:{}", e);
             return BaseConstant.LOCALHOST_IP;
         }
     }

@@ -45,19 +45,6 @@ public class RedisDelayedQueuePool {
                 TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(capacity), new RedisDelayedQueueFactory(), new RedisDelayedQueueFactoryHandler());
     }
 
-    /**
-     * 销毁线程池
-     *
-     * @throws
-     * @return: void
-     * @author: lvmoney /XXXXXX科技有限公司
-     * @date: 2020/5/20 16:33
-     */
-    public void destory() {
-        if (pool != null) {
-            pool.shutdownNow();
-        }
-    }
 
     public ExecutorService getRedisDelayedQueuePool() {
         return this.pool;

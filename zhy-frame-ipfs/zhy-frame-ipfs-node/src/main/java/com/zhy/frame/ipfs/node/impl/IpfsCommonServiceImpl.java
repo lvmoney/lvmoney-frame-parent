@@ -50,7 +50,7 @@ public class IpfsCommonServiceImpl implements IpfsCommonService {
         try {
             merkleNode = ipfsBuilder.build().add(file).get(0);
         } catch (IOException e) {
-            LOGGER.error("保存文件到ipfs报错:{}", e.getMessage());
+            LOGGER.error("保存文件到ipfs报错:{}", e);
             throw new BusinessException(IpfsException.Proxy.IPFS_SAVE_ERROR);
         }
         String hash = merkleNode.hash.toString();
@@ -69,7 +69,7 @@ public class IpfsCommonServiceImpl implements IpfsCommonService {
         try {
             data = ipfsBuilder.build().cat(filePointer);
         } catch (IOException e) {
-            LOGGER.error("从ipfs服务器下载获得文件报错:{}", e.getMessage());
+            LOGGER.error("从ipfs服务器下载获得文件报错:{}", e);
             throw new BusinessException(IpfsException.Proxy.IPFS_GET_ERROR);
         }
         return new FileByteOutVo(data);

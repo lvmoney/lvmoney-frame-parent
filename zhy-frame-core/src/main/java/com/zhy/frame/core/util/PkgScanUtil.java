@@ -253,19 +253,19 @@ public class PkgScanUtil {
                                                             packageName + '.' + className);
                                             onScanClass(clazz);
                                         } catch (ClassNotFoundException e) {
-                                            LOGGER.error("加载类出错:{}", e.getMessage());
+                                            LOGGER.error("加载类出错:{}", e);
                                         }
                                     }
                                 }
                             }
                         }
                     } catch (IOException e) {
-                        LOGGER.error("在扫描用户定义视图时从jar包获取文件出错:{}", e.getMessage());
+                        LOGGER.error("在扫描用户定义视图时从jar包获取文件出错:{}", e);
                     }
                 }
             }
         } catch (IOException e) {
-            LOGGER.error("扫描出错:{}", e.getMessage());
+            LOGGER.error("扫描出错:{}", e);
 
         }
     }
@@ -309,7 +309,7 @@ public class PkgScanUtil {
                             .loadClass(packageName + '.' + className);
                     onScanClass(clazz);
                 } catch (ClassNotFoundException e) {
-                    LOGGER.error("添加用户自定义视图类错误 找不到此类的.class文件:{}", e.getMessage());
+                    LOGGER.error("添加用户自定义视图类错误 找不到此类的.class文件:{}", e);
 
                 }
             }

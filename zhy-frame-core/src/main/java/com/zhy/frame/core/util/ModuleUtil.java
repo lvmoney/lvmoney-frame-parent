@@ -7,6 +7,7 @@ package com.zhy.frame.core.util;/**
  */
 
 
+import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.exception.CommonException;
 import org.slf4j.Logger;
@@ -31,6 +32,8 @@ public class ModuleUtil {
      * replace classes
      */
     private static final String REPLACE_CLASSES = "classes";
+
+    private static final String REPLACE_TEST_CLASSES = "test-";
     /**
      * classpath:
      */
@@ -48,10 +51,10 @@ public class ModuleUtil {
         File path = null;
         try {
             path = new File(ResourceUtils.getURL(CLASSPATH).getPath());
-            String rootPath = path.getPath().replaceAll(REPLACE_TARGET, "").replaceAll(REPLACE_CLASSES, "");
-            return rootPath;
+            String rootPath = path.getPath().replaceAll(REPLACE_TARGET, "").replaceAll(REPLACE_CLASSES, "").replaceAll(REPLACE_TEST_CLASSES, "");
+            return rootPath.substring(0, rootPath.length() - 1);
         } catch (FileNotFoundException e) {
-            LOGGER.error("获取当前module的根目录报错:{}", e.getMessage());
+            LOGGER.error("获取当前module的根目录报错:{}", e);
             throw new BusinessException(CommonException.Proxy.MODULE_ROOT_PATH_ERROR);
         }
 

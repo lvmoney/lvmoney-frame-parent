@@ -15,5 +15,6 @@
         <module>zhy-frame-office-common</module>
         <module>zhy-frame-office-excel</module>
         <module>zhy-frame-office-word</module>
+        <module>zhy-frame-office-pdf</module>
     </modules>
 </project>

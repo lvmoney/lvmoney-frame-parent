@@ -30,7 +30,7 @@ public class ClientAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request,
                        HttpServletResponse response, AccessDeniedException e)
             throws IOException {
-        LOGGER.error("客户端授权失败报错:{}", e.getMessage());
+        LOGGER.error("客户端授权失败报错:{}", e);
         response.setContentType("application/json;charset=UTF-8");
         ApiResult resultData = new ApiResult();
         resultData.setCode(AuthorityException.Proxy.OAUTH2_ACCESS_DENIED_ERROR.getCode());

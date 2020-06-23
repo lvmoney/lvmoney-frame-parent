@@ -1,13 +1,14 @@
 package com.zhy.frame.base.core.exception;
 
 import org.springframework.util.StringUtils;
-
 /**
  * @describe： * 业务异常,所有与具体业务有关的异常统一抛本类或其子类,使用ExceptionType来确定异常代码,提示信息
  * @author: lvmoney /四川******科技有限公司
  * @version:v1.0 2018年12月29日 上午11:18:14
  */
 public class BusinessException extends RuntimeException {
+
+
     private static final long serialVersionUID = -6076037770876023101L;
 
     private Integer code;

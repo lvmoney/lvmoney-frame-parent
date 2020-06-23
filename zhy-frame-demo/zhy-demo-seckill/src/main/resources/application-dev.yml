@@ -1,0 +1,35 @@
+#在这里我没有写driver-class-name: com.mysql.jdbc.Driver这个驱动被弃用了  使用新版com.mysql.cj.jdbc.Driver
+#控制台提示说自动帮我们找相应的驱动，一般无需手动加载，所以我注释掉了
+spring:
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  redis:
+    database: 4
+    port: 6379
+    host: 10.20.128.234
+server:
+  port: 8076
+  tomcat:
+    uri-encoding: UTF-8
+swagger:
+  base:
+    package: com.zhy.frame.demo.seckill.controller
+  contact:
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+redisson:
+  address: redis://10.20.128.234:6379
+  password:
+frame:
+  i18n:
+    support: false
+  swagger:
+    support: true

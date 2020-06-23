@@ -252,7 +252,7 @@ public class HashUtil {
             md.update(toHash.getBytes());
             return md.digest();
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("获得{}SHA-1报错:{}", toHash, e.getMessage());
+            LOGGER.error("获得{}SHA-1报错:{}", toHash, e);
             return null;
         }
     }
@@ -264,7 +264,7 @@ public class HashUtil {
             mac.init(signingKey);
             return mac.doFinal(encryptText.getBytes());
         } catch (Exception e) {
-            LOGGER.error("获得HmacSHA1值报错:{}", e.getMessage());
+            LOGGER.error("获得HmacSHA1值报错:{}", e);
             return null;
         }
     }

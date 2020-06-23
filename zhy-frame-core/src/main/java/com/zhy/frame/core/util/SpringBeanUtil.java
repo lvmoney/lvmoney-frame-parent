@@ -36,9 +36,11 @@ public class SpringBeanUtil implements ApplicationContextAware {
 
     /**
      * 默认构造方法，注入上下文
-     *
-     * @param applicationContext
-     * @return
+     * @param applicationContext:
+     * @return: void
+     * @throws
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/16 14:36
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -48,10 +50,12 @@ public class SpringBeanUtil implements ApplicationContextAware {
     /**
      * 获取 bean
      *
-     * @param clazz
-     * @return
+     * @param clazz:
+     * @throws
+     * @return: T
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/16 14:36
      */
-
     public static <T> T getBean(Class<T> clazz) {
         T obj;
         try {
@@ -67,8 +71,11 @@ public class SpringBeanUtil implements ApplicationContextAware {
     /**
      * 获取 bean 的类型
      *
-     * @param clazz
-     * @return
+     * @param clazz:
+     * @throws
+     * @return: java.util.List<T>
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/16 14:36
      */
     public static <T> List<T> getListBeansOfType(Class<T> clazz) {
         //声明一个结果
@@ -83,12 +90,14 @@ public class SpringBeanUtil implements ApplicationContextAware {
         return map == null ? null : new ArrayList<>(map.values());
     }
 
-
     /**
      * 获取 bean 的类型
      *
-     * @param clazz
-     * @return
+     * @param clazz:
+     * @throws
+     * @return: java.util.Map<java.lang.String, T>
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/16 14:36
      */
     public static <T> Map<String, T> getMapBeansOfType(Class<T> clazz) {
         //声明一个结果
@@ -107,8 +116,11 @@ public class SpringBeanUtil implements ApplicationContextAware {
     /**
      * 获取所有被注解的 bean
      *
-     * @param anno
-     * @return
+     * @param anno:
+     * @throws
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/16 14:35
      */
     public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> anno) {
         Map<String, Object> map;

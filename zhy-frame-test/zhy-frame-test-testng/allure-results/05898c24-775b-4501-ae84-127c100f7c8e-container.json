@@ -1,0 +1,12 @@
+{
+  "uuid": "05898c24-775b-4501-ae84-127c100f7c8e",
+  "name": "com.zhy.frame.test.testng.test.ChannelOrderTest",
+  "children": [
+    "5e7325e7-dece-40df-bf38-576080ca5c70"
+  ],
+  "befores": [],
+  "afters": [],
+  "links": [],
+  "start": 1592441841840,
+  "stop": 1592441841990
+}

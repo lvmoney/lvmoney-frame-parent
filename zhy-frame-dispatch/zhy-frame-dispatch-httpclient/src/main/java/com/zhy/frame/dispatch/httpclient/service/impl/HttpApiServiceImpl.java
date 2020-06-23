@@ -91,7 +91,7 @@ public class HttpApiServiceImpl implements HttpApiService {
             }
         } catch (IOException e) {
             httpGet.abort();
-            LOGGER.error(e.getMessage());
+            LOGGER.error("http get请求报错:{}", e);
         }
         return null;
     }
@@ -180,7 +180,7 @@ public class HttpApiServiceImpl implements HttpApiService {
                     EntityUtils.toString(response.getEntity(), BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
 
         } catch (Exception e) {
-            LOGGER.error("通过httpclient 发送json请求数据报错:{}", e.getMessage());
+            LOGGER.error("通过httpclient 发送json请求数据报错:{}", e);
             throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_JSON_ERROR);
         }
     }
@@ -209,7 +209,7 @@ public class HttpApiServiceImpl implements HttpApiService {
             return new HttpResult(response.getStatusLine().getStatusCode(),
                     EntityUtils.toString(response.getEntity(), BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
         } catch (Exception e) {
-            LOGGER.error("通过httpclient 发送file请求数据报错:{}", e.getMessage());
+            LOGGER.error("通过httpclient 发送file请求数据报错:{}", e);
             throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_FILE_ERROR);
         }
     }
@@ -229,7 +229,7 @@ public class HttpApiServiceImpl implements HttpApiService {
                     response.getEntity().getContent());
 
         } catch (Exception e) {
-            LOGGER.error("通过httpclient 发送file请求数据返回文件流报错:{}", e.getMessage());
+            LOGGER.error("通过httpclient 发送file请求数据返回文件流报错:{}", e);
             throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_FILE2_ERROR);
         }
     }
@@ -253,7 +253,7 @@ public class HttpApiServiceImpl implements HttpApiService {
             // 获取所有响应头字段
             Map<String, List<String>> map = connection.getHeaderFields();
         } catch (Exception e) {
-            LOGGER.error("获得hpptclient请求链接信息报错:{}", e.getMessage());
+            LOGGER.error("获得hpptclient请求链接信息报错:{}", e);
             throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_CONNECTION_ERROR);
         }
         // 使用finally块来关闭输入流
@@ -263,7 +263,7 @@ public class HttpApiServiceImpl implements HttpApiService {
                     in.close();
                 }
             } catch (Exception e2) {
-                LOGGER.error("获得hpptclient请求链接信息报错:{}", e2.getMessage());
+                LOGGER.error("获得hpptclient请求链接信息报错:{}", e2);
                 throw new BusinessException(DispatchException.Proxy.HTTPCLIENT_CONNECTION_ERROR);
             }
         }

@@ -72,7 +72,7 @@ public class ServerInfoListener implements ApplicationListener<WebServerInitiali
         try {
             address = InetAddress.getLocalHost();
         } catch (UnknownHostException e) {
-            LOGGER.error("获得访问address报错:{}", e.getMessage());
+            LOGGER.error("获得访问address报错:{}", e);
         }
         ServerInfo serverInfo = new ServerInfo();
         serverInfo.setIp(address.getHostAddress());

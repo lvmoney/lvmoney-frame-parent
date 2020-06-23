@@ -24,7 +24,7 @@ import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.core.ro.UserRo;
 import com.zhy.frame.authentication.jwt.service.JwtRedisService;
-import com.zhy.frame.cache.common.annation.CacheImpl;
+import com.zhy.frame.cache.common.annotations.CacheImpl;
 import com.zhy.frame.cache.common.service.CacheCommonService;
 import com.zhy.frame.core.vo.UserVo;
 import org.apache.commons.lang3.ObjectUtils;

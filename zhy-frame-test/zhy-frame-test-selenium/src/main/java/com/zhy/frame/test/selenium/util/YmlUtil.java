@@ -40,7 +40,7 @@ public class YmlUtil {
             Map obj = (Map) yaml.load(resourceAsStream);
             return obj;
         } catch (Exception e) {
-            LOGGER.error("读取yml文件报错:{}", e.getMessage());
+            LOGGER.error("读取yml文件报错:{}", e);
             return null;
         }
 

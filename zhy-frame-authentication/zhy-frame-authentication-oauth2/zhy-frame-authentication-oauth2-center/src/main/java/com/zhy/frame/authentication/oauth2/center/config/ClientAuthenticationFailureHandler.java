@@ -50,7 +50,7 @@ public class ClientAuthenticationFailureHandler extends SimpleUrlAuthenticationF
                         JsonEncoding.UTF8);
                 objectMapper.writeValue(jsonGenerator, resultData);
             } catch (Exception ex) {
-                LOGGER.error("不能够写入json信息:{}", ex.getMessage());
+                LOGGER.error("不能够写入json信息:{}", ex);
                 throw new CustomOauthException(AuthorityException.Proxy.DENIED_JSON_NOT_WRITE.getDescription());
             }
         } else {

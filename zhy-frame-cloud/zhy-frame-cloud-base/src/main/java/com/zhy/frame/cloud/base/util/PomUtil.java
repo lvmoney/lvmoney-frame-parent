@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static com.zhy.frame.base.core.constant.BaseConstant.DASH_LINE;
+
 /**
  * @describe：
  * @author: lvmoney/XXXXXX科技有限公司
@@ -59,13 +61,13 @@ public class PomUtil {
             String dockerRegistryIp = model.getProperties().getProperty(DOCKER_REGISTRYIP);
             String dockerTagPort = model.getProperties().getProperty(DOCKER_TAG_PORT);
             String namespace = model.getProperties().getProperty(NAMESPACE);
-            dockerInfo.setDockerFileName(projectArtifactId + "-" + projectVersion);
+            dockerInfo.setDockerFileName(projectArtifactId + DASH_LINE + projectVersion);
             dockerInfo.setDockerImageName(projectArtifactId + ":" + projectVersion);
             dockerInfo.setDockerImageTag(dockerRegistryIp + ":" + dockerTagPort + "/" + namespace + "/" + projectArtifactId + ":" + projectVersion);
         } catch (IOException e) {
-            LOGGER.error("获得docker配置信息报错:{}", e.getMessage());
+            LOGGER.error("获得docker配置信息报错:{}", e);
         } catch (XmlPullParserException e) {
-            LOGGER.error("获得docker配置信息报错:{}", e.getMessage());
+            LOGGER.error("获得docker配置信息报错:{}", e);
         }
         return dockerInfo;
     }

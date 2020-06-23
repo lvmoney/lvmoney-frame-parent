@@ -10,7 +10,7 @@ package com.zhy.frame.authentication.service.service.impl;/**
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.zhy.frame.authentication.service.service.UserCommonService;
-import com.zhy.frame.cache.common.annation.CacheImpl;
+import com.zhy.frame.cache.common.annotations.CacheImpl;
 import com.zhy.frame.cache.common.service.CacheCommonService;
 import com.zhy.frame.core.ro.UserRo;
 import com.zhy.frame.core.vo.UserVo;

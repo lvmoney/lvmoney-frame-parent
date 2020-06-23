@@ -72,7 +72,7 @@ public class HtmlStaticsServiceImplHtmlStaticsService extends BaseHtmlStaticsSer
                 try {
                     fileWriter.close();
                 } catch (Exception e2) {
-                    LOGGER.error("html静态化关闭fileWriter报错:{}", e2.getMessage());
+                    LOGGER.error("html静态化关闭fileWriter报错:{}", e2);
                 }
             }
         }

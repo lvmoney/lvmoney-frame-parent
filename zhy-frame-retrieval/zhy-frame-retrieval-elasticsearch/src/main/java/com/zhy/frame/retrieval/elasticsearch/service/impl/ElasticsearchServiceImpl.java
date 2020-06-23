@@ -12,10 +12,8 @@ import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.core.vo.LocationVo;
 import com.zhy.frame.retrieval.common.exception.RetrievalException;
 import com.zhy.frame.retrieval.elasticsearch.service.ElasticsearchService;
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchDeleteVo;
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchNearbyVo;
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchQueryVo;
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchSaveVo;
+import com.zhy.frame.retrieval.elasticsearch.vo.*;
+import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.sort.GeoDistanceSortBuilder;
@@ -51,7 +49,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public Object queryStringQuery(ElasticsearchQueryVo elasticsearchQueryVo) {
-        Class clazz = queryVoValidate(elasticsearchQueryVo);
+        Class clazz = elasticsearchQueryVo.getData().getClass();
         //使用queryStringQuery完成单字符串查询
         String content = elasticsearchQueryVo.getContext();
         Pageable pageable = elasticsearchQueryVo.getPageable();
@@ -62,7 +60,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public Object matchQuery(ElasticsearchQueryVo elasticsearchQueryVo) {
-        Class clazz = queryVoValidate(elasticsearchQueryVo);
+        Class clazz = elasticsearchQueryVo.getData().getClass();
         String content = elasticsearchQueryVo.getContext();
         Pageable pageable = elasticsearchQueryVo.getPageable();
         String field = elasticsearchQueryVo.getField();
@@ -79,7 +77,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
     @Override
     public Object matchPhraseQuery(ElasticsearchQueryVo elasticsearchQueryVo) {
-        Class clazz = queryVoValidate(elasticsearchQueryVo);
+        Class clazz = elasticsearchQueryVo.getData().getClass();
         String content = elasticsearchQueryVo.getContext();
         Pageable pageable = elasticsearchQueryVo.getPageable();
         String field = elasticsearchQueryVo.getField();
@@ -92,17 +90,10 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
         return elasticsearchTemplate.queryForList(searchQuery, clazz);
     }
 
-    private Class queryVoValidate(ElasticsearchQueryVo elasticsearchQueryVo) {
-        if (elasticsearchQueryVo.getData() == null) {
-            throw new BusinessException(RetrievalException.Proxy.ES_QUERY_BEAN_IS_REQUIRED);
-        } else {
-            return elasticsearchQueryVo.getData().getClass();
-        }
-    }
 
     @Override
     public Object termQuery(ElasticsearchQueryVo elasticsearchQueryVo) {
-        Class clazz = queryVoValidate(elasticsearchQueryVo);
+        Class clazz = elasticsearchQueryVo.getData().getClass();
         String content = elasticsearchQueryVo.getContext();
         Pageable pageable = elasticsearchQueryVo.getPageable();
         String field = elasticsearchQueryVo.getField();
@@ -113,7 +104,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
     @Override
     public Object termsQuery(ElasticsearchQueryVo elasticsearchQueryVo) {
-        Class clazz = queryVoValidate(elasticsearchQueryVo);
+        Class clazz = elasticsearchQueryVo.getData().getClass();
         String field = elasticsearchQueryVo.getField();
         List<String> contents = new ArrayList<String>(elasticsearchQueryVo.getContexts());
         Pageable pageable = elasticsearchQueryVo.getPageable();
@@ -125,7 +116,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
     @Override
     public Object multiMatchQuery(ElasticsearchQueryVo elasticsearchQueryVo) {
-        Class clazz = queryVoValidate(elasticsearchQueryVo);
+        Class clazz = elasticsearchQueryVo.getData().getClass();
         String content = elasticsearchQueryVo.getContext();
         Pageable pageable = elasticsearchQueryVo.getPageable();
         if (pageable == null) {
@@ -140,17 +131,16 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
     @Override
     public Object containQuery(ElasticsearchQueryVo elasticsearchQueryVo) {
-        Class clazz = queryVoValidate(elasticsearchQueryVo);
+        Class clazz = elasticsearchQueryVo.getData().getClass();
         String content = elasticsearchQueryVo.getContext();
-        Pageable pageable = elasticsearchQueryVo.getPageable();
         String field = elasticsearchQueryVo.getField();
         float minimumShouldMatch = elasticsearchQueryVo.getMinimumShouldMatch();
         if (minimumShouldMatch > 1) {
             throw new BusinessException(RetrievalException.Proxy.ES_QUERY_PERCENT_IS_ERROR);
         }
         if (new BigDecimal(minimumShouldMatch).equals(new BigDecimal(MIN_NUM_0))) {
-            String precent = float2Percent(minimumShouldMatch);
-            SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery(field, content).operator(Operator.AND).minimumShouldMatch(precent)).build();
+            String percent = float2Percent(minimumShouldMatch);
+            SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery(field, content).operator(Operator.AND).minimumShouldMatch(percent)).build();
             return elasticsearchTemplate.queryForList(searchQuery, clazz);
         }
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery(field, content).operator(Operator.AND)).build();
@@ -165,9 +155,6 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
     @Override
     public Object nearby(ElasticsearchNearbyVo elasticsearchNearbyVo) {
-        if (elasticsearchNearbyVo.getData() == null) {
-            throw new BusinessException(RetrievalException.Proxy.ES_QUERY_BEAN_IS_REQUIRED);
-        }
         Class clazz = elasticsearchNearbyVo.getData().getClass();
         LocationVo locationVo = elasticsearchNearbyVo.getLocationVo();
         double lat = Double.parseDouble(locationVo.getLat());
@@ -193,24 +180,19 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public boolean deleteById(ElasticsearchDeleteVo elasticsearchDeleteVo) {
-        Class clazz = deleteVoValidate(elasticsearchDeleteVo);
         String id = elasticsearchDeleteVo.getId();
         try {
-            elasticsearchTemplate.delete(clazz, id);
+            elasticsearchTemplate.delete(elasticsearchDeleteVo.getData().getClass(), id);
             return true;
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("es通过id删除数据报错:{}", e);
             throw new BusinessException(RetrievalException.Proxy.ES_QUERY_PERCENT_IS_ERROR);
         }
     }
 
     @Override
     public boolean deleteByBoolMatchQuery(ElasticsearchDeleteVo elasticsearchDeleteVo) {
-        Class clazz = deleteVoValidate(elasticsearchDeleteVo);
         Map<String, Object> fieldMap = elasticsearchDeleteVo.getFieldMap();
-        if (fieldMap == null) {
-            throw new BusinessException(RetrievalException.Proxy.ES_DELETE_FIELDS_IS_REQUIRED);
-        }
         try {
             DeleteQuery dq = new DeleteQuery();
             BoolQueryBuilder qb = QueryBuilders.boolQuery();
@@ -219,29 +201,24 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
                 qb.must(QueryBuilders.matchQuery(key, fieldMap.get(key)));
             }
             dq.setQuery(qb);
-            ;
-            elasticsearchTemplate.delete(dq, clazz);
-            ;
+            elasticsearchTemplate.delete(dq, elasticsearchDeleteVo.getData().getClass());
             return true;
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("es删除数据报错:{}", e);
             return false;
         }
     }
 
     @Override
     public boolean deleteByIndex(ElasticsearchDeleteVo elasticsearchDeleteVo) {
-        Class clazz = deleteVoValidate(elasticsearchDeleteVo);
-        return elasticsearchTemplate.deleteIndex(clazz);
+        return elasticsearchTemplate.deleteIndex(elasticsearchDeleteVo.getData().getClass());
     }
 
+    @Override
+    public long getVersion(GetVersionVo getVersionVo) {
+        GetRequest getRequest = new GetRequest(getVersionVo.getIndex(), getVersionVo.getId());
 
-    private Class deleteVoValidate(ElasticsearchDeleteVo elasticsearchDeleteVo) {
-        if (elasticsearchDeleteVo.getData() == null) {
-            throw new BusinessException(RetrievalException.Proxy.ES_QUERY_BEAN_IS_REQUIRED);
-        } else {
-            return elasticsearchDeleteVo.getData().getClass();
-        }
+        return elasticsearchTemplate.getClient().get(getRequest).actionGet().getVersion();
     }
 
 

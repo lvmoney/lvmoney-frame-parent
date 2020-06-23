@@ -60,7 +60,7 @@ public class EncryptFileUtil {
             }
             in.close();
         } catch (Exception ex) {
-            LOGGER.error("文件加密报错{}", ex.getMessage());
+            LOGGER.error("文件加密报错{}", ex);
         }
         return new ByteOutputFileVo(result);
     }
@@ -103,7 +103,7 @@ public class EncryptFileUtil {
             out.close();
             result = true;
         } catch (Exception ex) {
-            LOGGER.error("文件加密报错{}", ex.getMessage());
+            LOGGER.error("文件加密报错{}", ex);
         }
         return result;
     }
@@ -139,7 +139,7 @@ public class EncryptFileUtil {
             }
             in.close();
         } catch (Exception ex) {
-            LOGGER.error("文件解密报错:{}", ex.getMessage());
+            LOGGER.error("文件解密报错:{}", ex);
         }
         return new ByteOutputFileVo(result);
     }
@@ -182,7 +182,7 @@ public class EncryptFileUtil {
             out.close();
             result = true;
         } catch (Exception ex) {
-            LOGGER.error("文件解密报错:{}", ex.getMessage());
+            LOGGER.error("文件解密报错:{}", ex);
         }
         return result;
     }

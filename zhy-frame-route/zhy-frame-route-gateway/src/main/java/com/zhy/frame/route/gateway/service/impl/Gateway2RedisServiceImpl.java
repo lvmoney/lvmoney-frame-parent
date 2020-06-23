@@ -42,7 +42,7 @@ public class Gateway2RedisServiceImpl implements Gateway2RedisService {
                     });
             return result;
         } catch (Exception e) {
-            LOGGER.error("从redis中获得路由信息报错:{}", e.getMessage());
+            LOGGER.error("从redis中获得路由信息报错:{}", e);
             return null;
         }
     }
@@ -70,7 +70,7 @@ public class Gateway2RedisServiceImpl implements Gateway2RedisService {
             });
             return result;
         } catch (Exception e) {
-            LOGGER.error("从redis中获得路由信息报错:{}", e.getMessage());
+            LOGGER.error("从redis中获得路由信息报错:{}", e);
             return null;
         }
     }

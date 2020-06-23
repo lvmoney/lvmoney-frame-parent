@@ -97,7 +97,7 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
         } else {
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        LOGGER.error("gateway网关报错:{}", ex.getMessage());
+        LOGGER.error("gateway网关报错:{}", ex);
         serverHttpResponse.setStatusCode(httpStatus);
         return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(httpStatus.value(), httpStatus.name()))));
 

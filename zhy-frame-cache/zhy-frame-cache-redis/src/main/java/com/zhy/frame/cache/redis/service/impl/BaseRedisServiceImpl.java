@@ -10,7 +10,7 @@ package com.zhy.frame.cache.redis.service.impl;
 
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.util.JsonUtil;
-import com.zhy.frame.cache.common.annation.CacheService;
+import com.zhy.frame.cache.common.annotations.CacheService;
 import com.zhy.frame.cache.common.constant.CacheConstant;
 import com.zhy.frame.cache.common.exception.CacheException;
 import com.zhy.frame.core.vo.Page;
@@ -94,7 +94,7 @@ public class BaseRedisServiceImpl extends BaseRedisService {
         try {
             return stringRedisTemplate.opsForValue().get(key);
         } catch (Exception e) {
-            LOGGER.error("从redis中获取数据报错:{}", e.getMessage());
+            LOGGER.error("从redis中获取数据报错:{}", e);
             throw new BusinessException(CacheException.Proxy.REDIS_NOT_EXIST);
         }
     }
@@ -195,7 +195,7 @@ public class BaseRedisServiceImpl extends BaseRedisService {
                 cursor.forEachRemaining(consumer);
                 return null;
             } catch (IOException e) {
-                LOGGER.error("通过scan命令获得keys报错:{}", e.getMessage());
+                LOGGER.error("通过scan命令获得keys报错:{}", e);
                 throw new BusinessException(CacheException.Proxy.SCAN_COMMAND_ERROR);
             }
         });

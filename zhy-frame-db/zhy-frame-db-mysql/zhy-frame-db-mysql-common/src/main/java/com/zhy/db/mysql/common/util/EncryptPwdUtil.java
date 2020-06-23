@@ -51,19 +51,19 @@ public class EncryptPwdUtil {
                     druidPasswod.setPublicKey(publicKey);
                     druidPasswod.setPlaintext(plaintext);
                 } catch (Exception e) {
-                    LOGGER.error("通过公钥获得druid密钥报错:{}", e.getMessage());
+                    LOGGER.error("通过公钥获得druid密钥报错:{}", e);
                 }
             } catch (NoSuchAlgorithmException e) {
-                LOGGER.error("通过公钥获得druid密钥报错:{}", e.getMessage());
+                LOGGER.error("通过公钥获得druid密钥报错:{}", e);
             } catch (NoSuchProviderException e) {
-                LOGGER.error("通过公钥获得druid密钥报错:{}", e.getMessage());
+                LOGGER.error("通过公钥获得druid密钥报错:{}", e);
             }
 
         } else {
             try {
                 druidPasswod.setPassword(ConfigTools.encrypt(plaintext));
             } catch (Exception e) {
-                LOGGER.error("不用公钥获得druid密钥报错:{}", e.getMessage());
+                LOGGER.error("不用公钥获得druid密钥报错:{}", e);
             }
             druidPasswod.setPlaintext(plaintext);
         }

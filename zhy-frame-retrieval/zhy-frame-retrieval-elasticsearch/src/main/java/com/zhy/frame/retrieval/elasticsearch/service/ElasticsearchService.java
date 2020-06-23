@@ -9,10 +9,7 @@
 package com.zhy.frame.retrieval.elasticsearch.service;
 
 
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchDeleteVo;
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchNearbyVo;
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchQueryVo;
-import com.zhy.frame.retrieval.elasticsearch.vo.ElasticsearchSaveVo;
+import com.zhy.frame.retrieval.elasticsearch.vo.*;
 
 /**
  * @describe：
@@ -169,5 +166,16 @@ public interface ElasticsearchService {
      * @date: 2019/9/9 20:30
      */
     boolean deleteByIndex(ElasticsearchDeleteVo elasticsearchDeleteVo);
+
+    /**
+     * 获得index & id的version
+     *
+     * @param getVersionVo:
+     * @throws
+     * @return: long
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/9 17:29
+     */
+    long getVersion(GetVersionVo getVersionVo);
 
 }

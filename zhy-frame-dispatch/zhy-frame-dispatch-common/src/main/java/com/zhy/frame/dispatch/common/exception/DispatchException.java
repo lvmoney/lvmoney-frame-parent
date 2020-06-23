@@ -4,8 +4,6 @@ package com.zhy.frame.dispatch.common.exception;
 import com.zhy.frame.base.core.enums.ExceptionCodeLevel;
 import com.zhy.frame.base.core.exception.ExceptionType;
 
-import static com.zhy.frame.base.core.constant.BaseConstant.SUCCESS_DEFAULT_CODE;
-
 /**
  * @describe：路由错误码定义接口
  * @author: lvmoney /四川******科技有限公司

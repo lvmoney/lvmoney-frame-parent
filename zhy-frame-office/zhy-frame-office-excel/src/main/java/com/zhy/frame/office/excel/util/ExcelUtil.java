@@ -69,7 +69,7 @@ public class ExcelUtil {
             response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, BaseConstant.CHARACTER_ENCODE_UTF8_UPPER));
             workbook.write(response.getOutputStream());
         } catch (IOException e) {
-            logger.error("excel文档导出下载报错:{}", e.getMessage());
+            logger.error("excel文档导出下载报错:{}", e);
             throw new BusinessException(OfficeException.Proxy.EXCEL_DOWNLOAD_ERROR);
         }
     }
@@ -92,10 +92,10 @@ public class ExcelUtil {
         try {
             list = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
         } catch (NoSuchElementException e) {
-            logger.error("excel模板文件导入为空:{}", e.getMessage());
+            logger.error("excel模板文件导入为空:{}", e);
             throw new BusinessException(OfficeException.Proxy.EXCEL_TEMPLATE_ERROR);
         } catch (Exception e) {
-            logger.error("excel模板文件导入为空:{}", e.getMessage());
+            logger.error("excel模板文件导入为空:{}", e);
             throw new BusinessException(OfficeException.Proxy.EXCEL_TEMPLATE_ERROR);
         }
         return list;
@@ -113,10 +113,10 @@ public class ExcelUtil {
         try {
             list = ExcelImportUtil.importExcel(file.getInputStream(), pojoClass, params);
         } catch (NoSuchElementException e) {
-            logger.error("excel文件导入为空:{}", e.getMessage());
+            logger.error("excel文件导入为空:{}", e);
             throw new BusinessException(OfficeException.Proxy.EXCEL_IMPORT_ERROR);
         } catch (Exception e) {
-            logger.error("excel导入为空:{}", e.getMessage());
+            logger.error("excel导入为空:{}", e);
             throw new BusinessException(OfficeException.Proxy.EXCEL_IMPORT_ERROR);
         }
         return list;
@@ -146,7 +146,7 @@ public class ExcelUtil {
         } catch (NoSuchElementException e) {
             throw new IOException("excel文件不能为空");
         } catch (Exception e) {
-            throw new IOException(e.getMessage());
+            throw new IOException(e);
         }
     }
 

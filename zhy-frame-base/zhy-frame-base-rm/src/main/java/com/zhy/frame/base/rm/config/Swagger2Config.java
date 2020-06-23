@@ -10,6 +10,7 @@ package com.zhy.frame.base.rm.config;
 
 import com.zhy.frame.base.core.constant.BaseConstant;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -25,16 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @describe：不要打开swaager的配置，
- * 因为其使用方式可能和其他监控工具不一样会造成冲突，
+ * @describe：不要打开swaager的配置， 因为其使用方式可能和其他监控工具不一样会造成冲突，
  * 建议在对应有servlet的module中自行添加
  * @author: lvmoney/四川******科技有限公司
  * @version:v1.0 2019/2/28 10:05
  */
 @Configuration
 @EnableSwagger2
+@ConditionalOnProperty(name = "frame.swagger.support", havingValue = "true")
 public class Swagger2Config {
-
     /**
      * 标题
      */
@@ -94,6 +94,7 @@ public class Swagger2Config {
                 .build().securitySchemes(securitySchemes())
                 .securityContexts(securityContexts());
     }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(title)

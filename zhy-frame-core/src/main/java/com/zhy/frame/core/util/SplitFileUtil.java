@@ -65,17 +65,16 @@ public class SplitFileUtil {
             LOGGER.error("没有找到对应的文件:{}", file);
             return false;
         } catch (IOException e) {
-            LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e.getMessage());
+            LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e);
             return false;
         } finally {
             try {
                 raf.close();
-                return true;
             } catch (IOException e) {
-                LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e.getMessage());
-                return false;
+                LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e);
             }
         }
+        return true;
     }
 
     /**
@@ -115,7 +114,7 @@ public class SplitFileUtil {
             //关闭输出流
             out.close();
         } catch (Exception e) {
-            LOGGER.error("获得文件位置指针报错:{}", e.getMessage());
+            LOGGER.error("获得文件位置指针报错:{}", e);
         }
         return endPointer;
     }
@@ -149,17 +148,17 @@ public class SplitFileUtil {
                 }
             }
         } catch (Exception e) {
-            LOGGER.error("文件合并失败:{}", e.getMessage());
+            LOGGER.error("文件合并失败:{}", e);
             return false;
         } finally {
             try {
                 raf.close();
-                return true;
+
             } catch (IOException e) {
-                LOGGER.error("文件合并失败:{}", e.getMessage());
-                return false;
+                LOGGER.error("文件合并失败:{}", e);
             }
         }
+        return true;
     }
 
     public static void main(String[] args) throws IOException {
@@ -216,12 +215,12 @@ public class SplitFileUtil {
         } catch (FileNotFoundException e) {
             LOGGER.error("没有找到对应的文件:{}", file);
         } catch (IOException e) {
-            LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e.getMessage());
+            LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e);
         } finally {
             try {
                 raf.close();
             } catch (IOException e) {
-                LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e.getMessage());
+                LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e);
             }
         }
         return result;

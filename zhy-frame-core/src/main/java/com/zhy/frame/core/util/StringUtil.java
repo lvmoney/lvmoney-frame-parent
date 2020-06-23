@@ -8,6 +8,7 @@
 
 package com.zhy.frame.core.util;
 
+import com.zhy.frame.base.core.constant.BaseConstant;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -726,18 +727,34 @@ public class StringUtil extends StringUtils {
         return StringUtil.rightPad(oldText, length, parse);
     }
 
-    public static void main(String[] args) {
-        System.out.println(StringUtil.addZeroForNum("123", 6));
+    /**
+     * 生成 [min,max)随机数
+     *
+     * @param min:
+     * @param max:
+     * @throws
+     * @return: int
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/11 18:05
+     */
+    public static int randomNum(int min, int max) {
+        return (int) (min + Math.floor(Math.random() * max));
+    }
 
-
-        String text = "x 2 3 3";
-        System.out.println(strToStrArray(text)[3]);
-
-        System.out.println(strToBinStr(new String("111")));
-
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("adfad").append(PLACEHOLDER_BLANK_SPACE).append("dafadsf");
-        System.out.println(stringBuffer);
-
+    /**
+     * 首写字母大写
+     *
+     * @param str:
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/20 14:38
+     */
+    public static String upperFirstCode(String str) {
+        char[] ch = str.toCharArray();
+        if (ch[0] >= BaseConstant.CHAR_A_LOWER && ch[0] <= BaseConstant.CHAR_Z_LOWER) {
+            ch[0] = (char) (ch[0] - 32);
+        }
+        return new String(ch);
     }
 }

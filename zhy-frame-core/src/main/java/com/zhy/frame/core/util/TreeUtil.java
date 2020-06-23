@@ -74,7 +74,7 @@ public class TreeUtil {
             }
             return roots;
         } catch (Exception e) {
-            LOGGER.error("集合转树结构报错:{}", e.getMessage());
+            LOGGER.error("集合转树结构报错:{}", e);
             throw new RuntimeException(e);
         }
     }
@@ -156,7 +156,7 @@ public class TreeUtil {
             childrenField.setAccessible(false);
             return roots;
         } catch (Exception e) {
-            LOGGER.error("集合转树结构报错:{}", e.getMessage());
+            LOGGER.error("集合转树结构报错:{}", e);
             throw new BusinessException(CommonException.Proxy.TREE_CONVERSION_ERROR);
         }
     }
@@ -180,7 +180,7 @@ public class TreeUtil {
             try {
                 parentField = clazz.getSuperclass().getDeclaredField(parent);
             } catch (NoSuchFieldException e) {
-                LOGGER.error("获取idField字段报错:{}", e.getMessage());
+                LOGGER.error("获取idField字段报错:{}", e);
                 throw new BusinessException(CommonException.Proxy.TREE_CONVERSION_ERROR);
             }
         }
@@ -206,7 +206,7 @@ public class TreeUtil {
             try {
                 parentField = clazz.getSuperclass().getDeclaredField(parent);
             } catch (NoSuchFieldException e) {
-                LOGGER.error("获取parentField字段报错:{}", e.getMessage());
+                LOGGER.error("获取parentField字段报错:{}", e);
                 throw new BusinessException(CommonException.Proxy.TREE_CONVERSION_ERROR);
             }
         }
@@ -231,7 +231,7 @@ public class TreeUtil {
             try {
                 childrenField = clazz.getSuperclass().getDeclaredField(children);
             } catch (NoSuchFieldException e) {
-                LOGGER.error("获取childrenField字段报错:{}", e.getMessage());
+                LOGGER.error("获取childrenField字段报错:{}", e);
                 throw new BusinessException(CommonException.Proxy.TREE_CONVERSION_ERROR);
             }
         }
@@ -275,7 +275,7 @@ public class TreeUtil {
                 }
             }
         } catch (Exception e) {
-            LOGGER.error("添加子节点报错", e.getMessage());
+            LOGGER.error("添加子节点报错", e);
             throw new RuntimeException(e);
         }
     }

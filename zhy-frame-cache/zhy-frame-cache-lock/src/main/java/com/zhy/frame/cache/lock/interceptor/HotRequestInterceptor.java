@@ -109,7 +109,7 @@ public class HotRequestInterceptor extends HandlerInterceptorAdapter {
                         httpResponse.getWriter().print(json);
                         return false;
                     } catch (IOException e) {
-                        LOGGER.error("其他错误处理response返回处理报错：{}", e.getMessage());
+                        LOGGER.error("其他错误处理response返回处理报错：{}", e);
                     }
                 } else {
                     return super.preHandle(httpServletRequest, httpServletResponse, object);

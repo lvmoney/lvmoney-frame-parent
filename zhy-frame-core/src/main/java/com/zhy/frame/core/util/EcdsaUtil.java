@@ -45,7 +45,7 @@ public class EcdsaUtil {
             byte[] result = signature.sign();
             return Hex.encodeHexString(result);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("通过密钥加密:{}", e);
             return "";
         }
     }
@@ -73,7 +73,7 @@ public class EcdsaUtil {
             boolean bool = signature.verify(result);
             return bool;
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("Ecdsa公钥校验:{}", e);
             return false;
         }
     }
@@ -130,7 +130,7 @@ public class EcdsaUtil {
             result.setPublicKey(pubContent);
             result.setPrivateKey(priContent);
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("获得公钥密钥报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa获得公钥密钥报错:{}", e);
         }
 
         return result;
@@ -156,25 +156,25 @@ public class EcdsaUtil {
             cipher.init(Cipher.ENCRYPT_MODE, pubKey);
             return Hex.encodeHexString(cipher.doFinal(content));
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("通过公钥加密报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa通过公钥加密报错:{}", e);
 
         } catch (NoSuchProviderException e) {
-            LOGGER.error("通过公钥加密报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa通过公钥加密报错:{}", e);
 
         } catch (NoSuchPaddingException e) {
-            LOGGER.error("通过公钥加密报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa通过公钥加密报错:{}", e);
 
         } catch (InvalidKeyException e) {
-            LOGGER.error("通过公钥加密报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa通过公钥加密报错:{}", e);
 
         } catch (IllegalBlockSizeException e) {
-            LOGGER.error("通过公钥加密报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa通过公钥加密报错:{}", e);
 
         } catch (BadPaddingException e) {
-            LOGGER.error("通过公钥加密报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa通过公钥加密报错:{}", e);
 
         } catch (Exception e) {
-            LOGGER.error("通过公钥加密报错:{}", e.getMessage());
+            LOGGER.error("Ecdsa通过公钥加密报错:{}", e);
 
         }
         return null;

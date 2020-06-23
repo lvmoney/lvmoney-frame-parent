@@ -20,7 +20,7 @@ package com.zhy.frame.mq.kafka.provider.sender;/**
 
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.base.core.util.JsonUtil;
-import com.zhy.frame.mq.common.annation.MqService;
+import com.zhy.frame.mq.common.annotations.MqService;
 import com.zhy.frame.mq.common.constant.MqConstant;
 import com.zhy.frame.mq.common.exception.MqException;
 import com.zhy.frame.mq.common.service.MqSendService;
@@ -55,15 +55,15 @@ public class SynchronousSenderImpl implements MqSendService {
             //发送消息的时候需要休眠一下，否则发送时间较长的时候会导致进程提前关闭导致无法调用回调时间。主要是因为KafkaTemplate发送消息是采取异步方式发送的
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            LOGGER.error("kafka发送同步消息报错:{}", e.getMessage());
+            LOGGER.error("kafka发送同步消息报错:{}", e);
             throw new BusinessException(MqException.Proxy.KAFKA_SEND_SYN_INTERRUPTED_ERROR);
 
         } catch (ExecutionException e) {
-            LOGGER.error("kafka发送同步消息执行错误:{}", e.getMessage());
+            LOGGER.error("kafka发送同步消息执行错误:{}", e);
             throw new BusinessException(MqException.Proxy.KAFKA_SEND_SYN_EXE_ERROR);
 
         } catch (TimeoutException e) {
-            LOGGER.error("kafka发送同步消息超时:{}", e.getMessage());
+            LOGGER.error("kafka发送同步消息超时:{}", e);
             throw new BusinessException(MqException.Proxy.KAFKA_SEND_SYN_TIME_ERROR);
         }
     }

@@ -159,7 +159,7 @@ public class FrameShiroFilter extends FormAuthenticationFilter {
         try {
             httpResponse.getWriter().print(json);
         } catch (IOException e) {
-            LOGGER.error("shiro报错构造返回值报错{}", e.getMessage());
+            LOGGER.error("shiro报错构造返回值报错{}", e);
         }
     }
 

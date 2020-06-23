@@ -69,7 +69,7 @@ public abstract class BaseHtmlStaticsService implements HtmlStaticsService {
             FileUtils.deleteQuietly(file);
             LOGGER.info("已删除静态文件：" + fileName);
         } catch (Exception e) {
-            LOGGER.error("删除静态文件报错：{}", e.getMessage());
+            LOGGER.error("删除静态文件报错：{}", e);
         }
     }
 
@@ -92,7 +92,7 @@ public abstract class BaseHtmlStaticsService implements HtmlStaticsService {
             });
             return htmlStaticsVo;
         } catch (Exception e) {
-            LOGGER.error("获得指定服务请求地址的页面静态化数据报错:{}", e.getMessage());
+            LOGGER.error("获得指定服务请求地址的页面静态化数据报错:{}", e);
             return null;
         }
     }
@@ -105,7 +105,7 @@ public abstract class BaseHtmlStaticsService implements HtmlStaticsService {
             });
             return result;
         } catch (Exception e) {
-            LOGGER.error("获得指定服务的页面静态化数据报错:{}", e.getMessage());
+            LOGGER.error("获得指定服务的页面静态化数据报错:{}", e);
             return null;
         }
     }

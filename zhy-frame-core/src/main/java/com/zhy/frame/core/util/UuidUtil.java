@@ -10,6 +10,8 @@ package com.zhy.frame.core.util;
 
 import java.util.UUID;
 
+import static com.zhy.frame.base.core.constant.BaseConstant.DASH_LINE;
+
 /**
  * @describe：uuid工具类
  * @author: lvmoney/四川******科技有限公司
@@ -25,7 +27,7 @@ public class UuidUtil {
      * @date: 2019/11/25 11:15
      */
     public static String getUuid() {
-        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        String uuid = UUID.randomUUID().toString().replaceAll(DASH_LINE, "");
         return uuid;
     }
     

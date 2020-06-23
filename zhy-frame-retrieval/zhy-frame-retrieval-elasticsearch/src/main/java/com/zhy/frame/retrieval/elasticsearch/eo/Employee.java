@@ -35,6 +35,7 @@ public class Employee {
     @GeoPointField
     private String coordinate;
 
+
     public Long getId() {
         return id;
     }

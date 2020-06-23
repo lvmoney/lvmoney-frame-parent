@@ -112,7 +112,7 @@ public class ClientAuthenticationProvider extends AbstractUserDetailsAuthenticat
         } catch (InternalAuthenticationServiceException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
+            throw new InternalAuthenticationServiceException("客户端权限报错:{}", ex);
         }
     }
 

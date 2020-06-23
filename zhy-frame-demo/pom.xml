@@ -30,6 +30,7 @@
         <module>zhy-demo-caffeine</module>
         <module>zhy-demo-rabbitmq</module>
         <module>zhy-demo-video</module>
+        <module>zhy-demo-serialize</module>
     </modules>
 
 

@@ -24,23 +24,23 @@ import java.util.HashMap;
  */
 public class FileUtils {
 
-    private static final HashMap<String, String> fileTypes = new HashMap<String, String>();
+    private static final HashMap<String, String> FILE_TYPE = new HashMap();
 
     static { // BOM（Byte Order Mark）文件头字节
-        fileTypes.put("494433", "mp3");
-        fileTypes.put("524946", "wav");
-        fileTypes.put("ffd8ff", "jpg");
-        fileTypes.put("FFD8FF", "jpg");
-        fileTypes.put("89504E", "png");
-        fileTypes.put("89504e", "png");
-        fileTypes.put("474946", "gif");
+        FILE_TYPE.put("494433", "mp3");
+        FILE_TYPE.put("524946", "wav");
+        FILE_TYPE.put("ffd8ff", "jpg");
+        FILE_TYPE.put("FFD8FF", "jpg");
+        FILE_TYPE.put("89504E", "png");
+        FILE_TYPE.put("89504e", "png");
+        FILE_TYPE.put("474946", "gif");
     }
 
     private static final String B_UNIT = "B";
     private static final String KB_UNIT = "KB";
     private static final String MB_UNIT = "MB";
     private static final String GB_UNIT = "GB";
-    private static final DecimalFormat decimalFormat = new DecimalFormat("#.0");
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.0");
 
 
     /**
@@ -53,7 +53,7 @@ public class FileUtils {
      * @return
      */
     public static String getFileType(String filePath) {
-        return fileTypes.get(getFileHeader3(filePath));
+        return FILE_TYPE.get(getFileHeader3(filePath));
     }
 
     /**
@@ -117,13 +117,13 @@ public class FileUtils {
     public static String getFormatSize(double size) {
         String fileSizeString = "";
         if (size < 1024) {
-            fileSizeString = decimalFormat.format(size) + B_UNIT;
+            fileSizeString = DECIMAL_FORMAT.format(size) + B_UNIT;
         } else if (size < 1048576) {
-            fileSizeString = decimalFormat.format(size / 1024) + KB_UNIT;
+            fileSizeString = DECIMAL_FORMAT.format(size / 1024) + KB_UNIT;
         } else if (size < 1073741824) {
-            fileSizeString = decimalFormat.format(size / 1048576) + MB_UNIT;
+            fileSizeString = DECIMAL_FORMAT.format(size / 1048576) + MB_UNIT;
         } else {
-            fileSizeString = decimalFormat.format(size / 1073741824) + GB_UNIT;
+            fileSizeString = DECIMAL_FORMAT.format(size / 1073741824) + GB_UNIT;
         }
         return fileSizeString;
     }
@@ -133,15 +133,14 @@ public class FileUtils {
     }
 
     /**
-     * <p>
-     * 描述：高效率的将文件转换成字节数组
-     * </p>
+     * 高效率的将文件转换成字节数组
      *
-     * @param filename
-     * @return
-     * @throws IOException
+     * @param filePath:
+     * @throws
+     * @return: byte[]
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/15 15:53
      */
-    @SuppressWarnings("resource")
     public static byte[] toByteArray(String filePath) throws IOException {
 
         FileChannel fc = null;

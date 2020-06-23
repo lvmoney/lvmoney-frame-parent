@@ -14,6 +14,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import static com.zhy.frame.base.core.constant.BaseConstant.DASH_LINE;
+
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
 
@@ -52,7 +54,7 @@ public class FileUploadServiceImpl implements FileUploadService {
     }
 
     private String getRandomUUID() {
-        return UUID.randomUUID().toString().replace("-", "");
+        return UUID.randomUUID().toString().replace(DASH_LINE, "");
     }
 
 }

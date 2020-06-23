@@ -1,0 +1,73 @@
+{
+  "name": "createAccount",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1592533996306,
+  "stop": 1592533996312,
+  "uuid": "ccfa943e-8640-48cb-82d1-340bfa06cd25",
+  "historyId": "10553509b0d12a04587bf51634dc7a51",
+  "fullName": "com.zhy.frame.test.testng.test.ChannelOrderTest.createAccount",
+  "labels": [
+    {
+      "name": "package",
+      "value": "com.zhy.frame.test.testng.test.ChannelOrderTest"
+    },
+    {
+      "name": "testClass",
+      "value": "com.zhy.frame.test.testng.test.ChannelOrderTest"
+    },
+    {
+      "name": "testMethod",
+      "value": "createAccount"
+    },
+    {
+      "name": "parentSuite",
+      "value": "Suite"
+    },
+    {
+      "name": "suite",
+      "value": "admin"
+    },
+    {
+      "name": "subSuite",
+      "value": "com.zhy.frame.test.testng.test.ChannelOrderTest"
+    },
+    {
+      "name": "host",
+      "value": "WIN10-904031128"
+    },
+    {
+      "name": "thread",
+      "value": "7496@WIN10-904031128.main(1)"
+    },
+    {
+      "name": "framework",
+      "value": "testng"
+    },
+    {
+      "name": "language",
+      "value": "java"
+    },
+    {
+      "name": "epic",
+      "value": "正向epic"
+    },
+    {
+      "name": "story",
+      "value": "正向story"
+    },
+    {
+      "name": "severity",
+      "value": "critical"
+    }
+  ],
+  "links": []
+}

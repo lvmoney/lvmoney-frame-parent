@@ -35,6 +35,15 @@ import java.util.Map;
 public class BeanUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(BeanUtil.class);
 
+    /**
+     * 深拷贝
+     *
+     * @param src:
+     * @throws
+     * @return: java.util.List<T>
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/6/16 14:37
+     */
     public static <T> List<T> deepCopy(List<T> src) {
         try {
             ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
@@ -47,10 +56,10 @@ public class BeanUtil {
             List<T> dest = (List<T>) in.readObject();
             return dest;
         } catch (IOException e) {
-            LOGGER.error("list bean 拷贝io报错:{}", e.getMessage());
+            LOGGER.error("list bean 拷贝io报错:{}", e);
             throw new BusinessException(CommonException.Proxy.BEAN_LIST_COPY_ERROR);
         } catch (ClassNotFoundException e) {
-            LOGGER.error("list bean 拷贝报错:{}", e.getMessage());
+            LOGGER.error("list bean 拷贝报错:{}", e);
             throw new BusinessException(CommonException.Proxy.BEAN_LIST_COPY_ERROR);
         }
     }

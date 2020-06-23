@@ -8,7 +8,7 @@ package com.zhy.frame.mq.kafka.provider.sender;/**
 
 
 import com.zhy.frame.base.core.util.JsonUtil;
-import com.zhy.frame.mq.common.annation.MqService;
+import com.zhy.frame.mq.common.annotations.MqService;
 import com.zhy.frame.mq.common.constant.MqConstant;
 import com.zhy.frame.mq.common.service.MqSendService;
 import com.zhy.frame.mq.common.vo.MessageVo;
@@ -42,7 +42,7 @@ public class SimpleSenderImpl implements MqSendService {
             //发送消息的时候需要休眠一下，否则发送时间较长的时候会导致进程提前关闭导致无法调用回调时间。主要是因为KafkaTemplate发送消息是采取异步方式发送的
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            LOGGER.error("kafka发送消息报错:{}", e.getMessage());
+            LOGGER.error("kafka发送消息报错:{}", e);
         }
     }
 

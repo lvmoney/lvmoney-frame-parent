@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static com.zhy.frame.base.core.constant.BaseConstant.DASH_LINE;
+
 
 /**
  * @describe：
@@ -54,7 +56,7 @@ public class UserServiceImpl implements UserService {
             }};
             int dbNum = ThreadLocalRandom.current().nextInt(2);
             int serverNameHash = ConsistentHashVirtualNodeUtil.getHash(DbConstant.DB_NAME_DB + dbNum);
-            String dbName = DbConstant.DB_NAME_DB + "-" + serverNameHash;
+            String dbName = DbConstant.DB_NAME_DB + DASH_LINE + serverNameHash;
             List<String> tableList = tableDb.get(dbName);
             String tableName = tableList.get(ThreadLocalRandom.current().nextInt(tableList.size()));
             hintManager.addDatabaseShardingValue(TableConstant.TABLE_NAME_USER, dbName);

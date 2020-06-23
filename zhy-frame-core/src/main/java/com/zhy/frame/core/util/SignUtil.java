@@ -146,9 +146,9 @@ public class SignUtil {
                             value = obj.toString();
                         }
                     } catch (IllegalArgumentException e) {
-                        LOGGER.error(e.getMessage());
+                        LOGGER.error("通过实体构造map报错:{}", e);
                     } catch (IllegalAccessException e) {
-                        LOGGER.error(e.getMessage());
+                        LOGGER.error("通过实体构造map报错:{}", e);
                     }
                     result.put(key, value);
                 }
@@ -174,16 +174,16 @@ public class SignUtil {
                             value = obj.toString();
                         }
                     } catch (IllegalArgumentException e) {
-                        LOGGER.error(e.getMessage());
+                        LOGGER.error("通过实体构造map报错:{}", e);
                     } catch (IllegalAccessException e) {
-                        LOGGER.error(e.getMessage());
+                        LOGGER.error("通过实体构造map报错:{}", e);
                     }
                     result.put(key, value);
                 }
             }
         } catch (InstantiationException | IllegalAccessException e1) {
             result = null;
-            LOGGER.error(e1.getMessage());
+            LOGGER.error("通过实体构造map报错:{}", e1);
         }
         return result;
     }
@@ -227,7 +227,7 @@ public class SignUtil {
                 buff = buff.substring(0, buff.length() - 1);
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("通过map构造url报错:{}", e);
             return null;
         }
         if (keyToUpper) {

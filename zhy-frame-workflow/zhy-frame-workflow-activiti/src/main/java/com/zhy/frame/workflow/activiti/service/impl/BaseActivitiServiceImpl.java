@@ -150,7 +150,7 @@ public class BaseActivitiServiceImpl implements BaseActivitiService {
 //            is.close();
 //            System.out.println("图片生成成功");
         } catch (IOException e) {
-            LOGGER.error("通过流程id获得流程图报错:{}", e.getMessage());
+            LOGGER.error("通过流程id获得流程图报错:{}", e);
         }
         return imgVo;
     }
@@ -164,7 +164,7 @@ public class BaseActivitiServiceImpl implements BaseActivitiService {
         try {
             imgVo.setFileByte(IOUtils.toByteArray(is));
         } catch (IOException e) {
-            LOGGER.error("根据流程id获得流程图报错:{}", e.getMessage());
+            LOGGER.error("根据流程id获得流程图报错:{}", e);
         }
         return imgVo;
     }

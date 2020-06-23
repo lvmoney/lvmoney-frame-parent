@@ -8,6 +8,8 @@ package com.zhy.frame.demo.seckill.controller;/**
 
 
 import com.zhy.frame.base.core.api.ApiResult;
+import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.exception.CommonException;
 import com.zhy.frame.cache.lock.service.ProdLockService;
 import com.zhy.frame.cache.lock.vo.req.ProdLockInitReqVo;
 import com.zhy.frame.cache.lock.vo.req.ProdLockStockReqVo;
@@ -89,6 +91,16 @@ public class DemoController {
         prodLockStockReqVo.setNum(-1);
         prodLockStockReqVo.setProdId("10000");
         return ApiResult.success(prodLockService.getStock(prodLockStockReqVo));
+    }
+
+    @GetMapping(value = "frame/lock/error")
+    public ApiResult<String> error() {
+        throw new BusinessException(CommonException.Proxy.PARAM_ERROR);
+    }
+
+    @GetMapping(value = "frame/lock/succ")
+    public ApiResult<String> succ() {
+        return new ApiResult<>("succ");
     }
 
 }

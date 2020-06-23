@@ -169,7 +169,7 @@ public class FrameExceptionHandlerAdvice {
         try {
             httpResponse.getWriter().print(json);
         } catch (IOException e) {
-            LOGGER.error("其他错误处理response返回处理报错：{}", e.getMessage());
+            LOGGER.error("其他错误处理response返回处理报错：{}", e);
         }
     }
 

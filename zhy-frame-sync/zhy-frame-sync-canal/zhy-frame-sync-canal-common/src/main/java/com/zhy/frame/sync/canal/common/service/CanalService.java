@@ -67,20 +67,13 @@ public interface CanalService {
     void deleteDb(DbMsgVo dbMsgVo, CanalEntry.RowChange rowChange);
 
     /**
-     * @describe: 分页获得数据
-     * @param: [page, key]
-     * @return: com.zhy.common.vo.Page
-     * @author： lvmoney /XXXXXX有限公司
-     * 2019/7/21 20:32
-     */
-    /**
      * 分页获得数据
-     *
-     * @param page: 获得分页数据
-     * @param key:  key
-     * @return: com.zhy.common.vo.Page
+     * @param page:
+     * @param key:
+     * @return: com.zhy.frame.core.vo.Page
+     * @throws
      * @author: lvmoney /XXXXXX科技有限公司
-     * @date: 2019/9/9 19:53
+     * @date: 2020/6/9 14:39
      */
     Page getData(Page page, String key);
 

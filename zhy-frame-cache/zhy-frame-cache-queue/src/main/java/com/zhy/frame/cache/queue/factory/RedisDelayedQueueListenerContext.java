@@ -9,7 +9,7 @@ package com.zhy.frame.cache.queue.factory;/**
 
 import com.zhy.frame.base.core.exception.BusinessException;
 import com.zhy.frame.cache.common.exception.CacheException;
-import com.zhy.frame.cache.queue.annation.QueueImpl;
+import com.zhy.frame.cache.queue.annotations.QueueImpl;
 import com.zhy.frame.cache.queue.service.RedisDelayedQueueService;
 import com.zhy.frame.cache.queue.vo.MessageVo;
 import org.apache.commons.lang3.StringUtils;

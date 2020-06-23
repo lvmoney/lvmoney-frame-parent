@@ -61,7 +61,7 @@ public class WebSocketServer implements Runnable {
 
             serverChannelFuture = serverBootstrap.bind(port).sync();
         } catch (Exception e) {
-            logger.info(e.getMessage());
+            logger.error("构造netty报错:{}", e);
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
             e.printStackTrace();

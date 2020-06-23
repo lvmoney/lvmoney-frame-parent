@@ -32,7 +32,7 @@ public class FrameAsyncExceptionHandler implements AsyncUncaughtExceptionHandler
     public void handleUncaughtException(Throwable throwable, Method method, Object... obj) {
         String msg = throwable.getMessage();
         String methodName = method.getName();
-        LOGGER.error("Exception message :{}", throwable.getMessage());
+        LOGGER.error("Exception message :{}", throwable);
         LOGGER.error("Method name :{}", method.getName());
         String clazz = method.getDeclaringClass().getName();
         LOGGER.error("Class name :{}", clazz);

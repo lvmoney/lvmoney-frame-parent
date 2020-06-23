@@ -64,7 +64,7 @@ public class K8sServiceImpl implements K8sService {
             System.out.println("list sucess");
         } catch (Exception e) {
             System.out.println("list failed");
-            LOGGER.error("获得所有的命名空间报错:{}", e.getMessage());
+            LOGGER.error("获得所有的命名空间报错:{}", e);
 
         }
         return namespaceList;
@@ -99,12 +99,12 @@ public class K8sServiceImpl implements K8sService {
                     try {
                         fis.close();
                     } catch (Exception e2) {
-                        LOGGER.error("获得所有的节点报错:{}", e2.getMessage());
+                        LOGGER.error("获得所有的节点报错:{}", e2);
                     }
                 }
             }
         } catch (Exception e) {
-            LOGGER.error("获得所有的节点报错:{}", e.getMessage());
+            LOGGER.error("获得所有的节点报错:{}", e);
         }
         return nodeList;
     }

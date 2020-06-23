@@ -13,7 +13,7 @@ import com.zhy.frame.authentication.uri.constant.UriConstant;
 import com.zhy.frame.authentication.uri.ro.SysUriRo;
 import com.zhy.frame.authentication.uri.service.UriService;
 import com.zhy.frame.authentication.uri.vo.SysUriVo;
-import com.zhy.frame.cache.common.annation.CacheImpl;
+import com.zhy.frame.cache.common.annotations.CacheImpl;
 import com.zhy.frame.cache.common.constant.CacheConstant;
 import com.zhy.frame.cache.common.service.CacheCommonService;
 import org.springframework.beans.factory.annotation.Value;

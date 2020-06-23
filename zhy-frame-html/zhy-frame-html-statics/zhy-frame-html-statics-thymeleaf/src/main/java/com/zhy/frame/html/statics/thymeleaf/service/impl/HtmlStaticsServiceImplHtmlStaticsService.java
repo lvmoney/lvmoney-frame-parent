@@ -57,13 +57,13 @@ public class HtmlStaticsServiceImplHtmlStaticsService extends BaseHtmlStaticsSer
             templateEngine.process(modelAndView.getViewName(), ctx, fileWriter);
             LOGGER.info("已生成静态文件：" + fileName);
         } catch (Exception e) {
-            LOGGER.error("html静态化失败:{}", e.getMessage());
+            LOGGER.error("html静态化失败:{}", e);
         } finally {
             if (fileWriter != null) {
                 try {
                     fileWriter.close();
                 } catch (Exception e2) {
-                    LOGGER.error("html静态化关闭fileWriter报错:{}", e2.getMessage());
+                    LOGGER.error("html静态化关闭fileWriter报错:{}", e2);
                 }
             }
         }

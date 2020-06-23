@@ -29,7 +29,7 @@ public class ObjectSerializerUtil {
                 ObjectInputStream ois = new ObjectInputStream(bis);
                 return ois.readObject();
             } catch (Exception e) {
-                LOGGER.info("[异常信息] {}", e.getMessage());
+                LOGGER.info("[异常信息] {}", e);
             }
             return null;
         } else {
@@ -57,7 +57,7 @@ public class ObjectSerializerUtil {
                 oos.close();
                 return bos.toByteArray();
             } catch (IOException e) {
-                LOGGER.error("序列化对象报错:{}", e.getMessage());
+                LOGGER.error("序列化对象报错:{}", e);
             }
             return null;
         } else {
