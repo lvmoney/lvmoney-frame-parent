@@ -61,7 +61,7 @@ public class YamlUtil {
         }
         List<Object> yamlData = new ArrayList();
         yamlBuildVo.getData().stream().forEach(e -> {
-            Map<String, Object> map = (Map<String, Object>) yaml.load(JsonUtil.t2JsonString(e));
+            Map<String, Object> map = (Map<String, Object>) yaml.load(JsonUtil.t2JsonString(3));
             yamlData.add(map);
         });
         yaml.dumpAll(yamlData.iterator(), fw);

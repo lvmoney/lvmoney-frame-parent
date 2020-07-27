@@ -9,6 +9,7 @@ package com.zhy.demo.rabbitmq.customer;/**
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.ExchangeTypes;

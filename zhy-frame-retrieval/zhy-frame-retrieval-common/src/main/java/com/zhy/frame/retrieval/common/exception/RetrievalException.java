@@ -47,9 +47,18 @@ public interface RetrievalException {
          */
         ES_DELETE_FIELDS_IS_REQUIRED(ExceptionCodeLevel.RETRIEVAL.getValue() + 6, "elasticsearch FIELDS error is Required"),
         /**
-         * 其他
+         * 创建document报错
          */
-        OTHER(ExceptionCodeLevel.ROUTE.getValue() + 7, "未知错误");
+        ES_CREATE_DOCUMENT_ERROR(ExceptionCodeLevel.RETRIEVAL.getValue() + 7, "elasticsearch create document error"),
+        /**
+         * 更新document报错
+         */
+        ES_UPDATE_DOCUMENT_ERROR(ExceptionCodeLevel.RETRIEVAL.getValue() + 8, "elasticsearch update document error"),
+        /**
+         * 删除document报错
+         */
+        ES_DELETE_DOCUMENT_ERROR(ExceptionCodeLevel.RETRIEVAL.getValue() + 9, "elasticsearch delete document error"),
+        ;
         private int code;
         private String description;
 

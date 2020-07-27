@@ -10,6 +10,7 @@ package com.zhy.frame.dispatch.httpclient.service.impl;
 
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.dispatch.common.exception.DispatchException;
 import com.zhy.frame.dispatch.httpclient.service.HttpApiService;
 import com.zhy.frame.dispatch.httpclient.vo.HttpFileResult;

@@ -237,7 +237,8 @@ public class AutocodeDbUtil {
         // 需要生成的表
         List<String> tables = dbVo.getDbTable();
         if (ObjectUtils.isNotEmpty(tables)) {
-            String[] arr = (String[]) tables.toArray();
+            String[] arr;
+            arr = (String[]) tables.toArray();
             strategy.setInclude(arr);
         }
         strategy.setSuperServiceClass(null);

@@ -7,6 +7,7 @@ package com.zhy.frame.cloud.base.util;/**
  */
 
 
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.cloud.base.vo.DockerInfo;
 import com.zhy.frame.core.util.ModuleUtil;
 import org.apache.maven.model.Model;

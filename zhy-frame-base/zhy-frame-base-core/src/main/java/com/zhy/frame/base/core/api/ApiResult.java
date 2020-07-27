@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.util.I18nUtil;
 import com.zhy.frame.base.core.util.YmlUtil;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +18,7 @@ import static com.zhy.frame.base.core.constant.BaseConstant.*;
  * @author: lvmoney /四川******科技有限公司
  * @version:v1.0 2018年9月30日 上午8:51:33
  */
+@ApiModel(value = "统一返回值对象", description = "统一返回值对象")
 public class ApiResult<T> implements Serializable {
     static {
         Object property = YmlUtil.getInstance().getProperty("frame.i18n.support");
@@ -26,21 +29,22 @@ public class ApiResult<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "返回的状态码", required = true)
     private Integer code;
 
+    @ApiModelProperty(value = "是否成功", required = true)
     private boolean success;
-
+    @ApiModelProperty(value = "描述信息", required = false)
     private String msg;
-
+    @ApiModelProperty(value = "返回数据对象", required = false)
     private T data;
     @JSONField(format = API_RESULT_DATA_DATE_FORMAT)
     @JsonFormat(pattern = API_RESULT_DATA_DATE_FORMAT)
+    @ApiModelProperty(value = "返回时间", required = true)
     private Date date;
-
     public Date getDate() {
         return date;
     }
-
     public void setDate(Date date) {
         this.date = date;
     }

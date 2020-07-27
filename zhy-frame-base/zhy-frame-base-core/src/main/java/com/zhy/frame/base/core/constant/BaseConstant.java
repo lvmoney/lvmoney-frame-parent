@@ -263,5 +263,9 @@ public class BaseConstant {
      * 分号
      */
     public static final String SEMICOLON = ";";
+    /**
+     * html 的后缀
+     */
+    public static final String HTML_SUFFIX = ".html";
 
 }

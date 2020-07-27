@@ -7,6 +7,7 @@ package com.zhy.frame.pool.thread.config;/**
  */
 
 
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.core.util.SpringBeanUtil;
 import com.zhy.frame.pool.thread.service.AysnService;
 import com.zhy.frame.pool.thread.vo.UncaughtExceptionVo;
@@ -32,7 +33,7 @@ public class FrameAsyncExceptionHandler implements AsyncUncaughtExceptionHandler
     public void handleUncaughtException(Throwable throwable, Method method, Object... obj) {
         String msg = throwable.getMessage();
         String methodName = method.getName();
-        LOGGER.error("Exception message :{}", throwable);
+        LOGGER.error("Exception message :{}", JsonUtil.t2JsonString(throwable));
         LOGGER.error("Method name :{}", method.getName());
         String clazz = method.getDeclaringClass().getName();
         LOGGER.error("Class name :{}", clazz);

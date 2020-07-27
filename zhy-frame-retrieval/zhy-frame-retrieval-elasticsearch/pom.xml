@@ -20,6 +20,10 @@
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.zhy.frame</groupId>
             <artifactId>zhy-frame-retrieval-common</artifactId>
             <version>${project.parent.version}</version>

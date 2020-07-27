@@ -7,7 +7,7 @@ package com.zhy.frame.office.word.vo;/**
  */
 
 
-import com.zhy.frame.office.word.enums.WordTemplate;
+import com.zhy.frame.office.word.enums.WTemplateEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +25,6 @@ import java.io.Serializable;
 public class WordTemplateParams implements Serializable {
     private static final long serialVersionUID = -1386012864435093369L;
     private String paramName;
-    private WordTemplate wordTemplate;
+    private WTemplateEnum wTemplateEnum;
     private String templateParam;
 }

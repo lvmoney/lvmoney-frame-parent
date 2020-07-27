@@ -17,6 +17,7 @@
         <module>zhy-frame-newsql-tidb</module>
         <module>zhy-frame-newsql-hugegraph</module>
         <module>zhy-frame-newsql-vitess</module>
+        <module>zhy-frame-newsql-clickhouse</module>
     </modules>
 
 

@@ -10,6 +10,7 @@ import com.zhy.frame.authentication.oauth2.center.ro.Oauth2ClientDetailRo;
 import com.zhy.frame.authentication.oauth2.center.service.Oauth2RedisService;
 import com.zhy.frame.authentication.oauth2.center.vo.AuthorizationVo;
 import com.zhy.frame.authentication.oauth2.center.vo.resp.AuthorizationRespVo;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.cache.redis.service.BaseRedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -8,6 +8,7 @@ package com.zhy.frame.core.util;/**
 
 
 import com.zhy.frame.base.core.constant.BaseConstant;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.core.vo.SplitFileVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +63,7 @@ public class SplitFileUtil {
                 spiltWrite(file, count - 1, offSet, length);
             }
         } catch (FileNotFoundException e) {
-            LOGGER.error("没有找到对应的文件:{}", file);
+            LOGGER.error("没有找到对应的文件:{},错误原因是：{}", file, e);
             return false;
         } catch (IOException e) {
             LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e);
@@ -213,7 +214,7 @@ public class SplitFileUtil {
                 result.add(splitFileVo);
             }
         } catch (FileNotFoundException e) {
-            LOGGER.error("没有找到对应的文件:{}", file);
+            LOGGER.error("没有找到对应的文件:{},错误的原因是:{}", file, e);
         } catch (IOException e) {
             LOGGER.error("文件切割失败:{}，错误原因是：{}", file, e);
         } finally {

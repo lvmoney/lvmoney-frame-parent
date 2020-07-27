@@ -21,8 +21,8 @@ import java.util.List;
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class WordTablesVo implements Serializable {
     private static final long serialVersionUID = -8798237224216550240L;
     /**
@@ -42,6 +42,7 @@ public class WordTablesVo implements Serializable {
      * 描述
      */
     private String dataDesc;
+
 
     /**
      * table的宽度

@@ -82,6 +82,16 @@ public interface GatewayException {
         SIMPLE_ROUTE_SUPPORT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 9, "frame.simpleRoute.support value is 'true' or 'false'"),
 
         /**
+         * 重复提交支持
+         */
+        REPEAT_SUBMIT_SUPPORT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 10, "frame.repeatSubmit.support value is 'true' or 'false'"),
+
+
+        /**
+         * 重复提交错误
+         */
+        REPEAT_SUBMIT_ERROR(ExceptionCodeLevel.ROUTE.getValue() + 12, "short time resubmission error"),
+        /**
          * 其他
          */
         OTHER(ExceptionCodeLevel.ROUTE.getValue() + 99, "未知错误");

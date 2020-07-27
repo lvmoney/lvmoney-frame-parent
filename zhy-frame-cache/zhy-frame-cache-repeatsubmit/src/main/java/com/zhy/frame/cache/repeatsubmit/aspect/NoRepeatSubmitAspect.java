@@ -56,8 +56,8 @@ public class NoRepeatSubmitAspect {
      */
     @Value("${log.noToken.username:username}")
     private String username;
-    @Value("${repeactsubmit.time:10}")
-    private int repeactsubmitTime;
+    @Value("${repeatsubmit.time:10}")
+    private int repeatSubmitTime;
 
     @Autowired
     DistributedLockerService distributedLockerService;
@@ -66,7 +66,7 @@ public class NoRepeatSubmitAspect {
     RepeatSubmitConfigProp repeatSubmitConfigProp;
 
     /**
-     * json控制
+     * json空值
      */
     private static final String JSON_EMPTY_VALUE = "{}";
 
@@ -153,7 +153,7 @@ public class NoRepeatSubmitAspect {
                 /**
                  * 只要是同一个请求地址，就做了重复提交限制，体验不是很好
                  */
-                repeactsubmitTime = noRepeatSubmit.time();
+                repeatSubmitTime = noRepeatSubmit.time();
 
             } else {
                 /**
@@ -164,11 +164,11 @@ public class NoRepeatSubmitAspect {
                 SignVo signVo = new SignVo();
                 signVo.setData(data);
                 lockKey = lockKey + BaseConstant.CONNECTOR_UNDERLINE + SignUtil.signature(name, signVo);
-                repeactsubmitTime = noRepeatSubmit.time();
+                repeatSubmitTime = noRepeatSubmit.time();
             }
         }
 
-        boolean lock = distributedLockerService.tryLock(lockKey, TimeUnit.SECONDS, 1, repeactsubmitTime);
+        boolean lock = distributedLockerService.tryLock(lockKey, TimeUnit.SECONDS, 1, repeatSubmitTime);
         if (lock) {
             proceed = joinPoint.proceed();
             return proceed;

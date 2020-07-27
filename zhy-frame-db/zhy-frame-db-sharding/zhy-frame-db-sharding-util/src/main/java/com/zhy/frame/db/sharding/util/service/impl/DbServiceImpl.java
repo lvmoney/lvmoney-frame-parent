@@ -9,6 +9,7 @@ package com.zhy.frame.db.sharding.util.service.impl;/**
 
 import com.github.dozermapper.core.Mapper;
 import com.zhy.frame.base.core.constant.BaseConstant;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.core.util.ConsistentHashVirtualNodeUtil;
 import com.zhy.frame.db.sharding.util.constant.DbUtilConstant;
 import com.zhy.frame.db.sharding.util.service.DbService;
@@ -139,7 +140,7 @@ public class DbServiceImpl implements DbService {
             try {
                 conn.close();
             } catch (SQLException e) {
-                LOGGER.error("close connection failure", e);
+                LOGGER.error("close connection failure,{}", e);
             }
         }
     }

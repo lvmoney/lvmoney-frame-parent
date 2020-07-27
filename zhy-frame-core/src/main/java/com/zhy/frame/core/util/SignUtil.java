@@ -206,7 +206,7 @@ public class SignUtil {
             Collections.sort(infoIds, new Comparator<Map.Entry<String, String>>() {
                 @Override
                 public int compare(Map.Entry<String, String> o1, Map.Entry<String, String> o2) {
-                    return (o1.getKey()).toString().compareTo(o2.getKey());
+                    return (o1.getKey().toLowerCase()).compareTo(o2.getKey().toLowerCase());
                 }
             });
             // 构造URL 键值对的格式

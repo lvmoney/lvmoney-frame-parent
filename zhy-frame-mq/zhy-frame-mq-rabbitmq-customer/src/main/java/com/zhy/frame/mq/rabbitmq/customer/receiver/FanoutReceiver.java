@@ -9,6 +9,7 @@ package com.zhy.frame.mq.rabbitmq.customer.receiver;/**
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.mq.common.exception.MqException;
 import com.zhy.frame.mq.common.vo.MessageVo;
 import com.zhy.frame.mq.rabbitmq.common.constant.RabbitmqConstant;

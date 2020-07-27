@@ -36,7 +36,10 @@ public class GatewayConstant {
 
     public static final String LOCALHOST_IP = "127.0.0.1";
 
-
+    /**
+     * 重复提交名单前缀
+     */
+    public static final String REPEAT_SUBMIT_PREFIX = "SERVER_REPEAT_SUBMIT";
 
 
 }

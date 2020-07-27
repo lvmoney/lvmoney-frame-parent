@@ -159,4 +159,25 @@ hugegraph
 1300515928@qq.com  
 lvmoney
 
+#### 其他说明 
+
+架构没有使用springcloud的全家桶
+
+![以nacos为核心](https://images.gitee.com/uploads/images/2020/0724/094358_2bb5e1a0_107773.png "nacos.png")
+
+我们的架构
+
+![以istio为核心](https://images.gitee.com/uploads/images/2020/0724/094538_3207dbea_107773.png "frame-zhy.png")
+
+roadmap
+
+![roadmap](https://images.gitee.com/uploads/images/2020/0724/095048_f4de7e47_107773.png "roadmap.png")
+
+我们内部使用的业务中台和数据中台双中台战略，具体ppt可以联系lvmoney
+
+
+
+
+
+
 

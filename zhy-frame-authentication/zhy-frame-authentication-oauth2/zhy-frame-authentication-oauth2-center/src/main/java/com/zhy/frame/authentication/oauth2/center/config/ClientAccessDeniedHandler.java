@@ -3,6 +3,7 @@ package com.zhy.frame.authentication.oauth2.center.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.base.core.api.ApiResult;
+import com.zhy.frame.base.core.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

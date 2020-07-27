@@ -275,7 +275,7 @@ public class TreeUtil {
                 }
             }
         } catch (Exception e) {
-            LOGGER.error("添加子节点报错", e);
+            LOGGER.error("添加子节点报错{}", e);
             throw new RuntimeException(e);
         }
     }

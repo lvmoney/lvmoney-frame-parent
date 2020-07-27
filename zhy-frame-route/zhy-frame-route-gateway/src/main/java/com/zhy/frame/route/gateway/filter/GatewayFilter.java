@@ -15,20 +15,28 @@ import com.zhy.frame.authentication.util.util.JwtUtil;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
 import com.zhy.frame.base.core.exception.BusinessException;
+import com.zhy.frame.base.core.util.JsonUtil;
 import com.zhy.frame.base.core.util.SupportUtil;
+import com.zhy.frame.cache.common.exception.CacheException;
+import com.zhy.frame.cache.lock.service.DistributedLockerService;
 import com.zhy.frame.cloud.common.service.AuthorizedService;
 import com.zhy.frame.cloud.common.vo.AuthorizedVo;
 import com.zhy.frame.core.enums.InternalService;
 import com.zhy.frame.core.util.IpUtil;
+import com.zhy.frame.core.util.SignUtil;
 import com.zhy.frame.core.vo.ServerInfo;
+import com.zhy.frame.core.vo.SignVo;
 import com.zhy.frame.core.vo.UserVo;
 import com.zhy.frame.route.gateway.constant.GatewayConstant;
+import com.zhy.frame.route.gateway.enums.NoRepeatSubmitEnum;
 import com.zhy.frame.route.gateway.exception.GatewayException;
 import com.zhy.frame.route.gateway.feign.IAuthorityCheckClient;
 import com.zhy.frame.route.gateway.service.Gateway2RedisService;
+import com.zhy.frame.route.gateway.service.RepeatSubmitService;
 import com.zhy.frame.route.gateway.service.ServerService;
 import com.zhy.frame.route.gateway.service.WhiteListService;
 import com.zhy.frame.route.gateway.utils.ExceptionUtil;
+import com.zhy.frame.route.gateway.vo.RepeatSubmitVo;
 import com.zhy.frame.route.gateway.vo.WhiteListVo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +57,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -85,6 +94,9 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     @Value("${frame.releaseServer.support:false}")
     boolean releaseServerSupport;
 
+    @Value("${frame.repeatSubmit.support:false}")
+    private String repeatSupport;
+
     private static final String LOCALHOST_NAME = "localhost";
     /**
      * 开发local本地环境以http或者https开头，http包含了https
@@ -111,6 +123,18 @@ public class GatewayFilter implements GlobalFilter, Ordered {
     UserCommonService userCommonService;
     @Autowired
     IAuthorityCheckClient iAuthorityCheckClient;
+    @Autowired
+    RepeatSubmitService repeatSubmitService;
+
+    @Value("${repeatsubmit.time:10}")
+    private int repeatSubmitTime;
+    /**
+     * json空值
+     */
+    private static final String JSON_EMPTY_VALUE = "{}";
+
+    @Autowired
+    DistributedLockerService distributedLockerService;
 
     /**
      * @describe:1、直接能够访问的接口都是一些常用、不重要、不需要校验的接口 考虑到很多情况都是遭遇到非信任系统的调用攻击，所以需要校验发起调用的服务是否已被授权调用
@@ -120,6 +144,7 @@ public class GatewayFilter implements GlobalFilter, Ordered {
      * 如果是需要shiro校验，那么必须开启jwt校验，需要调用一个服务即校验jwt也要校验shiro，
      * <p>
      * 1、是否需要gateway支持====>2、白名单校验=====>3、sysId是否被授权====>4、是否被允许调用======>5、权限校验=======>6、服务访问
+     * ====》7、幂等性校验
      * @param: [exchange, chain]
      * @return: reactor.core.publisher.Mono<java.lang.Void>
      * @author: lvmoney /XXXXXX科技有限公司
@@ -196,6 +221,18 @@ public class GatewayFilter implements GlobalFilter, Ordered {
         } else if (!isShiro(realPath, token, serverInfo)) {
             serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
             return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.SHIRO_CHECK_ERROR))));
+        }
+        //8、重复提交
+        if (!SupportUtil.support(repeatSupport)) {
+            serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
+            return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.REPEAT_SUBMIT_SUPPORT_ERROR))));
+        } else if (BaseConstant.SUPPORT_FALSE.equals(repeatSupport)) {
+            return chain.filter(exchange);
+        } else {
+            if (isRepeatSubmit(token, realPath, exchange, serverInfo)) {
+                serverHttpResponse.setStatusCode(HttpStatus.CONFLICT);
+                return serverHttpResponse.writeWith(Flux.just(ExceptionUtil.filterExceptionHandle(serverHttpResponse, new BusinessException(GatewayException.Proxy.REPEAT_SUBMIT_ERROR))));
+            }
         }
         return chain.filter(exchange);
     }
@@ -481,6 +518,80 @@ public class GatewayFilter implements GlobalFilter, Ordered {
             }
         }
         return false;
+    }
+
+    /**
+     * 幂等性校验
+     * 如果token为空直接返回不是重复提交
+     * 如果在实体中没有获得重复提交的策略直接返回不是重复提交
+     * 一种以时间来锁请求的url，一种更严格加时间来锁请求的url+请求的数据
+     * 锁的时间可以通过请求的实体配置，如果时间没有配置那就以配置的全局时间为准
+     *
+     * @param token:
+     * @param realPath:
+     * @throws
+     * @return: boolean
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/7/16 9:10
+     */
+    private boolean isRepeatSubmit(String token, String realPath, ServerWebExchange exchange, ServerInfo serverInfo) {
+        if (StringUtils.isEmpty(token)) {
+            return false;
+        }
+
+        String serverName = serverInfo.getServerName();
+        RepeatSubmitVo repeatSubmitVo = getRepeatSubmitVoByPath(serverName, realPath);
+        if (ObjectUtils.isEmpty(repeatSubmitVo)) {
+            return false;
+        } else {
+            ServerHttpRequest request = exchange.getRequest();
+            String ip = request.getURI().getHost();
+            String lockKey = token + BaseConstant.CONNECTOR_UNDERLINE + realPath + BaseConstant.CONNECTOR_UNDERLINE + ip;
+
+            if (NoRepeatSubmitEnum.ALLOW.equals(repeatSubmitVo.getRepeatSubmitEnum())) {
+                return false;
+            } else if (NoRepeatSubmitEnum.NOT_ALLOW.equals(repeatSubmitVo.getRepeatSubmitEnum())) {
+                /**
+                 * 这里对非file请求，进行签名，生成唯一的hash值，用来作为lockKey，以达到我们请求参数不同被认为是不同的请求
+                 */
+                String data = JsonUtil.t2JsonString(request.getQueryParams());
+                data = JSON_EMPTY_VALUE.equals(data) ? serverName : data;
+                SignVo signVo = new SignVo();
+                signVo.setData(data);
+                lockKey = lockKey + BaseConstant.CONNECTOR_UNDERLINE + SignUtil.signature(token, signVo);
+            }
+            int submitTime = 0;
+            if (repeatSubmitVo.getRepeatSubmitTime() == null) {
+                submitTime = repeatSubmitTime;
+            } else {
+                submitTime = repeatSubmitVo.getRepeatSubmitTime();
+            }
+            boolean lock = distributedLockerService.tryLock(lockKey, TimeUnit.SECONDS, 1, submitTime);
+            if (lock) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    /**
+     * 获取请求路径的策略
+     *
+     * @param serverName:
+     * @param path:
+     * @throws
+     * @return: com.zhy.frame.route.gateway.vo.RepeatSubmitVo
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2020/7/16 9:57
+     */
+    private RepeatSubmitVo getRepeatSubmitVoByPath(String serverName, String path) {
+        List<RepeatSubmitVo> repeatSubmitVoList = repeatSubmitService.getRepeatSubmitVoByServerName(serverName);
+        try {
+            return repeatSubmitVoList.stream().filter(s -> s.getPath().equals(path)).findFirst().get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

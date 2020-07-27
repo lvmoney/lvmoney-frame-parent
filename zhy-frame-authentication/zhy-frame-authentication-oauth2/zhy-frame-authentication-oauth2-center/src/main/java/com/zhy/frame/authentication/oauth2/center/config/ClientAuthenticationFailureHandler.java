@@ -7,6 +7,7 @@ import com.zhy.frame.authentication.common.exception.AuthorityException;
 import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.constant.BaseConstant;
+import com.zhy.frame.base.core.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;

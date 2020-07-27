@@ -8,6 +8,7 @@ import com.zhy.frame.authentication.oauth2.center.exception.CustomOauthException
 import com.zhy.frame.authentication.oauth2.center.vo.RoleEnum;
 import com.zhy.frame.base.core.api.ApiResult;
 import com.zhy.frame.base.core.exception.CommonException;
+import com.zhy.frame.base.core.util.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

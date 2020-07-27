@@ -63,7 +63,8 @@ public class FrameExceptionHandlerAdvice {
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     public void handle(HttpServletRequest request, HttpServletResponse res, NoHandlerFoundException e) {
-        LOGGER.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+        e.printStackTrace();
         String msg = e.getLocalizedMessage();
         Integer status = getCodeByErrorMsg(msg);
         res.setStatus(HttpStatus.CONFLICT.value());
@@ -72,7 +73,8 @@ public class FrameExceptionHandlerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ApiResult<?> handler(MethodArgumentNotValidException e, HttpServletResponse res) {
-        LOGGER.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+        e.printStackTrace();
         List<BeanValidateExceptionVo> data = new ArrayList<>();
         e.getBindingResult().getFieldErrors().forEach(el -> {
             BeanValidateExceptionVo beanValidateExceptionVo = new BeanValidateExceptionVo();
@@ -97,14 +99,16 @@ public class FrameExceptionHandlerAdvice {
      */
     @ExceptionHandler(Exception.class)
     public ApiResult<?> handleException(HttpServletRequest req, HttpServletResponse res, Exception e) {
-        LOGGER.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+        e.printStackTrace();
         res.setStatus(HttpStatus.CONFLICT.value());
         return ApiResult.error(CommonException.Proxy.OTHER_ERROR.getCode(), CommonException.Proxy.OTHER_ERROR.getDescription());
     }
 
     @ExceptionHandler(RetryableException.class)
     public ApiResult<?> handleConnectException(HttpServletRequest req, HttpServletResponse res, Exception e) {
-        LOGGER.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+        e.printStackTrace();
         res.setStatus(HttpStatus.CONFLICT.value());
         return ApiResult.error(CommonException.Proxy.FEIGN_CONNECTION_REFUSED.getCode(), CommonException.Proxy.FEIGN_CONNECTION_REFUSED.getDescription());
     }
@@ -123,7 +127,8 @@ public class FrameExceptionHandlerAdvice {
      */
     @ExceptionHandler(BusinessException.class)
     public ApiResult<?> handleBusinessException(HttpServletRequest req, HttpServletResponse res, BusinessException e) {
-        LOGGER.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+        e.printStackTrace();
         res.setStatus(HttpStatus.CONFLICT.value());
         return ApiResult.error(e.getCode(), e.getMessage());
     }
@@ -141,7 +146,8 @@ public class FrameExceptionHandlerAdvice {
      */
     @ExceptionHandler(BindException.class)
     public ApiResult<?> handleBindException(HttpServletRequest req, HttpServletResponse res, BindException e) {
-        LOGGER.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+        e.printStackTrace();
         BindException bException = (BindException) e;
         List<BeanValidateExceptionVo> excepitonVos = new ArrayList<>();
         //解析原错误信息，封装后返回，此处返回非法的字段名称，原始值，错误信息
@@ -170,6 +176,7 @@ public class FrameExceptionHandlerAdvice {
             httpResponse.getWriter().print(json);
         } catch (IOException e) {
             LOGGER.error("其他错误处理response返回处理报错：{}", e);
+            e.printStackTrace();
         }
     }
 

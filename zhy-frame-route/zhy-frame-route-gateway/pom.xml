@@ -49,7 +49,7 @@
 
         <dependency>
             <groupId>com.zhy.frame</groupId>
-            <artifactId>zhy-frame-cache-redis</artifactId>
+            <artifactId>zhy-frame-cache-lock</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
