@@ -1,0 +1,34 @@
+server:
+  port: 8098
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: 192.168.10.58:9092,192.168.10.59:9092
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      max-poll-records: 1
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 5
+  redis:
+    database: 5
+    port: 6379
+    host: 192.168.10.74
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务调用方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+frame:
+  swagger:
+    support: true
+redisson:
+  address: redis://192.168.10.74:6379
+  password:

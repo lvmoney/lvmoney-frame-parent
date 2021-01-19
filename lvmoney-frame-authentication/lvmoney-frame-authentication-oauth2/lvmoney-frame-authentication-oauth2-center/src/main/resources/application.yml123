@@ -1,0 +1,80 @@
+server:
+  port: 10380
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+
+spring:
+  # redis配置
+  redis:
+    database: 7
+    port: 6379
+    host: 192.168.10.74
+  application:
+    name: platform-authentication-center
+  # jackson配置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  # cloud配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.20.128.16:8848
+        cluster-name: ${spring.application.name}
+
+    service-registry:
+      auto-registration:
+        enabled: true
+  # 数据源
+  datasource:
+    url: jdbc:mysql://192.168.10.44:3306/platform_apply?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+# mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.lvmoney.authentication.center.server.db.entity
+  global-config:
+    #刷新mapper 调试神器
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: AUTO
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      db-type: mysql
+    refresh: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+baseservice:
+  sms:
+    endpoint: baseservice-sms-dev
+rpc:
+  user:
+    server: http://10.20.128.16:8083
+
+# swagger配置
+swagger:
+  base:
+    package: com.zhy
+  contact:
+    email: author@zhy.com
+    name: author
+    url: ''
+  description: 权限中心
+  title: authentication-resource
+  url: ''
+  version: 1.0

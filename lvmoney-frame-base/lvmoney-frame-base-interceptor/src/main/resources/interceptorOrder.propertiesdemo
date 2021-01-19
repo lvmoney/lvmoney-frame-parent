@@ -1,0 +1,2 @@
+interceptor.order[0]=jwtInterceptor=99
+interceptor.order[1]=fileHeaderCheckInterceptor=999

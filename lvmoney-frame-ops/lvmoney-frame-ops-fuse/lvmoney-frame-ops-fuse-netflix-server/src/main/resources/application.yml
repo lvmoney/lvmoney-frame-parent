@@ -1,0 +1,9 @@
+server:
+  port: 8900
+turbine:
+  app-config: localhost:9902
+  combine-host-port: true
+  cluster-name-expression: new String("default")
+spring:
+  application:
+    name: sc-dashboard

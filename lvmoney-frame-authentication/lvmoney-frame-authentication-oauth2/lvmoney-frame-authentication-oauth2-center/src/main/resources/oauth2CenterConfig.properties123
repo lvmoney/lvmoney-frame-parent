@@ -1,0 +1,17 @@
+center.filterChainDefinitionList[0]=/swagger-ui.html
+center.filterChainDefinitionList[1]=/swagger-resources/**
+center.filterChainDefinitionList[2]=/v2/api-docs
+center.filterChainDefinitionList[3]=/webjars/**
+center.filterChainDefinitionList[4]=/user/me
+center.filterChainDefinitionList[5]=/404
+center.filterChainDefinitionList[6]=/security_check
+center.filterChainDefinitionList[7]=/captcha/**
+center.filterChainDefinitionList[8]=/signUp
+center.filterChainDefinitionList[9]=/signIn
+center.filterChainDefinitionList[10]=favicon.ico
+center.filterChainDefinitionList[11]=/oauth/signUp
+center.filterChainDefinitionList[12]=/login/**
+center.logoutUrl=/logout
+center.logoutSuccessUrl=/signIn?out
+center.loginPage=/signIn
+center.loginProcessingUrl=/security_check

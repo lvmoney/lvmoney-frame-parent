@@ -1,0 +1,57 @@
+nacos:
+  service:
+    address: localhost
+    port: 8848
+spring:
+  redis:
+    host: 10.20.128.234
+    port: 6379
+    database: 3
+  application:
+    name: shiro
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+    service-registry:
+      auto-registration:
+      enabled: true
+server:
+  port: 9010
+# swagger配置
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: feign demo 客户端
+  title: authentication-resource
+  url: ''
+  version: 1.0
+rpc:
+  demo:
+    server: localhost:9060
+feign:
+  httpclient:
+    enabled: true
+  okhttp:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: FULL
+frame:
+  jwt:
+    support: true
+  shiro:
+    support: true
+  requestType:
+    support: true
+operating:
+  environment: nacos
+  internal: internal

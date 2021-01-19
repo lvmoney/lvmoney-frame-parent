@@ -1,0 +1,1 @@
+自动生成数据库相关的实体，dao，service，controller

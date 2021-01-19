@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lvmoney-frame-parent</artifactId>
+        <groupId>com.lvmoney.frame</groupId>
+        <version>1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.roaringbitmap</groupId>
+            <artifactId>RoaringBitmap</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+    </dependencies>
+    <artifactId>lvmoney-frame-demo</artifactId>
+    <modules>
+        <module>demo-frame-api</module>
+        <module>demo-frame-common</module>
+        <module>demo-frame-shiro</module>
+        <module>demo-frame-provider</module>
+        <module>demo-frame-customer</module>
+        <module>demo-frame-seata</module>
+        <module>demo-frame-syn</module>
+        <module>demo-frame-sentinel-client</module>
+        <module>demo-frame-sentinel-provider</module>
+        <module>demo-frame-mongodb</module>
+        <module>demo-frame-profile</module>
+        <module>demo-frame-seckill</module>
+        <module>demo-frame-db</module>
+        <module>demo-frame-resubmit</module>
+        <module>demo-frame-skywalking</module>
+        <module>demo-frame-cache</module>
+        <module>demo-frame-caffeine</module>
+        <module>demo-frame-rabbitmq</module>
+        <module>demo-frame-video</module>
+        <module>demo-frame-serialize</module>
+        <module>demo-frame-simple</module>
+        <module>demo-frame-clickhouse</module>
+        <module>demo-frame-file</module>
+        <module>demo-frame-bitMap</module>
+        <module>demo-frame-sharding</module>
+        <module>demo-frame-sharding2</module>
+        <module>demo-frame-transaction-provider</module>
+        <module>demo-frame-transaction-customer</module>
+        <module>demo-frame-istio</module>
+        <module>demo-frame-istio-client</module>
+    </modules>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.vesion>3.6.0</maven.compiler.vesion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.lvmoney.frame</groupId>
+                <artifactId>lvmoney-frame-core</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lvmoney.frame</groupId>
+                <artifactId>lvmoney-frame-authentication-jwt</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lvmoney.frame</groupId>
+                <artifactId>lvmoney-frame-authentication-shiro</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.lvmoney.frame</groupId>
+                <artifactId>lvmoney-frame-db-mysql-common</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lvmoney.frame</groupId>
+                <artifactId>lvmoney-frame-config-client</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvmoney.frame</groupId>
+                <artifactId>lvmoney-frame-bom</artifactId>
+                <version>1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

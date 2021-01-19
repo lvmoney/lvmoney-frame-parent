@@ -1,0 +1,6 @@
+frame:
+  testing:
+    output: test-output
+    filename: 测试报告2.html
+    title: 服务测试报告
+    name: 服务测试报告

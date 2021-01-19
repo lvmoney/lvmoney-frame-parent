@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>工作流</title>
+    <script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btn').click(function () {
+                $.ajax({
+                    url: "/login",
+                    type: "POST",
+                    data: {
+                        "username": $("#username").val()
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            if (data.info.type == 1) {
+                                location.href = "/home";
+                            } else {
+                                location.href = "/homeApprover";
+                            }
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div>
+    <span>登录</span>
+    <input id="username" placeholder="用户名"/><br/>
+    <button type="button" id="btn">提交</button>
+</div>
+</body>
+
+
+</html>
+
+<style>
+    * {
+        font-family: "微软雅黑";
+        font-size: 15px;
+        margin: 0 auto;
+    }
+
+    div {
+        width: 400px;
+        margin-top: 100px;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    input, button {
+        margin-top: 10px;
+    }
+
+    input {
+        width: 400px;
+        padding: 5px 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 5px 0;
+        width: 408px;
+    }
+</style>
+

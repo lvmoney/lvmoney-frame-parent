@@ -1,0 +1,16 @@
+server:
+  port: 9908
+spring:
+  application:
+    name: provider
+swagger:
+  base:
+    package: com.lvmoney.frame.pool.disruptor.function
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0

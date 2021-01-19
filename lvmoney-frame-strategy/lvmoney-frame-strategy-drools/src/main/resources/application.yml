@@ -1,0 +1,27 @@
+server:
+  port: 8094
+  servlet:
+    context-path: /
+logging:
+  config: classpath:logback-boot.xml
+logback:
+  level: debug
+  #prdouct default data
+product:
+  xc:
+    profit: 15d
+    charge: 0.1d
+  tb:
+    profit: 15d
+    charge: 0.05d
+swagger:
+  base:
+    package: com.lvmoney.frame.strategy.drools.function
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0

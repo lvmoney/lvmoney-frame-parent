@@ -1,0 +1,17 @@
+frame:
+  html:
+    statics:
+      path: D:\sclt\jar
+swagger:
+  base:
+    package: com.lvmoney.frame.html.statics
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+server:
+  port: 9904

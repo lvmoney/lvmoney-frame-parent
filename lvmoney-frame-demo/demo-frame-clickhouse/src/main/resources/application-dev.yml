@@ -1,0 +1,30 @@
+swagger:
+  base:
+    package: com.lvmoney.frame.demo.clickhouse.controller
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+frame:
+  swagger:
+    support: true
+  db:
+    clickhouse:
+      host: 192.168.10.74
+      port: 8123
+      user: default
+      password:
+      database: log_platform
+  logback:
+    support: true
+    clickhouse:
+      batchSize: 2
+      intervalDate: 6000
+server:
+  port: 7766
+logging:
+  config: classpath:logback-spring.xml
