@@ -1,5 +1,0 @@
-spring:
-  cloud:
-    function:
-      scan:
-        packages: com.zhy.frame.serverless.faas.function

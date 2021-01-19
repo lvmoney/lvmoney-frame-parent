@@ -1,1 +1,0 @@
-可以使用logstash,canal等技术直接定时把mysql数据库的数据同步到es中,文档在百度云盘

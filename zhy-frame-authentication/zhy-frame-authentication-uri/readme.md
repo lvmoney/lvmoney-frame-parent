@@ -1,1 +1,0 @@
-@SysServer通用权限注解,通过该注解把系统提供的的service url保存到redis中

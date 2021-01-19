@@ -1,8 +1,0 @@
-spring:
-  data:
-    elasticsearch:
-      cluster-name: lvmoney-application
-      cluster-nodes: 127.0.0.1:9300
-      repositories.enable: true
-logging:
-  config: classpath:logback-spring.xml
