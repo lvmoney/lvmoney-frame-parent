@@ -14,7 +14,7 @@
 
 #### 使用方式
 
-通过maven依赖的方式引用到项目模块即可。把lvmoney-frame-parent作为所有项目的parent，子项目一般都要引入lvmoney-frame-core，其他模块根据系统需要引入，详见各个module的readme.md。demo 可见 lvmoney-frame-demo
+通过maven依赖的方式引用到项目模块即可。框架通过lvmoney-frame-bom引入了所有依赖和版本，子项目无需把框架作为parent，只需要把lvmoney-frame-bom作为dependencyManagement即可。子项目一般都要引入lvmoney-frame-core，其他模块根据系统需要引入，详见各个module的readme.md。demo 可见 lvmoney-frame-demo。某服务作为rpc服务时，需要自定义api发布到nexus中，那么服务提供方需要引入依赖实现接口功能，服务使用方引入依赖通过feign访问即可
 
 #### 服务支持
 
@@ -121,8 +121,8 @@ nacos
 sentinel  
 ipfs  
 docker  
-k8s1.16.0  
-istio1.3.0  
+k8s1.18.0  
+istio1.8.0  
 flink  
 hadoop  
 shiro  
@@ -171,13 +171,21 @@ lvmoney
 
 我们的架构
 
-![以istio为核心](https://images.gitee.com/uploads/images/2020/0724/094538_3207dbea_107773.png "frame-lvmoney.png")
-
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/114349_87aab8df_107773.png "微信截图_20210119114013.png")
 roadmap
 
-![roadmap](https://images.gitee.com/uploads/images/2020/0724/095048_f4de7e47_107773.png "roadmap.png")
+![roadmap](https://images.gitee.com/uploads/images/2020/0724/095048_f4de7e47_107773.png "roadmap.png")  
+
+服务发布
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/114028_9a74a927_107773.png "微信截图_20210119114013.png")
+
+运行监控
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/114120_899f8c87_107773.png "微信截图_20210119114013.png")
 
 我们内部使用的业务中台和数据中台双中台战略，具体ppt可以联系lvmoney
+
+
+部分博客文档:https://blog.csdn.net/weiranaixi
 
 
 
