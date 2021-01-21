@@ -48,6 +48,7 @@
         <module>demo-frame-transaction-customer</module>
         <module>demo-frame-istio</module>
         <module>demo-frame-istio-client</module>
+        <module>demo-frame-webservice</module>
     </modules>
 
 

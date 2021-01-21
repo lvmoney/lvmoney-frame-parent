@@ -45,6 +45,7 @@
         <module>lvmoney-frame-transaction</module>
         <module>lvmoney-frame-cypher</module>
         <module>lvmoney-frame-docking</module>
+        <module>lvmoney-frame-webservice</module>
     </modules>
 
     <distributionManagement>

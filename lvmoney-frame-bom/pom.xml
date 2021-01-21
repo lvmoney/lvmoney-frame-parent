@@ -156,6 +156,7 @@
         <alibaba-sentinel.version>2.1.0.RELEASE</alibaba-sentinel.version>
         <sentinel-datasource-nacos.version>1.7.2</sentinel-datasource-nacos.version>
         <weixin.binarywang.version>4.0.0</weixin.binarywang.version>
+        <cxf-spring-boot.version>3.2.1</cxf-spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -1191,7 +1192,22 @@
                 <artifactId>weixin-java-cp</artifactId>
                 <version>${weixin.binarywang.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web-services</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <!-- CXF webservice -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+                <version>${cxf-spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>${cxf-spring-boot.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

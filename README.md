@@ -3,7 +3,7 @@
 
 #### 介绍
 
-分布式微服务后台常用技术完全整合架构。基于java springboot springcloud ，通过maven依赖简单的引入即可使用各种常用技术。支持本地开发测试，nacos，k8s(istio)环境
+java版分布式微服务后台常用技术完全整合架构。基于springboot ，springcloud istio，通过maven依赖简单的引入即可使用各种常用技术。支持本地开发测试，nacos，k8s(istio)环境
 
 #### 目的  
 
