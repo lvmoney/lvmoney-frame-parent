@@ -75,7 +75,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <velocity.version>1.7</velocity.version>
         <mybatis-plus-boot-starter.version>3.3.0</mybatis-plus-boot-starter.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <reflections.version>0.9.11</reflections.version>
         <commons-codec.version>1.12</commons-codec.version>
         <commons-net.version>3.6</commons-net.version>
