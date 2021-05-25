@@ -8,6 +8,7 @@ package com.lvmoney.frame.mq.kafka.customer.receiver;/**
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.mq.common.factory.MqDataHandServiceContext;
 import com.lvmoney.frame.mq.common.vo.MessageVo;
 import com.lvmoney.frame.mq.kafka.common.constant.KafkaConstant;
@@ -26,8 +27,8 @@ public class SynchronousReceiver {
     @Autowired
     MqDataHandServiceContext handMqServiceContext;
 
-    @KafkaListener(topics = {KafkaConstant.SYN_QUEUE_NAME}, groupId = KafkaConstant.SYN_QUEUE_GROUP_ID)
-    public void receive(ConsumerRecord consumerRecord) throws InterruptedException {
+    @KafkaListener(topics = {"${frame.mq.name}" + BaseConstant.CONNECTOR_UNDERLINE + KafkaConstant.SYN_QUEUE_NAME}, groupId = KafkaConstant.SYN_QUEUE_GROUP_ID)
+    public void receive(ConsumerRecord consumerRecord) {
         MessageVo mqDataVo = JSONObject.parseObject(consumerRecord.value().toString(), MessageVo.class);
         String mqType = mqDataVo.getMsgType();
         handMqServiceContext.getData(mqType, mqDataVo);

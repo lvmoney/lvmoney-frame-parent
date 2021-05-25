@@ -3,14 +3,14 @@
  * 包名:com.lvmoney.hotel.elasticsearch.ro
  * 版本信息: 版本1.0
  * 日期:2018年11月7日  上午10:37:51
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.retrieval.elasticsearch.eo;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年11月7日 上午10:37:51
  */
 
@@ -20,7 +20,7 @@ import org.springframework.data.elasticsearch.annotations.GeoPointField;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2019年1月3日 下午1:45:54
  */
 @Document(indexName = "company", type = "employee", shards = 1, replicas = 0)

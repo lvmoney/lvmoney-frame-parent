@@ -7,9 +7,9 @@ package com.lvmoney.frame.mq.rabbitmq.customer.receiver;/**
  */
 
 import com.alibaba.fastjson.JSONObject;
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.rabbitmq.client.Channel;
 import com.lvmoney.frame.base.core.exception.BusinessException;
-import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.mq.common.exception.MqException;
 import com.lvmoney.frame.mq.common.vo.MessageVo;
 import com.lvmoney.frame.mq.rabbitmq.common.constant.RabbitmqConstant;
@@ -32,7 +32,7 @@ import java.io.IOException;
 
 
 @Component
-@RabbitListener(queues = RabbitmqConstant.MESSAGE_TOPIC)
+@RabbitListener(queues = "${frame.mq.name}" + BaseConstant.CONNECTOR_UNDERLINE + RabbitmqConstant.MESSAGE_TOPIC)
 public class TopicReceiver {
     private static final Logger LOGGER = LoggerFactory.getLogger(TopicReceiver.class);
     @Autowired

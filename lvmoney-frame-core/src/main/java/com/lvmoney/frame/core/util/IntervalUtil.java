@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.hotel.util
  * 版本信息: 版本1.0
  * 日期:2018年11月23日  上午10:17:17
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.core.util;
@@ -16,7 +16,7 @@ import javax.script.ScriptEngineManager;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年11月23日 上午10:17:17
  */
 

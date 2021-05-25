@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.frame.oss.common.service
  * 版本信息: 版本1.0
  * 日期:2019年1月10日  上午11:54:23
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.oss.common.service;
@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2019年1月10日 上午11:54:23
  */
 

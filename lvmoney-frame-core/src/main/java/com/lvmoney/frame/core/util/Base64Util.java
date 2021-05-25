@@ -3,7 +3,7 @@ package com.lvmoney.frame.core.util;/**
  * 包名:com.lvmoney.jwt.annotations
  * 版本信息: 版本1.0
  * 日期:2019/3/5
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 import com.lvmoney.frame.base.core.constant.BaseConstant;
@@ -19,7 +19,7 @@ import java.util.Base64;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class Base64Util {
@@ -30,7 +30,7 @@ public class Base64Util {
      *
      * @param: [b]
      * @return: java.lang.String
-     * @author： lvmoney /成都三合力通科技有限公司
+     * @author： lvmoney /XXXXXX科技有限公司
      * 2019/3/5
      */
     public static String encode(byte[] b) {
@@ -48,7 +48,7 @@ public class Base64Util {
      *
      * @param: [src]
      * @return: java.lang.String
-     * @author： lvmoney /成都三合力通科技有限公司
+     * @author： lvmoney /XXXXXX科技有限公司
      * 2019/3/5
      */
     public static String encode(String src) {
@@ -63,7 +63,7 @@ public class Base64Util {
      *
      * @param: [s]
      * @return: byte[]
-     * @author： lvmoney /成都三合力通科技有限公司
+     * @author： lvmoney /XXXXXX科技有限公司
      * 2019/3/5
      */
     public static byte[] decode(String s) {
@@ -76,7 +76,7 @@ public class Base64Util {
      *
      * @param: [s]
      * @return: java.lang.String
-     * @author： lvmoney /成都三合力通科技有限公司
+     * @author： lvmoney /XXXXXX科技有限公司
      * 2019/3/5
      */
     public static String decodeStr(String s) {

@@ -8,7 +8,6 @@ package com.lvmoney.frame.mq.common.service;/**
 
 
 import com.lvmoney.frame.mq.common.ro.ErrorRecordRo;
-import com.lvmoney.frame.mq.common.vo.MsgErrorVo;
 
 import java.util.List;
 

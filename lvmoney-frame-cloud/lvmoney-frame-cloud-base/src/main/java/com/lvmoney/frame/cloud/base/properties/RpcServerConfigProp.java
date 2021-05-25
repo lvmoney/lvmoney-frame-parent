@@ -3,7 +3,7 @@
  * 包名:com.chaoqi.springboot_shiro_redis.properties
  * 版本信息: 版本1.0
  * 日期:2019年1月6日  下午4:15:17
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.cloud.base.properties;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2019年1月6日 下午4:15:17
  */
 @Component

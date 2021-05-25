@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 
 /**
  * @describe：表结构发生变化，新增时，先判断数据库实例是否存在，不存在则创建
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年9月30日 上午8:51:33
  */
 @Target({ElementType.METHOD})

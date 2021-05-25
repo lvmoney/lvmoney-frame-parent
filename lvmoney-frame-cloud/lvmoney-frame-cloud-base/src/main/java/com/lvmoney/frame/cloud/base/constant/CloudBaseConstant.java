@@ -32,7 +32,7 @@ public class CloudBaseConstant {
     /**
      * ingress 默认https端口
      */
-    public static final int INGRESS_DEFAULT_HTTPS_PORT = 433;
+    public static final int INGRESS_DEFAULT_HTTPS_PORT = 443;
 
     /**
      * 虚拟服务映射路径默认为根

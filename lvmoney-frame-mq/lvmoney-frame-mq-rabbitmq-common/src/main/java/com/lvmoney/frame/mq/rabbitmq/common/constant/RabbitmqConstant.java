@@ -13,6 +13,9 @@ package com.lvmoney.frame.mq.rabbitmq.common.constant;/**
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class RabbitmqConstant {
+    private RabbitmqConstant() {
+    }
+
     /**
      * 简单的队列
      */

@@ -4,7 +4,7 @@ package com.lvmoney.frame.sync.canal.common.properties;
  * 包名:com.lvmoney.common.handler
  * 版本信息: 版本1.0
  * 日期:2019/2/28
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,7 +20,7 @@ import java.util.Set;
 
 /**
  * @describe：从yml文件中获得配置数据前缀是：canal.server
- * @author: lvmoney/成都三合力通科技有限公司
+ * @author: lvmoney/XXXXXX科技有限公司
  * @version:v1.0 2019/2/28 10:05
  */
 @Component

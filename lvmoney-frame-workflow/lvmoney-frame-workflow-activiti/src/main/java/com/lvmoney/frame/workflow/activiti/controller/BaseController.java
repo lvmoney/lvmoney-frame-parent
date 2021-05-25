@@ -3,7 +3,7 @@ package com.lvmoney.frame.workflow.activiti.controller;/**
  * 包名:com.lvmoney.jwt.annotations
  * 版本信息: 版本1.0
  * 日期:2019/1/22
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 
@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 @RestController

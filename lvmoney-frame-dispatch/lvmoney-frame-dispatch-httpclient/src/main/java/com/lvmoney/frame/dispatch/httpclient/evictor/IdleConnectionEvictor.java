@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.frame.dispatch.httpclient.evictor
  * 版本信息: 版本1.0
  * 日期:2018年10月18日  下午3:43:09
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.dispatch.httpclient.evictor;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月18日 下午3:43:10
  */
 

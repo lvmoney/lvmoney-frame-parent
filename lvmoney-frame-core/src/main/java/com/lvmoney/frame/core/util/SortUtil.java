@@ -3,14 +3,14 @@
  * 包名:gateway.test
  * 版本信息: 版本1.0
  * 日期:2018年11月14日  下午5:18:55
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.core.util;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年11月14日 下午5:18:55
  */
 

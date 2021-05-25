@@ -3,7 +3,7 @@ package com.lvmoney.frame.workflow.activiti.service;/**
  * 包名:com.lvmoney.jwt.annotations
  * 版本信息: 版本1.0
  * 日期:2019/1/23
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public interface BaseActivitiService {
@@ -144,7 +144,7 @@ public interface BaseActivitiService {
      * 直接将办理人assignee 换成别人，这时任务的拥有着不再是转办人，而是为空，相当与将任务转出
      * @param: [assigneeVo]
      * @return: boolean
-     * @author： lvmoney /成都三合力通科技有限公司
+     * @author： lvmoney /XXXXXX科技有限公司
      * 2019/1/31
      */
     /**

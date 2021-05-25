@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.elasticsearch.service.impl
  * 版本信息: 版本1.0
  * 日期:2019年1月14日  上午9:55:45
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.retrieval.elasticsearch.service.impl;
@@ -35,7 +35,7 @@ import java.util.Map;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2019年1月14日 上午9:55:45
  */
 @Service

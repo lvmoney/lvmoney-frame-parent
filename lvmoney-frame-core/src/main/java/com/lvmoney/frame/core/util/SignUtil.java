@@ -196,7 +196,7 @@ public class SignUtil {
      * @param urlEncode  是否需要URLENCODE
      * @param keyToUpper 是否需要将Key转换为全大写 * true:key转化成大写，false:不转化
      * @return
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static String formatUrlMap(Map<String, String> paraMap, boolean urlEncode, boolean keyToUpper) {
         String buff = "";

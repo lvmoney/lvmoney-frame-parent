@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class BloomFilterUtil implements Serializable {
@@ -266,7 +266,7 @@ public class BloomFilterUtil implements Serializable {
      * 16个位误判率大概是0.00046557303372
      * <p>
      * 32个位误判率大概是0.00000021167340
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      * @version:v1.0 2018年10月30日 下午3:29:38
      */
 

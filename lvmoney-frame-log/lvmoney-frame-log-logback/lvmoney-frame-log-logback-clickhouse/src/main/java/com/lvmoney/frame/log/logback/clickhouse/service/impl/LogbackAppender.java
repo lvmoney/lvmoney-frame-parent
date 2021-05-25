@@ -12,6 +12,8 @@ import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.util.SpringBeanUtil;
 import com.lvmoney.frame.core.util.DateUtil;
+import com.lvmoney.frame.core.util.IpUtil;
+import com.lvmoney.frame.core.util.SnowflakeIdFactoryUtil;
 import com.lvmoney.frame.log.logback.common.vo.LogVo;
 
 import static com.lvmoney.frame.base.core.constant.BaseConstant.COMMON_DATE_FORMAT;
@@ -32,13 +34,17 @@ public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
                 return;
             }
             LogVo logVo = new LogVo();
+            logVo.setIp(IpUtil.getLocalhostIp());
             logVo.setLevel(eventObject.getLevel().toString());
             logVo.setMsg(eventObject.getFormattedMessage());
             logVo.setThread(eventObject.getThreadName());
             logVo.setExeDate(DateUtil.localDateTimeFormatter(DateUtil.timestamp2LocalDateTime(eventObject.getTimeStamp()), COMMON_DATE_FORMAT));
             logVo.setSysName(logbackService.getSystemName());
+            Long num = SnowflakeIdFactoryUtil.nextId();
+            logVo.setId(num.toString());
             logbackService.saveLog(logVo);
         }
     }
+
 
 }

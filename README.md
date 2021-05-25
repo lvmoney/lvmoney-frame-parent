@@ -16,6 +16,12 @@ java版分布式微服务后台常用技术完全整合架构。基于springboot
 
 通过maven依赖的方式引用到项目模块即可。框架通过lvmoney-frame-bom引入了所有依赖和版本，子项目无需把框架作为parent，只需要把lvmoney-frame-bom作为dependencyManagement即可。子项目一般都要引入lvmoney-frame-core，其他模块根据系统需要引入，详见各个module的readme.md。demo 可见 lvmoney-frame-demo。某服务作为rpc服务时，需要自定义api发布到nexus中，那么服务提供方需要引入依赖实现接口功能，服务使用方引入依赖通过feign访问即可
 
+
+#### 发布
+
+整合jenkins。通过配置可一键构建系统的docker 镜像推送到私服 hardor，运行到k8s集群。同时伴随完成基于prometheus体系监控体系  
+通过开源工具的部署和开发规范，完整支持DEVOPS整个流程
+
 #### 服务支持
 
 
@@ -185,8 +191,7 @@ roadmap
 我们内部使用的业务中台和数据中台双中台战略，具体ppt可以联系lvmoney
 
 
-部分博客文档:https://blog.csdn.net/weiranaixi
-
+部分博客文档:https://www.infoq.cn/profile/1B873773DECDB0/publish
 
 
 

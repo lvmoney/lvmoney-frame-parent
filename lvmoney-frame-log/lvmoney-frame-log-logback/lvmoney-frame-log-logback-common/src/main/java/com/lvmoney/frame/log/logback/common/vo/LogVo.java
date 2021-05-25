@@ -29,6 +29,10 @@ public class LogVo implements Serializable {
      */
     private String sysName;
     /**
+     * ip地址
+     */
+    private String ip;
+    /**
      * 日志类型
      */
     private String level;

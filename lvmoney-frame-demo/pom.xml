@@ -49,6 +49,8 @@
         <module>demo-frame-istio</module>
         <module>demo-frame-istio-client</module>
         <module>demo-frame-webservice</module>
+        <module>demo-frame-mq-sender</module>
+        <module>demo-frame-mq-customer</module>
     </modules>
 
 

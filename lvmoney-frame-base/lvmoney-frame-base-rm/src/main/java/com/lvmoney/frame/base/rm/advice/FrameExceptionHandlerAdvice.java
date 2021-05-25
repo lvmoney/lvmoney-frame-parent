@@ -5,18 +5,18 @@ import com.lvmoney.frame.base.core.exception.BusinessException;
 import com.lvmoney.frame.base.core.exception.CommonException;
 import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.base.core.vo.BeanValidateExceptionVo;
+import com.lvmoney.frame.base.rm.constant.LogbackTypeConstant;
 import feign.RetryableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.ServletResponse;
@@ -35,6 +35,9 @@ import java.util.List;
 @ControllerAdvice
 @RestControllerAdvice
 public class FrameExceptionHandlerAdvice {
+    @Value("${frame.logback.type:console}")
+    private String clickhouseType;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FrameExceptionHandlerAdvice.class);
     /**
      * 开头即为404
@@ -49,7 +52,6 @@ public class FrameExceptionHandlerAdvice {
      * 3、2的使用需要结合注解
      * 4、由于shiro的特殊性，需要定制返回值
      *
-     * @param request:
      * @param e:
      * @throws
      * @return: com.lvmoney.frame.core.api.ApiResult<?>
@@ -57,8 +59,13 @@ public class FrameExceptionHandlerAdvice {
      * @date: 2019/12/2 15:54
      */
     @ExceptionHandler(NoHandlerFoundException.class)
-    public void handle(HttpServletRequest request, HttpServletResponse res, NoHandlerFoundException e) {
-        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+    public void handle(HttpServletResponse res, NoHandlerFoundException e) {
+        if (LogbackTypeConstant.LOGBACK_TYPE_CLICKHOSE.equals(clickhouseType)) {
+            LOGGER.error("NoHandlerFoundException类型的错误:{}", e);
+        } else {
+            LOGGER.error("NoHandlerFoundException类型的错误:{}", JsonUtil.t2JsonString(e));
+        }
+
         String msg = e.getLocalizedMessage();
         Integer status = getCodeByErrorMsg(msg);
         res.setStatus(HttpStatus.CONFLICT.value());
@@ -66,8 +73,12 @@ public class FrameExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiResult<?> handler(MethodArgumentNotValidException e, HttpServletResponse res) {
-        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+    public ApiResult handler(MethodArgumentNotValidException e, HttpServletResponse res) {
+        if (LogbackTypeConstant.LOGBACK_TYPE_CLICKHOSE.equals(clickhouseType)) {
+            LOGGER.error("MethodArgumentNotValidException类型的错误:{}", JsonUtil.t2JsonString(e));
+        } else {
+            LOGGER.error("MethodArgumentNotValidException类型的错误:{}", e);
+        }
         List<BeanValidateExceptionVo> data = new ArrayList<>();
         e.getBindingResult().getFieldErrors().forEach(el -> {
             BeanValidateExceptionVo beanValidateExceptionVo = new BeanValidateExceptionVo();
@@ -92,15 +103,23 @@ public class FrameExceptionHandlerAdvice {
      * @date: 2019/12/2 15:54
      */
     @ExceptionHandler(Exception.class)
-    public ApiResult<?> handleException(HttpServletRequest req, HttpServletResponse res, Exception e) {
-        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+    public ApiResult handleException(HttpServletRequest req, HttpServletResponse res, Exception e) {
+        if (LogbackTypeConstant.LOGBACK_TYPE_CLICKHOSE.equals(clickhouseType)) {
+            LOGGER.error("其他错误，Exception类型的错误:{}", JsonUtil.t2JsonString(e));
+        } else {
+            LOGGER.error("其他错误，Exception类型的错误:{}", e);
+        }
         res.setStatus(HttpStatus.CONFLICT.value());
         return ApiResult.error(CommonException.Proxy.OTHER_ERROR.getCode(), CommonException.Proxy.OTHER_ERROR.getDescription());
     }
 
     @ExceptionHandler(RetryableException.class)
-    public ApiResult<?> handleConnectException(HttpServletRequest req, HttpServletResponse res, Exception e) {
-        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+    public ApiResult handleConnectException(HttpServletRequest req, HttpServletResponse res, Exception e) {
+        if (LogbackTypeConstant.LOGBACK_TYPE_CLICKHOSE.equals(clickhouseType)) {
+            LOGGER.error("RetryableException类型的错误:{}", JsonUtil.t2JsonString(e));
+        } else {
+            LOGGER.error("RetryableException类型的错误:{}", e);
+        }
         res.setStatus(HttpStatus.CONFLICT.value());
         return ApiResult.error(CommonException.Proxy.FEIGN_CONNECTION_REFUSED.getCode(), CommonException.Proxy.FEIGN_CONNECTION_REFUSED.getDescription());
     }
@@ -118,8 +137,12 @@ public class FrameExceptionHandlerAdvice {
      * @date: 2019/12/2 15:55
      */
     @ExceptionHandler(BusinessException.class)
-    public ApiResult<?> handleBusinessException(HttpServletRequest req, HttpServletResponse res, BusinessException e) {
-        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+    public ApiResult handleBusinessException(HttpServletRequest req, HttpServletResponse res, BusinessException e) {
+        if (LogbackTypeConstant.LOGBACK_TYPE_CLICKHOSE.equals(clickhouseType)) {
+            LOGGER.error("BusinessException类型的错误:{}", JsonUtil.t2JsonString(e));
+        } else {
+            LOGGER.error("BusinessException类型的错误:{}", e);
+        }
         res.setStatus(HttpStatus.CONFLICT.value());
         return ApiResult.error(e.getCode(), e.getMessage());
     }
@@ -137,14 +160,17 @@ public class FrameExceptionHandlerAdvice {
      * @date: 2019/12/2 15:55
      */
     @ExceptionHandler(BindException.class)
-    public ApiResult<?> handleBindException(HttpServletRequest req, HttpServletResponse res, BindException e) {
-        LOGGER.error(e.getMessage() + "。error详情:{}", e);
+    public ApiResult handleBindException(HttpServletRequest req, HttpServletResponse res, BindException e) {
+        if (LogbackTypeConstant.LOGBACK_TYPE_CLICKHOSE.equals(clickhouseType)) {
+            LOGGER.error("BindException类型的错误:{}", JsonUtil.t2JsonString(e));
+        } else {
+            LOGGER.error("BindException类型的错误:{}", e);
+        }
         BindException bException = (BindException) e;
         List<BeanValidateExceptionVo> excepitonVos = new ArrayList<>();
         //解析原错误信息，封装后返回，此处返回非法的字段名称，原始值，错误信息
         for (FieldError error : bException.getBindingResult().getFieldErrors()) {
             BeanValidateExceptionVo excepitonVo = new BeanValidateExceptionVo();
-//            excepitonVo.setDefaultMessage(error.getDefaultMessage());
             excepitonVo.setDefaultMessage(error.getRejectedValue() + "不能绑定值给参数:" + error.getField());
             excepitonVo.setField(error.getField());
             excepitonVo.setRejectedValue(error.getRejectedValue());
@@ -167,7 +193,11 @@ public class FrameExceptionHandlerAdvice {
         try {
             httpResponse.getWriter().print(json);
         } catch (IOException e) {
-            LOGGER.error("其他错误处理response返回处理报错：{}", e);
+            if (LogbackTypeConstant.LOGBACK_TYPE_CLICKHOSE.equals(clickhouseType)) {
+                LOGGER.error("其他错误处理response返回处理报错：{}", JsonUtil.t2JsonString(e));
+            } else {
+                LOGGER.error("其他错误处理response返回处理报错：{}", e);
+            }
         }
     }
 
@@ -190,6 +220,7 @@ public class FrameExceptionHandlerAdvice {
             return CommonException.Proxy.OTHER_ERROR.getCode();
         }
     }
+
 
 
 }

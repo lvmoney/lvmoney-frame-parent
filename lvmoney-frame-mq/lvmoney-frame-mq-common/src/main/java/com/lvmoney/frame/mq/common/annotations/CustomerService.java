@@ -19,7 +19,4 @@ public @interface CustomerService {
 
     String name() default "";
 
-    // not use
-    // boolean offlineAble = true;
-
 }

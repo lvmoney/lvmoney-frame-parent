@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.hotel.util
  * 版本信息: 版本1.0
  * 日期:2018年11月16日  下午3:02:01
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.core.util;
@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年11月16日 下午3:02:01
  */
 
@@ -27,7 +27,7 @@ public class ListUtil {
      * @param compare
      * @return 2018年11月16日下午3:08:54
      * @describe:获得前面list中不包含后面list的字符list
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static List<String> getDifference(List<String> res, List<String> compare) {

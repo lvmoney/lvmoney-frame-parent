@@ -3,7 +3,7 @@ package com.lvmoney.frame.workflow.activiti.service.impl;/**
  * 包名:com.lvmoney.jwt.annotations
  * 版本信息: 版本1.0
  * 日期:2019/1/31
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 
@@ -15,7 +15,7 @@ import org.activiti.engine.impl.persistence.entity.TaskEntityManagerImpl;
 
 /**
  * @describe：删除当前运行时任务命令，并返回当前任务的执行对象id //这里继承了NeedsActiveTaskCmd，主要时很多跳转业务场景下，要求不能时挂起任务。可以直接继承Command即可
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class DeleteTaskCmd extends NeedsActiveTaskCmd<String> {

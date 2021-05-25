@@ -22,7 +22,5 @@ import static com.lvmoney.frame.mq.common.constant.MqConstant.RABBIT_TYPE_SIMPLE
 public @interface MqImpl {
     @AliasFor(annotation = Qualifier.class)
     String value() default RABBIT_TYPE_SIMPLE;
-    // not use
-    // boolean offlineAble = true;
 
 }

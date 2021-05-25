@@ -7,9 +7,9 @@ package com.lvmoney.frame.mq.rabbitmq.customer.receiver;/**
  */
 
 import com.alibaba.fastjson.JSONObject;
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.rabbitmq.client.Channel;
 import com.lvmoney.frame.base.core.exception.BusinessException;
-import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.mq.common.exception.MqException;
 import com.lvmoney.frame.mq.common.vo.MessageVo;
 import com.lvmoney.frame.mq.rabbitmq.common.constant.RabbitmqConstant;
@@ -30,7 +30,7 @@ import java.io.IOException;
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 @Component
-@RabbitListener(queues = RabbitmqConstant.SIMPLE_QUEUE_NAME)
+@RabbitListener(queues = "${frame.mq.name}" + BaseConstant.CONNECTOR_UNDERLINE + RabbitmqConstant.SIMPLE_QUEUE_NAME)
 public class SimpleReceiver {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleReceiver.class);
     @Autowired
@@ -47,8 +47,6 @@ public class SimpleReceiver {
         } catch (IOException e) {
             LOGGER.error("消费消息失败:{}", e);
             throw new BusinessException(MqException.Proxy.RABBIT_MESSAGE_RECEIVER_SIMPLE_ERROR);
-            //丢弃这条消息
-            //channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);
         }
     }
 }

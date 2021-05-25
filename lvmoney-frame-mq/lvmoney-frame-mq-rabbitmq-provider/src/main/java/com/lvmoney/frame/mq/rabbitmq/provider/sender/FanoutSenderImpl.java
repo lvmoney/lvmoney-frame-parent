@@ -6,6 +6,7 @@ package com.lvmoney.frame.mq.rabbitmq.provider.sender;/**
  * Copyright 四川******科技有限公司
  */
 
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.mq.common.annotations.MqService;
 import com.lvmoney.frame.mq.common.constant.MqConstant;
@@ -50,6 +51,8 @@ public class FanoutSenderImpl implements MqSendService {
         return template;
     }
 
+    @Value("${frame.mq.name:lvmoney}")
+    private String frameMqName;
     @Value("${rabbitmq.error.record.expire:18000}")
     String expire;
 
@@ -87,7 +90,7 @@ public class FanoutSenderImpl implements MqSendService {
             baseRabbitmqErrorService.errorRecord2Redis(errorRecordRo);
             result.set(false);
         });
-        rabbitTemplate.convertAndSend(RabbitmqConstant.EXCHANGE_FANOUT, JsonUtil.t2JsonString(msg));
+        rabbitTemplate.convertAndSend(frameMqName + BaseConstant.CONNECTOR_UNDERLINE + RabbitmqConstant.EXCHANGE_FANOUT, JsonUtil.t2JsonString(msg));
         return result.get();
     }
 

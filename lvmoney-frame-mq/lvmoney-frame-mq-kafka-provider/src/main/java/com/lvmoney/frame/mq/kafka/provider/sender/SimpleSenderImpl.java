@@ -7,6 +7,7 @@ package com.lvmoney.frame.mq.kafka.provider.sender;/**
  */
 
 
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.mq.common.annotations.MqService;
 import com.lvmoney.frame.mq.common.constant.MqConstant;
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -42,20 +42,19 @@ public class SimpleSenderImpl implements MqSendService {
     @Value("${kafka.send.get.milliseconds:1000}")
     String millseconds;
 
+    @Value("${frame.mq.name:lvmoney}")
+    private String frameMqName;
+
     @Override
     public boolean send(MessageVo messageVo) {
-        kafkaTemplate.setProducerListener(producerListener);
         try {
-            kafkaTemplate.send(KafkaConstant.SIMPLE_QUEUE_NAME, JsonUtil.t2JsonString(messageVo)).get(Long.valueOf(millseconds), TimeUnit.MILLISECONDS);
-        } catch (InterruptedException | TimeoutException | ExecutionException e) {
-            LOGGER.error("kafka发送同步消息报错:{}", e);
-            return false;
-        }
-        try {
+            kafkaTemplate.setProducerListener(producerListener);
+            kafkaTemplate.send(frameMqName + BaseConstant.CONNECTOR_UNDERLINE + KafkaConstant.SIMPLE_QUEUE_NAME, JsonUtil.t2JsonString(messageVo)).get(Long.valueOf(millseconds), TimeUnit.MILLISECONDS);
             //发送消息的时候需要休眠一下，否则发送时间较长的时候会导致进程提前关闭导致无法调用回调时间。主要是因为KafkaTemplate发送消息是采取异步方式发送的
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            LOGGER.error("kafka发送消息报错:{}", e);
+        } catch (TimeoutException | ExecutionException | InterruptedException e) {
+            LOGGER.error("kafka发送同步消息报错:{}", e);
+            return false;
         }
         return true;
     }

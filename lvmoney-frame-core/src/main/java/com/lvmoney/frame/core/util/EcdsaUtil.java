@@ -16,7 +16,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年9月30日 上午8:51:33
  */
 public class EcdsaUtil {
@@ -60,7 +60,7 @@ public class EcdsaUtil {
      * @param publicKey   公钥
      * @param signType    加密类型
      * @return 2018年10月10日下午1:47:03
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static boolean verifyEcdsa(String res, String sign, String factoryType, String publicKey,
                                       String signType) {
@@ -114,7 +114,7 @@ public class EcdsaUtil {
      * @param factoryType
      * @return 2018年10月10日下午2:09:26
      * @describe:获得密钥和公钥
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static EcdsaVo getSecretKey(String factoryType) {
         EcdsaVo result = new EcdsaVo();

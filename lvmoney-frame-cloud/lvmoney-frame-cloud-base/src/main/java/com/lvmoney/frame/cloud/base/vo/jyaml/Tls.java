@@ -30,4 +30,8 @@ public class Tls implements Serializable {
      * 挂载服务端私钥（与之前定义的secret tls istio-ingressgateway-certs --key对应）
      */
     private String privateKey;
+    /**
+     * 挂载服务端私钥（与之前定义的secret generic istio-ingressgateway-certs name对应）
+     */
+    private String credentialName;
 }

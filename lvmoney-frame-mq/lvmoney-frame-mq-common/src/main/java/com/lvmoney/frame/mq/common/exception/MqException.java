@@ -88,7 +88,7 @@ public interface MqException {
         private int code;
         private String description;
 
-        private Proxy(int code, String description) {
+        Proxy(int code, String description) {
             this.code = code;
             this.description = description;
         }

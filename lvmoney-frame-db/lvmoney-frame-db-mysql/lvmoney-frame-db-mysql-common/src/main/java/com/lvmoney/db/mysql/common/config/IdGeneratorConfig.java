@@ -25,7 +25,7 @@ public class IdGeneratorConfig {
      * 需要显式生成ID时使用
      *
      * @return: com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator
-     * @author: yangbo / 成都三合力通科技有限公司
+     * @author: yangbo / XXXXXX科技有限公司
      * @date: 2020/10/12 18:10
      */
     @Bean

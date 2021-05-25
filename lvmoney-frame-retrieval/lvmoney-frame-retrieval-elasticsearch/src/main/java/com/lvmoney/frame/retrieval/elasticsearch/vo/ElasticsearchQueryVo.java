@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.elasticsearch.ro
  * 版本信息: 版本1.0
  * 日期:2019年1月3日  下午2:00:55
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.retrieval.elasticsearch.vo;
@@ -16,7 +16,7 @@ import org.springframework.data.domain.Pageable;
 /**
  * @param <T>
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2019年1月3日 下午2:00:55
  */
 

@@ -24,6 +24,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorRecordDto<K, V> implements Serializable {
+    private static final long serialVersionUID = 7537167626673587246L;
     private String topic;
     private Integer partition;
     private Headers headers;

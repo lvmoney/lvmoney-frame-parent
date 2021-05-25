@@ -20,6 +20,9 @@
         <module>lvmoney-frame-mq-kafka-provider</module>
         <module>lvmoney-frame-mq-kafka-common</module>
         <module>lvmoney-frame-mq-kafka-customer</module>
+        <module>lvmoney-frame-mq-pulsar-provider</module>
+        <module>lvmoney-frame-mq-pulsar-customer</module>
+        <module>lvmoney-frame-mq-pulsar-common</module>
     </modules>
 
     <dependencyManagement>

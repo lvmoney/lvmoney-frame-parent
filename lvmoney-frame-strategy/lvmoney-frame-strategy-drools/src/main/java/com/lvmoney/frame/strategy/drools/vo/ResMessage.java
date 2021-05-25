@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.hotel.ro
  * 版本信息: 版本1.0
  * 日期:2018年11月23日  上午11:12:45
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.strategy.drools.vo;
@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年11月23日 上午11:12:45
  */
 

@@ -3,7 +3,7 @@ package com.lvmoney.frame.db.mysql.base.config;/**
  * 包名:com.lvmoney.common.handler
  * 版本信息: 版本1.0
  * 日期:2019/2/28
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 
@@ -29,7 +29,7 @@ import java.util.Arrays;
 
 /**
  * @describe：
- * @author: lvmoney/成都三合力通科技有限公司
+ * @author: lvmoney/XXXXXX科技有限公司
  * @version:v1.0 2019/2/28 10:05
  */
 @Configuration

@@ -17,6 +17,24 @@ package com.lvmoney.frame.mq.kafka.provider.sender;/**
  * @describe：
  * @author: lvmoney /四川******科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
+ * @describe：
+ * @author: lvmoney /四川******科技有限公司
+ * @version:v1.0 2018年10月30日 下午3:29:38
+ * @describe：
+ * @author: lvmoney /四川******科技有限公司
+ * @version:v1.0 2018年10月30日 下午3:29:38
+ * @describe：
+ * @author: lvmoney /四川******科技有限公司
+ * @version:v1.0 2018年10月30日 下午3:29:38
+ * @describe：
+ * @author: lvmoney /四川******科技有限公司
+ * @version:v1.0 2018年10月30日 下午3:29:38
+ * @describe：
+ * @author: lvmoney /四川******科技有限公司
+ * @version:v1.0 2018年10月30日 下午3:29:38
+ * @describe：
+ * @author: lvmoney /四川******科技有限公司
+ * @version:v1.0 2018年10月30日 下午3:29:38
  */
 
 
@@ -27,6 +45,7 @@ package com.lvmoney.frame.mq.kafka.provider.sender;/**
  * 2018年10月30日 下午3:29:38   
  */
 
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.mq.common.annotations.MqService;
 import com.lvmoney.frame.mq.common.constant.MqConstant;
@@ -53,21 +72,19 @@ public class SynchronousSenderImpl implements MqSendService {
     private ProviderListener producerListener;
     @Value("${kafka.send.get.milliseconds:1000}")
     String millseconds;
+    @Value("${frame.mq.name:lvmoney}")
+    private String frameMqName;
 
     @Override
     public boolean send(MessageVo messageVo) {
         try {
             kafkaTemplate.setProducerListener(producerListener);
-            kafkaTemplate.send(KafkaConstant.SYN_QUEUE_NAME, JsonUtil.t2JsonString(messageVo)).get(Long.valueOf(millseconds), TimeUnit.MILLISECONDS);
-        } catch (InterruptedException | TimeoutException |ExecutionException e) {
-            LOGGER.error("kafka发送同步消息报错:{}", e);
-            return false;
-        }
-        try {
+            kafkaTemplate.send(frameMqName + BaseConstant.CONNECTOR_UNDERLINE + KafkaConstant.SYN_QUEUE_NAME, JsonUtil.t2JsonString(messageVo)).get(Long.valueOf(millseconds), TimeUnit.MILLISECONDS);
             //发送消息的时候需要休眠一下，否则发送时间较长的时候会导致进程提前关闭导致无法调用回调时间。主要是因为KafkaTemplate发送消息是采取异步方式发送的
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            LOGGER.error("kafka发送消息报错:{}", e);
+        } catch (TimeoutException | ExecutionException | InterruptedException e) {
+            LOGGER.error("kafka发送同步消息报错:{}", e);
+            return false;
         }
         return true;
     }

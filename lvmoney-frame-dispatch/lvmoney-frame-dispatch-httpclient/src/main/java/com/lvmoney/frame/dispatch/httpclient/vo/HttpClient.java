@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.pay.httpclient
  * 版本信息: 版本1.0
  * 日期:2018年10月18日  下午3:33:54
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.dispatch.httpclient.vo;
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月18日 下午3:33:54
  */
 

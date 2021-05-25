@@ -31,6 +31,10 @@ public class SysLogDtoItem implements Serializable {
      */
     private String id;
     /**
+     * ip
+     */
+    private String ip;
+    /**
      * 系统名称
      */
     private String sysName;

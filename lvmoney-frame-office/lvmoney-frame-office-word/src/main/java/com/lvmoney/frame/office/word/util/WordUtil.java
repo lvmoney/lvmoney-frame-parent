@@ -45,7 +45,7 @@ import static com.lvmoney.frame.office.common.constant.OfficeConstant.*;
 
 /**
  * @describe：word操作工具类。html转pdf的效果不好，word转html效果一般
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年9月30日 上午8:51:33
  */
 public class WordUtil {

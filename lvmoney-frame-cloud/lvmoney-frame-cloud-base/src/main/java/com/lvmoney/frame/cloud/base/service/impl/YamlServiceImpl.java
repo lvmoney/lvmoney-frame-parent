@@ -34,7 +34,6 @@ import static com.lvmoney.frame.base.core.constant.BaseConstant.DASH_LINE;
 @org.springframework.stereotype.Service
 public class YamlServiceImpl implements YamlService {
 
-
     @Value("${custom.tomcat.https.schema:http}")
     private String schema;
     @Value("${secret.tls.serverCertificate:/etc/istio/ingressgateway-certs/tls.crt}")
@@ -227,6 +226,11 @@ public class YamlServiceImpl implements YamlService {
      * 新镜像拷贝目录
      */
     private static final String ININT_CONTAINER_COMMAND_AGENT_TARGET = "/sidecar";
+
+    /**
+     * https访问时 secret 名称后缀
+     */
+    private static final String HTTPS_GATEWAY_SECRET_SUFFIX = "-certs";
 
 
     @Override
@@ -449,10 +453,22 @@ public class YamlServiceImpl implements YamlService {
             servicesPortHttps.setProtocol(HttpProtocol.HTTPS.getValue());
             Tls tls = new Tls();
             tls.setMode(TlsNode.SIMPLE.getValue());
-            tls.setPrivateKey(privateKey);
-            tls.setServerCertificate(serverCertificate);
+//            tls.setPrivateKey(privateKey);
+//            tls.setServerCertificate(serverCertificate);
+            tls.setCredentialName(applicationName + HTTPS_GATEWAY_SECRET_SUFFIX);
             servers.setPort(servicesPortHttps);
             servers.setTls(tls);
+            //为了满足https&http均可访问
+            Servers httpServers = new Servers();
+            httpServers.setHosts(new ArrayList() {{
+                add("*." + applicationName + BaseConstant.WEBSITE_SUFFIX);
+            }});
+            Ports servicesPort = new Ports();
+            servicesPort.setNumber(CloudBaseConstant.INGRESS_DEFAULT_PORT);
+            servicesPort.setName(HttpProtocol.HTTP.getValue().toLowerCase());
+            servicesPort.setProtocol(HttpProtocol.HTTP.getValue());
+            httpServers.setPort(servicesPort);
+            serverList.add(httpServers);
         } else {
             Ports servicesPort = new Ports();
             servicesPort.setNumber(CloudBaseConstant.INGRESS_DEFAULT_PORT);

@@ -4,7 +4,7 @@ package com.lvmoney.frame.sync.canal.common.listener;
  * 包名:com.lvmoney.common.handler
  * 版本信息: 版本1.0
  * 日期:2019/2/28
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @describe：canal监听数据库的基本信息，注意这里暂未考虑分库分区的情况
- * @author: lvmoney/成都三合力通科技有限公司
+ * @author: lvmoney/XXXXXX科技有限公司
  * @version:v1.0 2019/2/28 10:05
  */
 @CanalEventListener

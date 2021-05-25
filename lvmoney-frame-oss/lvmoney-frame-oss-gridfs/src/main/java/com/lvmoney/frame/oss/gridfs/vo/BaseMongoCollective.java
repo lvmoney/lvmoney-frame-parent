@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.mongo.ro
  * 版本信息: 版本1.0
  * 日期:2019年1月10日  上午9:42:01
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.oss.gridfs.vo;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 /**
  * @param <T>
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2019年1月10日 上午9:42:01
  */
 

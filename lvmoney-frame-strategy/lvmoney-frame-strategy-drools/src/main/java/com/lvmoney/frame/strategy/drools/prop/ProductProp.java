@@ -3,7 +3,7 @@
  * 包名:application
  * 版本信息: 版本1.0
  * 日期:2018年11月23日  下午3:30:30
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.strategy.drools.prop;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年11月23日 下午3:30:30
  */
 @Component

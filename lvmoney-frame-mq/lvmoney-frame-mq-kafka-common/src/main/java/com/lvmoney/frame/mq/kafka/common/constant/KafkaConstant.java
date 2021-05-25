@@ -13,6 +13,9 @@ package com.lvmoney.frame.mq.kafka.common.constant;/**
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class KafkaConstant {
+    private KafkaConstant() {
+    }
+
     /**
      * 简单
      */

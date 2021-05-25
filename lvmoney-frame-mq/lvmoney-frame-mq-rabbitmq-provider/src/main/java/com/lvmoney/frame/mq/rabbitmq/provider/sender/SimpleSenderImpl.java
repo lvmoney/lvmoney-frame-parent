@@ -7,6 +7,7 @@ package com.lvmoney.frame.mq.rabbitmq.provider.sender;/**
  */
 
 
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.mq.common.annotations.MqService;
 import com.lvmoney.frame.mq.common.constant.MqConstant;
@@ -44,6 +45,8 @@ public class SimpleSenderImpl implements MqSendService {
     String expire;
     @Autowired
     ConnectionFactory connectionFactory;
+    @Value("${frame.mq.name:lvmoney}")
+    private String frameMqName;
 
     @Bean
     @Scope("prototype")
@@ -87,7 +90,7 @@ public class SimpleSenderImpl implements MqSendService {
             baseRabbitmqErrorService.errorRecord2Redis(errorRecordRo);
             result.set(false);
         });
-        rabbitTemplate.convertAndSend(RabbitmqConstant.SIMPLE_QUEUE_NAME, JsonUtil.t2JsonString(msg));
+        rabbitTemplate.convertAndSend(frameMqName + BaseConstant.CONNECTOR_UNDERLINE + RabbitmqConstant.SIMPLE_QUEUE_NAME, JsonUtil.t2JsonString(msg));
         return result.get();
     }
 

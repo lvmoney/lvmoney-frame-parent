@@ -4,7 +4,7 @@ package com.lvmoney.frame.sync.canal.common.annotation;
  * 包名:com.lvmoney.common.handler
  * 版本信息: 版本1.0
  * 日期:2019/2/28
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 import com.lvmoney.frame.sync.canal.common.config.CanalClientConfig;
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 
 /**
  * @describe：通过注解开启canal客户端
- * @author: lvmoney/成都三合力通科技有限公司
+ * @author: lvmoney/XXXXXX科技有限公司
  * @version:v1.0 2019/2/28 10:05
  */
 @Target(ElementType.TYPE)

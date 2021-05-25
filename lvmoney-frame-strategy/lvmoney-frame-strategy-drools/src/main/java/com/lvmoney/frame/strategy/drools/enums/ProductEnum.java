@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.hotel.constant
  * 版本信息: 版本1.0
  * 日期:2018年11月23日  上午10:19:07
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.strategy.drools.enums;
@@ -13,7 +13,7 @@ import com.lvmoney.frame.core.util.IntervalUtil;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年11月23日 上午10:19:07
  */
 
@@ -50,7 +50,7 @@ public enum ProductEnum {
      * @param key
      * @return 2018年11月23日上午10:42:57
      * @describe:根据区间获得对应的值
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static double getValueByKey(String key) {
         return ProductEnum.getProductEnum(key).getValue();
@@ -60,7 +60,7 @@ public enum ProductEnum {
      * @param value
      * @return 2018年11月23日上午10:43:13
      * @describe:根据区间里面的值获得对应的值
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static double getValueByKey(double value) {
         return ProductEnum.getProductEnum(value).getValue();

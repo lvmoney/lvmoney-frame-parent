@@ -3,7 +3,7 @@ package com.lvmoney.frame.core.util;/**
  * 包名:com.lvmoney.jwt.annotations
  * 版本信息: 版本1.0
  * 日期:2019/3/27
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 
@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class BeanUtil {
@@ -70,7 +70,7 @@ public class BeanUtil {
      * @param bean 要转换的bean
      * @return Map
      * @throws IOException 2018年11月8日下午1:34:51
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static Map bean2Map(Object bean) {
         return BeanMap.create(bean);
@@ -83,7 +83,7 @@ public class BeanUtil {
      * @param map   要转换的map
      * @return
      * @throws IOException 2018年11月8日下午1:34:51
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static <T> T map2Bean(Class<T> clazz, Map<String, Object> map) {
         T obj = null;
@@ -138,7 +138,7 @@ public class BeanUtil {
      * @return
      * @throws IOException 2018年11月8日下午1:34:51
      *                     JsonUtil.t2JsonString(map)，key值是@JSONField(name = "test3")里面的值
-     * @author: lvmoney /成都三合力通科技有限公司
+     * @author: lvmoney /XXXXXX科技有限公司
      */
     public static <T> T map2Json2Bean(Class<T> clazz, Map<String, Object> map) {
         T t = JSON.parseObject(JsonUtil.t2JsonString(map), clazz);

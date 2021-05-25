@@ -7,6 +7,7 @@ package com.lvmoney.frame.mq.rabbitmq.provider.sender;/**
  */
 
 
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.mq.common.annotations.MqService;
 import com.lvmoney.frame.mq.common.constant.MqConstant;
@@ -43,7 +44,8 @@ public class TopicRichSenderImpl implements MqSendService {
     String expire;
     @Autowired
     ConnectionFactory connectionFactory;
-
+    @Value("${frame.mq.name:lvmoney}")
+    private String frameMqName;
     @Bean("topicRichRabbitTemplate")
     @Scope("prototype")
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
@@ -92,7 +94,7 @@ public class TopicRichSenderImpl implements MqSendService {
             baseRabbitmqErrorService.errorRecord2Redis(errorRecordRo);
             result.set(false);
         });
-        rabbitTemplate.convertAndSend(RabbitmqConstant.EXCHANGE_TOPIC, RabbitmqConstant.MESSAGE_TOPICS, JsonUtil.t2JsonString(msg));
+        rabbitTemplate.convertAndSend(frameMqName + BaseConstant.CONNECTOR_UNDERLINE + RabbitmqConstant.EXCHANGE_TOPIC, RabbitmqConstant.MESSAGE_TOPICS, JsonUtil.t2JsonString(msg));
         return result.get();
     }
 }

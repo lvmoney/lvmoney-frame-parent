@@ -13,6 +13,9 @@ package com.lvmoney.frame.mq.common.constant;/**
  * @version:v1.0 2019/11/20 17:01
  */
 public class MqConstant {
+    private MqConstant() {
+    }
+
     /**
      * kafka simple
      */
@@ -55,4 +58,14 @@ public class MqConstant {
      * 错误处理rabbitmq
      */
     public static final String MQ_ERROR_TYPE_RABBIT = "mq_error_record_rabbit";
+
+
+    /**
+     * pulsar simple
+     */
+    public static final String PULSAR_TYPE_SIMPLE = "simple";
+    /**
+     * pulsar synchronous
+     */
+    public static final String PULSAR_TYPE_SYN = "synchronous";
 }

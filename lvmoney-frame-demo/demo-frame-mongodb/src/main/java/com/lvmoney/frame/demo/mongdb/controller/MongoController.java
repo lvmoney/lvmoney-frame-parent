@@ -3,7 +3,7 @@
  * 包名:com.lvmoney.router.function
  * 版本信息: 版本1.0
  * 日期:2018年12月29日  下午5:02:46
- * Copyright 成都三合力通科技有限公司
+ * Copyright XXXXXX科技有限公司
  */
 
 package com.lvmoney.frame.demo.mongdb.controller;
@@ -30,7 +30,7 @@ import java.util.Date;
 
 /**
  * @describe：
- * @author: lvmoney /成都三合力通科技有限公司
+ * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年12月29日 下午5:02:46
  * @RestController
  * @RequestMapping("mongo")
