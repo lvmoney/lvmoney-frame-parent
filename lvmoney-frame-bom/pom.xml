@@ -19,10 +19,10 @@
         <mybatis.version>3.4.6</mybatis.version>
         <mybatisSpring.version>1.3.2</mybatisSpring.version>
         <ignite.version>2.6.0</ignite.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13</junit.version>
         <fastjson.version>1.2.56</fastjson.version>
         <jwt.version>0.9.0</jwt.version>
-        <hibernateValidator.version>5.3.5.Final</hibernateValidator.version>
+        <hibernateValidator.version>5.3.6.Final</hibernateValidator.version>
         <swagger2.version>2.9.2</swagger2.version>
         <servlet.version>3.1.0</servlet.version>
         <java.version>1.8</java.version>
@@ -36,7 +36,7 @@
         <commons.io.version>2.6</commons.io.version>
         <commons.collections.version>3.2.2</commons.collections.version>
         <commons.pool2.version>2.5.0</commons.pool2.version>
-        <mysql.connector.version>8.0.13</mysql.connector.version>
+        <mysql.connector.version>8.0.16</mysql.connector.version>
         <mybatis.generator.version>1.3.2</mybatis.generator.version>
         <mybatis.plus.boot.verson>3.0.5</mybatis.plus.boot.verson>
         <drools.version>7.14.0.Final</drools.version>
@@ -75,7 +75,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <velocity.version>1.7</velocity.version>
         <mybatis-plus-boot-starter.version>3.3.0</mybatis-plus-boot-starter.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <reflections.version>0.9.11</reflections.version>
         <commons-codec.version>1.12</commons-codec.version>
         <commons-net.version>3.6</commons-net.version>
@@ -87,13 +87,13 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <hutool.version>5.4.5</hutool.version>
-        <guava.version>28.0-jre</guava.version>
+        <guava.version>30.0-jre</guava.version>
         <commons.text.version>1.6</commons.text.version>
         <commons.collections4.version>4.1</commons.collections4.version>
         <boot.redis.version>2.1.0.RELEASE</boot.redis.version>
         <boot.cache.verion>2.1.0.RELEASE</boot.cache.verion>
         <jackson.version>2.10.0</jackson.version>
-        <shiro.spring.version>1.4.0</shiro.spring.version>
+        <shiro.spring.version>1.7.0</shiro.spring.version>
         <spring.kafka.version>2.2.0.RELEASE</spring.kafka.version>
         <sharding.jdbc.version>4.0.1</sharding.jdbc.version>
         <revengemission.captcha.verion>0.7</revengemission.captcha.verion>
