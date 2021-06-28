@@ -122,7 +122,7 @@
         <kubernetes-model.version>4.4.0</kubernetes-model.version>
         <fabric-utils.version>2.0.46</fabric-utils.version>
         <kubernetes-api.version>3.0.11</kubernetes-api.version>
-        <snakeyaml.version>1.25</snakeyaml.version>
+        <snakeyaml.version>1.26</snakeyaml.version>
         <ganymed-ssh2.version>build210</ganymed-ssh2.version>
         <maven-model.version>3.0</maven-model.version>
         <micrometer-registry-prometheus.version>1.2.0</micrometer-registry-prometheus.version>
