@@ -11,20 +11,19 @@ import com.lvmoney.frame.authentication.api.ao.ShiroCheckAo;
 import com.lvmoney.frame.authentication.api.vo.JwtCheckVo;
 import com.lvmoney.frame.authentication.api.vo.ShiroCheckVo;
 import com.lvmoney.frame.base.core.api.ApiResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.lvmoney.frame.prefix.constant.FramePrefixConstant;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @describe：
- * @author: lvmoney/XXXXXX科技有限公司 
- * @version:v1.0
- * 2020/3/15 13:29  
+ * @author: lvmoney/XXXXXX科技有限公司
+ * @version:v1.0 2020/3/15 13:29
  */
+@RequestMapping(FramePrefixConstant.FRAME_AUTHENTICATION_PREFIX)
 public interface IAuthorityCheck {
     /**
      * 校验token
+     * z
      *
      * @param token:
      * @throws
@@ -32,7 +31,7 @@ public interface IAuthorityCheck {
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2020/3/15 14:14
      */
-    @GetMapping("/user/token/check")
+    @GetMapping("/token/check")
     ApiResult<JwtCheckVo> checkToken(@RequestParam("token") String token);
 
     /**
@@ -44,6 +43,6 @@ public interface IAuthorityCheck {
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2020/3/8 23:31
      */
-    @PostMapping("/user/autority/check")
+    @PostMapping("/autority/check")
     ApiResult<ShiroCheckVo> checkAuthority(@RequestBody ShiroCheckAo shiroCheckAo);
 }

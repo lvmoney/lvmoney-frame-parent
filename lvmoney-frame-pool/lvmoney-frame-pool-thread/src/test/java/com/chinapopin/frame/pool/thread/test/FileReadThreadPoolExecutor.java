@@ -46,7 +46,7 @@ public class FileReadThreadPoolExecutor {
                 TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(8), new FileReadThreadPoolExecutor.FileThreadFactory(), new FileReadThreadPoolExecutor.CustomRejectedExecutionHandler());
     }
 
-    public void destory() {
+    public void destroy() {
         if (pool != null) {
             pool.shutdownNow();
         }

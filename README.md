@@ -5,6 +5,9 @@
 
 java版分布式微服务后台常用技术完全整合架构。基于springboot ，springcloud istio，通过maven依赖简单的引入即可使用各种常用技术。支持本地开发测试，nacos，k8s(istio)环境
 
+#### 最近新增  
+新增区块链模块，主要借助webase完成对FISCO BCOS的操作  
+
 #### 目的  
 
 统一公司所有系统的技术栈  
@@ -118,6 +121,9 @@ lvmoney-frame-test
 工作流  
 lvmoney-frame-workflow  
 
+区块链  
+lvmoney-frame-blockchain  
+
 
 #### 技术罗列
 
@@ -144,6 +150,8 @@ tidb
 scylla  
 vitess  
 hugegraph  
+webase  
+FISCO BCOS
 等等  
 
 

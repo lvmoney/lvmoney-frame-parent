@@ -48,8 +48,6 @@ public interface ShiroRedisService {
     void saveShiroData(ShiroDataRo shiroDataRo);
 
 
-
-
     /**
      * 存储url 能被那些角色或者权限访问
      *
@@ -64,14 +62,13 @@ public interface ShiroRedisService {
     /**
      * 通过uri获得能被哪些角色和权限访问
      *
-     * @param uri:
+     * @param uri: uri 在多系统情况下需要带上sysid拼接
      * @throws
      * @return: ShiroUriVo
      * @author: lvmoney /四川******科技有限公司
      * @date: 2019/9/9 21:08
      */
     ShiroUriVo getShiroUriData(String uri);
-
 
 
 }

@@ -51,6 +51,7 @@
         <module>demo-frame-webservice</module>
         <module>demo-frame-mq-sender</module>
         <module>demo-frame-mq-customer</module>
+        <module>demo-frame-webase</module>
     </modules>
 
 

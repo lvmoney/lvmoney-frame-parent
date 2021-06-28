@@ -19,6 +19,7 @@ import com.lvmoney.frame.authentication.shiro.service.ShiroRedisService;
 import com.lvmoney.frame.authentication.shiro.vo.ShiroUriVo;
 import com.lvmoney.frame.authentication.util.util.JwtUtil;
 import com.lvmoney.frame.base.core.api.ApiResult;
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.core.vo.UserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -83,8 +84,11 @@ public class IAuthorityCheckController implements IAuthorityCheck {
         if (userVo == null) {
             return ApiResult.success(new ShiroCheckVo(false));
         }
-        String username = userVo.getUsername();
+        String userId = userVo.getUserId();
         String password = userVo.getPassword();
+        String sysId = userVo.getSysId();
+        //考虑到多个系统的权限角色，需要区分不同的用户和系统，做如下处理
+        String username = sysId + BaseConstant.CONNECTOR_UNDERLINE + userId;
         try {
             UsernamePasswordToken shiroToken = new UsernamePasswordToken(username, password);
             Subject subject = SecurityUtils.getSubject();
@@ -92,6 +96,7 @@ public class IAuthorityCheckController implements IAuthorityCheck {
             if (servletPath.endsWith(ShiroConstant.SERVLET_END_WITH)) {
                 servletPath = servletPath.substring(0, servletPath.lastIndexOf(ShiroConstant.SERVLET_END_WITH));
             }
+            servletPath = userVo.getSysId() + BaseConstant.CONNECTOR_UNDERLINE + servletPath;
             ShiroUriVo shiroUriVo = shiroRedisService.getShiroUriData(servletPath);
             if (shiroUriVo != null) {
                 List<String> roleList = new ArrayList<>(shiroUriVo.getRole());

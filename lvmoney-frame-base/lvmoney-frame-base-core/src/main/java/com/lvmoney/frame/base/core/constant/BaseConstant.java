@@ -278,4 +278,15 @@ public class BaseConstant {
      */
     public static final String HTML_SUFFIX = ".html";
 
+    /**
+     * 双引号
+     */
+    public static final String DOUBLE_QUOTATION_MARKS="\"";
+
+
+    /**
+     * 双引号转义符
+     */
+    public static final String DOUBLE_QUOTATION_MARKS_ESCAPE="\\\\\\\"";
+
 }

@@ -41,5 +41,6 @@
             <artifactId>lvmoney-frame-authentication-service</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
     </dependencies>
 </project>

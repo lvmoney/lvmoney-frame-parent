@@ -157,6 +157,9 @@
         <sentinel-datasource-nacos.version>1.7.2</sentinel-datasource-nacos.version>
         <weixin.binarywang.version>4.0.0</weixin.binarywang.version>
         <cxf-spring-boot.version>3.2.1</cxf-spring-boot.version>
+
+        <slf4j.version>1.7.16</slf4j.version>
+        <swagger-annotations.version>1.5.20</swagger-annotations.version>
     </properties>
 
     <dependencyManagement>
@@ -1207,6 +1210,24 @@
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-transports-http</artifactId>
                 <version>${cxf-spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-annotations.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

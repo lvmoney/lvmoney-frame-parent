@@ -17,5 +17,11 @@
             <artifactId>lvmoney-frame-base-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-prefix</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 </project>

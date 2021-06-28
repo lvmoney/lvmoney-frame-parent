@@ -7,6 +7,7 @@ package com.lvmoney.frame.dispatch.feign.config;/**
  */
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lvmoney.frame.base.core.exception.BusinessException;
@@ -28,6 +29,9 @@ import java.io.IOException;
 public class FeignClientErrorDecoder implements ErrorDecoder {
     private static final String RESULT_CODE = "code";
     private static final String RESULT_MSG = "msg";
+    private static final String RESULT_ERROR_MSG = "errorMessage";
+
+    private static final String DEFAULT_ERROR_MSG = "rpc server error";
 
     @Override
     public Exception decode(String methodKey, Response response) {
@@ -39,7 +43,12 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
         }
         JSONObject obj = (JSONObject) JSON.parse(body);
         Integer code = (Integer) obj.get(RESULT_CODE);
-        String msg = (String) obj.get(RESULT_MSG);
+        String msg = "";
+        if (ObjectUtil.isEmpty(obj.get(RESULT_MSG))) {
+            msg = obj.getString(RESULT_ERROR_MSG);
+        } else {
+            msg = (String) obj.getOrDefault(RESULT_MSG, DEFAULT_ERROR_MSG);
+        }
         throw new BusinessException(code, msg);
     }
 }

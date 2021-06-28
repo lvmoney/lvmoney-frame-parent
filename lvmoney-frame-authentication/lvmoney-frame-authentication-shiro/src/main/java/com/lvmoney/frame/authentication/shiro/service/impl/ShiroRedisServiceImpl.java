@@ -62,7 +62,6 @@ public class ShiroRedisServiceImpl implements ShiroRedisService {
     }
 
 
-
     @Override
     public void saveShiroUriData(ShiroUriRo shiroUriRo) {
         Map<String, String> map = new HashMap<>(BaseConstant.MAP_DEFAULT_SIZE);

@@ -38,7 +38,7 @@ public class CustomUnblockThreadPoolExecutor {
                 TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(5), new CustomThreadFactory(), new CustomRejectedExecutionHandler());
     }
 
-    public void destory() {
+    public void destroy() {
         if (pool != null) {
             pool.shutdownNow();
         }
