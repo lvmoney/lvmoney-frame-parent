@@ -1,5 +1,6 @@
 package com.lvmoney.frame.core.util;
 
+import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.core.vo.EcdsaVo;
 import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import java.security.*;
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+
+import static com.lvmoney.frame.base.core.constant.BaseConstant.EEC_FACTORY_TYPE;
 
 /**
  * @describe：
@@ -179,6 +182,11 @@ public class EcdsaUtil {
         }
         return null;
 
+    }
+
+    public static void main(String[] args) {
+        EcdsaVo ecdsaVo = EcdsaUtil.getSecretKey(EEC_FACTORY_TYPE);
+        System.out.println(JsonUtil.t2JsonString(ecdsaVo));
     }
 
 

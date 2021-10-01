@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: customer
+  redis:
+    database: 9
+    port: 6379
+    host: 192.168.0.21
 istio:
   docker:
     image:
@@ -31,7 +35,7 @@ swagger:
   base:
     package: com.lvmoney
   contact:
-    email: author@chdriver.com
+    email: author@lvmoney.com
     name: author
     url: ''
   description: frame demo 服务调用方
@@ -70,6 +74,12 @@ webase:
     coin:
       name: webase-coin
       url: 192.168.0.34:5002/WeBASE-Front
+    weid:
+      name: webase-weid
+      url: 192.168.0.45:6001/weid
+    weidentity:
+      name: webase-weidentity
+      url: 192.168.0.45:6001/weid
 feign:
   sentinel:
     enabled: true

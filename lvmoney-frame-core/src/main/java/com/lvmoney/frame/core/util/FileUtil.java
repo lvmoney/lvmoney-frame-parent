@@ -7,6 +7,7 @@ package com.lvmoney.frame.core.util;/**
  */
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.exception.BusinessException;
 import com.lvmoney.frame.base.core.exception.CommonException;
@@ -27,8 +28,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import static com.lvmoney.frame.base.core.constant.BaseConstant.CHARACTER_ENCODE_UTF8_LOWER;
-import static com.lvmoney.frame.base.core.constant.BaseConstant.PLACEHOLDER_WARP_SPACE;
+import static com.lvmoney.frame.base.core.constant.BaseConstant.*;
 
 /**
  * @describe：
@@ -588,6 +588,24 @@ public class FileUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * 将引号替换从引号的转义符
+     *
+     * @param quotationMarks:
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/6/21 9:11
+     */
+    public static String quotationMarksReplace(String quotationMarks) {
+        if (ObjectUtil.isNotEmpty(quotationMarks) && quotationMarks.contains(DOUBLE_QUOTATION_MARKS)) {
+            return quotationMarks.replaceAll(DOUBLE_QUOTATION_MARKS, DOUBLE_QUOTATION_MARKS_ESCAPE);
+        } else {
+            return quotationMarks;
+        }
+
     }
 
 }

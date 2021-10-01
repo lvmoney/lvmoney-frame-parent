@@ -37,5 +37,5 @@ public class FileBaseVo<T> implements Serializable {
      * 各个中间件的特性实体
      */
     private T data;
-    private long maxSize;
+    private Long maxSize;
 }

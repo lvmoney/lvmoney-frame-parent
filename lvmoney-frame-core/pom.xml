@@ -134,7 +134,7 @@
             <artifactId>RoaringBitmap</artifactId>
         </dependency>
 
-       <dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <exclusions>
@@ -143,6 +143,15 @@
                     <artifactId>snakeyaml</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hashids</groupId>
+            <artifactId>hashids</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hankcs</groupId>
+            <artifactId>hanlp</artifactId>
         </dependency>
 
     </dependencies>

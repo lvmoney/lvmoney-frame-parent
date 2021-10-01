@@ -15,6 +15,7 @@
         <module>lvmoney-frame-oss-common</module>
         <module>lvmoney-frame-oss-gridfs</module>
         <module>lvmoney-frame-oss-fastdfs</module>
+        <module>lvmoney-frame-oss-minio</module>
     </modules>
 
     <dependencyManagement>

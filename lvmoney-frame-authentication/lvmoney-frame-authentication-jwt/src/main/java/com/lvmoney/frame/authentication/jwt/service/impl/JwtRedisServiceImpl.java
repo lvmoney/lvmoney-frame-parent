@@ -20,6 +20,7 @@ import com.lvmoney.frame.authentication.common.exception.AuthorityException;
 import com.lvmoney.frame.authentication.service.service.UserCommonService;
 import com.lvmoney.frame.authentication.util.util.JwtUtil;
 import com.lvmoney.frame.authentication.util.vo.JwtVo;
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.exception.BusinessException;
 import com.lvmoney.frame.base.core.util.JsonUtil;
 import com.lvmoney.frame.core.ro.UserRo;
@@ -31,6 +32,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import static com.lvmoney.frame.authentication.common.constant.AuthConstant.TOKEN_GROUP;
 
 /**
  * @describe：
@@ -51,17 +54,19 @@ public class JwtRedisServiceImpl implements JwtRedisService {
 
     @Override
     public void saveToken2Redis(UserRo userRo) {
+        String redisKey = TOKEN_GROUP + userRo.getUserId() + BaseConstant.CONNECTOR_UNDERLINE + userRo.getToken();
         if (userRo.getExpire() > 0L) {
-            baseRedisService.setString(userRo.getToken(), JsonUtil.t2JsonString(userRo), userRo.getExpire());
+            baseRedisService.setString(redisKey, JsonUtil.t2JsonString(userRo), userRo.getExpire());
         } else {
-            baseRedisService.setString(userRo.getToken(), JsonUtil.t2JsonString(userRo), Long.parseLong(expire));
+            baseRedisService.setString(redisKey, JsonUtil.t2JsonString(userRo), Long.parseLong(expire));
         }
     }
 
 
     @Override
     public UserRo getUserRo(String token) {
-        Object obj = baseRedisService.getByKey(token);
+        String userId = JwtUtil.getUserId(token);
+        Object obj = baseRedisService.getByKey(TOKEN_GROUP + userId + BaseConstant.CONNECTOR_UNDERLINE + token);
         String jwtString = ObjectUtils.isEmpty(obj) ? null : obj.toString();
         if (jwtString != null) {
             UserRo userRo = JSON.parseObject(jwtString, new TypeReference<UserRo>() {
@@ -100,7 +105,8 @@ public class JwtRedisServiceImpl implements JwtRedisService {
 
     @Override
     public void deleteToken(String token) {
-        baseRedisService.deleteByKey(token);
+        String userId = JwtUtil.getUserId(token);
+        baseRedisService.deleteByKey(TOKEN_GROUP + userId + BaseConstant.CONNECTOR_UNDERLINE + token);
     }
 
     @Override
@@ -114,5 +120,11 @@ public class JwtRedisServiceImpl implements JwtRedisService {
         }
 
     }
+
+    @Override
+    public void deleteTokenByUserId(String userId) {
+        baseRedisService.deleteByWildcardKey(TOKEN_GROUP + userId);
+    }
+
 
 }

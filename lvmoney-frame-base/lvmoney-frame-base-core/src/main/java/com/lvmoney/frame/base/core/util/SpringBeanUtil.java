@@ -83,6 +83,19 @@ public class SpringBeanUtil implements ApplicationContextAware {
     }
 
     /**
+     * 通过bean 名称获得bean
+     *
+     * @param beanName:
+     * @throws
+     * @return: java.lang.Object
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/7/8 11:14
+     */
+    public static Object getBean(String beanName) {
+        return getApplicationContext().getBean(beanName);
+    }
+
+    /**
      * 获取 bean 的类型
      *
      * @param clazz:

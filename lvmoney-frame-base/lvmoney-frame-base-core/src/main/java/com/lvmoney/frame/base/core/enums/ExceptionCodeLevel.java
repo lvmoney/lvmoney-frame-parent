@@ -96,6 +96,10 @@ public enum ExceptionCodeLevel {
      * db
      */
     DB(19000),
+    /**
+     * pay
+     */
+    PAY(21000),
 
     ;
 

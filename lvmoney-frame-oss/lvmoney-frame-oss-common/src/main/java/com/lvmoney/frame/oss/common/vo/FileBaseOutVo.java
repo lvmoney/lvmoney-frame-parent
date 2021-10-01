@@ -32,6 +32,6 @@ public class FileBaseOutVo implements Serializable {
     private String fileId;
     private String fileName;
     private String fileType;
-    private long size;
+    private Long size;
 
 }

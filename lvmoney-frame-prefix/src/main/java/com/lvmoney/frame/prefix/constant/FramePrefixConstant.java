@@ -18,12 +18,20 @@ public class FramePrefixConstant {
      */
     private static final String FRAME_PREFIX = "/frame";
     /**
+     * 区块链 webase模块 前缀
+     */
+    private static final String BLOCK_CHAIN_WEBASE_PREFIX = FRAME_PREFIX + "/webase";
+    /**
      * 网关调用用户中台权限校验接口前缀
      */
     public static final String FRAME_AUTHENTICATION_PREFIX = FRAME_PREFIX + "/user/authentication";
-
     /**
      * webase 钱包 前缀
      */
-    public static final String PLATFORM_BLOCKCHAIN_WEBASE_WALLET = FRAME_PREFIX + "/webase/wallet";
+    public static final String PLATFORM_BLOCKCHAIN_WEBASE_WALLET = BLOCK_CHAIN_WEBASE_PREFIX + "/wallet";
+    /**
+     * webase weidentity 前缀
+     */
+    public static final String PLATFORM_BLOCKCHAIN_WEBASE_WE_IDENTITY = BLOCK_CHAIN_WEBASE_PREFIX + "/weidentity";
+
 }

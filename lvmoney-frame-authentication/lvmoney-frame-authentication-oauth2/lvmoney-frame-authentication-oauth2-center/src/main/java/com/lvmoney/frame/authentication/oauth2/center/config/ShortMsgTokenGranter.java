@@ -32,7 +32,8 @@ import java.util.Map;
 public class ShortMsgTokenGranter extends AbstractTokenGranter {
     private static final String GRANT_TYPE = "short_msg";
     UserDetailsService userDetailsService;
-
+    private static final String DEFAULT_USER_NAME_KEY = "telephone";
+    private static final String DEFAULT_PASSWORD_KEY = "password";
 
     public ShortMsgTokenGranter(UserDetailsService userDetailsService,
                                 AuthorizationServerTokenServices authorizationServerTokenServices,
@@ -46,9 +47,9 @@ public class ShortMsgTokenGranter extends AbstractTokenGranter {
 
         Map<String, String> parameters = new LinkedHashMap<String, String>(tokenRequest.getRequestParameters());
         // 客户端提交的用户名
-        String username = parameters.get("telephone");
+        String username = parameters.get(DEFAULT_USER_NAME_KEY);
         // 客户端提交的验证码
-        String password = parameters.get("password");
+        String password = parameters.get(DEFAULT_PASSWORD_KEY);
         username = Oauth2CommonConstant.TOKEN_GRANTER_SHORT_MSG + BaseConstant.CONNECTOR_UNDERLINE + username;
         // 从库里查用户
         UserDetails user = userDetailsService.loadUserByUsername(username);

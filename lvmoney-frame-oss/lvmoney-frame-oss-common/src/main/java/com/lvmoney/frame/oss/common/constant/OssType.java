@@ -28,6 +28,11 @@ public class OssType {
      * hdfsOss
      */
     public static final String OSS_HDFS = "hdfsOss";
+
+    /**
+     * minioOss
+     */
+    public static final String OSS_MINIO = "minioOss";
     /**
      * 文件头长度类型判断
      */

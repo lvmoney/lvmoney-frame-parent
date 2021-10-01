@@ -65,12 +65,12 @@ public class DbUtilConstant {
     /**
      * 数据库表关系前缀
      */
-    public static final String REL_DB_TABLE_PREFIX = "REL_DB_TABLE_PREFIX";
+    public static final String REL_DB_TABLE_PREFIX = "SHARDING:REL_DB_TABLE_PREFIX";
 
 
     /**
      * 数据库表关系前缀
      */
-    public static final String REL_DB_TENANT_PREFIX = "REL_DB_TENANT_PREFIX";
+    public static final String REL_DB_TENANT_PREFIX = "SHARDING:REL_DB_TENANT_PREFIX";
 
 }

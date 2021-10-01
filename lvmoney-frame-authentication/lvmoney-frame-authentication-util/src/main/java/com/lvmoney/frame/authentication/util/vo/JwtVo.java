@@ -70,4 +70,9 @@ public class JwtVo implements Serializable {
      */
     private String orgId;
 
+    /**
+     * 其他参数
+     */
+    private String other;
+
 }

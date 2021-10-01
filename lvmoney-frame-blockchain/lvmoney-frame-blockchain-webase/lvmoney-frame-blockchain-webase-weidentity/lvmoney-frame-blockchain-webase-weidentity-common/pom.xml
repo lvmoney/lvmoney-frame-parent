@@ -16,6 +16,23 @@
             <artifactId>lvmoney-frame-blockchain-webase-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.webank</groupId>
+            <artifactId>weid-java-sdk</artifactId>
+            <version>1.8.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-cache-redis</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 
 

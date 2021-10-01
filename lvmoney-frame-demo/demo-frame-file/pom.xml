@@ -84,37 +84,37 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+           <!-- <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.1.0</version>
                 <executions>
                     <execution>
-                        <id>build-image</id>     <!--定义一个执行命令的id-->
-                        <phase>package</phase>   <!--绑定mvn的哪个命令-->
+                        <id>build-image</id>     &lt;!&ndash;定义一个执行命令的id&ndash;&gt;
+                        <phase>package</phase>   &lt;!&ndash;绑定mvn的哪个命令&ndash;&gt;
                         <goals>
-                            <goal>build</goal>   <!--要执行的命令 -->
+                            <goal>build</goal>   &lt;!&ndash;要执行的命令 &ndash;&gt;
                         </goals>
                     </execution>
                     <execution>
                         <id>image-tag</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>tag</goal>      <!--tag命令，相当于docker的tag命令-->
+                            <goal>tag</goal>      &lt;!&ndash;tag命令，相当于docker的tag命令&ndash;&gt;
                         </goals>
                         <configuration>
-                            <image>${dockerImageName}</image>   <!--镜像名-->
-                            <newName>${dockerImageTag}</newName>   <!--打的标签名-->
+                            <image>${dockerImageName}</image>   &lt;!&ndash;镜像名&ndash;&gt;
+                            <newName>${dockerImageTag}</newName>   &lt;!&ndash;打的标签名&ndash;&gt;
                         </configuration>
                     </execution>
                     <execution>
                         <id>package-push</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>push</goal>    <!--相当于docker的push命令-->
+                            <goal>push</goal>    &lt;!&ndash;相当于docker的push命令&ndash;&gt;
                         </goals>
                         <configuration>
-                            <imageName>${dockerImageTag}</imageName>  <!--要push的镜像名-->
+                            <imageName>${dockerImageTag}</imageName>  &lt;!&ndash;要push的镜像名&ndash;&gt;
                         </configuration>
                     </execution>
                 </executions>
@@ -133,7 +133,7 @@
                         </resource>
                     </resources>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
         <resources>
             <resource>

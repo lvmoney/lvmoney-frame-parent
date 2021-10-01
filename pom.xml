@@ -44,7 +44,7 @@
         <module>lvmoney-frame-bom</module>
         <module>lvmoney-frame-transaction</module>
         <module>lvmoney-frame-cypher</module>
-        <module>lvmoney-frame-docking</module>
+        <module>lvmoney-frame-pay</module>
         <module>lvmoney-frame-webservice</module>
         <module>lvmoney-frame-blockchain</module>
         <module>lvmoney-frame-prefix</module>

@@ -7,9 +7,7 @@ package com.lvmoney.demo.transaction.customer.service.impl;/**
  */
 
 
-import com.lvmoney.frame.base.core.exception.BusinessException;
 import com.lvmoney.frame.base.core.util.JsonUtil;
-import com.lvmoney.frame.cache.common.exception.CacheException;
 import com.lvmoney.frame.mq.common.annotations.CustomerService;
 import com.lvmoney.frame.mq.common.service.MqDataHandService;
 import com.lvmoney.frame.mq.common.vo.MessageVo;

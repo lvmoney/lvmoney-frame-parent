@@ -35,7 +35,7 @@ public interface JwtRedisService {
      *
      * @param token:
      * @throws
-     * @return: com.lvmoney.frame.core.ro.UserRo
+     * @return: com.chdriver.frame.core.ro.UserRo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2020/3/3 18:19
      */
@@ -73,6 +73,17 @@ public interface JwtRedisService {
      * @date: 2019/11/19 17:53
      */
     String updateToken(String token);
+
+    /**
+     * 删除用户所有的token
+     *
+     * @param userId:
+     * @throws
+     * @return: void
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/9/30 18:22
+     */
+    void deleteTokenByUserId(String userId);
 
 
 }

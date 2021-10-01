@@ -8,6 +8,7 @@
 
 package com.lvmoney.frame.core.util;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.lvmoney.frame.base.core.constant.BaseConstant;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.lvmoney.frame.base.core.constant.BaseConstant.PLACEHOLDER_BLANK_SPACE;
+import static com.lvmoney.frame.base.core.constant.BaseConstant.*;
 
 /**
  * @describe：
@@ -788,8 +789,21 @@ public class StringUtil extends StringUtils {
         return UUID.randomUUID().toString().replaceAll(BaseConstant.DASH_LINE, "");
     }
 
-    public static void main(String[] args) {
-        String test = "test";
-        System.out.println(lowerFirstCode(test));
+    /**
+     * 将引号替换从引号的转义符
+     *
+     * @param quotationMarks:
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/6/21 9:11
+     */
+    public static String quotationMarksReplace(String quotationMarks) {
+        if (ObjectUtil.isNotEmpty(quotationMarks) && quotationMarks.contains(DOUBLE_QUOTATION_MARKS)) {
+            return quotationMarks.replaceAll(DOUBLE_QUOTATION_MARKS, DOUBLE_QUOTATION_MARKS_ESCAPE);
+        } else {
+            return quotationMarks;
+        }
+
     }
 }

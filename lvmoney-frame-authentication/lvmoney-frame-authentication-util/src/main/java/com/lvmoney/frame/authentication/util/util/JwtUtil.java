@@ -41,6 +41,11 @@ public class JwtUtil {
      * key userId
      */
     private static final String KEY_USER_ID = "userId";
+
+    /**
+     * key other
+     */
+    private static final String OTHER = "other";
     /**
      * key sysId
      */
@@ -115,6 +120,7 @@ public class JwtUtil {
                 .withClaim(KEY_ORG_ID, orgId)
                 .withClaim(KEY_SYS_ID, sysId)
                 .withClaim(KEY_USER_ID, userId)
+                .withClaim(OTHER,jwtVo.getOther())
                 .withClaim(KEY_TENANT_ID, tenantId)
                 .withClaim(KEY_ISS, jwtVo.getIss())
                 .withClaim(KEY_AUD, jwtVo.getAud())
@@ -158,7 +164,7 @@ public class JwtUtil {
      *
      * @param token:
      * @throws
-     * @return: com.lvmoney.frame.core.vo.UserVo
+     * @return: com.chdriver.frame.core.vo.UserVo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2020/3/3 18:14
      */
@@ -168,11 +174,13 @@ public class JwtUtil {
         String sysId = JWT.decode(verifyToken).getClaim(KEY_SYS_ID).asString();
         String tenantId = JWT.decode(verifyToken).getClaim(KEY_TENANT_ID).asString();
         String orgId = JWT.decode(verifyToken).getClaim(KEY_ORG_ID).asString();
+        String other=JWT.decode(verifyToken).getClaim(OTHER).asString();
         UserVo userVo = new UserVo();
         userVo.setSysId(sysId);
         userVo.setUserId(userId);
         userVo.setTenantId(tenantId);
         userVo.setOrgId(orgId);
+        userVo.setOther(other);
         return userVo;
     }
 
@@ -183,6 +191,7 @@ public class JwtUtil {
         jwtVo.setSysId("AAA");
         jwtVo.setTenantId("123");
         jwtVo.setExp(18000L);
+        jwtVo.setOther("test");
         String token2 = getToken(jwtVo);
         System.out.println(token2);
         System.out.println(token2.length());

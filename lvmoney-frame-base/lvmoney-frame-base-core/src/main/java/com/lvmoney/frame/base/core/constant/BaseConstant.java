@@ -281,12 +281,17 @@ public class BaseConstant {
     /**
      * 双引号
      */
-    public static final String DOUBLE_QUOTATION_MARKS="\"";
+    public static final String DOUBLE_QUOTATION_MARKS = "\"";
 
 
     /**
      * 双引号转义符
      */
-    public static final String DOUBLE_QUOTATION_MARKS_ESCAPE="\\\\\\\"";
+    public static final String DOUBLE_QUOTATION_MARKS_ESCAPE = "\\\\\\\"";
 
+
+    /**
+     * 空
+     */
+    public static final String EMPTY = "";
 }

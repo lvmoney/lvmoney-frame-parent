@@ -10,6 +10,8 @@ package com.lvmoney.frame.dispatch.feign.config;/**
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lvmoney.frame.base.core.constant.BaseConstant;
+import com.lvmoney.frame.base.core.enums.ExceptionCodeLevel;
 import com.lvmoney.frame.base.core.exception.BusinessException;
 import com.lvmoney.frame.dispatch.common.exception.DispatchException;
 import feign.Response;
@@ -33,6 +35,12 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
 
     private static final String DEFAULT_ERROR_MSG = "rpc server error";
 
+    private static final String RESULT_ERROR = "error";
+
+    private static final String ERROR_STATUS = "status";
+
+    private static final Integer DEFAULT_ERROR_CODE = ExceptionCodeLevel.OTHER.getValue();
+
     @Override
     public Exception decode(String methodKey, Response response) {
         String body = "";
@@ -42,10 +50,17 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             throw new BusinessException(DispatchException.Proxy.FEIGN_BODY_ERROR);
         }
         JSONObject obj = (JSONObject) JSON.parse(body);
-        Integer code = (Integer) obj.get(RESULT_CODE);
+        Integer code;
+        if (ObjectUtil.isNotEmpty(obj.get(ERROR_STATUS))) {
+            code = obj.getInteger(ERROR_STATUS);
+        } else {
+            code = (Integer) obj.getOrDefault(RESULT_CODE, DEFAULT_ERROR_CODE);
+        }
         String msg = "";
-        if (ObjectUtil.isEmpty(obj.get(RESULT_MSG))) {
+        if (ObjectUtil.isNotEmpty(obj.get(RESULT_ERROR_MSG))) {
             msg = obj.getString(RESULT_ERROR_MSG);
+        } else if (ObjectUtil.isNotEmpty(obj.get(RESULT_ERROR))) {
+            msg = obj.getString(RESULT_ERROR);
         } else {
             msg = (String) obj.getOrDefault(RESULT_MSG, DEFAULT_ERROR_MSG);
         }

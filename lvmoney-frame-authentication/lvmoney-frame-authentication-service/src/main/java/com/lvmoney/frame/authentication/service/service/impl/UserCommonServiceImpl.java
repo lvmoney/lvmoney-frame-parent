@@ -10,12 +10,16 @@ package com.lvmoney.frame.authentication.service.service.impl;/**
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lvmoney.frame.authentication.service.service.UserCommonService;
+import com.lvmoney.frame.authentication.util.util.JwtUtil;
+import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.cache.common.annotations.CacheImpl;
 import com.lvmoney.frame.cache.common.service.CacheCommonService;
 import com.lvmoney.frame.core.ro.UserRo;
 import com.lvmoney.frame.core.vo.UserVo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
+
+import static com.lvmoney.frame.authentication.common.constant.AuthConstant.TOKEN_GROUP;
 
 /**
  * @describe：
@@ -29,7 +33,8 @@ public class UserCommonServiceImpl implements UserCommonService {
 
     @Override
     public UserVo getUserVo(String token) {
-        Object obj = baseRedisService.getByKey(token);
+        String userId = JwtUtil.getUserId(token);
+        Object obj = baseRedisService.getByKey(TOKEN_GROUP + userId + BaseConstant.CONNECTOR_UNDERLINE + token);
         String jwtString = ObjectUtils.isEmpty(obj) ? null : obj.toString();
         UserVo userVo = new UserVo();
         if (jwtString != null) {
