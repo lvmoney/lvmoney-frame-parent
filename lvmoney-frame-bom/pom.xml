@@ -173,7 +173,7 @@
         <fabric-gateway.version>2.1.1</fabric-gateway.version>
 
         <jacob.version>1.14.3</jacob.version>
-        <pdfbox.version>2.0.12</pdfbox.version>
+        <pdfbox.version>2.0.24</pdfbox.version>
 
         <itextpdf.version>5.5.13</itextpdf.version>
         <itext-asian.version>5.2.0</itext-asian.version>
