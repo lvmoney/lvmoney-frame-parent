@@ -8,7 +8,7 @@ package com.lvmoney.frame.base.core.util;/**
 
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.text.StrSpliter;
+import cn.hutool.core.text.StrSplitter;
 import cn.hutool.core.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +77,7 @@ public class YmlUtil {
     public Object getProperty(String name) {
         try {
             LinkedHashMap param = prop;
-            List<String> split = StrSpliter.split(name, StrUtil.C_DOT, true, true);
+            List<String> split = StrSplitter.split(name, StrUtil.C_DOT, true, true);
             for (int i = 0; i < split.size(); i++) {
                 if (i == split.size() - 1) {
                     return param.get(split.get(i));

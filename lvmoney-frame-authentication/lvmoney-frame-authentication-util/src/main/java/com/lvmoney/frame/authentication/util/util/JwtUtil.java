@@ -164,7 +164,7 @@ public class JwtUtil {
      *
      * @param token:
      * @throws
-     * @return: com.chdriver.frame.core.vo.UserVo
+     * @return: com.lvmoney.frame.core.vo.UserVo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2020/3/3 18:14
      */

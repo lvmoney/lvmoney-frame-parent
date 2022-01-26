@@ -48,6 +48,7 @@
         <module>lvmoney-frame-webservice</module>
         <module>lvmoney-frame-blockchain</module>
         <module>lvmoney-frame-prefix</module>
+        <module>lvmoney-frame-linkis</module>
     </modules>
 
     <distributionManagement>

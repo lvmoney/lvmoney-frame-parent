@@ -35,7 +35,13 @@ public class FeignInterceptor implements RequestInterceptor {
         HttpServletRequest request = Objects.requireNonNull(attributes).getRequest();
         String token = request.getHeader(AUTHORIZATION_TOKEN_KEY);
         if (ObjectUtil.isNotEmpty(token)) {
-            template.header(AUTHORIZATION_TOKEN_KEY, request.getHeader(AUTHORIZATION_TOKEN_KEY));
+            template.header(AUTHORIZATION_TOKEN_KEY, token);
+        } else {
+            Object attribute = request.getAttribute(AUTHORIZATION_TOKEN_KEY);
+            if (ObjectUtil.isNotEmpty(attribute)) {
+                template.header(AUTHORIZATION_TOKEN_KEY, attribute.toString());
+            }
+
         }
     }
 }

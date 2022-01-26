@@ -1,0 +1,24 @@
+#false时为单机模式，true时为zookeeper高可用模式
+canal:
+  server:
+    instances:
+      example:
+        clusterEnabled: false
+        host: 192.168.0.21
+        #zookeeper 地址
+        #        zookeeperAddress: 10.10.2.137:2181,10.10.2.138:2181,10.10.2.139:2181
+        #        port: 11111
+        batchSize: 1000
+        acquireInterval: 1000
+        retryCount: 20
+    maxPoolSize: 20
+    initPoolSize: 5
+spring:
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 8099
+  redis:
+    database: 0
+    port: 6379
+    host: 192.168.0.21

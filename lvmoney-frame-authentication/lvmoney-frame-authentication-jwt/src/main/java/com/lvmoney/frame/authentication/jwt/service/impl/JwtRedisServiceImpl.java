@@ -34,6 +34,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import static com.lvmoney.frame.authentication.common.constant.AuthConstant.TOKEN_GROUP;
+import static com.lvmoney.frame.base.core.constant.BaseConstant.CHARACTER_ASTERISK;
 
 /**
  * @describe：
@@ -123,7 +124,7 @@ public class JwtRedisServiceImpl implements JwtRedisService {
 
     @Override
     public void deleteTokenByUserId(String userId) {
-        baseRedisService.deleteByWildcardKey(TOKEN_GROUP + userId);
+        baseRedisService.deleteByWildcardKey(TOKEN_GROUP + userId + CHARACTER_ASTERISK);
     }
 
 

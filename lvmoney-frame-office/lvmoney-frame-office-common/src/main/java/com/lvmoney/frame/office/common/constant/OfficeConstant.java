@@ -31,4 +31,9 @@ public class OfficeConstant {
      * word转html，image存放的默认基础路径
      */
     public static final String DEFAULT_WORD_IMAGE_BASE_PATH = "images";
+
+    /**
+     * pdf后缀
+     */
+    public static final String PDF_SUFFIX = ".pdf";
 }

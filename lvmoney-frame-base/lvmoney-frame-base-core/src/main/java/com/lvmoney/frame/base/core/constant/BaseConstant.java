@@ -15,6 +15,7 @@ import java.io.File;
  * @version:v1.0 2019/11/19 16:38
  */
 public class BaseConstant {
+
     /**
      * 返回值时间格式
      */
@@ -117,6 +118,11 @@ public class BaseConstant {
 
 
     /**
+     * 星号
+     */
+    public static final String CHARACTER_ASTERISK = "*";
+
+    /**
      * 连接符下划线
      */
     public static final String CONNECTOR_UNDERLINE = "_";
@@ -146,6 +152,16 @@ public class BaseConstant {
      * 大括号右
      */
     public static final String BRACE_RIGHT = "}";
+
+
+    /**
+     * 括号左
+     */
+    public static final String BRACKETS_LEFT = "(";
+    /**
+     * 括号右
+     */
+    public static final String BRACKETS_RIGHT = ")";
 
 
     /**
@@ -220,32 +236,32 @@ public class BaseConstant {
     /**
      * ECC factory类型
      */
-    public final static String EEC_FACTORY_TYPE = "EC";
+    public static final String EEC_FACTORY_TYPE = "EC";
 
     /**
      * ECC signature类型
      */
-    public final static String EEC_SIGNATURE_TYPE = "SHA256withECDSA";
+    public static final String EEC_SIGNATURE_TYPE = "SHA256withECDSA";
     /**
      * md5
      */
-    public final static String MD5_SIGNATURE_TYPE = "md5";
+    public static final String MD5_SIGNATURE_TYPE = "md5";
 
     /**
      * SHA-256
      */
-    public final static String SHA_256_SIGNATURE_TYPE = "SHA-256";
+    public static final String SHA_256_SIGNATURE_TYPE = "SHA-256";
 
     /**
      * SHA-1
      */
-    public final static String SHA_1_SIGNATURE_TYPE = "SHA-1";
+    public static final String SHA_1_SIGNATURE_TYPE = "SHA-1";
 
 
     /**
      * HMAC_SHA1
      */
-    public final static String HMAC_SHA1_SIGNATURE_TYPE = "HmacSHA1";
+    public static final String HMAC_SHA1_SIGNATURE_TYPE = "HmacSHA1";
 
 
     /**
@@ -277,7 +293,6 @@ public class BaseConstant {
      * html 的后缀
      */
     public static final String HTML_SUFFIX = ".html";
-
     /**
      * 双引号
      */
@@ -289,9 +304,49 @@ public class BaseConstant {
      */
     public static final String DOUBLE_QUOTATION_MARKS_ESCAPE = "\\\\\\\"";
 
-
     /**
      * 空
      */
     public static final String EMPTY = "";
+    /**
+     * get请求
+     */
+    public static final String REQUEST_TYPE_GET = "GET";
+    /**
+     * post请求
+     */
+    public static final String REQUEST_TYPE_POST = "POST";
+
+    /**
+     * 兆的长度
+     */
+    public static final Integer OMEN_SIZE = 1024 * 1024;
+
+    /**
+     * 毫秒到秒的进制
+     */
+    public static final Integer LONG_SEC_MS = 1000;
+
+
+    /**
+     * 小时到秒的进制
+     */
+    public static final Integer LONG_HOUR_SEC = 3600;
+
+
+    /**
+     * 分钟到秒的进制
+     */
+    public static final Integer LONG_MIN_SEC = 60;
+
+    /**
+     * 等于符号
+     */
+    public static final String CHAR_EQUAL_SIGN = "=";
+
+    /**
+     * 单引号
+     */
+    public static final String SINGLE_QUOTATION_MARK = "'";
+
 }

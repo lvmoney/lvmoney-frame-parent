@@ -15,6 +15,7 @@
         <module>lvmoney-frame-sync-common</module>
         <module>lvmoney-frame-sync-canal</module>
         <module>lvmoney-frame-sync-netty</module>
+        <module>lvmoney-frame-sync-uniformity</module>
     </modules>
     <dependencyManagement>
         <dependencies>

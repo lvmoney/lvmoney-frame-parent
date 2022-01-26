@@ -18,7 +18,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Encoder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -26,7 +29,10 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.zip.ZipFile;
 
 import static com.lvmoney.frame.base.core.constant.BaseConstant.*;
 
@@ -36,8 +42,15 @@ import static com.lvmoney.frame.base.core.constant.BaseConstant.*;
  * @version:v1.0 2018年10月30日 下午3:29:38
  */
 public class FileUtil {
+    private FileUtil() {
+    }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class);
     private static final int FILE_BYTE_LENGTH = 32 * 1024;
+    /**
+     * png
+     */
+    private static final String PNG = "png";
 
     /**
      * @describe: multipart 转flle
@@ -48,21 +61,14 @@ public class FileUtil {
      */
     public static File multipartFile2File(MultipartFile file) {
         File toFile = null;
-        if (("").equals(file) || file.getSize() <= 0) {
+        if (file == null || file.getSize() <= 0) {
             file = null;
         } else {
-            InputStream ins = null;
-            try {
-                ins = file.getInputStream();
+            try (InputStream ins = file.getInputStream()) {
+                toFile = new File(file.getOriginalFilename());
+                inputStreamToFile(ins, toFile);
             } catch (IOException e) {
                 LOGGER.error("获取文件的inputStream报错:{}", e);
-            }
-            toFile = new File(file.getOriginalFilename());
-            inputStreamToFile(ins, toFile);
-            try {
-                ins.close();
-            } catch (IOException e) {
-                LOGGER.error("关闭文件的inputStream报错:{}", e);
             }
         }
         return toFile;
@@ -75,11 +81,15 @@ public class FileUtil {
      * @author： lvmoney /四川******科技有限公司
      * 2019/3/5
      */
-    public static void fileToMultipartFile(File file) throws Exception {
-
-        FileInputStream fileInput = new FileInputStream(file);
-        MultipartFile toMultipartFile = new MockMultipartFile("file", file.getName(), "text/plain", IOUtils.toByteArray(fileInput));
-        toMultipartFile.getInputStream();
+    public static void fileToMultipartFile(File file) {
+        try (FileInputStream fileInput = new FileInputStream(file)) {
+            MultipartFile toMultipartFile = new MockMultipartFile("file", file.getName(), "text/plain", IOUtils.toByteArray(fileInput));
+            toMultipartFile.getInputStream();
+        } catch (FileNotFoundException e) {
+            LOGGER.error("文件没有发现:{}", e);
+        } catch (IOException e) {
+            LOGGER.error("ile 转 MultipartFile报错:{}", e);
+        }
 
     }
 
@@ -91,14 +101,13 @@ public class FileUtil {
      * 2019/3/5
      */
     public static void inputStreamToFile(InputStream ins, File file) {
-        try {
-            OutputStream os = new FileOutputStream(file);
+
+        try (OutputStream os = new FileOutputStream(file)) {
             int bytesRead = 0;
             byte[] buffer = new byte[FILE_BYTE_LENGTH];
             while ((bytesRead = ins.read(buffer, 0, FILE_BYTE_LENGTH)) != -1) {
                 os.write(buffer, 0, bytesRead);
             }
-            os.close();
             ins.close();
         } catch (Exception e) {
             LOGGER.error("inputstream 转 file报错:{}", e);
@@ -118,6 +127,27 @@ public class FileUtil {
     }
 
     /**
+     * byte[] 转 OutputStream
+     *
+     * @param buf:
+     * @throws
+     * @return: java.io.OutputStream
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/10/14 11:37
+     */
+    public static final OutputStream byte2Output(byte[] buf) {
+        OutputStream os = new ByteArrayOutputStream();
+        try {
+            os.write(buf);
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return os;
+
+    }
+
+    /**
      * @describe: OutputStream 转 InputStream,待验证
      * @param: [out]
      * @return: java.io.ByteArrayInputStream
@@ -125,8 +155,7 @@ public class FileUtil {
      * 2019/3/6
      */
     public static ByteArrayInputStream parse(OutputStream out) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        baos = (ByteArrayOutputStream) out;
+        ByteArrayOutputStream baos = (ByteArrayOutputStream) out;
         ByteArrayInputStream swapStream = new ByteArrayInputStream(baos.toByteArray());
         return swapStream;
     }
@@ -147,47 +176,19 @@ public class FileUtil {
     }
 
     /**
-     * @describe:
-     * @param: [buf, filePath, fileName]
-     * @return: void
-     * @author： lvmoney /四川******科技有限公司
-     * 2019/3/16
+     * 文件转2进制
+     *
+     * @param filePath:
+     * @throws
+     * @return: byte[]
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/1/29 10:06
      */
-    public static void byte2File(byte[] buf, String fileName) {
-        BufferedOutputStream bos = null;
-        FileOutputStream fos = null;
-        File file = null;
-        try {
-            file = new File(fileName);
-            fos = new FileOutputStream(file);
-            bos = new BufferedOutputStream(fos);
-            bos.write(buf);
-        } catch (Exception e) {
-            LOGGER.error("流转换成文件报错:{}", e);
-        } finally {
-            if (bos != null) {
-                try {
-                    bos.close();
-                } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e);
-                }
-            }
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e);
-                }
-            }
-        }
-    }
-
 
     public static byte[] file2byte(String filePath) {
         byte[] buffer = null;
-        try {
-            File file = new File(filePath);
-            FileInputStream fis = new FileInputStream(file);
+        File file = new File(filePath);
+        try (FileInputStream fis = new FileInputStream(file)) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] b = new byte[FILE_BYTE_LENGTH];
             int n;
@@ -198,43 +199,36 @@ public class FileUtil {
             bos.close();
             buffer = bos.toByteArray();
         } catch (FileNotFoundException e) {
-            LOGGER.error("文件转成成流报错:{}", e);
+            LOGGER.error("文件没有发现报错:{}", e);
         } catch (IOException e) {
-            LOGGER.error("文件转成成流报错:{}", e);
+            LOGGER.error("文件转成流报错:{}", e);
         }
         return buffer;
     }
 
+    /**
+     * 2进制转文件
+     *
+     * @param buf:
+     * @param filePath:
+     * @param fileName:
+     * @throws
+     * @return: void
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/1/29 10:05
+     */
     public static void byte2File(byte[] buf, String filePath, String fileName) {
-        BufferedOutputStream bos = null;
-        FileOutputStream fos = null;
-        File file = null;
-        try {
-            File dir = new File(filePath);
-            if (!dir.exists() && dir.isDirectory()) {
-                dir.mkdirs();
-            }
-            file = new File(filePath + File.separator + fileName);
-            fos = new FileOutputStream(file);
-            bos = new BufferedOutputStream(fos);
+
+
+        File dir = new File(filePath);
+        if (!dir.exists() && dir.isDirectory()) {
+            dir.mkdirs();
+        }
+        File file = new File(filePath + File.separator + fileName);
+        try (FileOutputStream fos = new FileOutputStream(file); BufferedOutputStream bos = new BufferedOutputStream(fos)) {
             bos.write(buf);
         } catch (Exception e) {
             LOGGER.error("流转换成文件报错:{}", e);
-        } finally {
-            if (bos != null) {
-                try {
-                    bos.close();
-                } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e);
-                }
-            }
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    LOGGER.error("流转换成文件报错:{}", e);
-                }
-            }
         }
     }
 
@@ -253,14 +247,14 @@ public class FileUtil {
 
         StringBuilder sb = new StringBuilder();
         sb.append(resource);
-        try {
-            RandomAccessFile randomAccessFile = new RandomAccessFile(filename, "rw");
+
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(filename, "rw")) {
+
             byte[] bytes = sb.toString().getBytes();
             randomAccessFile.seek(randomAccessFile.length());
             if (appendable) {
                 randomAccessFile.write(bytes);
             }
-            randomAccessFile.close();
         } catch (Exception e) {
             LOGGER.error("写文件报错:{}", e);
             return false;
@@ -283,18 +277,16 @@ public class FileUtil {
         if (!file.getParentFile().exists()) {
             file.mkdirs();
         }
-        try {
-            RandomAccessFile inRandomAccessFile = new RandomAccessFile(srcPath, "r");
+
+
+        try (RandomAccessFile inRandomAccessFile = new RandomAccessFile(srcPath, "r"); RandomAccessFile outRandomAccessFile = new RandomAccessFile(targetPath, "rw");) {
             FileChannel inFileChannel = inRandomAccessFile.getChannel();
             MappedByteBuffer inMappedByteBuffer = inFileChannel.map(FileChannel.MapMode.READ_ONLY, 0, inFileChannel.size());
-            inRandomAccessFile.close();
             inFileChannel.close();
-            RandomAccessFile outRandomAccessFile = new RandomAccessFile(targetPath, "rw");
             FileChannel outFileChannel = outRandomAccessFile.getChannel();
             MappedByteBuffer outMappedByteBuffer = outFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, inMappedByteBuffer.capacity());
             outMappedByteBuffer.put(inMappedByteBuffer);
             outMappedByteBuffer.force();
-            outRandomAccessFile.close();
             outFileChannel.close();
             outMappedByteBuffer.flip();
         } catch (Exception e) {
@@ -318,8 +310,10 @@ public class FileUtil {
         File file = new File(fileName);
         long len = file.length();
         Long result = 0L;
-        try {
-            MappedByteBuffer mappedByteBuffer = new RandomAccessFile(file, "r")
+
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
+
+            MappedByteBuffer mappedByteBuffer = randomAccessFile
                     .getChannel()
                     .map(FileChannel.MapMode.READ_ONLY, 0, len);
             byte[] dst = new byte[FILE_BYTE_LENGTH];
@@ -336,7 +330,6 @@ public class FileUtil {
                 }
                 int length = (mappedByteBuffer.capacity() % FILE_BYTE_LENGTH == 0) ? FILE_BYTE_LENGTH
                         : mappedByteBuffer.capacity() % FILE_BYTE_LENGTH;
-//                System.out.println(new String(dst, 0, length));
                 String temp = new String(dst, 0, length);
                 result += getCharacterCount(temp, "A");
             }
@@ -414,26 +407,6 @@ public class FileUtil {
     }
 
 
-    public static void main(String[] args) {
-//        for (int n = 0; n < 5; n++) {
-//            for (int i = 0; i < 1; i++) {
-//                largeWrite("D:\\data\\temp\\test" + i + ".txt", true, i + "AABBBAAAACCCCAAAAADDDDDAAAAAAFFFFFFAAAAAAAADDD" + i);
-//            }
-//        }
-
-//        long start = System.currentTimeMillis();   //获取开始时间
-//        Long text = 0L;
-//        for (int i = 0; i < 1; i++) {
-//            Long dd = FileUtil.readFile("D:\\data\\temp\\t" + 1 + ".txt");
-//            text = text + dd;
-//        }
-//        System.out.println(text);
-//        long end = System.currentTimeMillis(); //获取结束时间
-//        System.out.println("程序运行时间： " + (end - start) + "ms");
-
-        readFile("D:\\data\\temp\\test.txt", 15, 1700);
-    }
-
     /**
      * 读取文件某一段数据
      *
@@ -448,9 +421,8 @@ public class FileUtil {
     public static Long readFile(String file, long begin, long end) {
         String a = file.split(FileUtil.getFileSuffix(file))[0];
         Long result = 0L;
-        try {
-            //申明文件切割后的文件磁盘
-            RandomAccessFile in = new RandomAccessFile(new File(file), "r");
+
+        try (RandomAccessFile in = new RandomAccessFile(new File(file), "r");) {
             //定义一个可读，可写的文件并且后缀名为的二进制文件
             String tempFile = a + BaseConstant.CONNECTOR_UNDERLINE + SnowflakeIdFactoryUtil.nextId() + FileUtil.getFileSuffix(file);
             File delFile = new File(tempFile);
@@ -482,15 +454,10 @@ public class FileUtil {
                 }
 
             }
-
-
-            //关闭输入流
-            in.close();
             if (delFile.exists()) {
-                delFile.delete();
+                Files.delete(Paths.get(tempFile));
             }
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             LOGGER.error("获得文件位置指针报错:{}", e);
         }
         return result;
@@ -506,20 +473,17 @@ public class FileUtil {
      * @date: 2020/6/4 10:00
      */
     public static String getByInputStream(InputStream in) {
-        BufferedReader reader = null;
-        reader = new BufferedReader(new InputStreamReader(in, Charset.forName(CHARACTER_ENCODE_UTF8_LOWER)));
 
-        StringBuffer buffer = new StringBuffer();
-        String str = null;
-        try {
+        StringBuilder stringBuilder = new StringBuilder();
+        String str = "";
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, Charset.forName(CHARACTER_ENCODE_UTF8_LOWER)))) {
             while ((str = reader.readLine()) != null) {
-                buffer.append(str + PLACEHOLDER_WARP_SPACE);
+                stringBuilder.append(str + PLACEHOLDER_WARP_SPACE);
             }
-            reader.close();
         } catch (Exception ex) {
             LOGGER.error("从InputStream获得数据报错:{}", ex);
         }
-        return buffer.toString();
+        return stringBuilder.toString();
     }
 
 
@@ -538,8 +502,13 @@ public class FileUtil {
         if (!file.exists()) {
             return file.mkdirs();
         } else if (cover) {
-            file.delete();
-            return file.mkdirs();
+            try {
+                Files.delete(Paths.get(path));
+                return file.mkdirs();
+            } catch (IOException e) {
+                LOGGER.error("删除文件:{},报错原因:{}", path, e);
+            }
+
         }
         return true;
     }
@@ -564,7 +533,13 @@ public class FileUtil {
                 delFile(f);
             }
         }
-        return file.delete();
+        try {
+            Files.delete(Paths.get(file.getAbsolutePath()));
+            return true;
+        } catch (IOException e) {
+            LOGGER.error("删除文件报错:{}", e);
+            return false;
+        }
     }
 
     /**
@@ -590,22 +565,87 @@ public class FileUtil {
         return true;
     }
 
-    /**
-     * 将引号替换从引号的转义符
-     *
-     * @param quotationMarks:
-     * @throws
-     * @return: java.lang.String
-     * @author: lvmoney /XXXXXX科技有限公司
-     * @date: 2021/6/21 9:11
-     */
-    public static String quotationMarksReplace(String quotationMarks) {
-        if (ObjectUtil.isNotEmpty(quotationMarks) && quotationMarks.contains(DOUBLE_QUOTATION_MARKS)) {
-            return quotationMarks.replaceAll(DOUBLE_QUOTATION_MARKS, DOUBLE_QUOTATION_MARKS_ESCAPE);
-        } else {
-            return quotationMarks;
+
+    public static final byte[] inputStream2byte(InputStream inStream) {
+        ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
+        byte[] buff = new byte[100];
+        int rc = 0;
+        while (true) {
+            try {
+                if ((rc = inStream.read(buff, 0, 100)) > 0) {
+                } else {
+                    break;
+                }
+            } catch (IOException e) {
+                LOGGER.error("inputStream 转byte[] 报错:{}", e);
+                return null;
+            }
+            swapStream.write(buff, 0, rc);
+        }
+        byte[] in2b = swapStream.toByteArray();
+        return in2b;
+    }
+
+    public static void main(String[] args) {
+        File file = new File("D:\\12.zip");
+        try {
+            ZipFile zipFile = new ZipFile(file);
+            zipFile.close();
+            FileUtil.delFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
+
+
+    /**
+     * BufferedImage转byte[]
+     *
+     * @param bImage:
+     * @param type:
+     * @throws
+     * @return: byte[]
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/7/19 19:05
+     */
+    public static byte[] bufferedImage2Bytes(BufferedImage bImage, String type) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bImage, type, out);
+        } catch (IOException e) {
+            LOGGER.error("BufferedImage 转byte[] 报错:{}", e);
+        }
+        return out.toByteArray();
+    }
+
+    /**
+     * bufferedImage 转为 base64编码
+     *
+     * @param bufferedImage:
+     * @throws
+     * @return: java.lang.String
+     * @author: lvmoney /XXXXXX科技有限公司
+     * @date: 2021/10/14 18:31
+     */
+    public static String bufferedImage2Base64(BufferedImage bufferedImage) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        String base64 = "";
+        try {
+            // 写入流中
+            ImageIO.write(bufferedImage, PNG, byteArrayOutputStream);
+            // 转换成字节
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+            BASE64Encoder encoder = new BASE64Encoder();
+            // 转换成base64串 删除 \r\n
+            base64 = encoder.encodeBuffer(bytes).trim()
+                    .replaceAll("\n", "")
+                    .replaceAll("\r", "");
+        } catch (IOException e) {
+            LOGGER.error("bufferedImage 转为 base64编码报错:{}", e);
+        }
+        return base64;
+    }
+
 
 }

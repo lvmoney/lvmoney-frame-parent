@@ -85,6 +85,62 @@ public interface CommonException {
          */
         NUMBER_FORMAT_ERROR(ExceptionCodeLevel.CORE.getValue() + 12, "参数转化错误"),
 
+
+        /**
+         * bloom初始化位数太大
+         */
+        BLOOM_INIT_ERROR(ExceptionCodeLevel.CORE.getValue() + 13, "构造bloomfilter位数太大溢出了"),
+
+        /**
+         * 保存floom到文件报错
+         */
+        BLOOM_SAVE_ERROR(ExceptionCodeLevel.CORE.getValue() + 14, "保存bloomfilter到文件报错"),
+
+        /**
+         * 获得floom报错
+         */
+        BLOOM_GET_ERROR(ExceptionCodeLevel.CORE.getValue() + 15, "从文件获得bloomfilter报错"),
+
+
+        /**
+         * 构造ecdsa私钥报错
+         */
+        ECDSA_BUILD_PRIVATE_ERROR(ExceptionCodeLevel.CORE.getValue() + 16, "构造ecdsa私钥报错"),
+
+        /**
+         * 构造ecdsa私钥报错
+         */
+        ECDSA_BUILD_PUBLICH_ERROR(ExceptionCodeLevel.CORE.getValue() + 17, "构造ecdsa公钥报错"),
+
+        /**
+         * 构造ecdsa私钥报错
+         */
+        ECDSA_GET_SECRET_ERROR(ExceptionCodeLevel.CORE.getValue() + 18, "获得ecdsa密钥报错"),
+
+
+        /**
+         * 参数校验错误
+         */
+        JSON_SCHEMA_ERROR(ExceptionCodeLevel.CORE.getValue() + 19, "获得json参数校验规则报错"),
+
+        /**
+         * 空指针异常
+         */
+        NULL_POINTER_ERROR(ExceptionCodeLevel.CORE.getValue() + 20, "空指针异常"),
+
+
+        /**
+         * 通过json获得jsonNode报错
+         */
+        JSON_NODE_BY_JSON_ERROR(ExceptionCodeLevel.CORE.getValue() + 21, "通过json获得jsonNode报错"),
+
+
+
+        /**
+         * 通过jsonSchema文件获得json校验规则报错
+         */
+        READ_JSON_SCHEMA_ERROR(ExceptionCodeLevel.CORE.getValue() + 22, "通过jsonSchema文件获得json校验规则报错"),
+
         /**
          * 成功
          */

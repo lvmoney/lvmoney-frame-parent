@@ -17,6 +17,7 @@
         <module>lvmoney-frame-base-serializer</module>
         <module>lvmoney-frame-base-profile</module>
         <module>lvmoney-frame-base-interceptor</module>
+		<module>lvmoney-frame-base-validator</module>
     </modules>
     <dependencyManagement>
         <dependencies>

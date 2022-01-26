@@ -16,6 +16,7 @@
         <module>lvmoney-frame-db-seata</module>
         <module>lvmoney-frame-db-mysql</module>
         <module>lvmoney-frame-db-common</module>
+		<module>lvmoney-frame-db-influxdb</module>
     </modules>
     <dependencyManagement>
         <dependencies>

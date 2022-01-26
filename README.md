@@ -1,12 +1,12 @@
 # lvmoney-frame-parent  
 
-
 #### 介绍
 
 java版分布式微服务后台常用技术完全整合架构。基于springboot ，springcloud istio，通过maven依赖简单的引入即可使用各种常用技术。支持本地开发测试，nacos，k8s(istio)环境
 
 #### 最近新增  
 新增区块链模块，主要借助webase完成对FISCO BCOS的操作  
+最近忙得很，该框架和内部的版本有几个小版本的差距了，有空了更新。有需要可直接联系我获得最新版本  
 
 #### 目的  
 

@@ -1,6 +1,6 @@
 package com.lvmoney.frame.core.util;/**
  * 描述:
- * 包名:com.chdriver.frame.core.util
+ * 包名:com.lvmoney.frame.core.util
  * 版本信息: 版本1.0
  * 日期:2021/9/23
  * Copyright XXXXXX科技有限公司
@@ -39,7 +39,7 @@ public class PackageUtil {
      * @param weight:
      * @param value:
      * @throws
-     * @return: com.chdriver.frame.core.vo.PackageVo
+     * @return: com.lvmoney.frame.core.vo.PackageVo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2021/9/24 13:05
      */
@@ -98,7 +98,7 @@ public class PackageUtil {
      * @param value:
      * @param num:
      * @throws
-     * @return: com.chdriver.frame.core.vo.PackageVo
+     * @return: com.lvmoney.frame.core.vo.PackageVo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2021/9/24 13:05
      */
@@ -170,7 +170,7 @@ public class PackageUtil {
      * @param weight:
      * @param value:
      * @throws
-     * @return: com.chdriver.frame.core.vo.PackageVo
+     * @return: com.lvmoney.frame.core.vo.PackageVo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2021/9/24 13:05
      */

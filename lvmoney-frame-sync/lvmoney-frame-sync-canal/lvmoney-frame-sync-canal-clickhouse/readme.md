@@ -1,0 +1,4 @@
+新增数据同步模块，通过canal完成mysql数据库数据到clickhouse的全量和增量同步。  
+clickhouse官方提供MaterializeMySQL,mysql分库分表后需要数据合并到同一张表  
+由于clickhouse对于高频写有限制，需要批量写入  
+是否使用消息队列解耦待定  

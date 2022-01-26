@@ -35,7 +35,7 @@ public interface JwtRedisService {
      *
      * @param token:
      * @throws
-     * @return: com.chdriver.frame.core.ro.UserRo
+     * @return: com.lvmoney.frame.core.ro.UserRo
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2020/3/3 18:19
      */

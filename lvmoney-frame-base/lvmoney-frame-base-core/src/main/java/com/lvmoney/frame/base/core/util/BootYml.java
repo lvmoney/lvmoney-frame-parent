@@ -10,7 +10,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.text.StrSpliter;
+import cn.hutool.core.text.StrSplitter;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -74,7 +74,7 @@ public class BootYml extends Yaml {
         // 加载引入的yml
         Object include = mainMap.get(this.include);
         // include是使用逗号分隔开的，需要切割一下
-        List<String> split = StrSpliter.split(Convert.toStr(include), StrUtil.C_COMMA, true, true);
+        List<String> split = StrSplitter.split(Convert.toStr(include), StrUtil.C_COMMA, true, true);
         for (String inc : split) {
             mapAll.putAll(yml2Map(StrUtil.format("{}-{}.yml", this.prefix, inc)));
         }

@@ -15,6 +15,7 @@
         <module>lvmoney-frame-sync-canal-mysql</module>
         <module>lvmoney-frame-sync-canal-redis</module>
         <module>lvmoney-frame-sync-canal-common</module>
+        <module>lvmoney-frame-sync-canal-clickhouse</module>
     </modules>
 
 

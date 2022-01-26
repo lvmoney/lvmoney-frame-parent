@@ -17,9 +17,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @describe：统一网关，springboot主方法
  * @author: lvmoney /XXXXXX科技有限公司
  * @version:v1.0 2018年9月30日 上午8:51:33
- */
-@SpringBootApplication(scanBasePackages = {"com.lvmoney.**"})
-@EnableCanalClient
+// */
+//@SpringBootApplication(scanBasePackages = {"com.lvmoney.**"})
+//@EnableCanalClient
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
