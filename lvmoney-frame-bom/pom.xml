@@ -93,7 +93,7 @@
         <boot.redis.version>2.1.0.RELEASE</boot.redis.version>
         <boot.cache.verion>2.1.0.RELEASE</boot.cache.verion>
         <jackson.version>2.10.0</jackson.version>
-        <shiro.spring.version>1.7.0</shiro.spring.version>
+        <shiro.spring.version>1.7.1</shiro.spring.version>
         <spring.kafka.version>2.2.0.RELEASE</spring.kafka.version>
         <sharding.jdbc.version>4.0.1</sharding.jdbc.version>
         <revengemission.captcha.verion>0.7</revengemission.captcha.verion>
