@@ -13,7 +13,7 @@
     <properties>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <spring.version>5.1.2.RELEASE</spring.version>
-        <springboot.version>2.1.0.RELEASE</springboot.version>
+        <springboot.version>2.5.12</springboot.version>
         <mariadb.java.client>2.2.1</mariadb.java.client>
         <alibaba.druid>1.1.22</alibaba.druid>
         <mybatis.version>3.4.6</mybatis.version>
