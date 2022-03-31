@@ -56,7 +56,7 @@
         <boot.oauth2.verion>2.3.6.RELEASE</boot.oauth2.verion>
         <thymeleaf.extras.springsecurity4.version>3.0.0.RELEASE</thymeleaf.extras.springsecurity4.version>
         <hibernate.jpa.api.version>1.0.2</hibernate.jpa.api.version>
-        <cloud.version>2.1.0.RELEASE</cloud.version>
+        <cloud.version>2.5.12</cloud.version>
         <jasper.version>8.5.5</jasper.version>
         <velocity.engine.version>2.3</velocity.engine.version>
         <jodconverter.verion>4.1.0</jodconverter.verion>
