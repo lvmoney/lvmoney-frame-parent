@@ -116,7 +116,7 @@
         <nimbus-jose-jwt.version>7.9</nimbus-jose-jwt.version>
         <netflix.feign.version>8.18.0</netflix.feign.version>
         <cloud-hystrix>1.4.6.RELEASE</cloud-hystrix>
-        <spring-security-core.version>5.1.11.RELEASE</spring-security-core.version>
+        <spring-security-core.version>5.5.7</spring-security-core.version>
         <feign-httpclient.version>8.18.0</feign-httpclient.version>
         <kubernetes-client.version>4.4.0</kubernetes-client.version>
         <kubernetes-model.version>4.4.0</kubernetes-model.version>
