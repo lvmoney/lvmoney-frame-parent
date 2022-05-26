@@ -174,7 +174,9 @@ public class SimHashUtil {
      * @date: 2021/9/16 8:47
      */
     public static int countChinese(String text) {
-        if (StringUtils.isEmpty(text)) return 0;
+        if (StringUtils.isEmpty(text)) {
+            return 0;
+        }
         int amount = 0;
         char[] chs = text.toCharArray();
         for (char c : chs) {
@@ -356,6 +358,7 @@ public class SimHashUtil {
         if (oriMap != null && !oriMap.isEmpty()) {
             List<Entry<String, Integer>> entryList = new ArrayList<Entry<String, Integer>>(oriMap.entrySet());
             Collections.sort(entryList, new Comparator<Entry<String, Integer>>() {
+                @Override
                 public int compare(Entry<String, Integer> entry1, Entry<String, Integer> entry2) {
                     return entry2.getValue() - entry1.getValue();
                 }

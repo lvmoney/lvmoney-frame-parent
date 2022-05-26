@@ -101,6 +101,11 @@ public enum ExceptionCodeLevel {
      */
     PAY(21000),
 
+    /**
+     * ai
+     */
+    AI(22000),
+
     ;
 
     private Integer value;

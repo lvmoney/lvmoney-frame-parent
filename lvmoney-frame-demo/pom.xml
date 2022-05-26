@@ -9,13 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
-    <dependencies>
-        <dependency>
-            <groupId>org.roaringbitmap</groupId>
-            <artifactId>RoaringBitmap</artifactId>
-            <version>0.9.0</version>
-        </dependency>
-    </dependencies>
     <artifactId>lvmoney-frame-demo</artifactId>
     <modules>
         <module>demo-frame-api</module>
@@ -41,7 +34,7 @@
         <module>demo-frame-simple</module>
         <module>demo-frame-clickhouse</module>
         <module>demo-frame-file</module>
-        <module>demo-frame-bitMap</module>
+        <module>demo-frame-bitmap</module>
         <module>demo-frame-sharding</module>
         <module>demo-frame-sharding2</module>
         <module>demo-frame-transaction-provider</module>
@@ -52,6 +45,9 @@
         <module>demo-frame-mq-sender</module>
         <module>demo-frame-mq-customer</module>
         <module>demo-frame-webase</module>
+        <module>demo-frame-opencv</module>
+        <module>demo-frame-uniformity</module>
+        <module>demo-frame-influxdb</module>
     </modules>
 
 

@@ -1,0 +1,244 @@
+server:
+  port: 8072
+  tomcat:
+    uri-encoding: utf-8
+nacos:
+  service:
+    address: 192.168.0.21
+    port: 8848
+    namespace: 65394e40-97bc-4d50-9a18-0dea7eb717bb
+spring:
+  application:
+    name: chdriver-platform-address
+  # 序列化返回JSON日期时区为东八区,日期格式为 2020-11-30 11:42:20
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+        namespace: ${nacos.service.namespace}
+    service-registry:
+      auto-registration:
+        enable: true
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    database: 0
+    port: 6379
+    host: 192.168.0.21
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化Druid
+    druid:
+      # mysql数据库接地址
+      url: jdbc:mysql://192.168.0.21:3306/platform_user?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: Chdriver2021#
+      # 初始化连接大小   默认：0
+      initial-size: 20
+      # 最小空闲连接数 默认：0
+      min-idle: 10
+      # 最大连接数  默认：8
+      max-active: 30
+      # 获取连接等待超时的时间(毫秒) 默认：-1
+      max-wait: 60000
+      # 查询超时时间(秒)
+      query-timeout: 30
+      # 用来检测连接是否有效的sql，要求是一个查询语句
+      validation-query: SELECT 1 FROM DUAL
+      # 申请连接时检测连接可用性 默认：false
+      test-on-borrow: false
+      # 归还连接检测 默认：false
+      test-on-return: false
+      # 超时是否检测连接可用性
+      test-while-idle: true
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接 (毫秒)
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间(毫秒，默认30分钟)
+      min-evictable-idle-time-millis: 300000
+      # 通过别名的方式配置扩展插件，常用的插件有：监控统计用的filter:stat；日志用的filter:log4j；防御sql注入的filter:wall
+      filters: stat,wall,slf4j
+      # 是否缓存PreparedStatement. PSCache对支持游标的数据库性能提升巨大，比如说oracle.在mysql下建议关闭.
+      pool-prepared-statements: false
+      # 每个连接上PSCache的大小
+      max-pool-prepared-statement-per-connection-size: 50
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 通过connectProperties属性来打开mergeSql(Sql合并)功能；慢SQL记录(配置超过5秒就是慢，默认是3秒)
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        session-stat-max-count: 1000
+        session-stat-enable: true
+        profile-enable: true
+        stat-view-servlet:
+          enabled: true
+          url-pattern: "/druid/*"
+          login-username: root
+          login-password: root
+          allow: 127.0.0.1
+          reset-enable: true
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.lvmoney.platform.user.manager.entity
+  #typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    #刷新mapper 调试神器
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: ASSIGN_ID
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-field: valid  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 0 # 逻辑已删除值(默认为 0)
+      logic-not-delete-value: 1 # 逻辑未删除值(默认为 1)
+      db-type: mysql
+    refresh: true
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+    #自定义SQL注入器
+  #sql-injector: com.baomidou.mybatisplus.extension.injector.LogicSqlInjector
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@chinapopin.com
+    name: yanghaizhou
+    url: ''
+  description: 用户中台接口文档
+  title: 用户中台
+  url: ''
+  version: 1.0
+frame:
+  releaseServer:
+    support: true
+  swagger:
+    support: true
+  i18n:
+    support: false
+  shiro:
+    support: true
+  jwt:
+    support: true
+  requestType:
+    support: false
+  db:
+    clickhouse:
+      host: 192.168.0.11
+      port: 8123
+      user: default
+      password:
+      database: log_platform
+
+istio:
+  docker:
+    image:
+      tag: ${docker.tag}
+      name: ${docker.image}
+      pull: Always
+    file:
+      name: ${docker.jar}
+      temp: /home
+  yaml:
+    namespace: default
+    cover: true
+    replicas: 1
+    version: v1
+    skywalking:
+      InitContainersImage: 192.168.0.13:8999/frame/skywalking-agent:v1
+  master:
+    #K8s master节点IP地址
+    ip: 192.168.0.41
+
+system:
+  sysId: 333
+
+jwt:
+  server:
+    expire: 18000
+
+custom:
+  tomcat:
+    https:
+      schema: http
+
+platform:
+  datasync:
+    pool:
+      corePoolSize: 4
+      maxPoolSize: 6
+      queueCapacity: 100
+      awaitTerminationMinutes: 30
+      threadNamePrefix: Async-User-
+    page:
+      size: 500
+
+redisson:
+  address: redis://192.168.0.21:6379
+  password:
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+        retryer:
+          period: 100     # 发起当前请求的时间间隔，单位毫秒
+          maxPeriod: 1000 # 发起当前请求的最大时间间隔，单位毫秒
+          maxAttempts: 3  # 最多请求次数，包括第一次
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          strategy: SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 1000
+          thread:
+            timeoutInMilliseconds: 5000
+operating:
+  environment: istio
+  internal: internal
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,prometheus,metrics,httptrace,threaddump,heapdump,springmetrics
+        exclude: env,beans
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+        step: 1m
+        descriptions: true

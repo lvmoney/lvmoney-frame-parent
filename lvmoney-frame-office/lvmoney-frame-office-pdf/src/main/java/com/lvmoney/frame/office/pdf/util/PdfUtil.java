@@ -188,7 +188,7 @@ public class PdfUtil {
 
             Integer pageNo = pic2PdfVo.getPageNo();
             List<Pic2PdfVoItem> item = pic2PdfVo.getItem();
-            if (PAGE_FIRST == pageNo) {
+            if (PAGE_FIRST.equals(pageNo)) {
                 PdfContentByte under = stamper.getOverContent(PAGE_FIRST);
                 item.forEach(e -> {
                     Image image = pic2PdfVoItem2Image(e, width);
@@ -199,7 +199,7 @@ public class PdfUtil {
                     }
                 });
 
-            } else if (PAGE_LAST == pageNo) {
+            } else if (PAGE_LAST.equals(pageNo)) {
                 PdfContentByte under = stamper.getOverContent(pageCount);
                 item.forEach(e -> {
                     Image image = pic2PdfVoItem2Image(e, width);
@@ -329,7 +329,6 @@ public class PdfUtil {
         }
 
     }
-
 
 
     public static void main(String[] args) {

@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>chdriver-frame-parent</artifactId>
-        <groupId>com.chdriver.frame</groupId>
+        <artifactId>lvmoney-frame-parent</artifactId>
+        <groupId>com.lvmoney.frame</groupId>
         <version>1.0.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chdriver-frame-bom</artifactId>
+    <artifactId>lvmoney-frame-bom</artifactId>
     <properties>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <spring.version>5.1.2.RELEASE</spring.version>
@@ -93,7 +93,7 @@
         <boot.redis.version>2.1.0.RELEASE</boot.redis.version>
         <boot.cache.verion>2.1.0.RELEASE</boot.cache.verion>
         <jackson.version>2.10.0</jackson.version>
-        <shiro.spring.version>1.8.0</shiro.spring.version>
+        <shiro.spring.version>1.7.0</shiro.spring.version>
         <spring.kafka.version>2.2.0.RELEASE</spring.kafka.version>
         <sharding.jdbc.version>4.0.1</sharding.jdbc.version>
         <revengemission.captcha.verion>0.7</revengemission.captcha.verion>
@@ -111,7 +111,7 @@
         <fluent.logger.version>0.3.4</fluent.logger.version>
         <ribbon.version>1.4.6.RELEASE</ribbon.version>
         <nacos.client.version>1.1.1</nacos.client.version>
-        <apache.dubbo.version>2.7.6</apache.dubbo.version>
+        <apache.dubbo.version>2.7.15</apache.dubbo.version>
         <spring-security-jwt.version>1.0.10.RELEASE</spring-security-jwt.version>
         <nimbus-jose-jwt.version>7.9</nimbus-jose-jwt.version>
         <netflix.feign.version>8.18.0</netflix.feign.version>
@@ -131,7 +131,7 @@
         <reactor-test.version>3.3.0.RELEASE</reactor-test.version>
         <sharding-jdbc.version>4.0.1</sharding-jdbc.version>
         <uid-generator.version>0.0.4-RELEASE</uid-generator.version>
-        <testng.version>7.1.0</testng.version>
+        <testng.version>6.14.3</testng.version>
         <elasticsearch.version>2.1.0.RELEASE</elasticsearch.version>
         <elasticsearch.client.version>7.6.2</elasticsearch.client.version>
         <elasticsearch.high.client.version>7.6.2</elasticsearch.high.client.version>
@@ -177,6 +177,7 @@
 
         <itextpdf.version>5.5.13</itextpdf.version>
         <itext-asian.version>5.2.0</itext-asian.version>
+
         <json-schema-validator.version>2.2.6</json-schema-validator.version>
         <influxdb.version>1.0.2</influxdb.version>
     </properties>
@@ -1347,7 +1348,6 @@
                 <artifactId>bcprov-jdk15on</artifactId>
                 <version>${bcprov-jdk15on.version}</version>
             </dependency>
-
 
             <dependency>
                 <groupId>com.github.fge</groupId>

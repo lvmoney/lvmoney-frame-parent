@@ -51,10 +51,11 @@ public class PackageUtil {
             for (int j = 1; j < v + 1; j++) {
                 //如果第i件物品的重量大于背包容量j,则不装入背包
                 //由于weight和value数组下标都是从0开始,故注意第i个物品的重量为weight[i-1],价值为value[i-1]
-                if (weight[i - 1] > j)
+                if (weight[i - 1] > j) {
                     dp[i][j] = dp[i - 1][j];
-                else
+                } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1]);
+                }
             }
         }
         //则容量为V的背包能够装入物品的最大值为
@@ -110,9 +111,9 @@ public class PackageUtil {
             for (int j = 1; j < v + 1; j++) {
                 //如果第i件物品的重量大于背包容量j,则不装入背包
                 //由于weight和value数组下标都是从0开始,故注意第i个物品的重量为weight[i-1],价值为value[i-1]
-                if (weight[i - 1] > j)
+                if (weight[i - 1] > j) {
                     dp[i][j] = dp[i - 1][j];
-                else {
+                } else {
                     //考虑物品的件数限制
                     int maxV = Math.min(num[i - 1], j / weight[i - 1]);
                     for (int k = 0; k < maxV + 1; k++) {
@@ -132,8 +133,9 @@ public class PackageUtil {
                 item.add(new PackageIndexVo(i));
                 j = j - weight[i - 1];
             }
-            if (j == 0)
+            if (j == 0) {
                 break;
+            }
         }
         Map<Integer, List<PackageIndexVo>> itemMap = item.stream().collect(Collectors.groupingBy(PackageIndexVo::getNum));
         itemMap.forEach((k, val) -> {
@@ -183,10 +185,11 @@ public class PackageUtil {
             for (int j = 1; j < v + 1; j++) {
                 //如果第i件物品的重量大于背包容量j,则不装入背包
                 //由于weight和value数组下标都是从0开始,故注意第i个物品的重量为weight[i-1],价值为value[i-1]
-                if (weight[i - 1] > j)
+                if (weight[i - 1] > j) {
                     dp[i][j] = dp[i - 1][j];
-                else
+                } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - weight[i - 1]] + value[i - 1]);
+                }
             }
         }
         //则容量为V的背包能够装入物品的最大值为
@@ -200,8 +203,9 @@ public class PackageUtil {
                 item.add(new PackageIndexVo(i));
                 j = j - weight[i - 1];
             }
-            if (j == 0)
+            if (j == 0) {
                 break;
+            }
         }
         Map<Integer, List<PackageIndexVo>> itemMap = item.stream().collect(Collectors.groupingBy(PackageIndexVo::getNum));
         itemMap.forEach((k, val) -> {

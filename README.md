@@ -5,6 +5,7 @@
 java版分布式微服务后台常用技术完全整合架构。基于springboot ，springcloud istio，通过maven依赖简单的引入即可使用各种常用技术。支持本地开发测试，nacos，k8s(istio)环境
 
 #### 最近新增  
+新增通过seetaface6实现人脸识别等功能  
 新增区块链模块，主要借助webase完成对FISCO BCOS的操作  
 最近忙得很，该框架和内部的版本有几个小版本的差距了，有空了更新。有需要可直接联系我获得最新版本  
 
@@ -26,7 +27,8 @@ java版分布式微服务后台常用技术完全整合架构。基于springboot
 通过开源工具的部署和开发规范，完整支持DEVOPS整个流程
 
 #### 服务支持
-
+人脸识别等(ocr,OpenCV,seataface)  
+lvmoney-frame-ai
 
 访问安全认证(oauth2,jwt)  
 lvmoney-frame-authentication  
@@ -179,13 +181,10 @@ lvmoney
 
 ![说明](https://images.gitee.com/uploads/images/2020/0724/095934_b4551d4f_107773.png "说明.png")
 
-以nacos为核心
-
-![以nacos为核心](https://images.gitee.com/uploads/images/2020/0724/094358_2bb5e1a0_107773.png "nacos.png")
-
 我们的架构
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/114349_87aab8df_107773.png "微信截图_20210119114013.png")
+![输入图片说明](%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6.png)
+
 roadmap
 
 ![roadmap](https://images.gitee.com/uploads/images/2020/0724/095048_f4de7e47_107773.png "roadmap.png")  
@@ -195,6 +194,11 @@ roadmap
 
 运行监控
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/114120_899f8c87_107773.png "微信截图_20210119114013.png")
+
+其他  
+
+![输入图片说明](%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png)
+![输入图片说明](%E6%9F%90%E8%A1%8C%E4%B8%9A%E4%BE%9B%E5%BA%94%E9%93%BE%E4%B8%9A%E5%8A%A1%E7%BB%93%E6%9E%84.png)
 
 我们内部使用的业务中台和数据中台双中台战略，具体ppt可以联系lvmoney
 
