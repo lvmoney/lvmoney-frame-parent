@@ -14,6 +14,10 @@
     <modules>
         <module>lvmoney-frame-ai-opencv</module>
         <module>lvmoney-frame-ai-seetaface</module>
+        <module>lvmoney-frame-ai-isolationforest</module>
+        <module>lvmoney-frame-ai-ocr</module>
+        <module>lvmoney-frame-ai-lstm</module>
+        <module>lvmoney-frame-ai-jpython</module>
     </modules>
 
 

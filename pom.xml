@@ -50,6 +50,7 @@
         <module>lvmoney-frame-prefix</module>
         <module>lvmoney-frame-linkis</module>
         <module>lvmoney-frame-ai</module>
+        <module>lvmoney-frame-expression</module>
     </modules>
 
     <distributionManagement>

@@ -349,4 +349,10 @@ public class BaseConstant {
      */
     public static final String SINGLE_QUOTATION_MARK = "'";
 
+
+    /**
+     * 0
+     */
+    public static final String ZERO_CHAR = "0";
+
 }

@@ -97,14 +97,29 @@ public enum ExceptionCodeLevel {
      */
     DB(19000),
     /**
-     * pay
+     * newsql
      */
-    PAY(21000),
+    NEWSQL(21000),
 
     /**
-     * ai
+     * seataface
      */
-    AI(22000),
+    SEATAFACE(22000),
+
+    /**
+     * if
+     */
+    ISOLATIONE_FOREST(23000),
+
+    /**
+     * jPython
+     */
+    JPYTHON(24000),
+
+    /**
+     * EXPRESSION
+     */
+    EXPRESSION(25000),
 
     ;
 
