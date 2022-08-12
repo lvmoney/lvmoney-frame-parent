@@ -1,0 +1,31 @@
+server:
+  port: 8097
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.10.58:9092,192.168.10.59:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  redis:
+    database: 5
+    port: 6379
+    host: 192.168.10.74
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务调用方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+frame:
+  swagger:
+    support: true
+  mq:
+    name: lvmoney
+redisson:
+  address: redis://192.168.10.74:6379
+  password:

@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: seata-test
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: default
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/fescar?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+server:
+  port: 8070
+  tomcat:
+    uri-encoding: UTF-8
+logging:
+  level:
+    io.seata: debug

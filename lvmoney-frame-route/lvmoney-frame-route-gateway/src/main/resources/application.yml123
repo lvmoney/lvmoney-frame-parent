@@ -1,0 +1,108 @@
+rpc:
+  server:
+    authentication: http://localhost:8030
+    ##lb开头是注册中心中的服务
+    provider: lb://provider
+    authority: shiro
+server:
+  port: 9999
+nacos:
+  service:
+    address: 192.168.10.58
+    port: 8848
+spring:
+  application:
+    name: platform-gateway-dev
+  redis:
+    database: 3
+    port: 6379
+    host: 192.168.10.74
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+      service-registry:
+        auto-registration:
+        enabled: true
+    gateway:
+      httpclient:
+        ssl:
+          #需要配置,gateway转发后台的https请求才不会报错
+          useInsecureTrustManager: true
+      routes:
+        - id: dalaoyang
+          uri: http://www.sina.com/
+          predicates:
+            - Path=/dalaoyang/**
+        - id: juejin
+          uri: https://www.baidu.com/
+          predicates:
+            - Path=/juejin/**
+        - id: provider
+          uri: ${rpc.server.provider}
+          predicates:
+            - Path=/frame/provider/**
+          filters:
+            - StripPrefix=0 # 表示在转发时去掉userapi
+# hystrix 信号量隔离，3秒后自动超时
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 3000
+  shareSecurityContext: true
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+frame:
+  gateway:
+    support: true
+  white:
+    support: true
+  releaseServer:
+    support: true
+  allowable:
+    support: false
+  jwt:
+    support: true
+  shiro:
+    support: false
+  simpleRoute:
+    support: false
+swagger:
+  base:
+    package: com.lvmoney.frame.route.gateway.function
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: 网关
+  title: authentication-resource
+  url: ''
+  version: 1.0
+operating:
+  environment: nacos
+  internal: internal
+management:
+  endpoints:
+    web:
+      exposure:
+        include=*:
+redisson:
+  address: redis://192.168.10.74:6379
+  password:

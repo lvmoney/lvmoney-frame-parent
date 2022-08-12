@@ -1,0 +1,18 @@
+server:
+  port: 9904
+  #你生成的证书名字
+
+spring:
+  application:
+    name: skywalking
+swagger:
+  base:
+    package: com.lvmoney.demo.skywalking.function
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0

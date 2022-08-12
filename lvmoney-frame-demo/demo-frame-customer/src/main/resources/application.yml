@@ -1,0 +1,78 @@
+server:
+  port: 9902
+  httpPort: 8081
+nacos:
+  service:
+    address: 192.168.10.58
+    port: 8848
+
+spring:
+  application:
+    name: customer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+      service-registry:
+        auto-registration:
+          enabled: true
+  redis:
+    database: 5
+    port: 6379
+    host: 192.168.10.74
+istio:
+  docker:
+    image:
+      tag: ${docker.tag}
+      name: ${docker.image}
+      pull: Always
+    file:
+      name: ${docker.jar}
+      temp: /home
+  yaml:
+    namespace: lvmoney
+    cover: true
+    replicas: 1
+    version: v1
+  master:
+    ip: 192.168.1.181
+rpc:
+  server:
+    gateway: 192.168.10.80
+operating:
+  environment: istio
+  internal: internal
+swagger:
+  base:
+    package: com.lvmoney.frame.demo.customer.function
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务调用方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+custom:
+  tomcat:
+    https:
+      schema: http
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 3000

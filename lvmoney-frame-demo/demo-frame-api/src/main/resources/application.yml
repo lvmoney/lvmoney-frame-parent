@@ -1,0 +1,144 @@
+#spring:
+#  profiles:
+#    active: dev
+swagger:
+  title: demo
+  version: v2.0
+  base:
+    package: com.lvmoney.demo.api.function
+  description: 框架demo系统后台接口
+  url: www.baidu.com
+  contact:
+    name: lvmoney
+    url: www.baidu.com
+    email: 1300515928@qq.com
+frame:
+  jwt:
+    support: false
+  shiro:
+    support: false
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  boot:
+    admin:
+      client:
+        url: http://localhost:8769
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  redis:
+    database: 10
+    port: 6379
+    host: 10.20.128.234
+  datasource:
+    # mysql数据库接地址
+    #    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    #    username: root
+    #    password: 123456
+    #    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化Druid
+    druid:
+      # mysql数据库接地址
+      url: jdbc:mysql://10.20.128.235:3306/lvmoney-tmc?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+      #      url: jdbc:mysql://localhost:3306/hsx?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+      #      driver-class-name: com.mysql.cj.jdbc.Driver3
+
+      username: scltlvmoney
+      #      username: root
+      password: scltlvmoney2019888
+      #      password: 123456789
+      #      password: 123456789
+      # 初始化连接大小   默认：0
+      initial-size: 20
+      # 最小空闲连接数 默认：0
+      min-idle: 10
+      # 最大连接数  默认：8
+      max-active: 30
+      # 获取连接等待超时的时间(毫秒) 默认：-1
+      max-wait: 60000
+      # 查询超时时间(秒)
+      query-timeout: 30
+      # 用来检测连接是否有效的sql，要求是一个查询语句
+      validation-query: SELECT 1 FROM DUAL
+      # 申请连接时检测连接可用性 默认：false
+      test-on-borrow: false
+      # 归还连接检测 默认：false
+      test-on-return: false
+      # 超时是否检测连接可用性
+      test-while-idle: true
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接 (毫秒)
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间(毫秒，默认30分钟)
+      min-evictable-idle-time-millis: 300000
+      # 通过别名的方式配置扩展插件，常用的插件有：监控统计用的filter:stat；日志用的filter:log4j；防御sql注入的filter:wall
+      filters: stat,wall,slf4j
+      # 是否缓存PreparedStatement. PSCache对支持游标的数据库性能提升巨大，比如说oracle.在mysql下建议关闭.
+      pool-prepared-statements: false
+      # 每个连接上PSCache的大小
+      max-pool-prepared-statement-per-connection-size: 50
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 通过connectProperties属性来打开mergeSql(Sql合并)功能；慢SQL记录(配置超过5秒就是慢，默认是3秒)
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        session-stat-max-count: 1000
+        session-stat-enable: true
+        profile-enable: true
+        stat-view-servlet:
+          enabled: true
+          url-pattern: "/druid/*"
+          login-username: root
+          login-password: root
+          allow: 127.0.0.1
+          reset-enable: true
+  main:
+    allow-bean-definition-overriding: true
+#mybatis-plus:
+#  mapper-locations: classpath*:mappers/*
+#  #MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名，注册后在 Mapper 对应的 XML 文件中可以直接使用类名，而不用使用全限定的类名
+#  type-aliases-package: com.scltlvmoney.dictionaries.entity
+#  # 数据库表与实体类的驼峰命名自动转换
+#  configuration:
+#    map-underscore-to-camel-case: true
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: top.shen33.yang.model.entity
+  #typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    #刷新mapper 调试神器
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: AUTO
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      db-type: mysql
+    refresh: true
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+    #自定义SQL注入器
+  #sql-injector: com.baomidou.mybatisplus.extension.injector.LogicSqlInjector
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+

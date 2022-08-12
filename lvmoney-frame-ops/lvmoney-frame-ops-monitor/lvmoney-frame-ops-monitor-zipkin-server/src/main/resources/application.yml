@@ -1,0 +1,22 @@
+server:
+  port: 9411
+spring:
+  application:
+    name: sc-sc-zipkin
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        register: true
+        hostname: 127.0.0.1
+        serviceName: ${spring.application.name}
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+        tags: urlprefix-/${spring.application.name}
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false

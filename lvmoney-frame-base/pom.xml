@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lvmoney-frame-parent</artifactId>
+        <groupId>com.lvmoney.frame</groupId>
+        <version>1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lvmoney-frame-base</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>lvmoney-frame-base-rm</module>
+        <module>lvmoney-frame-base-core</module>
+        <module>lvmoney-frame-base-serializer</module>
+        <module>lvmoney-frame-base-profile</module>
+        <module>lvmoney-frame-base-interceptor</module>
+		<module>lvmoney-frame-base-validator</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.lvmoney.frame</groupId>
+                <artifactId>lvmoney-frame-bom</artifactId>
+                <version>1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

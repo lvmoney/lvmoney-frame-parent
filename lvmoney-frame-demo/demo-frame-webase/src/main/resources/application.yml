@@ -1,0 +1,90 @@
+server:
+  port: 9902
+  httpPort: 8081
+
+spring:
+  application:
+    name: customer
+  redis:
+    database: 9
+    port: 6379
+    host: 192.168.0.21
+istio:
+  docker:
+    image:
+      tag: ${docker.tag}
+      name: ${docker.image}
+      pull: Always
+    file:
+      name: ${docker.jar}
+      temp: /home
+  yaml:
+    namespace: lvmoney
+    cover: true
+    replicas: 1
+    version: v1
+  master:
+    ip: 192.168.1.181
+rpc:
+  server:
+    gateway: 192.168.10.80
+operating:
+  environment: istio
+  internal: internal
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务调用方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+custom:
+  tomcat:
+    https:
+      schema: http
+frame:
+  swagger:
+    support: true
+transactionUrl: http://192.168.0.34:5002/WeBASE-Front/trans/handle
+groupId: 1
+userAddress: "0xf0c3097dc9bef37664c91dd3d4d695dfe94429a1"
+
+useAes: true
+contract:
+  name: HelloWorld
+  address: "0x15379169460d19ade2b18ee638070af812006184"
+  funcName: set
+  funcParam: "[\"abc\"]"
+
+webase:
+  server:
+    front:
+      name: webase-front
+      url: 192.168.0.34:5002/WeBASE-Front
+    sign:
+      name: webase-sign
+      url: 192.168.0.23:5004/WeBASE-Sign
+    trans:
+      name: webase-transaction
+      url: 192.168.0.44:5003/WeBASE-Transaction
+    coin:
+      name: webase-coin
+      url: 192.168.0.34:5002/WeBASE-Front
+    weid:
+      name: webase-weid
+      url: 192.168.0.45:6001/weid
+    weidentity:
+      name: webase-weidentity
+      url: 192.168.0.45:6001/weid
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限

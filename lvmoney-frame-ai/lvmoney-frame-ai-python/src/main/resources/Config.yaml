@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+redis:
+  host: 192.168.3.162
+  port: 6379
+  password: boao2022
+  db: 5
+  decode_responses: True
+
+server:
+  host: 0.0.0.0
+  port: 8024
+  workers: 1
+  name: boao-platform-smart
+  modelPath: model
+  lstmResult: lstmResults
+  ifResult: ifResults
+  pyodResult: pyodResults
+
+minio:
+  host: 192.168.3.198
+  port: 9000
+  accessKey: admin
+  secretKey: 12345678
+  lstmBucket: lstm-file
+  ifBucket: if-file
+  pyodBucket: pyod-file
+
+taos:
+  host: 192.168.3.171
+  user: root
+  password: taosdata
+  db: platform_smart_filter
+  config: C:\TDengine\cfg

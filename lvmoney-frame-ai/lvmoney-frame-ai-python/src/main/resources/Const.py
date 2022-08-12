@@ -1,0 +1,119 @@
+# -*- coding: utf-8 -*-
+
+# 数据智能统一前缀
+SMART_DATA_PREFIX = 'smartData'
+# 逗号
+CHARACTER_COMMA = ","
+
+SPACE = ' '
+# 下划线
+CONNECTOR_UNDERLINE = '_'
+# 冒号
+COLON = ':'
+
+# lstm相关统一前缀
+SMART_DATA_LSTM_PREFIX = SMART_DATA_PREFIX + CONNECTOR_UNDERLINE + 'Lstm:'
+
+# lstm 返回值连续的原始数据json key
+SMART_DATA_LSTM_RESULT_KEY_ORIGINAL = 'original'
+
+# lstm 返回值连续的预测数据json key
+SMART_DATA_LSTM_RESULT_KEY_FUTURE = 'future'
+
+# isolationForest 返回值所有值json key
+SMART_DATA_ISOLATION_FOREST_RESULT_KEY_ALL = 'all'
+
+# isolationForest 返回值异常值json key
+SMART_DATA_ISOLATION_FOREST_RESULT_KEY_ABNORMAL = 'abnormal'
+
+# isolationForest 返回值正常值json key
+SMART_DATA_ISOLATION_FOREST_RESULT_KEY_NORMAL = 'normal'
+
+# 配置文件名称
+SMART_CONFIG_FILE_NAME = 'Config.yaml'
+
+SMART_CONFIG_REDIS = 'redis'
+
+SMART_CONFIG_REDIS_HOST = 'host'
+
+SMART_CONFIG_REDIS_PORT = 'port'
+
+SMART_CONFIG_REDIS_PASSWORD = 'password'
+
+SMART_CONFIG_REDIS_DB = 'db'
+
+SMART_CONFIG_REDIS_DECODE_RESPONSE = 'decode_responses'
+
+SMART_CONFIG_SERVER = 'server'
+
+SMART_CONFIG_SERVER_HOST = 'host'
+
+SMART_CONFIG_SERVER_PORT = 'port'
+
+SMART_CONFIG_SERVER_WORKERS = 'workers'
+
+SMART_CONFIG_SERVER_NAME = 'name'
+
+SMART_CONFIG_SERVER_MODEL_PATH = 'modelPath'
+
+SMART_CONFIG_SERVER_RESULT_LSTM_PATH = 'lstmResult'
+
+SMART_CONFIG_SERVER_RESULT_IF_PATH = 'ifResult'
+
+SMART_CONFIG_SERVER_RESULT_PYOD_PATH = 'pyodResult'
+
+# lstm 分类 多变量
+SMART_LSTM_CLASSIFY_MULT = 'multivariable'
+
+# lstm 分类 单变量
+SMART_LSTM_CLASSIFY_UNIV = 'univariate'
+
+# result 文件后缀
+RESULT_FILE_SUFFIX = '.png'
+
+RESULT_FILE_CLASSIFY = 'png'
+
+# dict records
+DICT_CLASSIFY_RECORDS = 'records'
+
+# dict list
+DICT_CLASSIFY_LIST = 'list'
+
+# python lstm model 最优参数
+SMART_DATA_LSTM_BEST_MODEL_PARAM_MULT = SMART_DATA_LSTM_PREFIX + CONNECTOR_UNDERLINE + SMART_LSTM_CLASSIFY_MULT + CONNECTOR_UNDERLINE + 'modelParam'
+
+# python lstm model 最优参数
+SMART_DATA_LSTM_BEST_MODEL_PARAM_UNIV = SMART_DATA_LSTM_PREFIX + CONNECTOR_UNDERLINE + SMART_LSTM_CLASSIFY_UNIV + CONNECTOR_UNDERLINE + 'modelParam'
+
+SMART_CONFIG_MINIO = 'minio'
+
+SMART_CONFIG_MINIO_HOST = 'host'
+
+SMART_CONFIG_MINIO_PORT = 'port'
+
+SMART_CONFIG_REDIS_ACCESS_KEY = 'accessKey'
+
+SMART_CONFIG_MINIO_SECRET_KEY = 'secretKey'
+
+SMART_CONFIG_MINIO_LSTM_RESULT_BUCKET = 'lstmBucket'
+
+SMART_CONFIG_MINIO_IF_RESULT_BUCKET = 'ifBucket'
+
+SMART_CONFIG_MINIO_PYOD_RESULT_BUCKET = 'pyodBucket'
+
+# 计算数据在上下限范围内的 结果字段后缀
+DETECTOR_RANGE_SUFFIX = CONNECTOR_UNDERLINE + 'result'
+# 默认数据唯一标识字段
+SMART_DATA_UNIQUE_ID = 'id'
+
+SMART_CONFIG_TAOS = 'taos'
+
+SMART_CONFIG_TAOS_HOST = 'host'
+
+SMART_CONFIG_TAOS_USER = 'user'
+
+SMART_CONFIG_TAOS_PASSWORD = 'password'
+
+SMART_CONFIG_TAOS_DB = 'db'
+
+SMART_CONFIG_TAOS_CONFIG = 'config'

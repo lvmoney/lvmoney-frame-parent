@@ -1,0 +1,148 @@
+server:
+  port: 8060
+  tomcat:
+    uri-encoding: utf-8
+nacos:
+  service:
+    address: 192.168.0.21
+    port: 8848
+    namespace: 65394e40-97bc-4d50-9a18-0dea7eb717bb
+operating:
+  environment: istio
+  internal: internal
+spring:
+  application:
+    name: lvmoney-platform-action
+  # 序列化返回JSON日期时区为东八区,日期格式为 2020-11-30 11:42:20
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+        namespace: ${nacos.service.namespace}
+    service-registry:
+      auto-registration:
+        enable: true
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    database: 7
+    port: 6379
+    host: 192.168.0.21
+
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@chinapopin.com
+    name: yanghaizhou
+    url: ''
+  description: 用户中台接口文档
+  title: 用户中台
+  url: ''
+  version: 1.0
+frame:
+  releaseServer:
+    support: true
+  swagger:
+    support: true
+  i18n:
+    support: false
+  shiro:
+    support: true
+  jwt:
+    support: true
+  requestType:
+    support: false
+  db:
+    clickhouse:
+      host: 192.168.0.11
+      port: 8123
+      user: default
+      password:
+      database: log_platform
+
+istio:
+  docker:
+    image:
+      tag: ${docker.tag}
+      name: ${docker.image}
+      pull: Always
+    file:
+      name: ${docker.jar}
+      temp: /home
+  yaml:
+    namespace: default
+    cover: true
+    replicas: 1
+    version: v1
+  master:
+    #K8s master节点IP地址
+    ip: 192.168.0.41
+
+custom:
+  tomcat:
+    https:
+      schema: http
+
+rpc:
+  server:
+    org: platform-org-dev
+    datasync-task: platform-datasync-dev
+    authentication: platform-authentication-manager-dev
+    dictionary: www.lvmoney-platform-dictionary.com
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+        retryer:
+          period: 100     # 发起当前请求的时间间隔，单位毫秒
+          maxPeriod: 1000 # 发起当前请求的最大时间间隔，单位毫秒
+          maxAttempts: 3  # 最多请求次数，包括第一次
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          strategy: SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 1000
+          thread:
+            timeoutInMilliseconds: 5000
+
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,prometheus,metrics,httptrace,threaddump,heapdump,springmetrics
+        exclude: env,beans
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+        step: 1m
+        descriptions: true
+influxdb:
+  url: http://192.168.0.14:8086
+  username: admin
+  password: admin
+  database: test

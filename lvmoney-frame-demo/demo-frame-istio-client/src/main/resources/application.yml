@@ -1,0 +1,125 @@
+nacos:
+  service:
+    address: 192.168.10.58
+    port: 8848
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
+  application:
+    name: demo-istio-client
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 192.168.10.58:8086
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+    service-registry:
+      auto-registration:
+        enabled: true
+  redis:
+    database: 5
+    port: 6379
+    host: 192.168.10.74
+istio:
+  docker:
+    image:
+      tag: ${docker.tag}
+      name: ${docker.image}
+      pull: Always
+    file:
+      name: ${docker.jar}
+      temp: /home
+  yaml:
+    namespace: default
+    cover: true
+    replicas: 1
+    version: v1
+  master:
+    ip: 192.168.10.80
+rpc:
+  server:
+    gateway: www.zipkin.com
+operating:
+  environment: nacos
+  internal: internal
+custom:
+  tomcat:
+    https:
+      schema: http
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+
+server:
+  port: 8073
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务调用方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+frame:
+  swagger:
+    support: true
+  db:
+    clickhouse:
+      host: 192.168.10.74
+      port: 8123
+      user: default
+      password:
+      database: log_platform
+  logback:
+    support: true
+    clickhouse:
+      batchSize: 100000
+      intervalDate: 6000
+      tableName: sys_log
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  metrics:
+#    tags:
+#      application: ${spring.application.name}
+
+logging:
+  config: classpath:logback-spring.xml
+opentracing:
+  zipkin:
+    enabled: true
+    http-sender:
+      base-url: http://www.zipkin.com
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,prometheus,metrics,httptrace,threaddump,heapdump,springmetrics
+        exclude: env,beans
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+        step: 1m
+        descriptions: true

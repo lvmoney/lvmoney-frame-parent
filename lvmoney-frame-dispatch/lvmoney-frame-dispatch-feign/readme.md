@@ -1,0 +1,6 @@
+1、只引入时，用@SpringCloudApplication  
+2、用fallFactory可以获得rpc服务返回的具体错误
+3、使用的时候注意在控制器上加 @HystrixCommand注解后远程rpc服务报错直接进入该注解指定的控制器
+4、在feignClient上配置2生成fallFactory可以拿到远程rpc返回的错误信息，可以在控制器中进行下一步的业务处理
+5、如果在feignClient上配置DisableHystrix.class，那么系统直接会把远程rpc的错误返回不进入我们写的请求控制器
+注意：这样做，远程rpc连不上的错误就不会处理了。直接返回

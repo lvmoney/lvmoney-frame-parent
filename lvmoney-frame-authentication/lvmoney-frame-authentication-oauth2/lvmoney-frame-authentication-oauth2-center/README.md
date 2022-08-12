@@ -1,0 +1,81 @@
+1、参考某大神的demo结合frame整体架构进行该造，oauth2主要提供了数据库，内存，redis等几种存储校验 信息，本框架全部用redis来存储，oauth2默认提供的redis对于frame兼容性不太好，进行了重写。只保留了
+登录页面，其他管理页面废弃了（个人觉得管理页面需要定制化）  
+2、使用时，需要初始化应用的数据，就是构造ro把数据存储到redis，可参考RedisOauthClientServiceImpl，RedisUserDetailsServiceImpl
+（测试数据代码可以删除或者注释掉）  
+3、用户登录成功或者失败会在login_history表中记录和更该user_account里面的状态，可通过ClientAuthenticationFailureHandler和
+ClientAuthenticationSuccessHandler查看  
+4、可在系统初始化的时候把2中的数据存到数据库在ApplicationStartedEventListener中实现，
+个人觉得应该在RedisClientDetailsServiceImpl,
+RedisUserDetailsServiceImpl
+中实现（系统已经实现可查看）。  
+5、测试  
+authorization_code模式：用于PC端，页面跳转，安全性最高，需要两步获取token  
+通过浏览器访问：  
+localhost:10380/oauth/authorize?client_id=SampleClientId&response_type=code&redirect_uri=http://localhost:8030/user/index
+输入用户名，密码（zhangsan/tgb.258）、验证码，确认授权获得授权码，该授权码只能使用一次
+通过postman获得token:  
+post   
+http://localhost:10380/oauth/token?client_id=SampleClientId&client_secret=tgb.258&grant_type=authorization_code&redirect_uri=http://localhost:8030/login&code=n9iooT  
+
+
+password模式：用于手机端或者其他无页面跳转场景，应由后台服务端调用，保护client_id和client_secret  
+通过postman获得token:  
+post  
+http://localhost:10380/oauth/token?client_id=SampleClientId&client_secret=tgb.258&grant_type=password&scope=user_info&username=zhangsan&password=tgb.258  
+
+
+client_credentials模式:  
+通过postman获得token:  
+post  
+http://localhost:10380/oauth/token?client_id=SampleClientId&client_secret=tgb.258&grant_type=client_credentials&scope=user_info&username=zhangsan&password=tgb.258  
+
+
+校验token：校验access_token  
+post  
+localhost:10380/oauth/check_token?token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJ1c2VyX2luZm8iXSwiZXhwIjoxNTY0OTA2NzczLCJhdXRob3JpdGllcyI6W251bGxdLCJqdGkiOiIzZDBkYmJhMS1jNzkyLTQwZmQtYjZiYi1kYjBhNTZiMGM0YzkiLCJjbGllbnRfaWQiOiJTYW1wbGVDbGllbnRJZCJ9.SXSDH3mVt_J-7hhYlzeyjNK0CULXCvFGR16Om2DrToA66RUzLIFNNLQp9i-XgkP3txVFjUzbDQJ8toWuSHihv4wEUl5MvMWu0eyto-addyPae-bJjGzF6tDZE7AHap2akepnOkn5Kaa8Xi4uT_bnYlBVGNJtB9NsFD-9x7oGP0g  
+header:  
+Authorization:Basic U2FtcGxlQ2xpZW50SWQ6dGdiLjI1OA==  
+Basic后面的值是clientid:password base64后的值，即SampleClientId:tgb.258  base64后的值
+从 oauth2的 org.springframework.security.oauth2.provider.token.RemoteTokenServices的方法getAuthorizationHeader看出来
+Content-Type:application/x-www-form-urlencoded  
+
+
+访问oauth2 server受保护资源，请求时携带token，password,authorization_code获得的access_token才可以  
+get  
+localhost:10380/user/me  
+header:  
+Authorization:Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ6aGFuZ3NhbiIsInVzZXJfbmFtZSI6InpoYW5nc2FuIiwic2NvcGUiOlsidXNlcl9pbmZvIl0sImFjY291bnRPcGVuQ29kZSI6MSwiZXhwIjoxNTY0OTExNTc1LCJncmFudFR5cGUiOiJwYXNzd29yZCIsImF1dGhvcml0aWVzIjpbbnVsbF0sImp0aSI6Ijc0NDRiMTJhLTBmNDYtNGMxYS1iYmUyLThhYTJhMzlkMmNhYSIsImNsaWVudF9pZCI6IlNhbXBsZUNsaWVudElkIiwic3RhdHVzIjoxfQ.kFVoxWUF5OiD3u75nQRZtKKTbylX4cZU1P6wVuHP97ALdlsxJar_2JCW30xPHYA8Hkca6JaXxoVzw8p-G30Vi9xYPnMLyO0Ka_NITH8-261pyeOnGlAlttBrsAxKqHZ3dwl1j4EjgAJMxg6HjaVad1S780rV5yisqZuYvIxRpTI  
+
+
+刷新token  
+post  
+localhost:10380/oauth/token?client_id=SampleClientId&client_secret=tgb.258&grant_type=refresh_token&refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ6aGFuZ3NhbiIsInVzZXJfbmFtZSI6InpoYW5nc2FuIiwic2NvcGUiOlsidXNlcl9pbmZvIl0sImF0aSI6Ijc0NDRiMTJhLTBmNDYtNGMxYS1iYmUyLThhYTJhMzlkMmNhYSIsImFjY291bnRPcGVuQ29kZSI6MSwiZXhwIjoxNTY3NDk5OTc1LCJncmFudFR5cGUiOiJwYXNzd29yZCIsImF1dGhvcml0aWVzIjpbbnVsbF0sImp0aSI6IjEyMWMwYjJjLWNkMmYtNDA3OS1hYjRkLTBiNGMwYzJkMWI2YyIsImNsaWVudF9pZCI6IlNhbXBsZUNsaWVudElkIiwic3RhdHVzIjoxfQ.SZhuZ5M6btRcpbW5D3vXrc4whkXGfCti8HCDV6JDR1G6Un4As5Q2-vwZRAv1jGpjvPiCsRybkQvNCMA6-gbdFz4eluSn22HTT_4Ypg2V5AheX8SmjdEm5iymm-FULftkKwUiqO4MHeiqoRc1eSAsbszJLKJga2T8a4_CJc-x1TE  
+
+
+访问应用受保护的资源:请求时携带token，password,authorization_code,client_credentials获得的access_token均可以  
+get  
+http://localhost:8030/user  
+header:  
+Authorization:Bearer  eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ6aGFuZ3NhbiIsInVzZXJfbmFtZSI6InpoYW5nc2FuIiwic2NvcGUiOlsidXNlcl9pbmZvIl0sImFjY291bnRPcGVuQ29kZSI6MSwiZXhwIjoxNTY0OTExNTc1LCJncmFudFR5cGUiOiJwYXNzd29yZCIsImF1dGhvcml0aWVzIjpbbnVsbF0sImp0aSI6Ijc0NDRiMTJhLTBmNDYtNGMxYS1iYmUyLThhYTJhMzlkMmNhYSIsImNsaWVudF9pZCI6IlNhbXBsZUNsaWVudElkIiwic3RhdHVzIjoxfQ.kFVoxWUF5OiD3u75nQRZtKKTbylX4cZU1P6wVuHP97ALdlsxJar_2JCW30xPHYA8Hkca6JaXxoVzw8p-G30Vi9xYPnMLyO0Ka_NITH8-261pyeOnGlAlttBrsAxKqHZ3dwl1j4EjgAJMxg6HjaVad1S780rV5yisqZuYvIxRpTI  
+
+
+RSA密钥生成，用于签名token，客户端、资源端本地验证token  
+使用Java工具包中的keytool制作证书jwt.jks，重要参数:设置别名为:jwt，有效天数为:36500，密码为:lvmoney(和application.properties中jwt.jks.keypass=lvmoney要一致)，替换位置src/main/resources/jwt.jks
+keytool -genkey -alias jwt -keyalg RSA -keysize 1024 -keystore D:/test/jwt.jks -validity 36500
+application.properties中jwt.jks.keypair=jwt的值为jwt.jks的名字jwt
+获取jwt token签名的RSA公钥，用于本地验证token  
+Get   
+localhost:10830/oauth/token_key  
+jwk-set-uri：resource server 可以得到jwt token签名公钥并缓存，进行本地验证  
+Get localhost:10830/.well-known/jwks.json  
+
+
+扩展grant_type,參照FrameCodeTokenGranter 的 frame_code  
+post  
+localhost:10380/oauth/token?client_id=SampleClientId&client_secret=tgb.258&grant_type=frame_code&scope=user_info&username=zhangsan&password=tgb.258&captcha=UvvZ&captcha_num=1158216781404573696  
+获得的access_token和其他（password）用法一样  
+
+6、resource,client等client-id不同，只需要在server端redis（mysql）中有对应的值，那么client通过
+server获得access_token就能访问不同的resource
+
+7、注意需要自己把client端，user detail信息放到对应的redis,需要实现接口Db2RedisService

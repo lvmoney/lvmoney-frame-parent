@@ -1,0 +1,50 @@
+nacos:
+  service:
+    address: 192.168.10.58
+    port: 8848
+spring:
+  application:
+    name: sentinel-demo-client
+  cloud:
+    sentinel:
+      transport:
+        clientIp: 192.168.10.58
+        dashboard: 192.168.10.58:8086
+        port: 8719
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+  redis:
+    database: 3
+    port: 6379
+    host: 192.168.10.74
+swagger:
+  base:
+    package: com.lvmoney
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+server:
+  port: 9906
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+rpc:
+  server:
+    gateway: http://localhost:9901
+frame:
+  releaseServer:
+    support: true
+  swagger:
+    support: true

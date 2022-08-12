@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lvmoney-frame-demo</artifactId>
+        <groupId>com.lvmoney.frame</groupId>
+        <version>1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>demo-frame-file</artifactId>
+    <properties>
+        <!--私服ip-->
+        <dockerRegistryIp>192.168.10.59</dockerRegistryIp>
+        <!--tag 端口-->
+        <dockerTagPort>5000</dockerTagPort>
+        <!--push 端口-->
+        <dockerPushPort>2375</dockerPushPort>
+        <!--项目属于一个大的分类-->
+        <namespace>platform</namespace>
+        <!--docker images-->
+        <dockerImageName>${project.artifactId}:${project.version}</dockerImageName>
+        <!--dockerFile 中 jar名称-->
+        <dockerFileName>${project.artifactId}-${project.version}</dockerFileName>
+        <!--docker tag-->
+        <dockerImageTag>
+            ${dockerRegistryIp}:${dockerTagPort}/${namespace}/${project.artifactId}:${project.version}
+        </dockerImageTag>
+        <!--docker host-->
+        <dockerHost>http://${dockerRegistryIp}:${dockerPushPort}</dockerHost>
+
+        <rootPath>/dockerTemp</rootPath>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-oss-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-authentication-jwt</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-cloud-base</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-office-excel</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <!--这里写上main方法所在类的路径-->
+                <configuration>
+                    <!--com.kismet.p2p.APPConfig即mainClass-->
+                    <mainClass>com.lvmoney.demo.file.application.FileApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+           <!-- <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <id>build-image</id>     &lt;!&ndash;定义一个执行命令的id&ndash;&gt;
+                        <phase>package</phase>   &lt;!&ndash;绑定mvn的哪个命令&ndash;&gt;
+                        <goals>
+                            <goal>build</goal>   &lt;!&ndash;要执行的命令 &ndash;&gt;
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>image-tag</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tag</goal>      &lt;!&ndash;tag命令，相当于docker的tag命令&ndash;&gt;
+                        </goals>
+                        <configuration>
+                            <image>${dockerImageName}</image>   &lt;!&ndash;镜像名&ndash;&gt;
+                            <newName>${dockerImageTag}</newName>   &lt;!&ndash;打的标签名&ndash;&gt;
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>package-push</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>push</goal>    &lt;!&ndash;相当于docker的push命令&ndash;&gt;
+                        </goals>
+                        <configuration>
+                            <imageName>${dockerImageTag}</imageName>  &lt;!&ndash;要push的镜像名&ndash;&gt;
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <imageName>${dockerImageName}</imageName>
+                    <baseImage>java</baseImage>
+                    <maintainer>docker_maven lvmoney build</maintainer>
+                    <workdir>${rootPath}</workdir>
+                    <cmd>["java", "-version"]</cmd>
+                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>${rootPath}</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>-->
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

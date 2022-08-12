@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lvmoney-frame-blockchain</artifactId>
+        <groupId>com.lvmoney.frame</groupId>
+        <version>1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lvmoney-frame-blockchain-webase</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>lvmoney-frame-blockchain-webase-common</module>
+        <module>lvmoney-frame-blockchain-webase-front</module>
+        <module>lvmoney-frame-blockchain-webase-sign</module>
+        <module>lvmoney-frame-blockchain-webase-wallet</module>
+        <module>lvmoney-frame-blockchain-webase-trans</module>
+        <module>lvmoney-frame-blockchain-webase-weidentity</module>
+    </modules>
+
+
+</project>

@@ -1,0 +1,8 @@
+rpc:
+  gateway:
+    server: gateway
+server:
+  port: 8080
+spring:
+  application:
+    name: lvmoney

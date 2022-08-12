@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    clickhouse:
+      driverClassName: ru.yandex.clickhouse.ClickHouseDriver
+      url: jdbc:clickhouse://10.20.128.235:8123/default?max_result_bytes=10000
+      username: default
+      paswword:
+      initialSize: 10
+      maxActive: 100
+      minIdle: 10
+      maxWait: 6000
+      query-timeout: 30
+      # 用来检测连接是否有效的sql，要求是一个查询语句
+      validation-query: SELECT 1 FROM DUAL
+      # 申请连接时检测连接可用性 默认：false
+      test-on-borrow: false
+      # 归还连接检测 默认：false
+      test-on-return: false
+      # 超时是否检测连接可用性
+      test-while-idle: true
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接 (毫秒)
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间(毫秒，默认30分钟)
+      min-evictable-idle-time-millis: 300000
+swagger:
+  base:
+    package: com.lvmoney.frame.demo.clickhouse.controller
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+frame:
+  swagger:
+    support: true
+server:
+  port: 7766
+logging:
+  config: classpath:logback-spring.xml

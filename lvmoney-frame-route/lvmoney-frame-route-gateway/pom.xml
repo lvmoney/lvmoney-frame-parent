@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lvmoney-frame-route</artifactId>
+        <groupId>com.lvmoney.frame</groupId>
+        <version>1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lvmoney-frame-route-gateway</artifactId>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-route-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-rm</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-dispatch-feign</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-rm</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-cache-lock</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-rm</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-interceptor</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-authentication-util</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-rm</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-authentication-service</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-rm</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-cloud-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-rm</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-authentication-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-rm</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.lvmoney.frame</groupId>
+                    <artifactId>lvmoney-frame-base-serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-registry-nacos</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+    </dependencies>
+</project>

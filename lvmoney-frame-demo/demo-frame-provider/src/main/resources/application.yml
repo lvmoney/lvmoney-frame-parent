@@ -1,0 +1,95 @@
+server:
+  port: 9901
+
+nacos:
+  service:
+    address: 192.168.10.58
+    port: 8848
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+  application:
+    name: provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.service.address}:${nacos.service.port}
+        cluster-name: ${spring.application.name}
+    service-registry:
+      auto-registration:
+      enabled: true
+  redis:
+    database: 5
+    port: 6379
+    host: 192.168.10.74
+swagger:
+  base:
+    package: com.lvmoney.frame.demo.provider.function
+  contact:
+    email: author@lvmoney.com
+    name: author
+    url: ''
+  description: frame demo 服务提供方
+  title: authentication-resource
+  url: ''
+  version: 1.0
+istio:
+  namespace: lvmoney
+  docker:
+    image:
+      pull: Always
+    file:
+      temp: /home
+  yaml:
+    cover: true
+    replicas: 1
+    version: v1
+    destination:
+      support: true
+      v1: 90
+      v2: 10
+    mirror:
+      support: true
+      version: v1
+    fault:
+      support: true
+      percent: 90
+      delay: 7
+    policy:
+      maxConnections: 2048
+      connectTimeout: 3s
+      http1MaxPendingRequests: 1024
+      maxRequestsPerConnection: 200
+      http2MaxRequests: 2048
+      consecutiveErrors: 3
+      maxRetries: 3
+      interval: 3s
+      baseEjectionTime: 3m
+      maxEjectionPercent: 100
+  master:
+    ip: 192.168.1.181
+
+operating:
+  environment: nacos
+  internal: internal
+frame:
+  releaseServer:
+    support: true
+custom:
+  tomcat:
+    https:
+      schema: http
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+  metrics:
+    tags:
+      application: ${spring.application.name}
