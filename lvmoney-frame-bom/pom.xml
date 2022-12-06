@@ -88,7 +88,7 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <hutool.version>5.7.7</hutool.version>
         <guava.version>30.0-jre</guava.version>
-        <commons.text.version>1.6</commons.text.version>
+        <commons.text.version>1.10.0</commons.text.version>
         <commons.collections4.version>4.1</commons.collections4.version>
         <boot.redis.version>2.1.0.RELEASE</boot.redis.version>
         <boot.cache.verion>2.1.0.RELEASE</boot.cache.verion>
