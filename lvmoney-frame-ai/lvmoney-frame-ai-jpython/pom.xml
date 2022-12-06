@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>com.lvmoney.frame</groupId>
-            <artifactId>lvmoney-frame-core</artifactId>
+            <artifactId>lvmoney-frame-ai-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

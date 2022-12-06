@@ -52,7 +52,6 @@
         <module>lvmoney-frame-ai</module>
         <module>lvmoney-frame-expression</module>
     </modules>
-
     <distributionManagement>
         <repository>
             <id>nexus-releases</id>

@@ -120,7 +120,6 @@ public enum ExceptionCodeLevel {
      * EXPRESSION
      */
     EXPRESSION(25000),
-
     ;
 
     private Integer value;

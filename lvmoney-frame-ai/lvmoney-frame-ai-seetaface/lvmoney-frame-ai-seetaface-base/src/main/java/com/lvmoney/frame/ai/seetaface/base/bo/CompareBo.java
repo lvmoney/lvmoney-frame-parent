@@ -1,6 +1,6 @@
 package com.lvmoney.frame.ai.seetaface.base.bo;/**
  * 描述:
- * 包名:com.lvmoney.frame.ai.seetaface.base.bo
+ * 包名:com.lvmoney.frame.ai.seetaface.client.bo
  * 版本信息: 版本1.0
  * 日期:2022/2/10
  * Copyright XXXXXX科技有限公司

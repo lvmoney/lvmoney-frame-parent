@@ -8,6 +8,7 @@ package com.lvmoney.frame.ai.seetaface.jni.natives;/**
 
 
 import com.lvmoney.frame.ai.seetaface.jni.vo.*;
+import com.lvmoney.frame.ai.seetaface.jni.vo.*;
 
 /**
  * @describe：活体识别 静默活体识别根据输入的图像数据、人脸位置和人脸特征点，对输入人脸进行活体的判断，并返回人脸活体的状态

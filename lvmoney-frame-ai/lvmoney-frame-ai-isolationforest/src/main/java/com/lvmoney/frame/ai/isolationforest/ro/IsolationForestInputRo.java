@@ -7,7 +7,7 @@ package com.lvmoney.frame.ai.isolationforest.ro;/**
  */
 
 
-import com.lvmoney.frame.ai.isolationforest.enums.DataClassificationEnum;
+import com.lvmoney.frame.ai.enums.DataClassificationEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

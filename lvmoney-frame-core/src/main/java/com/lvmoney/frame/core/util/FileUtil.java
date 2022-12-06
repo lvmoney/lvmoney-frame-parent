@@ -7,34 +7,30 @@ package com.lvmoney.frame.core.util;/**
  */
 
 
-import cn.hutool.core.util.ObjectUtil;
 import com.lvmoney.frame.base.core.constant.BaseConstant;
 import com.lvmoney.frame.base.core.exception.BusinessException;
 import com.lvmoney.frame.base.core.exception.CommonException;
-import com.lvmoney.frame.base.core.util.JsonUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipFile;
 
-import static com.lvmoney.frame.base.core.constant.BaseConstant.*;
+import static com.lvmoney.frame.base.core.constant.BaseConstant.CHARACTER_ENCODE_UTF8_LOWER;
+import static com.lvmoney.frame.base.core.constant.BaseConstant.PLACEHOLDER_WARP_SPACE;
 
 /**
  * @describe：
@@ -47,10 +43,6 @@ public class FileUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class);
     private static final int FILE_BYTE_LENGTH = 32 * 1024;
-    /**
-     * png
-     */
-    private static final String PNG = "png";
 
     /**
      * @describe: multipart 转flle
@@ -313,9 +305,7 @@ public class FileUtil {
 
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
 
-            MappedByteBuffer mappedByteBuffer = randomAccessFile
-                    .getChannel()
-                    .map(FileChannel.MapMode.READ_ONLY, 0, len);
+            MappedByteBuffer mappedByteBuffer = randomAccessFile.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, len);
             byte[] dst = new byte[FILE_BYTE_LENGTH];
 
             for (int offset = 0; offset < mappedByteBuffer.capacity(); offset += FILE_BYTE_LENGTH) {
@@ -328,8 +318,7 @@ public class FileUtil {
                         dst[i] = mappedByteBuffer.get(offset + i);
                     }
                 }
-                int length = (mappedByteBuffer.capacity() % FILE_BYTE_LENGTH == 0) ? FILE_BYTE_LENGTH
-                        : mappedByteBuffer.capacity() % FILE_BYTE_LENGTH;
+                int length = (mappedByteBuffer.capacity() % FILE_BYTE_LENGTH == 0) ? FILE_BYTE_LENGTH : mappedByteBuffer.capacity() % FILE_BYTE_LENGTH;
                 String temp = new String(dst, 0, length);
                 result += getCharacterCount(temp, "A");
             }
@@ -633,14 +622,11 @@ public class FileUtil {
         String base64 = "";
         try {
             // 写入流中
-            ImageIO.write(bufferedImage, PNG, byteArrayOutputStream);
+            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
             // 转换成字节
             byte[] bytes = byteArrayOutputStream.toByteArray();
-            BASE64Encoder encoder = new BASE64Encoder();
             // 转换成base64串 删除 \r\n
-            base64 = encoder.encodeBuffer(bytes).trim()
-                    .replaceAll("\n", "")
-                    .replaceAll("\r", "");
+            base64 = Base64.encodeBase64String(bytes).trim().replaceAll("\n", "").replaceAll("\r", "");
         } catch (IOException e) {
             LOGGER.error("bufferedImage 转为 base64编码报错:{}", e);
         }

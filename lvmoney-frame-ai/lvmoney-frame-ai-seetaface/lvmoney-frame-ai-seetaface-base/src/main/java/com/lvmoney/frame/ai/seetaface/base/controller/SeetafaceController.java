@@ -1,18 +1,18 @@
 package com.lvmoney.frame.ai.seetaface.base.controller;/**
  * 描述:
- * 包名:com.lvmoney.frame.ai.seetaface.base.controller
+ * 包名:com.lvmoney.frame.ai.seetaface.client.controller
  * 版本信息: 版本1.0
  * 日期:2022/2/15
  * Copyright XXXXXX科技有限公司
  */
 
 
+import com.lvmoney.frame.ai.seetaface.base.service.FaceService;
 import com.lvmoney.frame.ai.seetaface.base.bo.CompareIdCardBo;
 import com.lvmoney.frame.ai.seetaface.base.bo.FaceCheckBo;
 import com.lvmoney.frame.ai.seetaface.base.bo.FaceCheckResBo;
 import com.lvmoney.frame.ai.seetaface.base.dto.CompareIdCardDto;
 import com.lvmoney.frame.ai.seetaface.base.dto.FaceCheckDto;
-import com.lvmoney.frame.ai.seetaface.base.service.FaceService;
 import com.lvmoney.frame.base.core.api.ApiResult;
 import com.lvmoney.frame.oss.common.vo.FileBaseVo;
 import org.springframework.beans.factory.annotation.Autowired;

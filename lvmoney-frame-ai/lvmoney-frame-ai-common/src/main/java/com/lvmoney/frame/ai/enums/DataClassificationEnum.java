@@ -1,4 +1,4 @@
-package com.lvmoney.frame.ai.isolationforest.enums;/**
+package com.lvmoney.frame.ai.enums;/**
  * 描述:
  * 包名:com.lvmoney.frame.autocode.catalogue.enums
  * 版本信息: 版本1.0
@@ -40,11 +40,6 @@ public enum DataClassificationEnum {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-
     public static List<String> getValues() {
         List<String> result = new ArrayList();
         for (DataClassificationEnum catalogueEnum : DataClassificationEnum.values()) {
@@ -55,6 +50,10 @@ public enum DataClassificationEnum {
 
     public static void main(String[] args) {
         System.out.println(DataClassificationEnum.getValues());
+    }
+
+    public String getValue() {
+        return value;
     }
 
 }

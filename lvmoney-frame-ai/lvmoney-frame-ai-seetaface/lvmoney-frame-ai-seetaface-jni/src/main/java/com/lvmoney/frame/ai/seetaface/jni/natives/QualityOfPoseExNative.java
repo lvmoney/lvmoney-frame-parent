@@ -7,6 +7,7 @@ package com.lvmoney.frame.ai.seetaface.jni.natives;/**
  */
 
 import com.lvmoney.frame.ai.seetaface.jni.vo.*;
+import com.lvmoney.frame.ai.seetaface.jni.vo.*;
 
 /**
  * @describe：深度学习的人脸姿态评估器

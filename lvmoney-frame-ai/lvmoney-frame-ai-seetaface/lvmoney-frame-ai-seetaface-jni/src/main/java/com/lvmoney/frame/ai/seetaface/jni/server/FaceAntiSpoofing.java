@@ -10,6 +10,7 @@ import com.lvmoney.frame.ai.seetaface.common.exception.SeetafaceException;
 import com.lvmoney.frame.ai.seetaface.jni.natives.FaceAntiSpoofingNative;
 import com.lvmoney.frame.ai.seetaface.jni.util.SeetafaceValidated;
 import com.lvmoney.frame.ai.seetaface.jni.vo.*;
+import com.lvmoney.frame.ai.seetaface.jni.vo.*;
 import com.lvmoney.frame.base.core.exception.BusinessException;
 
 import java.io.Closeable;

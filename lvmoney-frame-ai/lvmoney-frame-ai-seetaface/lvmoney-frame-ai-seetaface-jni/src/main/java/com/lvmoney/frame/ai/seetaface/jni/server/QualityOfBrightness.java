@@ -6,12 +6,12 @@ package com.lvmoney.frame.ai.seetaface.jni.server;/**
  * Copyright XXXXXX科技有限公司
  */
 
-import com.lvmoney.frame.ai.seetaface.jni.natives.QualityOfBrightnessNative;
 import com.lvmoney.frame.ai.seetaface.jni.util.SeetafaceValidated;
 import com.lvmoney.frame.ai.seetaface.jni.vo.QualityResult;
 import com.lvmoney.frame.ai.seetaface.jni.vo.SeetaImageData;
 import com.lvmoney.frame.ai.seetaface.jni.vo.SeetaPointF;
 import com.lvmoney.frame.ai.seetaface.jni.vo.SeetaRect;
+import com.lvmoney.frame.ai.seetaface.jni.natives.QualityOfBrightnessNative;
 
 import java.io.Closeable;
 

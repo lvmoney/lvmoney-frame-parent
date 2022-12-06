@@ -7,7 +7,7 @@ package com.lvmoney.frame.ai.lstm.ro;/**
  */
 
 
-import com.lvmoney.frame.ai.lstm.enums.DataClassifyEnum;
+import com.lvmoney.frame.ai.enums.DataClassificationEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,10 +25,11 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LstmInputRo implements Serializable {
+    private static final long serialVersionUID = 4021390291122181521L;
     /**
      * 数据分类
      */
-    private DataClassifyEnum classification;
+    private DataClassificationEnum classification;
     /**
      * 生效时间
      */

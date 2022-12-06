@@ -1,6 +1,6 @@
 package com.lvmoney.frame.ai.seetaface.base.service.impl;/**
  * 描述:
- * 包名:com.lvmoney.frame.ai.seetaface.base.service.impl
+ * 包名:com.lvmoney.frame.ai.seetaface.client.service.impl
  * 版本信息: 版本1.0
  * 日期:2022/2/9
  * Copyright XXXXXX科技有限公司
@@ -9,13 +9,15 @@ package com.lvmoney.frame.ai.seetaface.base.service.impl;/**
 
 import cn.hutool.core.convert.Convert;
 import com.lvmoney.frame.ai.seetaface.base.bo.*;
-import com.lvmoney.frame.ai.seetaface.base.dto.ComparisonHistoryDto;
 import com.lvmoney.frame.ai.seetaface.base.dto.*;
 import com.lvmoney.frame.ai.seetaface.base.entity.ComparisonHistory;
 import com.lvmoney.frame.ai.seetaface.base.enums.ComparisonClassify;
 import com.lvmoney.frame.ai.seetaface.base.service.ComparisonHistoryService;
 import com.lvmoney.frame.ai.seetaface.base.service.ComparisonResourceService;
 import com.lvmoney.frame.ai.seetaface.base.service.FaceService;
+import com.lvmoney.frame.ai.seetaface.base.bo.*;
+import com.lvmoney.frame.ai.seetaface.base.dto.ComparisonHistoryDto;
+import com.lvmoney.frame.ai.seetaface.base.dto.*;
 import com.lvmoney.frame.ai.seetaface.common.constant.SeetafaceCommonConstant;
 import com.lvmoney.frame.ai.seetaface.common.exception.SeetafaceException;
 import com.lvmoney.frame.ai.seetaface.common.vo.ResourceStr;
@@ -56,7 +58,7 @@ public class FaceServiceImpl implements FaceService {
     /**
      * 隐私信息通用加密密码
      */
-    @Value("${privacy.unify.password:chChdriver2021!}")
+    @Value("${privacy.unify.password:chlvmoney2021!}")
     private String privacyPassword;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FaceServiceImpl.class);

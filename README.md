@@ -3,8 +3,17 @@
 
 #### 嗨，朋友。觉得我这个框架的设计或代码对你有点启发的话，麻烦用你发财的右手食指把右上角的star点一下哟，谢谢。
 
+#### 朋友，使劲往下看完，你应该会觉得有点意思
+
 #### 免费的相互学习沟通交流请联系我，qq：1300515928，邮箱：1300515928@qq.com
 
+#### 我最近创建了QQ群，致力于完全免费的交流和分享Java Python K8s Devops相关知识和资料  
+![输入图片说明](qrcode_1665626919464_edit_417433004067033.jpg)
+
+#### 知音赋  
+明月照空，阁楼玉烟，雏燕回巢。旧园青桥梧桐，风及处，忽起忽伏。提笔竟忘丝竹，娥眉墨凝固。慎回首，万千花朵，失颜色含羞默默。  
+世人笑我太疯癫，看不穿，流水环高山。濡沫浓情何处？深山处，初露新吐。列游湖畔，结庐南山共种红豆。暖握知音合萧瑟，白首不罢手。  
+[还有很多哟，持续更新中](https://gitee.com/lvmoney/personal-poems)
 
 
 #### 介绍
@@ -14,6 +23,7 @@ java版分布式微服务后端常用技术整合框架。基于springboot ，sp
 
 
 #### 最近新增  
+
 新增python 模块代码，包括python操作redis、minio、yaml、json、dataframe、tdengine等代码，后续会新增python 使用pyod、adtk、pca、LightGBM、IsolationForest、lstm、fastapi等相关实操代码  
 新增自定义占位科学计算表达式，完成数据处理  
 新增区块链模块，主要借助webase完成对FISCO BCOS的操作   
@@ -43,8 +53,10 @@ demo 可见 lvmoney-frame-demo
 #### 发布
 
 通过开源工具的配合部署和开发规范，完整支持DEVOPS整个流程   
+
 整合jenkins+nexus+gitlab+sonarqube+testng+harbor+k8s+promethus+alertmanager等。通过配置可一键构建系统的docker 镜像推送到私服 hardor，运行到k8s集群。同时完成基于prometheus的监控告警体系  
 发布到k8s（istio）需要的.yaml文件可以通过maven引入boao-frame-cloud-base，通过swagger调用boao-frame-cloud-base提供的控制器接口一键生成  
+
 
 #### 服务支持
 人脸识别等(ocr,OpenCV,seataface,lstm，pyod，lgbm)  
@@ -168,14 +180,16 @@ lvmoney-frame-expression
 
 #### 技术罗列
 
+jdk1.8  
+python3.7  
+k8s1.21.0  
+istio  
 springboot  
 springcloud  
 nacos  
 sentinel  
 ipfs  
 docker  
-k8s1.18.0  
-istio1.8.0  
 flink  
 hadoop  
 shiro  
@@ -198,8 +212,11 @@ adtk
 pca  
 LightGBM  
 IsolationForest  
-lstm  
+lstm 
+Prophet   
 fastapi  
+tdengine   
+
 
 等等  
 

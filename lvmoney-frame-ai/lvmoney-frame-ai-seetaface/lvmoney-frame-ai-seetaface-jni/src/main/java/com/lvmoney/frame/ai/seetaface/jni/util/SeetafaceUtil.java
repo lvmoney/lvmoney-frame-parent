@@ -36,7 +36,7 @@ public class SeetafaceUtil {
      *
      * @param bufferedImage: 图片
      * @throws
-     * @return: com.lvmoney.frame.ai.seetaface.jni.vo.SeetaImageData BGR属性
+     * @return: SeetaImageData BGR属性
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2022/2/21 19:41
      */
@@ -106,7 +106,7 @@ public class SeetafaceUtil {
      *
      * @param path: 路径
      * @throws
-     * @return: com.lvmoney.frame.ai.seetaface.jni.vo.SeetaImageData
+     * @return: SeetaImageData
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2022/2/21 19:42
      */
@@ -119,7 +119,7 @@ public class SeetafaceUtil {
      *
      * @param file:
      * @throws
-     * @return: com.lvmoney.frame.ai.seetaface.jni.vo.SeetaImageData
+     * @return: SeetaImageData
      * @author: lvmoney /XXXXXX科技有限公司
      * @date: 2022/2/21 19:42
      */

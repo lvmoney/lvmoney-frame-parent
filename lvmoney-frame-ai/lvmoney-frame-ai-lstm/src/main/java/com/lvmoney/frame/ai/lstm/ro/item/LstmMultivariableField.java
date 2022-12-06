@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LstmMultivariableField implements Serializable {
-    private static final long serialVersionUID = -4609024388420429085L;
+    private static final long serialVersionUID = 8642784085096626348L;
     /**
      * 预测的字段
      */

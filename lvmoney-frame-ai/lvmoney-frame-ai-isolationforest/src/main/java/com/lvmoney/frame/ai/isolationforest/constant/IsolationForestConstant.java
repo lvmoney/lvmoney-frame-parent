@@ -9,16 +9,14 @@ package com.lvmoney.frame.ai.isolationforest.constant;/**
 
 import com.lvmoney.frame.base.core.constant.BaseConstant;
 
+import static com.lvmoney.frame.ai.constant.AiConstant.SMART_DATA_PREFIX;
+
 /**
  * @describe：
  * @author: lvmoney/XXXXXX科技有限公司
  * @version:v1.0 2022/5/12 10:25
  */
 public class IsolationForestConstant {
-    /**
-     * 数据智能统一前缀
-     */
-    public static final String SMART_DATA_PREFIX = "smartData";
 
 
     /**

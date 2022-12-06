@@ -1,0 +1,86 @@
+# Angle-based Outlier Detector (ABOD)
+PYOD_FUNCTION_CLASSIFY_ABOD = 'ABOD'
+
+# Cluster-based Local Outlier Factor (CBLOF)
+PYOD_FUNCTION_CLASSIFY_CBLOF = 'CBLOF'
+
+# Feature Bagging
+PYOD_FUNCTION_CLASSIFY_FEATURE_BAGGING = 'FB'
+
+# Histogram-base Outlier Detection (HBOS)
+PYOD_FUNCTION_CLASSIFY_HBOS = 'HBOS'
+
+# Isolation Forest
+PYOD_FUNCTION_CLASSIFY_ISOLATION_FOREST = 'IF'
+
+# K Nearest Neighbors (KNN)
+PYOD_FUNCTION_CLASSIFY_KNN = 'KNN'
+
+# Average KNN
+PYOD_FUNCTION_CLASSIFY_KNN_AVERAGE = 'AKNN'
+
+# Local Outlier Factor (LOF)
+PYOD_FUNCTION_CLASSIFY_LOF = 'LOF'
+
+# Minimum Covariance Determinant (MCD)
+PYOD_FUNCTION_CLASSIFY_MCD = 'MCD'
+
+# One-class SVM (OCSVM)
+PYOD_FUNCTION_CLASSIFY_OCSVM = 'OCSVM'
+
+# Principal Component Analysis (PCA)
+PYOD_FUNCTION_CLASSIFY_PCA = 'PCA'
+
+# Locally Selective Combination (LSCP)
+PYOD_FUNCTION_CLASSIFY_LSCP = 'LSCP'
+
+# COF(局部，近邻)
+PYOD_FUNCTION_CLASSIFY_COF = 'COF'
+# LOCI(局部，近邻)
+# 局部相关积分。基于密度。不适合处理较大数据集
+PYOD_FUNCTION_CLASSIFY_LOCI = 'LOCI'
+
+# 子空间离群点检测
+PYOD_FUNCTION_CLASSIFY_SOD = 'SOD'
+
+# SOS
+PYOD_FUNCTION_CLASSIFY_SOS = 'SOS'
+
+# ROD
+PYOD_FUNCTION_CLASSIFY_ROD = 'ROD'
+
+# COPOD
+PYOD_FUNCTION_CLASSIFY_COPOD = 'COPOD'
+# ECOD
+PYOD_FUNCTION_CLASSIFY_ECOD = 'ECOD'
+# autoEncoder_torch
+PYOD_FUNCTION_CLASSIFY_AUTO_ENCODER_TORCH = 'AET'
+
+# s：表示的是大小，是一个标量或者是一个shape大小为(n,)的数组，可选，默认20
+PYOD_PLT_SCATTER_S_DEFAULT = 20
+
+# 字体默认14
+PYOD_PLT_FONT_SIZE_DEFAULT = 14
+# 默认title
+PYOD_PLT_FONT_TITLE_DEFAULT = 'pyod多算法数据异常测试'
+# x，y轴默认数据范围
+PYOD_PLT_AXIS_RANGE_DEFAULT = (0, 1)
+
+# 数据降维默认数据维度
+PYOD_PCA_DATA_DIMENSION_DEFAULT = 2
+
+# 数据降维默认数据维度字段X
+PYOD_PCA_DATA_DIMENSION_X = 'X'
+# 数据降维默认数据维度字段Y
+PYOD_PCA_DATA_DIMENSION_Y = 'Y'
+# 数据降维默认数据维度预测值result
+PYOD_PCA_DATA_DIMENSION_RESULT = 'result'
+
+# 数据预测结果异常
+PYOD_PRED_RESULT_ERROR = 1
+# 数据预测结果正常
+PYOD_PRED_RESULT_RIGHT = 0
+# 异常值的默认倍数
+PYOD_PRED_PERCENT_DEFAULT = 100
+# 单个字段进行pyod过滤时，copy一列数据成为2列
+PYOD_DATA_FILED_COPY_SUFFIX = '_copy'

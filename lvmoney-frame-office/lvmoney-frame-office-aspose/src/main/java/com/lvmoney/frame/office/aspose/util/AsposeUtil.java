@@ -9,8 +9,8 @@ package com.lvmoney.frame.office.aspose.util;/**
 
 import com.aspose.words.Document;
 import com.aspose.words.SaveFormat;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 

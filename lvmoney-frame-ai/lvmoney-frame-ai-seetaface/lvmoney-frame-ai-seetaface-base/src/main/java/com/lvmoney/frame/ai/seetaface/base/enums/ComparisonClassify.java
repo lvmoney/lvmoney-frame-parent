@@ -1,6 +1,6 @@
 package com.lvmoney.frame.ai.seetaface.base.enums;/**
  * 描述:
- * 包名:com.lvmoney.frame.ai.seetaface.base.enums
+ * 包名:com.lvmoney.frame.ai.seetaface.client.enums
  * 版本信息: 版本1.0
  * 日期:2022/2/11
  * Copyright XXXXXX科技有限公司

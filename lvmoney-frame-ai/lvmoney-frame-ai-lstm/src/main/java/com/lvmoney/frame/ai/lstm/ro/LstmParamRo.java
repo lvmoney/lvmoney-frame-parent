@@ -24,7 +24,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LstmParamRo implements Serializable {
-    private static final long serialVersionUID = -2881243385118626863L;
+    private static final long serialVersionUID = -7111427402497599096L;
     /**
      * 生效时间
      */

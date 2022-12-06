@@ -1,12 +1,14 @@
 package com.lvmoney.frame.ai.seetaface.base.service;/**
  * 描述:
- * 包名:com.lvmoney.frame.ai.seetaface.base.service
+ * 包名:com.lvmoney.frame.ai.seetaface.client.service
  * 版本信息: 版本1.0
  * 日期:2022/2/9
  * Copyright XXXXXX科技有限公司
  */
 
 
+import com.lvmoney.frame.ai.seetaface.base.bo.*;
+import com.lvmoney.frame.ai.seetaface.base.dto.*;
 import com.lvmoney.frame.ai.seetaface.base.bo.*;
 import com.lvmoney.frame.ai.seetaface.base.dto.*;
 

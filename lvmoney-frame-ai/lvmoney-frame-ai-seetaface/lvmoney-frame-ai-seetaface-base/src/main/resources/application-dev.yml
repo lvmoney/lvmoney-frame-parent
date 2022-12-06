@@ -12,7 +12,7 @@ operating:
   internal: internal
 spring:
   application:
-    name: chdriver-platform-address
+    name: lvmoney-platform-address
   # 序列化返回JSON日期时区为东八区,日期格式为 2020-11-30 11:42:20
   jackson:
     time-zone: GMT+8
@@ -44,7 +44,7 @@ spring:
       # mysql数据库接地址
       url: jdbc:mysql://192.168.0.21:3306/platform_face?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
       username: root
-      password: Chdriver2021#
+      password: lvmoney2021#
       # 初始化连接大小   默认：0
       initial-size: 20
       # 最小空闲连接数 默认：0

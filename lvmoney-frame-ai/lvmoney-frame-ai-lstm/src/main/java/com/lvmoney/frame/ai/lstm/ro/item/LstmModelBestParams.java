@@ -23,7 +23,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LstmModelBestParams implements Serializable {
-    private static final long serialVersionUID = 908455900923493037L;
+    private static final long serialVersionUID = 8635250962094966087L;
     /**
      * batchSize
      */

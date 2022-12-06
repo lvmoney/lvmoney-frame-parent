@@ -5,8 +5,12 @@ from minio.error import S3Error
 from datetime import timedelta
 from minio.deleteobjects import DeleteObject
 
+import Const
+from JsonUtil import getKeyValue
+from YamlUtil import read
 
-class Bucket(object):
+
+class MinioBucket(object):
     client = None
     policy = '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"AWS":["*"]},"Action":["s3:GetBucketLocation","s3:ListBucket"],"Resource":["arn:aws:s3:::%s"]},{"Effect":"Allow","Principal":{"AWS":["*"]},"Action":["s3:GetObject"],"Resource":["arn:aws:s3:::%s/*"]}]}'
 
@@ -14,10 +18,6 @@ class Bucket(object):
         if not cls.client:
             cls.client = object.__new__(cls)
         return cls.client
-
-    def __init__(self, service, access_key, secret_key, secure=False):
-        self.service = service
-        self.client = Minio(service, access_key=access_key, secret_key=secret_key, secure=secure)
 
     def exists_bucket(self, bucket_name):
         """
@@ -201,7 +201,18 @@ class Bucket(object):
         """
         return self.client.presigned_get_object(bucket_name, file, expires=timedelta(days=days))
 
+    def __int__(self):
+        yamlData = read(Const.SMART_CONFIG_FILE_NAME)
+        minioConfig = getKeyValue(yamlData, Const.SMART_CONFIG_MINIO)
+        minioHost = str(getKeyValue(minioConfig, Const.SMART_CONFIG_MINIO_HOST))
+        minioPort = str(getKeyValue(minioConfig, Const.SMART_CONFIG_MINIO_PORT))
+        minioAccessKey = str(getKeyValue(minioConfig, Const.SMART_CONFIG_REDIS_ACCESS_KEY))
+        minioSecretKey = str(getKeyValue(minioConfig, Const.SMART_CONFIG_MINIO_SECRET_KEY))
+
+        self.client = Minio(minioHost + Const.COLON + minioPort, access_key=minioAccessKey, secret_key=minioSecretKey,
+                            secure=False)
+
 
 if __name__ == '__main__':
-    minio_obj = Bucket(service="192.168.3.198:9000", access_key="admin", secret_key="12345678")
+    minio_obj = MinioBucket()
     minio_obj.upload_file('zhengcj', 'Token.png', 'D://Token.png', 'png')

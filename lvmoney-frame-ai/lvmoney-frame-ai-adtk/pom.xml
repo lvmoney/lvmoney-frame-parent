@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lvmoney-frame-ai</artifactId>
+        <groupId>com.lvmoney.frame</groupId>
+        <version>1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lvmoney-frame-ai-adtk</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-cache-redis</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.lvmoney.frame</groupId>
+            <artifactId>lvmoney-frame-ai-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

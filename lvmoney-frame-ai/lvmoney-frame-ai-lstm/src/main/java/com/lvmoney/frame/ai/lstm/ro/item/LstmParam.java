@@ -23,7 +23,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class LstmParam implements Serializable {
 
-    private static final long serialVersionUID = 2707649489101016358L;
+    private static final long serialVersionUID = 1761213443939763046L;
     /**
      * 神经网络训练的轮次,控制执行次数
      */
@@ -54,7 +54,7 @@ public class LstmParam implements Serializable {
     private String[] optimizer;
 
     /**
-     * Dropout是一种训练时可以采用的正则化方法，通过在正向传递和权值更新的过程中对LSTM神经元的输入和递归连接进行概率性失活，该方法能有效避免过拟合并该善模型性能
+     * Dropout是一种训练时可以采用的正则化方法，通过在正向传递和权值更新的过程中对LSTM神经元的输入和递归连接进行概率性失活，该方法能有效避免过拟合并改善模型性能
      */
     private String[] dropout;
     /**

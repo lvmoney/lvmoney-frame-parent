@@ -1,8 +1,8 @@
 package com.lvmoney.frame.ai.seetaface.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lvmoney.frame.ai.seetaface.base.dto.GetByIdCardDto;
 import com.lvmoney.frame.ai.seetaface.base.entity.ComparisonResource;
+import com.lvmoney.frame.ai.seetaface.base.dto.GetByIdCardDto;
 import com.lvmoney.frame.ai.seetaface.common.vo.ResourceStr;
 
 /**

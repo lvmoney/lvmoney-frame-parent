@@ -25,7 +25,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class LstmMultivariableFieldRo implements Serializable {
 
-    private static final long serialVersionUID = -2881243385118626863L;
+    private static final long serialVersionUID = 5407231628805661205L;
     /**
      * 生效时间
      */

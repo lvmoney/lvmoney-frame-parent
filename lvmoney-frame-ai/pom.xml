@@ -19,6 +19,10 @@
         <module>lvmoney-frame-ai-lstm</module>
         <module>lvmoney-frame-ai-jpython</module>
         <module>lvmoney-frame-ai-python</module>
+        <module>lvmoney-frame-ai-adtk</module>
+        <module>lvmoney-frame-ai-common</module>
+        <module>lvmoney-frame-ai-lgbm</module>
+        <module>lvmoney-frame-ai-pyod</module>
     </modules>
 
 

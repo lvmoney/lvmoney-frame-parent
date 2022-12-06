@@ -9,6 +9,7 @@ package com.lvmoney.frame.ai.seetaface.jni.server;/**
 import com.lvmoney.frame.ai.seetaface.jni.natives.QualityOfPoseExNative;
 import com.lvmoney.frame.ai.seetaface.jni.util.SeetafaceValidated;
 import com.lvmoney.frame.ai.seetaface.jni.vo.*;
+import com.lvmoney.frame.ai.seetaface.jni.vo.*;
 
 import java.io.Closeable;
 
