@@ -78,7 +78,7 @@
         <commons-io.version>2.7</commons-io.version>
         <reflections.version>0.9.11</reflections.version>
         <commons-codec.version>1.12</commons-codec.version>
-        <commons-net.version>3.6</commons-net.version>
+        <commons-net.version>3.9.0</commons-net.version>
         <jansi.version>1.18</jansi.version>
         <lombok.version>1.18.8</lombok.version>
         <commons-pool2.version>2.6.2</commons-pool2.version>
